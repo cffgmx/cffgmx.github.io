@@ -1,10 +1,450 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Mi página</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carlos Flores — Inicio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:       #1a1a1a;
+      --paper:     #f5f5f3;
+      --warm-mid:  #888880;
+      --accent:    #2a2a2a;
+      --rule:      #d8d8d6;
+      --nav-bg:    #1a1a1a;
+      --nav-text:  #c8c8c4;
+      --nav-hover: #aaaaaa;
+      --sidebar-w: 220px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.75;
+      background: var(--paper);
+      color: var(--ink);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── Sidebar nav ── */
+    nav {
+      width: var(--sidebar-w);
+      min-height: 100vh;
+      background: var(--nav-bg);
+      display: flex;
+      flex-direction: column;
+      padding: 2.5rem 0;
+      position: fixed;
+      top: 0; left: 0;
+      z-index: 100;
+    }
+
+    .nav-name {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--nav-text);
+      padding: 0 1.6rem 1.8rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-name span {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      font-weight: 300;
+      color: var(--nav-hover);
+      margin-top: 0.25rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    nav ul {
+      list-style: none;
+      margin-top: 1.5rem;
+      flex: 1;
+    }
+
+    nav ul li a {
+      display: block;
+      padding: 0.55rem 1.6rem;
+      color: var(--nav-text);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s, padding-left 0.2s;
+      border-left: 3px solid transparent;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: var(--nav-hover);
+      padding-left: 2rem;
+      border-left-color: var(--nav-hover);
+    }
+
+    nav ul li a.active {
+      font-style: italic;
+    }
+
+    /* ── Main content ── */
+    main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      max-width: 780px;
+      padding: 4rem 3.5rem;
+    }
+
+    .page-header {
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .page-header h1 {
+      font-size: 2.1rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--accent);
+      letter-spacing: -0.01em;
+    }
+
+    .page-header p.tagline {
+      font-size: 0.88rem;
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      color: var(--warm-mid);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+    }
+
+    /* ── Home layout ── */
+    .home-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .home-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      filter: sepia(15%) contrast(1.05);
+      border: 1px solid var(--rule);
+    }
+
+    .home-photo-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--warm-mid);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid var(--rule);
+    }
+
+    .home-bio h2 {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .home-bio p {
+      font-size: 1rem;
+      color: var(--ink);
+      margin-bottom: 0.9rem;
+    }
+
+    /* ── Generic content sections ── */
+    .section-intro {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--warm-mid);
+      margin-bottom: 2rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .entry-list {
+      list-style: none;
+    }
+
+    .entry-list li {
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .entry-list li:last-child {
+      border-bottom: none;
+    }
+
+    .entry-title {
+      font-size: 1.05rem;
+      font-weight: 500;
+    }
+
+    .entry-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: var(--warm-mid);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 0.15rem;
+    }
+
+    .entry-desc {
+      font-size: 0.95rem;
+      color: #444442;
+      margin-top: 0.35rem;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Contact card ── */
+    .contact-card {
+      background: #e8e8e6;
+      border: 1px solid var(--rule);
+      padding: 1.8rem 2rem;
+      margin-top: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-card h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      font-family: 'DM Mono', monospace;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--warm-mid);
+      margin-bottom: 1rem;
+    }
+
+    .contact-card p { margin-bottom: 0.5rem; }
+
+    /* ── Pages: hidden/visible ── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ── Responsive ── */
+    @media (max-width: 700px) {
+      :root { --sidebar-w: 0px; }
+      nav { width: 100%; min-height: auto; position: relative; flex-direction: column; padding: 1rem 0; }
+      nav ul { display: flex; flex-wrap: wrap; margin-top: 0.5rem; }
+      nav ul li a { padding: 0.4rem 0.9rem; border-left: none; border-bottom: 2px solid transparent; font-size: 0.85rem; }
+      nav ul li a:hover, nav ul li a.active { padding-left: 0.9rem; border-left: none; border-bottom-color: var(--nav-hover); }
+      body { flex-direction: column; }
+      main { margin-left: 0; padding: 2rem 1.5rem; }
+      .home-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-    <h1>Hola, soy Paco</h1>
-    <p>Bienvenido</p>
-</body>
-</html>
+
+<nav>
+  <div class="nav-name">
+    Carlos Flores
+    <span>cffga.github.io</span>
+  </div>
+  <ul>
+    <li><a href="#" class="active" onclick="showPage('home', this)">Inicio</a></li>
+    <li><a href="#" onclick="showPage('piezas', this)">Piezas sueltas</a></li>
+    <li><a href="#" onclick="showPage('notebooks', this)">Notebooks</a></li>
+    <li><a href="#" onclick="showPage('proyectos', this)">Proyectos</a></li>
+    <li><a href="#" onclick="showPage('notas', this)">Notas</a></li>
+    <li><a href="#" onclick="showPage('material', this)">Material recomendado</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- ══════════ INICIO ══════════ -->
+  <div id="page-home" class="page active">
+    <div class="page-header">
+      <h1>Carlos Flores</h1>
+    </div>
+    <div class="home-grid">
+      <div class="home-photo-placeholder">[ foto ]</div>
+      <div class="home-bio">
+        <p>
+          Soy matemático, profesor universitario y estudiante de maestría en Ciencia de Datos.
+          Mis intereses recorren el espectro que va desde la geometría diferencial y la topología
+          algebraica hasta la modelación probabilística, el análisis estadístico, el machine learning
+          y sus aplicaciones. En mi tiempo libre, desarrollo cursos y materiales en español,
+          buscando combinar el rigor con una narrativa clara y accesible.
+        </p>
+        <p>
+          Esta página reúne mis piezas sueltas, notas de curso, proyectos y material
+          de referencia. Si buscas los cuadernos de Python, puedes encontrarlos en
+          la sección <a href="#" onclick="showPage('notebooks', document.querySelector('[onclick*=notebooks]'))">Notebooks</a>.
+        </p>
+        <div class="contact-card">
+          <h3>Contacto</h3>
+          <p><strong>Correo:</strong> <a href="mailto:cffg@protonmail.com">cffg@protonmail.com</a></p>
+          <p><strong>GitHub:</strong> <a href="https://github.com/cffga" target="_blank">github.com/cffga</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ PIEZAS SUELTAS ══════════ -->
+  <div id="page-piezas" class="page">
+    <div class="page-header">
+      <h1>Piezas sueltas</h1>
+      <p class="tagline">Textos y escritos propios</p>
+    </div>
+    <p class="section-intro">Textos donde expongo mi punto de vista sobre temas matemáticos y afines.</p>
+    <ul class="entry-list">
+      <li>
+        <div class="entry-title">Por qué se trabaja con gérmenes en geometría diferencial</div>
+        <div class="entry-meta">Geometría diferencial · Ensayo</div>
+        <div class="entry-desc">Una defensa del concepto de germen: por qué esta abstracción, aparentemente innecesaria, es la respuesta natural a una limitación concreta.</div>
+      </li>
+      <li>
+        <div class="entry-title">Título de otra pieza</div>
+        <div class="entry-meta">Tema · Tipo de texto</div>
+        <div class="entry-desc">Descripción breve.</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ══════════ NOTEBOOKS ══════════ -->
+  <div id="page-notebooks" class="page">
+    <div class="page-header">
+      <h1>Notebooks</h1>
+      <p class="tagline">Cuadernos de Python y análisis de datos</p>
+    </div>
+    <p class="section-intro">
+      Cuadernos pedagógicos en español organizados por tema. Cada uno sigue el principio
+      de motivación antes que definición: ningún concepto se nombra antes de que su necesidad
+      haya sido establecida.
+    </p>
+    <ul class="entry-list">
+      <li>
+        <div class="entry-title"><a href="#">Introducción a Python</a></div>
+        <div class="entry-meta">Python · Nivel introductorio</div>
+        <div class="entry-desc">Primeros pasos en Python: tipos, expresiones, y la idea de objeto.</div>
+      </li>
+      <li>
+        <div class="entry-title"><a href="#">Operadores de comparación</a></div>
+        <div class="entry-meta">Python · Nivel introductorio</div>
+        <div class="entry-desc">Valores booleanos y comparación entre objetos.</div>
+      </li>
+      <li>
+        <div class="entry-title"><a href="#">Secuencias</a></div>
+        <div class="entry-meta">Python · Estructuras de datos</div>
+        <div class="entry-desc">Listas, tuplas y el concepto de secuencia indexada.</div>
+      </li>
+      <li>
+        <div class="entry-title"><a href="#">Estructuras de control</a></div>
+        <div class="entry-meta">Python · Control de flujo</div>
+        <div class="entry-desc">Condicionales: if, elif, else como respuesta a la limitación de las expresiones booleanas simples.</div>
+      </li>
+      <li>
+        <div class="entry-title"><a href="#">KNN: clasificación</a></div>
+        <div class="entry-meta">Ciencia de datos · Machine learning</div>
+        <div class="entry-desc">Clasificación con K vecinos más cercanos usando datos de glucosa e insulina.</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ══════════ PROYECTOS ══════════ -->
+  <div id="page-proyectos" class="page">
+    <div class="page-header">
+      <h1>Proyectos</h1>
+      <p class="tagline">Investigación y desarrollo</p>
+    </div>
+    <p class="section-intro">Proyectos activos y concluidos en matemáticas, estadística y ciencia de datos.</p>
+    <ul class="entry-list">
+      <li>
+        <div class="entry-title">Título del proyecto</div>
+        <div class="entry-meta">Área temática · Estado: en curso</div>
+        <div class="entry-desc">Descripción del proyecto, metodología y objetivo.</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ══════════ NOTAS ══════════ -->
+  <div id="page-notas" class="page">
+    <div class="page-header">
+      <h1>Notas</h1>
+      <p class="tagline">Apuntes y escritos</p>
+    </div>
+    <p class="section-intro">
+      Notas de curso, apuntes de trabajo y textos en progreso. No son necesariamente completos
+      ni definitivos.
+    </p>
+    <ul class="entry-list">
+      <li>
+        <div class="entry-title"><a href="#">Diferenciación — borrador</a></div>
+        <div class="entry-meta">Análisis matemático · En progreso</div>
+        <div class="entry-desc">
+          Notas para un texto sobre diferenciación al estilo de Spivak, dirigido a estudiantes
+          con base en álgebra lineal y análisis elemental.
+        </div>
+      </li>
+      <li>
+        <div class="entry-title"><a href="#">Muestreo aleatorio simple (MAS)</a></div>
+        <div class="entry-meta">Estadística · Referencia</div>
+        <div class="entry-desc">Guía práctica y fichas de fórmulas para MAS, con ejercicios resueltos.</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ══════════ MATERIAL RECOMENDADO ══════════ -->
+  <div id="page-material" class="page">
+    <div class="page-header">
+      <h1>Material recomendado</h1>
+      <p class="tagline">Libros, videos y recursos</p>
+    </div>
+    <p class="section-intro">Textos y recursos que considero valiosos en matemáticas, estadística y computación.</p>
+
+    <h2 style="font-size:1.1rem;font-weight:500;margin:1.5rem 0 0.8rem;color:var(--accent);">Libros</h2>
+    <ul class="entry-list">
+      <li>
+        <div class="entry-title">Calculus — Michael Spivak</div>
+        <div class="entry-meta">Análisis matemático</div>
+        <div class="entry-desc">La referencia obligada para quien quiere entender el análisis real con rigor y elegancia narrativa.</div>
+      </li>
+      <li>
+        <div class="entry-title">The Elements of Statistical Learning</div>
+        <div class="entry-meta">Estadística · Machine learning</div>
+        <div class="entry-desc">Hastie, Tibshirani y Friedman. Disponible gratuitamente en línea.</div>
+      </li>
+    </ul>
+
+    <h2 style="font-size:1.1rem;font-weight:500;margin:1.5rem 0 0.8rem;color:var(--accent);">Otros recursos</h2>
+    <ul class="entry-list">
+      <li>
+        <div class="entry-title">—</div>
+        <div class="entry-meta">Por añadir</div>
+      </li>
+    </ul>
+  </div>
+
+</main>
+
+<script>
+  function showPage(id, linkEl) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    document.querySelectorAll('nav ul li a').forEach(a => a.classList.remove('active'));
+    if (linkEl) linkEl.classList.add('active');
+    return false;
+  }
+</script>
