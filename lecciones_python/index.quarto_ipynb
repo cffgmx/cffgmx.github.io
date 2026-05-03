@@ -1,0 +1,471 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "598a55e2",
+   "metadata": {},
+   "source": [
+    "---\n",
+    "title: \"Introducción\"\n",
+    "author: \"Carlos Flores\"\n",
+    "date: \"2024-06-01\"\n",
+    "format: html\n",
+    "---\n",
+    "\n",
+    "## Introducción al notebook\n",
+    "\n",
+    "El material que estás leyendo está elaborado con **Quarto Web Project**, una herramienta diseñada para crear documentos reproducibles que integran texto, código y resultados en un mismo flujo de trabajo. Sin embargo, el propósito no es que te limites a leerlo de forma pasiva, sino que utilices este contenido como guía para **practicar activamente en Google Colab**, ejecutando y modificando el código por tu cuenta.\n",
+    "\n",
+    "Google Colab es un entorno interactivo que funciona directamente en el navegador, sin necesidad de instalar ningún programa ni contar con experiencia previa en programación. A lo largo de este material, la idea es que tomes cada fragmento de código y lo reproduzcas en tu propio notebook de Colab, experimentando con él hasta entenderlo con claridad.\n",
+    "\n",
+    "El objetivo de estos notebooks es enseñar los elementos fundamentales del lenguaje Python de forma progresiva, partiendo siempre de la intuición antes de llegar a la definición formal. Están pensados para estudiantes cuya formación es en matemáticas, física o actuaría, perfiles que se acercan a la programación no como un objeto de estudio en sí mismo, sino como una herramienta para modelar, analizar y resolver problemas.\n",
+    "\n",
+    "Cada concepto que se introduce en estos notebooks existe porque resuelve un problema concreto, y ese problema se presenta antes de mostrar la solución. El objetivo final no es memorizar sintaxis, sino construir una base sólida desde la cual dar el paso hacia áreas más especializadas como ciencia de datos, aprendizaje automático y otros campos donde Python se utiliza de manera intensiva.\n",
+    "\n",
+    "Si nunca has usado Google Colab, es muy recomendable ver los dos videos que aparecen a continuación.\n",
+    "\n",
+    "* **Introducción a Google Colab y su uso básico**\n",
+    "  En este video se explica qué es Google Colab, cómo funciona un notebook y cómo ejecutar celdas.\n",
+    "  [https://youtu.be/8VFYs3Ot_aA?si=K0dIhDmHpP0H9Ivt](https://youtu.be/8VFYs3Ot_aA?si=K0dIhDmHpP0H9Ivt)\n",
+    "\n",
+    "* **Cómo escribir expresiones matemáticas en LaTeX**\n",
+    "  Aquí se muestra cómo introducir fórmulas matemáticas dentro de un notebook de forma clara y ordenada.\n",
+    "  [https://youtu.be/_eSNtDh6ecI?si=bML0DvE0WQ8ZQyLM](https://youtu.be/_eSNtDh6ecI?si=bML0DvE0WQ8ZQyLM)\n",
+    "\n",
+    "Estos videos sirven como apoyo inicial para que puedas trabajar el material de manera más fluida en tu propio entorno de práctica.\n",
+    "\n",
+    "## Python como calculadora\n",
+    "\n",
+    "El punto de partida más natural para aprender a programar es también el más inmediato: hacer cuentas. Antes de hablar de variables, funciones o estructuras de datos, tiene sentido familiarizarse con la forma en que Python interpreta y evalúa expresiones matemáticas. Por eso comenzamos aquí.\n",
+    "\n",
+    "Se pueden evaluar directamente expresiones como \n",
+    "$$3\\times 4 \\times 5 + 1,$$\n",
+    "\n",
+    "pero para ello es necesario escribirlas usando la sintaxis del lenguaje. La multiplicación se escribe con `*`, la suma con `+`, la resta con `-` y la división con `/`. Así, la expresión anterior se introduce como:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "43395de1",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "61"
+      ]
+     },
+     "execution_count": 1,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "3 * 4 * 5 + 1"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "7d9a17f7",
+   "metadata": {},
+   "source": [
+    "Al ejecutar esta celda, Python evalúa la expresión y devuelve el resultado, que en este caso es `61`. Este proceso de escribir una expresión y obtener su resultado es fundamental para entender cómo funciona la programación: estamos dando instrucciones a la computadora para que realice cálculos específicos. A medida que avancemos, veremos cómo estas operaciones básicas se combinan con otras herramientas para crear programas más complejos y útiles.\n",
+    "\n",
+    "Además de las operaciones básicas, Python permite calcular potencias. En matemáticas se emplea la notación $a^n$, pero en Python se usa `a ** n`. Por ejemplo, $2^3$$ se escribe así:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "3889ad76",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "8"
+      ]
+     },
+     "execution_count": 2,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "2 ** 3"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "6f89d7c9",
+   "metadata": {},
+   "source": [
+    "Al igual que en el álgebra, los paréntesis permiten agrupar términos y controlar el orden en que se realizan las operaciones. En las siguientes celdas se calculan respectivamente $(2^3)^2$ y $2^{3^2}$, dos expresiones que producen resultados muy distintos precisamente por cómo se agrupan las potencias:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "13863ccf",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "64"
+      ]
+     },
+     "execution_count": 3,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "(2 ** 3) ** 2"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "3c39c708",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "512"
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "2 ** (3 ** 2)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "5dd4d810",
+   "metadata": {},
+   "source": [
+    "Las últimas dos operaciones que veremos completan el repertorio aritmético básico, la *división entera* y el *módulo* o *residuo*. La división entera responde a la pregunta \"¿cuántas veces cabe un número en otro sin pasarse?\", el módulo responde a \"¿cuánto sobra?\". Juntas, estas dos operaciones describen completamente una división.\n",
+    "\n",
+    "La división entera entre 7 y 2 se calcula así:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "0282eded",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "3"
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "7 // 2"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "0e46d544",
+   "metadata": {},
+   "source": [
+    "El resultado es 3, porque el 2 cabe 3 veces en 7. Y para saber cuánto sobra:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "dc89c65b",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "1"
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "7 % 2"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "c7cf6ea2",
+   "metadata": {},
+   "source": [
+    "El resultado es 1, porque después de esas 3 veces, queda 1 sin dividir.\n",
+    "\n",
+    "Con las operaciones básicas ya cubiertas, conviene introducir una herramienta sencilla pero que se usará constantemente a lo largo de todos los notebooks, los *comentarios*. Un comentario es texto que se escribe dentro de una celda de código pero que Python ignora por completo al ejecutar. Su propósito es explicar qué hace el código, aclarar la intención detrás de una línea o dejar notas para quien lo lea más adelante.\n",
+    "\n",
+    "En Python, los comentarios se introducen con el símbolo `#`. Todo lo que aparece a la derecha de ese símbolo en la misma línea es ignorado al ejecutar la celda:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "64ed89fb",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "4"
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Este es un comentario, no afecta el resultado\n",
+    "2 + 2  # Esto también es un comentario, el resultado sigue siendo 4"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "ca229fba",
+   "metadata": {},
+   "source": [
+    "Usar comentarios es un hábito que conviene desarrollar desde el principio, sobre todo mientras se aprende. A lo largo de los notebooks se usarán con frecuencia, pero con lo que acabamos de ver es suficiente para reconocerlos y escribirlos.\n",
+    "\n",
+    "Volvamos ahora a los números. Hasta aquí hemos realizado operaciones sin preguntarnos sobre la naturaleza de los valores que manejamos. Sin embargo, no todos los números son iguales para Python, y entender esa diferencia es importante para evitar errores que a veces resultan desconcertantes.\n",
+    "\n",
+    "## Tipos de números en Python\n",
+    "\n",
+    "En matemáticas distinguimos con cuidado los números enteros de los reales. Los *enteros*, representados por el conjunto $\\mathbb{Z} = \\{\\dots, -2, -1, 0, 1, 2, \\dots\\}$, no tienen parte decimal. Los *reales* $\\mathbb{R}$ sí pueden tenerla, y su definición matemática exige precisión infinita.\n",
+    "\n",
+    "Una computadora, sin embargo, trabaja con recursos finitos. No puede almacenar un número real con infinitos decimales, solo puede guardar una aproximación. Por eso Python no trabaja con números reales en sentido estricto, sino con representaciones finitas de ellos, que en programación se llaman `float`. Los enteros, en cambio, sí se representan de forma exacta y se llaman `int` (de *integer*).\n",
+    "\n",
+    "Esta distinción tiene consecuencias prácticas. Por ejemplo:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "d9c7dd24",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0.30000000000000004"
+      ]
+     },
+     "execution_count": 8,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "0.1 + 0.2"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "e8d633c2",
+   "metadata": {},
+   "source": [
+    "Desde el punto de vista matemático, esperaríamos exactamente $0.3$. Sin embargo, la computadora muestra un valor ligeramente distinto. Esto no es un error de Python, es la consecuencia inevitable de trabajar con representaciones finitas. Al operar sobre valores aproximados, las pequeñas diferencias en su representación pueden acumularse en el resultado.\n",
+    "\n",
+    "Entender esta distinción entre `int` (exacto) y `float` (aproximado) es fundamental para interpretar resultados correctamente y para elegir el tipo adecuado según el problema. Más adelante se verá que existen formas de trabajar con números reales de manera estricta cuando el problema requiere precisión absoluta.\n",
+    "\n",
+    "Python también maneja de forma nativa los *números complejos*, escritos en el formato `a + bj`, donde `a` es la parte real y `b` la imaginaria. Un detalle importante: Python usa la letra `j` para la unidad imaginaria, en lugar de la $i$ que es habitual en los libros de matemáticas. Por ejemplo, el número complejo $3 + 4i$ se representa en Python como:   "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "ae904e27",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(3+4j)"
+      ]
+     },
+     "execution_count": 9,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "3 + 4j"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "44620535",
+   "metadata": {},
+   "source": [
+    "## Variables\n",
+    "\n",
+    "Las operaciones que hemos hecho hasta ahora tienen una limitación evidente, y es que cada resultado se pierde inmediatamente. Si calculamos $2^{10}$, el valor aparece en pantalla, pero no podemos usarlo después. Para que un resultado sea reutilizable, necesitamos una forma de guardarlo y darle un nombre. A eso sirven las *variables*.\n",
+    "\n",
+    "Una variable es un nombre que queda asociado a un valor en la memoria de la computadora. La asignación sigue la forma:\n",
+    "\n",
+    "`nombre = valor`\n",
+    "\n",
+    "donde `nombre` es el identificador elegido y `valor` es el dato que se quiere almacenar. El símbolo `=` no expresa igualdad matemática, indica que el nombre de la izquierda quedará ligado al valor de la derecha. Por ejemplo:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "id": "f19df52b",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "edad = 25"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "b2437e61",
+   "metadata": {},
+   "source": [
+    "Al ejecutar esta línea ocurren tres cosas:\n",
+    "\n",
+    "1. El número `25` se almacena en algún lugar de la memoria de la computadora.\n",
+    "2. Python registra el nombre `edad`.\n",
+    "3. Ese nombre queda asociado al valor `25`.\n",
+    "\n",
+    "A partir de ese momento, escribir `edad` en cualquier parte del programa es equivalente a usar el valor `25`:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "95e838d1",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "50"
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "edad + 25"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "d4055a5c",
+   "metadata": {},
+   "source": [
+    "Ahora bien, las variables no son permanentes, pueden reasignarse. Si posteriormente se ejecuta:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "1c5a1ddd",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "edad = 10"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "7fc2512a",
+   "metadata": {},
+   "source": [
+    "la referencia `edad` se redirige hacia el nuevo valor `10`:\n",
+    "\n",
+    "```\n",
+    "Antes:   edad  ──────►  25\n",
+    "Después: edad  ──────►  10\n",
+    "```\n",
+    "\n",
+    "El valor `25` queda sin ninguna variable que lo referencie, y Python lo descartará de la memoria.\n",
+    "\n",
+    "Es posible que dos nombres referencien simultáneamente el mismo objeto:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "dfabde5b",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "20"
+      ]
+     },
+     "execution_count": 13,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "a = 10\n",
+    "b = a # Esta línea hace que el nombre \"b\" apunte también a 10\n",
+    "a + b"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "5559f192",
+   "metadata": {},
+   "source": [
+    "Si luego se reasigna `a`, la referencia `b` no se ve afectada; simplemente continúa apuntando al valor original:\n",
+    "\n",
+    "```python\n",
+    "a = 3\n",
+    "a + b # Aquí \"b\" sigue apuntando a 10\n",
+    "```\n",
+    "Con esto, tenemos los ingredientes fundamentales: sabemos operar con números, distinguimos sus tipos y podemos guardar resultados para reutilizarlos. La siguiente lección parte de aquí para introducir una capacidad nueva: la de comparar valores y tomar decisiones en función de esas comparaciones."
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3",
+   "path": "/home/carlos/anaconda3/envs/maestria/share/jupyter/kernels/python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.13.9"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

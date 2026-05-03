@@ -1,0 +1,19 @@
+project:
+  type: website
+
+website:
+  title: "Python"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: Acerca de
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: darkly
+    css: styles.css
+    toc: true

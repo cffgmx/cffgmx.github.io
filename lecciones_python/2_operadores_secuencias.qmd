@@ -1,0 +1,193 @@
+---
+title: "Operadores y secuencias"
+author: "Carlos Flores"
+format: html
+---
+
+## Operadores de comparación y operadores lógicos
+
+En la lección anterior usamos Python principalmente como una calculadora. Sin embargo, programar no consiste solo en hacer cuentas. También implica responder preguntas y, a partir de ellas, tomar decisiones. Por ejemplo, comprobar si un número es mayor que otro, si dos cantidades coinciden o si se cumple cierta condición.
+
+Para abordar esta cuestión, Python dispone de los *operadores de comparación* y los *operadores lógicos*. Por ahora nos centraremos en los primeros.
+
+Los operadores de comparación pueden entenderse de forma muy natural como una manera de hacer preguntas. Cada vez que comparas dos expresiones, en realidad estás formulando una pregunta sobre ellas. Por ejemplo, al escribir una comparación, es como si preguntaras “¿estos números son iguales?”, “¿uno es mayor que el otro?” o “¿son distintos?”. La respuesta que Python produce siempre es de tipo `True` (Verdadero) o `False` (Falso), que puedes interpretar simplemente como “sí” o “no”. A este tipo de respuestas se les denomina *valores booleanos*.
+
+El primer operador de comparación que veremos es `==`, y se utiliza para preguntar si dos valores son iguales. Es importante no confundirlo con `=`, que no compara, sino que asigna un valor a una variable. Por su parte, el operador `!=` permite formular la pregunta contraria y verificar si dos valores son distintos. Por ejemplo:
+
+
+```{python}
+temperatura_actual = 22
+temperatura_limite = 22
+
+temperatura_actual == temperatura_limite  # ¿Son iguales?
+```
+
+Los otros operadores de comparación son: `>` (mayor que), `<` (menor que), `>=` (mayor o igual que) y `<=` (menor o igual que). Funcionan exactamente como en matemáticas, y todos devuelven un booleano. Por ejemplo:
+
+
+```{python}
+22 > 30    # ¿22 es mayor que 30?
+```
+
+
+```{python}
+22 <= 22   # ¿22 es menor o igual que 22?
+```
+
+En muchas situaciones, una sola comparación no es suficiente. En la vida cotidiana combinamos varias condiciones en una misma idea: "¿hace más de 20 grados *y* menos de 30?" o "¿es de noche *o* está nublado?". Para formular ese tipo de condiciones compuestas, Python ofrece los *operadores lógicos*: `and`, `or` y `not`.
+
+El operador `and` combina dos condiciones y devuelve `True` únicamente cuando ambas son verdaderas al mismo tiempo. Si alguna falla, el resultado es `False`. Puede entenderse como el operador que *exige que todo se cumpla simultáneamente*.
+
+
+```{python}
+temp = 25
+temp > 20 and temp < 30  # ¿Está entre 20 y 30?
+```
+
+
+```{python}
+temp > 20 and temp < 24  # temp > 20 es True, pero temp < 24 es False
+```
+
+`or` es más permisivo, devuelve `True` con que una sola de las dos condiciones sea verdadera. Solo produce `False` cuando ambas fallan al mismo tiempo.
+
+
+```{python}
+temp < 10 or temp > 20  # temp < 10 es False, pero temp > 20 es True
+```
+
+
+```{python}
+temp < 10 or temp > 30  # Ambas condiciones son False
+```
+
+Finalmente, `not` es un operador de negación que invierte el valor de una condición. Si la condición es `True`, `not` la convierte en `False`, y viceversa.
+
+
+```{python}
+not temp > 20  # temp > 20 es True, así que not lo convierte en False
+```
+
+Con la capacidad de comparar valores, surge de forma natural una nueva necesidad: ¿qué sucede cuando no trabajamos con un dato suelto, sino con varios al mismo tiempo? ¿Cómo los organizamos? Eso nos lleva al siguiente concepto.
+
+## Secuencias en Python
+
+Cuando programamos, frecuentemente necesitamos manejar no solo un dato suelto, sino varios simultáneamente, como una lista de temperaturas registradas a lo largo del día, las letras que forman una palabra, o las coordenadas de un punto en el espacio. Para mantener esos datos organizados y accesibles, Python ofrece el concepto de *secuencia*: una estructura que agrupa elementos en un orden fijo, donde cada uno ocupa una posición numerada.
+
+En esta lección veremos tres tipos de secuencias: listas, tuplas y cadenas.
+
+### Listas `list`
+
+Una *lista* es la secuencia más flexible. Su contenido puede modificarse libremente después de crearla: se pueden cambiar elementos, añadir nuevos o eliminar los existentes. Se definen usando corchetes `[ ]`, separando por comas los datos que la conforman. Por ejemplo:
+
+
+```{python}
+temperaturas = [23.5, 24.0, 22.8, 17, 19.4]
+```
+
+Conviene usar una lista cuando se sabe que los datos son *dinámicos*, es decir, cuando se espera que cambien: mediciones que se acumulan, resultados que se procesan, elementos que el usuario puede agregar o quitar. La flexibilidad de la lista responde exactamente a esa necesidad.
+
+### Tuplas `tuple`
+
+Una *tupla* funciona como una lista en casi todo, con una diferencia fundamental: una vez creada, no puede modificarse. Se definen usando paréntesis `()`. Por ejemplo:
+
+
+```{python}
+punto_geodesico = (19.4326, -99.1332)
+```
+
+Usar una tupla es una forma de comunicar "estos datos no deben cambiar". Las coordenadas de una ciudad, la fecha de nacimiento de una persona o los extremos de un intervalo matemático son valores estables por naturaleza, y representarlos con una tupla no solo los protege de modificaciones accidentales, sino que comunica esa intención a quien lea el código.
+
+### Cadenas `str`
+
+Una *cadena* es, en el fondo, una secuencia de caracteres de texto. Al igual que las tuplas, las cadenas son inmutables. Se definen encerrando el texto entre comillas dobles o simples.
+
+
+```{python}
+nombre = 'Carlos'
+```
+
+Lo importante es que Python trata todo lo que esté dentro de las comillas como texto puro. Eso significa que `"42"` no es el número cuarenta y dos, es un `"4"` seguido de un `"2"`, dos caracteres con los que no se puede hacer aritmética. Del mismo modo, `"hola mundo"` tiene diez caracteres, no nueve: el espacio también ocupa una posición en la secuencia.
+
+Ahora que los tres tipos están claros, tiene sentido hablar de lo que todos comparten.
+
+## Lo que toda secuencia puede hacer
+
+Más allá de sus diferencias, las tres secuencias comparten un conjunto de operaciones fundamentales. Una de las más importantes es la *indexación*, es decir, el hecho de que cada elemento ocupa una posición numerada, llamada *índice*, que comienza en `0` (y no en `1`, como podría esperarse). Para acceder a un elemento, basta con escribir el nombre de la secuencia seguido del índice entre corchetes.
+
+
+```{python}
+temperaturas[2]
+```
+
+
+```{python}
+punto_geodesico[0]
+```
+
+
+```{python}
+nombre[3]
+```
+
+
+```{python}
+"Hola mundo"[4] # Aquí el espacio tiene indice 4
+```
+
+Python también permite contar desde el final usando índices negativos: `secuencia[-1]` es siempre el último elemento, `secuencia[-2]` el penúltimo, y así sucesivamente. Es una convención práctica que evita tener que conocer la longitud exacta de la secuencia.
+
+Además de acceder a elementos individuales, las secuencias permiten extraer porciones completas mediante el *slicing* o rebanado. La sintaxis `secuencia[inicio:fin]` devuelve todos los elementos desde la posición `inicio` hasta justo antes de `fin`, sin incluirla.
+
+
+```{python}
+nombre[0:5]
+```
+
+
+```{python}
+temperaturas[1:4]
+```
+
+La tercera operación compartida es el operador de pertenencia `in`, que responde a la pregunta "¿este elemento está dentro de la secuencia?". Devuelve `True` o `False`, los mismos booleanos que ya conocemos de la sección anterior. Aquí se ve por primera vez cómo las ideas se conectan: lo que aprendimos sobre comparaciones sirve directamente para trabajar con secuencias.
+
+
+```{python}
+"P" in "Python"
+```
+
+
+```{python}
+"p" in "Python" # Devuelve false pues es minúscula
+```
+
+
+```{python}
+17 in temperaturas
+```
+
+Hasta aquí, todos los ejemplos han usado colecciones de un solo tipo de dato. En la práctica, sin embargo, las listas y las tuplas pueden mezclar cualquier tipo de elemento, incluso otras secuencias. Esto se llama *anidamiento*: una secuencia que contiene a otra, lo que permite representar estructuras más complejas con las mismas herramientas que ya conocemos.
+
+
+```{python}
+# Una lista que mezcla números, cadenas, tuplas y listas
+registro = [42, "temperatura", [23.5, 24.0, 22.8], (3, "hola")]
+```
+
+
+```{python}
+registro[3]
+```
+
+En los ejemplos anteriores nos hemos limitado a *leer* los valores que contiene una secuencia. Esto nos lleva a una pregunta natural: ¿qué sucede cuando necesitamos *modificar* uno de esos valores? La respuesta depende del tipo de secuencia.
+
+Como ya vimos, las listas son mutables: su contenido puede cambiar después de crearlas. Las tuplas y las cadenas, en cambio, son inmutables. La edición directa de elementos, por tanto, solo es posible en listas, y se hace usando la misma notación de índice que ya conocemos, ahora en el lado izquierdo de una asignación:
+
+
+```{python}
+temperaturas = [23.5, 24.0, 22.8]
+temperaturas[1] = 19.0  # Reemplazamos el segundo valor
+temperaturas
+```
+
+Con esto hemos cubierto las tres secuencias y las operaciones que todas comparten. El siguiente paso natural es preguntarse: ¿cómo le decimos a Python que haga algo con cada elemento de una secuencia, uno por uno? Esa capacidad (la de actuar de forma repetida sobre una colección) es uno de los poderes más importantes de la programación, y se introduce en las lecciones que siguen.

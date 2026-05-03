@@ -1,0 +1,168 @@
+---
+title: "Introducción a Google Colab y Python"
+author: "Carlos Flores"
+format: html
+---
+
+## Google Colab
+
+A lo largo de estas lecciones te encontrarás con una secuencia de ideas que no solo se explican, sino que se ponen en juego de inmediato. Cada sección está pensada para que avances entendiendo, pero también probando: lo que aquí aparece no está cerrado, sino que se abre a que lo ejecutes, lo modifiques y observes cómo responde. En ese proceso (más que en la lectura misma) es donde se construye la comprensión.
+
+Para ello utilizaremos *Google Colab*, que es una plataforma que funciona directamente en el navegador y permite escribir y ejecutar código sin necesidad de instalar nada. No es necesario que tengas experiencia previa en programación: empezaremos desde lo más básico. A lo largo del material, encontrarás fragmentos de código que podrás copiar y ejecutar ahí mismo, modificándolos y observando qué ocurre en cada caso.
+
+Si nunca has usado Google Colab, es muy recomendable ver los dos videos que aparecen a continuación.
+
+* **Introducción a Google Colab y su uso básico**
+  En este video se explica qué es Google Colab, cómo funciona un notebook y cómo ejecutar celdas.
+  [https://youtu.be/8VFYs3Ot_aA?si=K0dIhDmHpP0H9Ivt](https://youtu.be/8VFYs3Ot_aA?si=K0dIhDmHpP0H9Ivt)
+
+* **Cómo escribir expresiones matemáticas en LaTeX**
+  Aquí se muestra cómo introducir fórmulas matemáticas dentro de un notebook de forma clara y ordenada.
+  [https://youtu.be/_eSNtDh6ecI?si=bML0DvE0WQ8ZQyLM](https://youtu.be/_eSNtDh6ecI?si=bML0DvE0WQ8ZQyLM)
+
+Estos videos sirven como apoyo inicial para que puedas trabajar el material de manera más fluida en tu propio entorno de práctica.
+
+El objetivo de estas lecciones es enseñar los elementos fundamentales del lenguaje Python de forma progresiva, partiendo siempre de la intuición antes de llegar a la definición formal. Están pensados para estudiantes cuya formación es en matemáticas, física o actuaría, perfiles que se acercan a la programación no como un objeto de estudio en sí mismo, sino como una herramienta para modelar, analizar y resolver problemas.
+
+Cada concepto que se introduce en estas lecciones existe porque resuelve un problema concreto, y ese problema se presenta antes de mostrar la solución. El objetivo final no es memorizar sintaxis, sino construir una base sólida desde la cual dar el paso hacia áreas más especializadas como ciencia de datos, aprendizaje automático y otros campos donde Python se utiliza de manera intensiva.
+
+## Python como calculadora
+
+El punto de partida más natural para aprender a programar es también el más inmediato: hacer cuentas. Antes de hablar de variables, funciones o estructuras de datos, tiene sentido familiarizarse con la forma en que Python interpreta y evalúa expresiones matemáticas. Por eso comenzamos aquí.
+
+Se pueden evaluar directamente expresiones como 
+$$3\times 4 \times 5 + 1,$$
+
+pero para ello es necesario escribirlas usando la sintaxis del lenguaje. En Python la multiplicación se escribe con `*`, la suma con `+`, la resta con `-` y la división con `/`. Así, la expresión anterior se introduce como:
+
+```{python}
+3 * 4 * 5 + 1
+```
+
+Al ejecutar esta celda, Python evalúa la expresión y devuelve el resultado, que en este caso es `61`. 
+
+Además de las operaciones básicas, Python permite calcular potencias. En matemáticas se emplea la notación $a^n$, pero en Python se usa `a ** n`. Por ejemplo, $2^3$ se escribe así:
+
+```{python}
+2 ** 3
+```
+
+
+
+Al igual que en el álgebra, los paréntesis permiten agrupar términos y controlar el orden en que se realizan las operaciones. En las siguientes celdas se calculan respectivamente $(2^3)^2$ y $2^{3^2}$, dos expresiones que producen resultados muy distintos precisamente por cómo se agrupan las potencias:
+
+```{python}
+(2 ** 3) ** 2
+```
+
+```{python}
+2 ** (3 ** 2)
+```
+
+Las últimas dos operaciones que veremos completan el repertorio aritmético básico, la *división entera* y el *módulo* o *residuo*. La división entera responde a la pregunta "¿cuántas veces cabe un número en otro sin pasarse?", el módulo responde a "¿cuánto sobra?". Juntas, estas dos operaciones describen completamente una división.
+
+La división entera entre 7 y 2 se calcula así:
+
+```{python}
+7 // 2
+```
+
+El resultado es 3, porque el 2 cabe 3 veces en 7. Y para saber cuánto sobra:
+
+```{python}
+7 % 2
+```
+
+El resultado es 1, porque después de esas 3 veces, queda 1 sin dividir.
+
+Con las operaciones básicas ya cubiertas, conviene introducir una herramienta sencilla pero que se usará constantemente a lo largo de todos los notebooks, los *comentarios*. Un comentario es texto que se escribe dentro de una celda de código pero que Python ignora por completo al ejecutar. Su propósito es explicar qué hace el código, aclarar la intención detrás de una línea o dejar notas para quien lo lea más adelante.
+
+En Python, los comentarios se introducen con el símbolo `#`. Todo lo que aparece a la derecha de ese símbolo en la misma línea es ignorado al ejecutar la celda:
+
+```{python}
+# Este es un comentario, no afecta el resultado
+2 + 2  # Esto también es un comentario, el resultado sigue siendo 4
+```
+
+Usar comentarios es un hábito que conviene desarrollar desde el principio, sobre todo mientras se aprende. A lo largo de las lecciones se usarán con frecuencia, pero con lo que acabamos de ver es suficiente para reconocerlos y escribirlos.
+
+Volvamos ahora a los números. Hasta aquí hemos realizado operaciones sin preguntarnos sobre la naturaleza de los valores que manejamos. Sin embargo, no todos los números son iguales para Python, y entender esa diferencia es importante para evitar errores que a veces resultan desconcertantes.
+
+## Tipos de números en Python
+
+En matemáticas distinguimos con cuidado los números enteros de los reales. Los *enteros*, representados por el conjunto $\mathbb{Z} = \{\dots, -2, -1, 0, 1, 2, \dots\}$, no tienen parte decimal. Los *reales* $\mathbb{R}$ sí pueden tenerla, y su definición matemática exige precisión infinita.
+
+Una computadora, sin embargo, trabaja con recursos finitos. No puede almacenar un número real con infinitos decimales, solo puede guardar una aproximación. Por eso Python no trabaja con números reales en sentido estricto, sino con representaciones finitas de ellos, que en programación se llaman `float`. Los enteros, en cambio, sí se representan de forma exacta y se llaman `int` (de *integer*).
+
+Esta distinción tiene consecuencias prácticas. Por ejemplo:
+
+```{python}
+0.1 + 0.2
+```
+
+Desde el punto de vista matemático, esperaríamos exactamente `0.3`. Sin embargo, la computadora muestra un valor ligeramente distinto. Esto no es un error de Python, es la consecuencia inevitable de trabajar con representaciones finitas. Al operar sobre valores aproximados, las pequeñas diferencias en su representación pueden acumularse en el resultado.
+
+Entender esta distinción entre `int` (exacto) y `float` (aproximado) es fundamental para interpretar resultados correctamente y para elegir el tipo adecuado según el problema. Más adelante se verá que existen formas de trabajar con números reales de manera estricta cuando el problema requiere precisión absoluta.
+
+Python también maneja de forma nativa los *números complejos*, escritos en el formato `a + bj`, donde `a` es la parte real y `b` la imaginaria. Un detalle importante: Python usa la letra `j` para la unidad imaginaria, en lugar de la $i$ que es habitual en los libros de matemáticas. Por ejemplo, el número complejo $3 + 4i$ se representa en Python como:   
+
+```{python}
+3 + 4j
+```
+
+## Variables
+
+Las operaciones que hemos hecho hasta ahora tienen una limitación evidente, y es que cada resultado se pierde inmediatamente. Si calculamos $2^{10}$, el valor aparece en pantalla, pero no podemos usarlo después. Para que un resultado sea reutilizable, necesitamos una forma de guardarlo y darle un nombre. A eso sirven las *variables*.
+
+Una variable es un nombre que queda asociado a un valor en la memoria de la computadora. La asignación sigue la forma:
+
+`nombre = valor`
+
+donde `nombre` es el identificador elegido y `valor` es el dato que se quiere almacenar. El símbolo `=` no expresa igualdad matemática, indica que el nombre de la izquierda quedará ligado al valor de la derecha. Por ejemplo:
+
+```{python}
+edad = 25
+```
+
+Al ejecutar esta línea ocurren tres cosas:
+
+1. El número `25` se almacena en algún lugar de la memoria de la computadora.
+2. Python registra el nombre `edad`.
+3. Ese nombre queda asociado al valor `25`.
+
+A partir de ese momento, escribir `edad` en cualquier parte del programa es equivalente a usar el valor `25`:
+
+````{python}
+edad + 25
+````
+
+Ahora bien, las variables no son permanentes, pueden reasignarse. Si posteriormente se ejecuta:
+
+```{python}
+edad = 10
+```
+
+la referencia `edad` se redirige hacia el nuevo valor `10`:
+
+```
+Antes:   edad  ──────►  25
+Después: edad  ──────►  10
+```
+
+El valor `25` queda sin ninguna variable que lo referencie, y Python lo descartará de la memoria.
+
+Es posible que dos nombres referencien simultáneamente el mismo objeto:
+
+```{python}
+a = 10
+b = a # Esta línea hace que el nombre "b" apunte también a 10
+a + b
+```
+
+Si luego se reasigna `a`, la referencia `b` no se ve afectada; simplemente continúa apuntando al valor original:
+
+```python
+a = 3
+a + b # Aquí "b" sigue apuntando a 10
+```
+Con esto, tenemos los ingredientes fundamentales: sabemos operar con números, distinguimos sus tipos y podemos guardar resultados para reutilizarlos. La siguiente lección parte de aquí para introducir una capacidad nueva: la de comparar valores y tomar decisiones en función de esas comparaciones.

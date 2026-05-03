@@ -1,0 +1,11 @@
+---
+title: "Carlos Flores"
+---
+
+Soy matemático, profesor universitario y estudiante de maestría en Ciencia de Datos. Mis intereses recorren el espectro que va desde la geometría diferencial y la topología algebraica hasta la modelación probabilística, el análisis estadístico, el machine learning y sus aplicaciones. En mi tiempo libre, desarrollo cursos y materiales en español, buscando combinar el rigor con una narrativa clara y accesible.
+
+## Contacto
+
+- **Correo:** [cffg@protonmail.com](mailto:cffg@protonmail.com)
+- **GitHub:** [github.com/cffga](https://github.com/cffga)
+- **Página personal:** [cffga.github.io](https://cffga.github.io)
