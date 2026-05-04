@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Carlos Flores">
+
+<title>Lectura y escritura de archivos – Python</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-432110074345c4f8b160cf3ff92ed90f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-390afa5198d6ab90f34e2d88858aae97.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-432110074345c4f8b160cf3ff92ed90f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Python</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">Acerca de</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#abrir-y-cerrar-un-archivo-open-y-with" id="toc-abrir-y-cerrar-un-archivo-open-y-with" class="nav-link active" data-scroll-target="#abrir-y-cerrar-un-archivo-open-y-with">Abrir y cerrar un archivo: <code>open()</code> y <code>with</code></a>
+  <ul class="collapse">
+  <li><a href="#modos-de-apertura" id="toc-modos-de-apertura" class="nav-link" data-scroll-target="#modos-de-apertura">Modos de apertura</a></li>
+  </ul></li>
+  <li><a href="#leer-archivos" id="toc-leer-archivos" class="nav-link" data-scroll-target="#leer-archivos">Leer archivos</a>
+  <ul class="collapse">
+  <li><a href="#ignorar-líneas-de-comentario-y-vacías" id="toc-ignorar-líneas-de-comentario-y-vacías" class="nav-link" data-scroll-target="#ignorar-líneas-de-comentario-y-vacías">Ignorar líneas de comentario y vacías</a></li>
+  <li><a href="#leer-un-archivo-de-temperaturas" id="toc-leer-un-archivo-de-temperaturas" class="nav-link" data-scroll-target="#leer-un-archivo-de-temperaturas">Leer un archivo de temperaturas</a></li>
+  </ul></li>
+  <li><a href="#escribir-archivos" id="toc-escribir-archivos" class="nav-link" data-scroll-target="#escribir-archivos">Escribir archivos</a></li>
+  <li><a href="#el-formato-csv" id="toc-el-formato-csv" class="nav-link" data-scroll-target="#el-formato-csv">El formato CSV</a>
+  <ul class="collapse">
+  <li><a href="#escribir-un-csv" id="toc-escribir-un-csv" class="nav-link" data-scroll-target="#escribir-un-csv">Escribir un CSV</a></li>
+  </ul></li>
+  <li><a href="#el-formato-json" id="toc-el-formato-json" class="nav-link" data-scroll-target="#el-formato-json">El formato JSON</a>
+  <ul class="collapse">
+  <li><a href="#json-en-memoria-sin-archivos" id="toc-json-en-memoria-sin-archivos" class="nav-link" data-scroll-target="#json-en-memoria-sin-archivos">JSON en memoria sin archivos</a></li>
+  </ul></li>
+  <li><a href="#rutas-de-archivos" id="toc-rutas-de-archivos" class="nav-link" data-scroll-target="#rutas-de-archivos">Rutas de archivos</a></li>
+  <li><a href="#ejemplo-integrador" id="toc-ejemplo-integrador" class="nav-link" data-scroll-target="#ejemplo-integrador">Ejemplo integrador</a></li>
+  <li><a href="#lo-que-sigue" id="toc-lo-que-sigue" class="nav-link" data-scroll-target="#lo-que-sigue">Lo que sigue</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lectura y escritura de archivos</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Carlos Flores </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Todo el código que hemos escrito hasta ahora trabaja con datos que existen únicamente mientras el programa está en ejecución: una lista de calificaciones definida directamente en el código, un diccionario de estudiantes construido línea a línea. Cuando el programa termina, esos datos desaparecen. En la práctica, los datos vienen de otra parte —un archivo generado por un instrumento, una exportación de una base de datos, un registro acumulado con el tiempo— y los resultados deben guardarse en algún lugar que persista más allá de la sesión.</p>
+<p>La lección anterior introdujo el manejo de errores precisamente porque abrir un archivo es la operación donde las excepciones son más inevitables: el archivo puede no existir, puede estar en un formato inesperado, puede haber problemas de permisos. Ahora que sabemos manejar esas situaciones, podemos ocuparnos de los archivos propiamente.</p>
+<p>Para que todos los ejemplos de esta lección funcionen de forma autónoma, comenzamos creando los archivos de muestra que usaremos a lo largo de ella. En la práctica, estos archivos ya existirían en disco —generados por un sensor, exportados de una hoja de cálculo, descargados de internet— pero crearlos aquí permite ejecutar la lección completa sin dependencias externas.</p>
+<div id="04481cc9" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Archivo de temperaturas con comentarios</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"datos_temperatura.txt"</span>, <span class="st">"w"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"# Registro de temperaturas - Estación Toluca</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"# Fecha: 2024-01-15</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"23.5</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"24.0</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"22.8</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"no_valido</span><span class="ch">\n</span><span class="st">"</span>)   <span class="co"># línea inválida intencional</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"19.0</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)             <span class="co"># línea vacía intencional</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"21.3</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"20.7</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"18.9</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Archivo CSV de calificaciones</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"calificaciones.csv"</span>, <span class="st">"w"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"nombre,calificacion,carrera</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"Ana,9.2,Matemáticas</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"Luis,7.8,Física</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"María,8.5,Matemáticas</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"Carlos,6.1,Actuaría</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"Sofía,9.7,Física</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"Pedro,5.4,Actuaría</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"Lucía,8.0,Matemáticas</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"Roberto,7.2,Física</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Archivo JSON de estudiantes</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>estudiantes_datos <span class="op">=</span> [</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Ana"</span>,    <span class="st">"calificacion"</span>: <span class="fl">9.2</span>, <span class="st">"carrera"</span>: <span class="st">"Matemáticas"</span>},</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Luis"</span>,   <span class="st">"calificacion"</span>: <span class="fl">7.8</span>, <span class="st">"carrera"</span>: <span class="st">"Física"</span>},</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"María"</span>,  <span class="st">"calificacion"</span>: <span class="fl">8.5</span>, <span class="st">"carrera"</span>: <span class="st">"Matemáticas"</span>},</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Carlos"</span>, <span class="st">"calificacion"</span>: <span class="fl">6.1</span>, <span class="st">"carrera"</span>: <span class="st">"Actuaría"</span>},</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Sofía"</span>,  <span class="st">"calificacion"</span>: <span class="fl">9.7</span>, <span class="st">"carrera"</span>: <span class="st">"Física"</span>},</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"estudiantes.json"</span>, <span class="st">"w"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    json.dump(estudiantes_datos, f, ensure_ascii<span class="op">=</span><span class="va">False</span>, indent<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Archivos de muestra creados."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Archivos de muestra creados.</code></pre>
+</div>
+</div>
+<section id="abrir-y-cerrar-un-archivo-open-y-with" class="level2">
+<h2 class="anchored" data-anchor-id="abrir-y-cerrar-un-archivo-open-y-with">Abrir y cerrar un archivo: <code>open()</code> y <code>with</code></h2>
+<p>La función <code>open()</code> recibe la ruta del archivo y devuelve un objeto que representa la conexión con ese archivo en disco. Ese objeto tiene operaciones para leer y escribir, pero antes de que el programa termine —o antes de que el archivo se use en otro contexto— esa conexión debe cerrarse. Si no se cierra, los datos escritos pueden no guardarse correctamente y el sistema puede quedarse con el recurso ocupado.</p>
+<p>La lección anterior mostró la forma manual de hacer esto con <code>finally</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>archivo <span class="op">=</span> <span class="bu">open</span>(<span class="st">"datos.txt"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    contenido <span class="op">=</span> archivo.read()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">finally</span>:</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    archivo.close()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Eso garantiza el cierre, pero es verboso. Python ofrece el bloque <code>with</code> exactamente para este patrón: abre el archivo al entrar al bloque y lo cierra automáticamente al salir, haya ocurrido una excepción o no. Es la forma que se usa siempre en la práctica.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"datos.txt"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    contenido <span class="op">=</span> f.read()</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># aquí el archivo ya está cerrado, aunque haya habido un error dentro del bloque</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La sintaxis <code>as f</code> asigna el objeto archivo al nombre <code>f</code> para usarlo dentro del bloque. Fuera del bloque <code>with</code>, <code>f</code> sigue existiendo como nombre pero el archivo ya está cerrado y no debe usarse.</p>
+<p>El parámetro <code>encoding="utf-8"</code> especifica la codificación del texto. UTF-8 es el estándar universal para texto en español y prácticamente cualquier idioma moderno; omitirlo puede producir errores con caracteres como tildes o la ñ dependiendo del sistema operativo.</p>
+<section id="modos-de-apertura" class="level3">
+<h3 class="anchored" data-anchor-id="modos-de-apertura">Modos de apertura</h3>
+<p>El segundo argumento de <code>open()</code> es el <em>modo</em>, que indica qué se pretende hacer con el archivo:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 19%">
+<col style="width: 37%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Modo</th>
+<th style="text-align: left;">Significado</th>
+<th style="text-align: left;">Si el archivo no existe</th>
+<th style="text-align: left;">Si el archivo existe</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>"r"</code></td>
+<td style="text-align: left;">Lectura</td>
+<td style="text-align: left;">Lanza <code>FileNotFoundError</code></td>
+<td style="text-align: left;">Lo abre</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>"w"</code></td>
+<td style="text-align: left;">Escritura</td>
+<td style="text-align: left;">Lo crea</td>
+<td style="text-align: left;">Borra su contenido</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>"a"</code></td>
+<td style="text-align: left;">Añadir al final</td>
+<td style="text-align: left;">Lo crea</td>
+<td style="text-align: left;">Conserva su contenido y añade al final</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>"x"</code></td>
+<td style="text-align: left;">Creación exclusiva</td>
+<td style="text-align: left;">Lo crea</td>
+<td style="text-align: left;">Lanza <code>FileExistsError</code></td>
+</tr>
+</tbody>
+</table>
+<p>El modo <code>"r"</code> es el predeterminado: si se omite el segundo argumento, Python asume lectura. Los modos <code>"w"</code> y <code>"a"</code> son los más usados para escritura. La distinción entre ellos es importante: <code>"w"</code> destruye el contenido existente sin advertencia, mientras que <code>"a"</code> lo preserva y añade al final.</p>
+</section>
+</section>
+<section id="leer-archivos" class="level2">
+<h2 class="anchored" data-anchor-id="leer-archivos">Leer archivos</h2>
+<p>Una vez abierto un archivo en modo lectura, hay tres formas principales de acceder a su contenido, cada una apropiada para una situación distinta.</p>
+<p><code>read()</code> lee el archivo completo y devuelve todo su contenido como una sola cadena. Es simple, pero carga todo en memoria de una vez, lo que puede ser un problema con archivos muy grandes.</p>
+<p><code>readline()</code> lee una sola línea cada vez que se llama, incluyendo el carácter de salto de línea <code>\n</code> al final. Es útil cuando se necesita procesar el archivo de forma muy controlada, aunque el <code>for</code> que veremos a continuación es más cómodo en la práctica.</p>
+<p><code>readlines()</code> lee todas las líneas y las devuelve como una lista de cadenas, donde cada elemento es una línea con su <code>\n</code> incluido. Permite acceder a líneas por índice, pero también carga todo en memoria.</p>
+<p>La forma más idiomática y eficiente de leer un archivo línea a línea es iterar directamente sobre el objeto archivo con un <code>for</code>. Python entrega una línea en cada iteración sin cargar el archivo completo en memoria, lo que lo hace adecuado incluso para archivos grandes:</p>
+<div id="821e8929" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"datos_temperatura.txt"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> linea <span class="kw">in</span> f:</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="bu">repr</span>(linea))   <span class="co"># repr() muestra el \n explícitamente</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'# Registro de temperaturas - Estación Toluca\n'
+'# Fecha: 2024-01-15\n'
+'23.5\n'
+'24.0\n'
+'22.8\n'
+'no_valido\n'
+'19.0\n'
+'\n'
+'21.3\n'
+'20.7\n'
+'18.9\n'</code></pre>
+</div>
+</div>
+<p>Se puede observar que cada línea termina con <code>\n</code>, el carácter de salto de línea. La forma de eliminarlo es <code>linea.strip()</code>, que elimina espacios en blanco y saltos de línea al inicio y al final de una cadena. <code>strip()</code> es un método de cadena; los métodos de cadena se explicarán en detalle en la lección 11, pero <code>strip()</code> ya apareció en la lección anterior y su efecto es suficientemente intuitivo para usarlo aquí.</p>
+<div id="19931b71" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"datos_temperatura.txt"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> linea <span class="kw">in</span> f:</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        linea <span class="op">=</span> linea.strip()   <span class="co"># elimina \n y espacios sobrantes</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(linea)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Registro de temperaturas - Estación Toluca
+# Fecha: 2024-01-15
+23.5
+24.0
+22.8
+no_valido
+19.0
+
+21.3
+20.7
+18.9</code></pre>
+</div>
+</div>
+<section id="ignorar-líneas-de-comentario-y-vacías" class="level3">
+<h3 class="anchored" data-anchor-id="ignorar-líneas-de-comentario-y-vacías">Ignorar líneas de comentario y vacías</h3>
+<p>Un patrón muy común en archivos de datos es que algunas líneas sean comentarios o estén vacías y no deban procesarse. La combinación de <code>for</code>, <code>if</code> y <code>continue</code> que ya conocemos maneja esto directamente:</p>
+<div id="ceb6bcd3" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"datos_temperatura.txt"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> linea <span class="kw">in</span> f:</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        linea <span class="op">=</span> linea.strip()</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> linea.startswith(<span class="st">"#"</span>) <span class="kw">or</span> linea <span class="op">==</span> <span class="st">""</span>:</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span>   <span class="co"># ignoramos comentarios y líneas vacías</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(linea)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>23.5
+24.0
+22.8
+no_valido
+19.0
+21.3
+20.7
+18.9</code></pre>
+</div>
+</div>
+<p><code>startswith()</code> es otro método de cadena que verifica si una cadena comienza con cierto prefijo. Como <code>strip()</code>, su uso aquí es suficientemente directo; ambos se explicarán formalmente en la lección 11.</p>
+</section>
+<section id="leer-un-archivo-de-temperaturas" class="level3">
+<h3 class="anchored" data-anchor-id="leer-un-archivo-de-temperaturas">Leer un archivo de temperaturas</h3>
+<p>Retomando los datos que han acompañado toda la serie, la función siguiente lee el archivo de temperaturas, descarta comentarios y líneas vacías, convierte cada valor a <code>float</code> y devuelve la lista de temperaturas válidas usando el manejo de errores de la lección anterior:</p>
+<div id="3f79570b" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> leer_temperaturas(ruta):</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Lee un archivo de temperaturas (una por línea).</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Ignora líneas vacías y comentarios que empiezan con #.</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Devuelve una lista de floats con las temperaturas válidas.</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    temperaturas <span class="op">=</span> []</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    invalidas    <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(ruta, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> linea <span class="kw">in</span> f:</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>                linea <span class="op">=</span> linea.strip()</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> linea <span class="op">==</span> <span class="st">""</span> <span class="kw">or</span> linea.startswith(<span class="st">"#"</span>):</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">continue</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>                <span class="cf">try</span>:</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>                    temperaturas <span class="op">=</span> temperaturas <span class="op">+</span> [<span class="bu">float</span>(linea)]</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>                <span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>                    invalidas <span class="op">=</span> invalidas <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">FileNotFoundError</span>:</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">FileNotFoundError</span>(<span class="ss">f"No se encontró el archivo: </span><span class="sc">{</span>ruta<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> invalidas <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Advertencia: </span><span class="sc">{</span>invalidas<span class="sc">}</span><span class="ss"> línea(s) no pudieron convertirse a número."</span>)</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> temperaturas</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>temperaturas <span class="op">=</span> leer_temperaturas(<span class="st">"datos_temperatura.txt"</span>)</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Temperaturas leídas: </span><span class="sc">{</span><span class="bu">len</span>(temperaturas)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Promedio: </span><span class="sc">{</span><span class="bu">sum</span>(temperaturas) <span class="op">/</span> <span class="bu">len</span>(temperaturas)<span class="sc">:.2f}</span><span class="ss"> °C"</span>)</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mínima:   </span><span class="sc">{</span><span class="bu">min</span>(temperaturas)<span class="sc">:.2f}</span><span class="ss"> °C"</span>)</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Máxima:   </span><span class="sc">{</span><span class="bu">max</span>(temperaturas)<span class="sc">:.2f}</span><span class="ss"> °C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Advertencia: 1 línea(s) no pudieron convertirse a número.
+Temperaturas leídas: 7
+Promedio: 21.46 °C
+Mínima:   18.90 °C
+Máxima:   24.00 °C</code></pre>
+</div>
+</div>
+<p>El <code>try</code> exterior captura <code>FileNotFoundError</code> si el archivo no existe y lo relanza con un mensaje más descriptivo. El <code>try</code> interior captura <code>ValueError</code> línea por línea, permitiendo que el procesamiento continúe aunque alguna línea sea inválida —como la línea <code>"no_valido"</code> que incluimos intencionalmente en el archivo de muestra. Ese comportamiento —acumular errores en lugar de detenerse ante el primero— es exactamente el patrón que mostró el ejemplo integrador de la lección anterior.</p>
+</section>
+</section>
+<section id="escribir-archivos" class="level2">
+<h2 class="anchored" data-anchor-id="escribir-archivos">Escribir archivos</h2>
+<p>Abrir un archivo en modo <code>"w"</code> o <code>"a"</code> permite escribir en él con <code>write()</code>, que recibe una cadena y la escribe tal cual. A diferencia de <code>print()</code>, <code>write()</code> no añade automáticamente un salto de línea: hay que incluirlo explícitamente con <code>\n</code>.</p>
+<div id="94f857f1" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"temperaturas"</span>: <span class="bu">len</span>(temperaturas),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"promedio"</span>:     <span class="bu">round</span>(<span class="bu">sum</span>(temperaturas) <span class="op">/</span> <span class="bu">len</span>(temperaturas), <span class="dv">2</span>),</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"minima"</span>:       <span class="bu">min</span>(temperaturas),</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"maxima"</span>:       <span class="bu">max</span>(temperaturas)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"resumen_temperaturas.txt"</span>, <span class="st">"w"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"=== Resumen de temperaturas ===</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="ss">f"Lecturas válidas: </span><span class="sc">{</span>resultado[<span class="st">'temperaturas'</span>]<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="ss">f"Promedio:         </span><span class="sc">{</span>resultado[<span class="st">'promedio'</span>]<span class="sc">:.2f}</span><span class="ss"> °C</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="ss">f"Mínima:           </span><span class="sc">{</span>resultado[<span class="st">'minima'</span>]<span class="sc">:.2f}</span><span class="ss"> °C</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="ss">f"Máxima:           </span><span class="sc">{</span>resultado[<span class="st">'maxima'</span>]<span class="sc">:.2f}</span><span class="ss"> °C</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificamos leyendo el archivo recién creado</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"resumen_temperaturas.txt"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(f.read())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== Resumen de temperaturas ===
+Lecturas válidas: 7
+Promedio:         21.46 °C
+Mínima:           18.90 °C
+Máxima:           24.00 °C
+</code></pre>
+</div>
+</div>
+<p>El modo <code>"a"</code> es útil cuando se quiere acumular registros a lo largo del tiempo sin sobrescribir los anteriores. Por ejemplo, un sensor que añade una lectura al archivo cada vez que se ejecuta:</p>
+<div id="c7b4561e" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> registrar_lectura(ruta, temperatura):</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Añade una lectura al final del archivo de registro."""</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(ruta, <span class="st">"a"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        f.write(<span class="ss">f"</span><span class="sc">{</span>temperatura<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>registrar_lectura(<span class="st">"registro.txt"</span>, <span class="fl">23.5</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>registrar_lectura(<span class="st">"registro.txt"</span>, <span class="fl">24.1</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>registrar_lectura(<span class="st">"registro.txt"</span>, <span class="fl">22.8</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"registro.txt"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(f.read())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>23.5
+24.1
+22.8
+</code></pre>
+</div>
+</div>
+<p>Cada llamada a <code>registrar_lectura</code> abre el archivo, añade una línea y lo cierra. La próxima vez que se abra en modo <code>"a"</code>, el contenido anterior estará intacto.</p>
+</section>
+<section id="el-formato-csv" class="level2">
+<h2 class="anchored" data-anchor-id="el-formato-csv">El formato CSV</h2>
+<p>El formato CSV (<em>comma-separated values</em>, valores separados por comas) es el más común para intercambiar datos tabulares: cada línea es un registro y los campos están separados por comas. Es el formato que exportan las hojas de cálculo y el que leen directamente las bibliotecas de ciencia de datos.</p>
+<p>Leer un CSV manualmente requiere separar cada línea en sus campos. El método <code>split(",")</code> divide una cadena en una lista usando la coma como separador —también es un método de cadena, explicado en la lección 11, pero su comportamiento es directo:</p>
+<div id="f66a562f" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> leer_csv(ruta):</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Lee un archivo CSV con encabezado.</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Devuelve una lista de diccionarios, uno por fila.</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    registros <span class="op">=</span> []</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(ruta, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>            lineas <span class="op">=</span> []</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> linea <span class="kw">in</span> f:</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>                linea <span class="op">=</span> linea.strip()</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> linea <span class="op">!=</span> <span class="st">""</span>:</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>                    lineas <span class="op">=</span> lineas <span class="op">+</span> [linea]</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">FileNotFoundError</span>:</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">FileNotFoundError</span>(<span class="ss">f"No se encontró el archivo: </span><span class="sc">{</span>ruta<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> lineas:</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> []</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># La primera línea es el encabezado</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    encabezado <span class="op">=</span> lineas[<span class="dv">0</span>].split(<span class="st">","</span>)</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Las demás son datos</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> linea <span class="kw">in</span> lineas[<span class="dv">1</span>:]:</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>        valores  <span class="op">=</span> linea.split(<span class="st">","</span>)</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>        registro <span class="op">=</span> {}</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i, campo <span class="kw">in</span> <span class="bu">enumerate</span>(encabezado):</span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>            registro[campo] <span class="op">=</span> valores[i]</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>        registros <span class="op">=</span> registros <span class="op">+</span> [registro]</span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> registros</span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>grupo <span class="op">=</span> leer_csv(<span class="st">"calificaciones.csv"</span>)</span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> alumno <span class="kw">in</span> grupo:</span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(alumno)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'nombre': 'Ana', 'calificacion': '9.2', 'carrera': 'Matemáticas'}
+{'nombre': 'Luis', 'calificacion': '7.8', 'carrera': 'Física'}
+{'nombre': 'María', 'calificacion': '8.5', 'carrera': 'Matemáticas'}
+{'nombre': 'Carlos', 'calificacion': '6.1', 'carrera': 'Actuaría'}
+{'nombre': 'Sofía', 'calificacion': '9.7', 'carrera': 'Física'}
+{'nombre': 'Pedro', 'calificacion': '5.4', 'carrera': 'Actuaría'}
+{'nombre': 'Lucía', 'calificacion': '8.0', 'carrera': 'Matemáticas'}
+{'nombre': 'Roberto', 'calificacion': '7.2', 'carrera': 'Física'}</code></pre>
+</div>
+</div>
+<p>Esta función ilustra el patrón completo: leer líneas, separar encabezado de datos, construir un diccionario por cada fila usando <code>enumerate()</code> para emparejar cada campo con su nombre. El resultado es exactamente la estructura de lista de diccionarios que hemos usado desde la lección de estructuras de datos.</p>
+<p>Una observación importante: los valores del CSV se leen como cadenas. Para usar la calificación como número hay que convertirla explícitamente:</p>
+<div id="b37688e5" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> alumno <span class="kw">in</span> grupo:</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    nombre       <span class="op">=</span> alumno[<span class="st">"nombre"</span>]</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    calificacion <span class="op">=</span> <span class="bu">float</span>(alumno[<span class="st">"calificacion"</span>])</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    carrera      <span class="op">=</span> alumno[<span class="st">"carrera"</span>]</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>nombre<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>carrera<span class="sc">}</span><span class="ss">): </span><span class="sc">{</span>calificacion<span class="sc">:.1f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ana (Matemáticas): 9.2
+Luis (Física): 7.8
+María (Matemáticas): 8.5
+Carlos (Actuaría): 6.1
+Sofía (Física): 9.7
+Pedro (Actuaría): 5.4
+Lucía (Matemáticas): 8.0
+Roberto (Física): 7.2</code></pre>
+</div>
+</div>
+<p>Esta limitación —que el CSV no guarda información de tipos— es una de las razones por las que en ciencia de datos se usa pandas para leer CSV en lugar de hacerlo manualmente: pandas infiere los tipos automáticamente. Pero entender qué hace pandas por debajo es lo que permite diagnosticar problemas cuando algo sale mal.</p>
+<section id="escribir-un-csv" class="level3">
+<h3 class="anchored" data-anchor-id="escribir-un-csv">Escribir un CSV</h3>
+<p>Escribir un CSV es el proceso inverso: convertir cada registro en una línea de texto uniendo sus campos con comas. El método <code>join()</code> une los elementos de una lista con un separador dado —método de cadena explicado en la lección 11—:</p>
+<div id="22bcfcb0" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> escribir_csv(ruta, registros, campos):</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Escribe una lista de diccionarios como archivo CSV.</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">    `campos` define el orden de las columnas.</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(ruta, <span class="st">"w"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        f.write(<span class="st">","</span>.join(campos) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> registro <span class="kw">in</span> registros:</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>            valores <span class="op">=</span> [<span class="bu">str</span>(registro[campo]) <span class="cf">for</span> campo <span class="kw">in</span> campos]</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>            f.write(<span class="st">","</span>.join(valores) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>grupo_actualizado <span class="op">=</span> [</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Ana"</span>,   <span class="st">"calificacion"</span>: <span class="fl">9.5</span>, <span class="st">"carrera"</span>: <span class="st">"Matemáticas"</span>},</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Luis"</span>,  <span class="st">"calificacion"</span>: <span class="fl">8.0</span>, <span class="st">"carrera"</span>: <span class="st">"Física"</span>},</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"María"</span>, <span class="st">"calificacion"</span>: <span class="fl">8.7</span>, <span class="st">"carrera"</span>: <span class="st">"Matemáticas"</span>},</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>escribir_csv(<span class="st">"grupo_actualizado.csv"</span>, grupo_actualizado,</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>             [<span class="st">"nombre"</span>, <span class="st">"calificacion"</span>, <span class="st">"carrera"</span>])</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"grupo_actualizado.csv"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(f.read())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>nombre,calificacion,carrera
+Ana,9.5,Matemáticas
+Luis,8.0,Física
+María,8.7,Matemáticas
+</code></pre>
+</div>
+</div>
+<p>La comprensión <code>[str(registro[campo]) for campo in campos]</code> convierte cada valor a cadena antes de unirlos, ya que <code>join()</code> requiere que todos los elementos sean cadenas. Es el mismo tipo de comprensión que usamos extensamente en la lección anterior.</p>
+</section>
+</section>
+<section id="el-formato-json" class="level2">
+<h2 class="anchored" data-anchor-id="el-formato-json">El formato JSON</h2>
+<p>JSON (<em>JavaScript Object Notation</em>) es el otro formato universal para intercambiar datos. Su estructura de pares clave-valor, listas y valores anidados se corresponde directamente con los diccionarios y listas de Python, lo que hace la conversión entre ambos especialmente natural.</p>
+<p>Python incluye el módulo <code>json</code> en su biblioteca estándar. Esta es la primera vez en la serie que usamos <code>import</code> de forma explícita —apareció de forma silenciosa en la primera celda de esta lección, que creó los archivos de muestra. Los módulos se explicarán en profundidad en la lección 15; por ahora basta con saber que <code>import json</code> pone a disposición las funciones del módulo bajo el nombre <code>json</code>, y que se accede a ellas con la notación <code>json.función()</code>. Esa notación de punto es exactamente la misma que veremos con profundidad cuando se introduzca la programación orientada a objetos en la lección 11.</p>
+<div id="61661341" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> leer_json(ruta):</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Lee un archivo JSON y devuelve el objeto Python equivalente."""</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(ruta, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> json.load(f)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">FileNotFoundError</span>:</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">FileNotFoundError</span>(<span class="ss">f"No se encontró el archivo: </span><span class="sc">{</span>ruta<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> json.JSONDecodeError <span class="im">as</span> e:</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f"El archivo no contiene JSON válido: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>estudiantes <span class="op">=</span> leer_json(<span class="st">"estudiantes.json"</span>)</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> e <span class="kw">in</span> estudiantes:</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>e[<span class="st">'nombre'</span>]<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>e[<span class="st">'carrera'</span>]<span class="sc">}</span><span class="ss">): </span><span class="sc">{</span>e[<span class="st">'calificacion'</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ana (Matemáticas): 9.2
+Luis (Física): 7.8
+María (Matemáticas): 8.5
+Carlos (Actuaría): 6.1
+Sofía (Física): 9.7</code></pre>
+</div>
+</div>
+<p><code>json.load(f)</code> lee el contenido del archivo y lo convierte automáticamente al tipo Python correspondiente: un objeto JSON se convierte en un diccionario, un array en una lista, una cadena en <code>str</code>, un número en <code>int</code> o <code>float</code>. La conversión de tipos que había que hacer manualmente con el CSV aquí es automática.</p>
+<p>Para escribir un objeto Python como JSON en un archivo se usa <code>json.dump()</code>:</p>
+<div id="eee0c6dd" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="op">=</span> {</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"fecha"</span>:    <span class="st">"2024-01-15"</span>,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"estacion"</span>: <span class="st">"Toluca"</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lecturas"</span>: <span class="bu">len</span>(temperaturas),</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"promedio"</span>: <span class="bu">round</span>(<span class="bu">sum</span>(temperaturas) <span class="op">/</span> <span class="bu">len</span>(temperaturas), <span class="dv">2</span>),</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"minima"</span>:   <span class="bu">min</span>(temperaturas),</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"maxima"</span>:   <span class="bu">max</span>(temperaturas),</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"unidad"</span>:   <span class="st">"Celsius"</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"resumen.json"</span>, <span class="st">"w"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    json.dump(resumen, f, ensure_ascii<span class="op">=</span><span class="va">False</span>, indent<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"resumen.json"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(f.read())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{
+    "fecha": "2024-01-15",
+    "estacion": "Toluca",
+    "lecturas": 7,
+    "promedio": 21.46,
+    "minima": 18.9,
+    "maxima": 24.0,
+    "unidad": "Celsius"
+}</code></pre>
+</div>
+</div>
+<p>El parámetro <code>ensure_ascii=False</code> permite que caracteres como tildes y ñ se guarden directamente en lugar de convertirse a secuencias de escape. El parámetro <code>indent=4</code> formatea el JSON con indentación de cuatro espacios, produciendo un archivo legible por humanos.</p>
+<section id="json-en-memoria-sin-archivos" class="level3">
+<h3 class="anchored" data-anchor-id="json-en-memoria-sin-archivos">JSON en memoria sin archivos</h3>
+<p>El módulo <code>json</code> también ofrece <code>json.loads()</code> y <code>json.dumps()</code> (con <code>s</code> final, de <em>string</em>) para convertir entre objetos Python y cadenas JSON sin pasar por un archivo. Esto es útil cuando los datos llegan como texto, por ejemplo desde una API web:</p>
+<div id="42f73a59" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># De cadena JSON a objeto Python</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>texto_json <span class="op">=</span> <span class="st">'{"nombre": "Ana", "calificacion": 9.2}'</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>datos <span class="op">=</span> json.loads(texto_json)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(datos[<span class="st">"nombre"</span>])</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co"># De objeto Python a cadena JSON</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>registro <span class="op">=</span> {<span class="st">"nombre"</span>: <span class="st">"Luis"</span>, <span class="st">"calificacion"</span>: <span class="fl">7.8</span>, <span class="st">"carrera"</span>: <span class="st">"Física"</span>}</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>texto <span class="op">=</span> json.dumps(registro, ensure_ascii<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(texto)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ana
+{"nombre": "Luis", "calificacion": 7.8, "carrera": "Física"}</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="rutas-de-archivos" class="level2">
+<h2 class="anchored" data-anchor-id="rutas-de-archivos">Rutas de archivos</h2>
+<p>Hasta aquí todos los ejemplos han usado rutas simples como <code>"datos_temperatura.txt"</code>, que Python interpreta como relativas al directorio de trabajo actual. En Google Colab, ese directorio es <code>/content</code> por defecto. Para trabajar con archivos en otras ubicaciones, la ruta debe ser más específica.</p>
+<p>Una ruta relativa como <code>"datos/temperaturas.txt"</code> busca el archivo en una carpeta <code>datos</code> dentro del directorio actual. Una ruta absoluta como <code>"/content/drive/MyDrive/datos.txt"</code> especifica la ubicación completa desde la raíz del sistema.</p>
+<p>Antes de intentar abrir un archivo, a veces es útil verificar que existe. El módulo <code>os</code> de la biblioteca estándar ofrece <code>os.path.exists()</code> para eso:</p>
+<div id="06935b3f" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> leer_datos_seguro(ruta):</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> os.path.exists(ruta):</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"El archivo '</span><span class="sc">{</span>ruta<span class="sc">}</span><span class="ss">' no existe."</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(ruta, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> f.read()</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>contenido <span class="op">=</span> leer_datos_seguro(<span class="st">"datos_temperatura.txt"</span>)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> contenido <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Archivo leído: </span><span class="sc">{</span><span class="bu">len</span>(contenido)<span class="sc">}</span><span class="ss"> caracteres."</span>)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>contenido <span class="op">=</span> leer_datos_seguro(<span class="st">"archivo_que_no_existe.txt"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Archivo leído: 111 caracteres.
+El archivo 'archivo_que_no_existe.txt' no existe.</code></pre>
+</div>
+</div>
+<p>La verificación con <code>os.path.exists()</code> antes de <code>open()</code> es una cláusula de guarda aplicada a archivos. La alternativa —dejar que <code>open()</code> falle y capturar el <code>FileNotFoundError</code>— es igualmente válida y generalmente preferida por el estilo EAFP de Python que vimos en la lección anterior. La elección entre ambas depende del contexto: si la ausencia del archivo es un caso normal y esperado, la guarda es más explícita; si es verdaderamente excepcional, <code>try / except</code> es más natural.</p>
+</section>
+<section id="ejemplo-integrador" class="level2">
+<h2 class="anchored" data-anchor-id="ejemplo-integrador">Ejemplo integrador</h2>
+<p>Para cerrar, una función que lee el CSV de calificaciones, calcula estadísticas por carrera y guarda el resultado como JSON. Combina todo lo visto en esta lección con las estructuras de datos y comprensiones de lecciones anteriores.</p>
+<div id="5cf929ec" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clasificar(calificacion):</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> calificacion <span class="op">&gt;=</span> <span class="fl">9.0</span>:</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Sobresaliente"</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> calificacion <span class="op">&gt;=</span> <span class="fl">7.0</span>:</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Bien"</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> calificacion <span class="op">&gt;=</span> <span class="fl">6.0</span>:</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Suficiente"</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Reprobado"</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> analizar_grupo(ruta_csv, ruta_salida):</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="co">    Lee calificaciones desde un CSV, calcula estadísticas por carrera</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="co">    y guarda el resultado en un archivo JSON.</span></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>        grupo <span class="op">=</span> leer_csv(ruta_csv)</span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">FileNotFoundError</span> <span class="im">as</span> e:</span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(e)</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convertir calificaciones a float</span></span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> alumno <span class="kw">in</span> grupo:</span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>            alumno[<span class="st">"calificacion"</span>] <span class="op">=</span> <span class="bu">float</span>(alumno[<span class="st">"calificacion"</span>])</span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>            alumno[<span class="st">"calificacion"</span>] <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filtrar registros con calificación válida</span></span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>    validos <span class="op">=</span> [a <span class="cf">for</span> a <span class="kw">in</span> grupo <span class="cf">if</span> a[<span class="st">"calificacion"</span>] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>]</span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> validos:</span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"No hay registros válidos para analizar."</span>)</span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Carreras únicas</span></span>
+<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a>    carreras <span class="op">=</span> {a[<span class="st">"carrera"</span>] <span class="cf">for</span> a <span class="kw">in</span> validos}</span>
+<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Estadísticas por carrera</span></span>
+<span id="cb31-41"><a href="#cb31-41" aria-hidden="true" tabindex="-1"></a>    resultado <span class="op">=</span> {}</span>
+<span id="cb31-42"><a href="#cb31-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> carrera <span class="kw">in</span> <span class="bu">sorted</span>(carreras):</span>
+<span id="cb31-43"><a href="#cb31-43" aria-hidden="true" tabindex="-1"></a>        califs <span class="op">=</span> [a[<span class="st">"calificacion"</span>] <span class="cf">for</span> a <span class="kw">in</span> validos <span class="cf">if</span> a[<span class="st">"carrera"</span>] <span class="op">==</span> carrera]</span>
+<span id="cb31-44"><a href="#cb31-44" aria-hidden="true" tabindex="-1"></a>        alumnos_carrera <span class="op">=</span> [</span>
+<span id="cb31-45"><a href="#cb31-45" aria-hidden="true" tabindex="-1"></a>            {</span>
+<span id="cb31-46"><a href="#cb31-46" aria-hidden="true" tabindex="-1"></a>                <span class="st">"nombre"</span>:       a[<span class="st">"nombre"</span>],</span>
+<span id="cb31-47"><a href="#cb31-47" aria-hidden="true" tabindex="-1"></a>                <span class="st">"calificacion"</span>: a[<span class="st">"calificacion"</span>],</span>
+<span id="cb31-48"><a href="#cb31-48" aria-hidden="true" tabindex="-1"></a>                <span class="st">"nivel"</span>:        clasificar(a[<span class="st">"calificacion"</span>])</span>
+<span id="cb31-49"><a href="#cb31-49" aria-hidden="true" tabindex="-1"></a>            }</span>
+<span id="cb31-50"><a href="#cb31-50" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> a <span class="kw">in</span> validos <span class="cf">if</span> a[<span class="st">"carrera"</span>] <span class="op">==</span> carrera</span>
+<span id="cb31-51"><a href="#cb31-51" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="cb31-52"><a href="#cb31-52" aria-hidden="true" tabindex="-1"></a>        resultado[carrera] <span class="op">=</span> {</span>
+<span id="cb31-53"><a href="#cb31-53" aria-hidden="true" tabindex="-1"></a>            <span class="st">"total"</span>:    <span class="bu">len</span>(califs),</span>
+<span id="cb31-54"><a href="#cb31-54" aria-hidden="true" tabindex="-1"></a>            <span class="st">"promedio"</span>: <span class="bu">round</span>(<span class="bu">sum</span>(califs) <span class="op">/</span> <span class="bu">len</span>(califs), <span class="dv">2</span>),</span>
+<span id="cb31-55"><a href="#cb31-55" aria-hidden="true" tabindex="-1"></a>            <span class="st">"minima"</span>:   <span class="bu">min</span>(califs),</span>
+<span id="cb31-56"><a href="#cb31-56" aria-hidden="true" tabindex="-1"></a>            <span class="st">"maxima"</span>:   <span class="bu">max</span>(califs),</span>
+<span id="cb31-57"><a href="#cb31-57" aria-hidden="true" tabindex="-1"></a>            <span class="st">"alumnos"</span>:  alumnos_carrera</span>
+<span id="cb31-58"><a href="#cb31-58" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb31-59"><a href="#cb31-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-60"><a href="#cb31-60" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Guardar como JSON</span></span>
+<span id="cb31-61"><a href="#cb31-61" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(ruta_salida, <span class="st">"w"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb31-62"><a href="#cb31-62" aria-hidden="true" tabindex="-1"></a>        json.dump(resultado, f, ensure_ascii<span class="op">=</span><span class="va">False</span>, indent<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb31-63"><a href="#cb31-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-64"><a href="#cb31-64" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Análisis guardado en '</span><span class="sc">{</span>ruta_salida<span class="sc">}</span><span class="ss">'.</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb31-65"><a href="#cb31-65" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> resultado</span>
+<span id="cb31-66"><a href="#cb31-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-67"><a href="#cb31-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-68"><a href="#cb31-68" aria-hidden="true" tabindex="-1"></a>reporte <span class="op">=</span> analizar_grupo(<span class="st">"calificaciones.csv"</span>, <span class="st">"reporte_carreras.json"</span>)</span>
+<span id="cb31-69"><a href="#cb31-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-70"><a href="#cb31-70" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> reporte <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb31-71"><a href="#cb31-71" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> carrera, datos <span class="kw">in</span> reporte.items():</span>
+<span id="cb31-72"><a href="#cb31-72" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>carrera<span class="sc">}</span><span class="ss">  (promedio: </span><span class="sc">{</span>datos[<span class="st">'promedio'</span>]<span class="sc">:.2f}</span><span class="ss">, "</span></span>
+<span id="cb31-73"><a href="#cb31-73" aria-hidden="true" tabindex="-1"></a>              <span class="ss">f"</span><span class="sc">{</span>datos[<span class="st">'total'</span>]<span class="sc">}</span><span class="ss"> alumno(s))"</span>)</span>
+<span id="cb31-74"><a href="#cb31-74" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> alumno <span class="kw">in</span> datos[<span class="st">"alumnos"</span>]:</span>
+<span id="cb31-75"><a href="#cb31-75" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>alumno[<span class="st">'nombre'</span>]<span class="sc">:&lt;10}</span><span class="ss"> </span><span class="sc">{</span>alumno[<span class="st">'calificacion'</span>]<span class="sc">:.1f}</span><span class="ss">"</span></span>
+<span id="cb31-76"><a href="#cb31-76" aria-hidden="true" tabindex="-1"></a>                  <span class="ss">f"  </span><span class="sc">{</span>alumno[<span class="st">'nivel'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb31-77"><a href="#cb31-77" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Análisis guardado en 'reporte_carreras.json'.
+
+Actuaría  (promedio: 5.75, 2 alumno(s))
+  Carlos     6.1  Suficiente
+  Pedro      5.4  Reprobado
+
+Física  (promedio: 8.23, 3 alumno(s))
+  Luis       7.8  Bien
+  Sofía      9.7  Sobresaliente
+  Roberto    7.2  Bien
+
+Matemáticas  (promedio: 8.57, 3 alumno(s))
+  Ana        9.2  Sobresaliente
+  María      8.5  Bien
+  Lucía      8.0  Bien
+</code></pre>
+</div>
+</div>
+<p>El ejemplo usa <code>leer_csv()</code> y <code>json.dump()</code> para la entrada y salida, comprensiones de lista y conjunto para el procesamiento, la función <code>clasificar()</code> que ha acompañado la serie desde la lección 5, y manejo de errores en cada operación que puede fallar. Nada es nuevo en términos de herramientas; lo nuevo es que los datos ahora provienen de un archivo real y los resultados se persisten en otro.</p>
+</section>
+<section id="lo-que-sigue" class="level2">
+<h2 class="anchored" data-anchor-id="lo-que-sigue">Lo que sigue</h2>
+<p>Con el manejo de archivos, el código puede por primera vez interactuar con el mundo exterior de forma persistente: leer datos que otro programa generó, guardar resultados que otro programa leerá. Pero hay algo que los archivos revelan con claridad: operar sobre ellos requiere la notación <code>f.read()</code>, <code>f.write()</code>, <code>json.load()</code>, <code>linea.strip()</code>, <code>linea.split()</code>. Esa notación de punto, que hemos usado de forma pragmática sin explicar del todo, tiene una razón de ser precisa. La siguiente lección la explica: introduce qué es un objeto en Python y por qué esa forma de escribir las operaciones no es convencional sino estructural.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

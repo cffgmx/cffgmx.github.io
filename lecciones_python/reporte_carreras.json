@@ -1,0 +1,66 @@
+{
+    "Actuaría": {
+        "total": 2,
+        "promedio": 5.75,
+        "minima": 5.4,
+        "maxima": 6.1,
+        "alumnos": [
+            {
+                "nombre": "Carlos",
+                "calificacion": 6.1,
+                "nivel": "Suficiente"
+            },
+            {
+                "nombre": "Pedro",
+                "calificacion": 5.4,
+                "nivel": "Reprobado"
+            }
+        ]
+    },
+    "Física": {
+        "total": 3,
+        "promedio": 8.23,
+        "minima": 7.2,
+        "maxima": 9.7,
+        "alumnos": [
+            {
+                "nombre": "Luis",
+                "calificacion": 7.8,
+                "nivel": "Bien"
+            },
+            {
+                "nombre": "Sofía",
+                "calificacion": 9.7,
+                "nivel": "Sobresaliente"
+            },
+            {
+                "nombre": "Roberto",
+                "calificacion": 7.2,
+                "nivel": "Bien"
+            }
+        ]
+    },
+    "Matemáticas": {
+        "total": 3,
+        "promedio": 8.57,
+        "minima": 8.0,
+        "maxima": 9.2,
+        "alumnos": [
+            {
+                "nombre": "Ana",
+                "calificacion": 9.2,
+                "nivel": "Sobresaliente"
+            },
+            {
+                "nombre": "María",
+                "calificacion": 8.5,
+                "nivel": "Bien"
+            },
+            {
+                "nombre": "Lucía",
+                "calificacion": 8.0,
+                "nivel": "Bien"
+            }
+        ]
+    }
+}

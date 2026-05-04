@@ -1,0 +1,27 @@
+[
+    {
+        "nombre": "Ana",
+        "calificacion": 9.2,
+        "carrera": "Matemáticas"
+    },
+    {
+        "nombre": "Luis",
+        "calificacion": 7.8,
+        "carrera": "Física"
+    },
+    {
+        "nombre": "María",
+        "calificacion": 8.5,
+        "carrera": "Matemáticas"
+    },
+    {
+        "nombre": "Carlos",
+        "calificacion": 6.1,
+        "carrera": "Actuaría"
+    },
+    {
+        "nombre": "Sofía",
+        "calificacion": 9.7,
+        "carrera": "Física"
+    }
+]

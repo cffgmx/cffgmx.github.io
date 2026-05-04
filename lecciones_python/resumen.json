@@ -1,0 +1,9 @@
+{
+    "fecha": "2024-01-15",
+    "estacion": "Toluca",
+    "lecturas": 7,
+    "promedio": 21.46,
+    "minima": 18.9,
+    "maxima": 24.0,
+    "unidad": "Celsius"
+}

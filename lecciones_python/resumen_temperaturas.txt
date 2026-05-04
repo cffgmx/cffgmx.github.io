@@ -1,0 +1,5 @@
+=== Resumen de temperaturas ===
+Lecturas válidas: 7
+Promedio:         21.46 °C
+Mínima:           18.90 °C
+Máxima:           24.00 °C

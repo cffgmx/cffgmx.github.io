@@ -1,0 +1,370 @@
+---
+title: "Errores y excepciones"
+author: "Carlos Flores"
+format: html
+---
+
+Todo el código que hemos escrito hasta ahora ha operado en condiciones ideales: las listas siempre tenían elementos, los diccionarios siempre tenían las claves que pedíamos, las funciones siempre recibían el tipo de dato correcto. Eso es conveniente para aprender, pero no refleja la realidad. En cuanto un programa interactúa con el mundo exterior —lee un archivo, procesa datos que alguien más generó, recibe entrada del usuario— las condiciones dejan de ser perfectas. Python responde a esas situaciones lanzando una *excepción*: una señal de que ocurrió algo que el flujo normal no puede manejar.
+
+Hasta ahora la única estrategia disponible para anticipar problemas ha sido la cláusula de guarda: verificar condiciones con `if` antes de hacer un cálculo y devolver `None` cuando algo no está bien. Eso funciona cuando controlamos los datos de entrada. Cuando no los controlamos, necesitamos una herramienta distinta.
+
+## Qué es una excepción
+
+Una excepción no es un error del lenguaje: es un mecanismo deliberado. Cuando Python encuentra una situación que no puede resolver —dividir entre cero, acceder a un índice que no existe, operar sobre un tipo incorrecto— construye un objeto que describe el problema y lo *lanza*. Si ese objeto no es capturado por ningún bloque de manejo, el programa se detiene y muestra el *traceback*: el rastro de llamadas que llevó hasta el error.
+
+El alumno ya ha visto tracebacks varias veces a lo largo de la serie, aunque sin que se explicaran formalmente. Antes de aprender a manejar excepciones, conviene aprender a leer ese mensaje, porque contiene toda la información necesaria para entender qué ocurrió.
+
+## Leer un traceback
+
+Un traceback se lee de abajo hacia arriba. La última línea es siempre la más importante: indica el *tipo* de la excepción y el *mensaje* que la acompaña. Las líneas anteriores muestran la cadena de llamadas que condujo al error, desde la más externa hasta la más interna.
+
+El siguiente código produce un error intencional:
+
+```{python}
+#| error: true
+calificaciones = [8.2, 5.9, 9.5]
+print(calificaciones[10])   # El índice 10 no existe
+```
+
+El traceback muestra `IndexError: list index out of range`. `IndexError` es el tipo de excepción; `list index out of range` es el mensaje. Ambos juntos describen exactamente el problema: se intentó acceder a una posición que no existe en la lista.
+
+Los tipos de excepción que el alumno ya ha encontrado a lo largo de la serie, ahora con nombre explícito:
+
+`TypeError` ocurre cuando una operación se aplica a un objeto del tipo incorrecto. Por ejemplo, intentar sumar un número y una cadena, o intentar modificar un elemento de una tupla, que fue lo primero que vimos en la lección de secuencias.
+
+```{python}
+#| error: true
+"La temperatura es: " + 23.5   # No se puede concatenar str y float directamente
+```
+
+`ValueError` ocurre cuando el tipo es correcto pero el valor no tiene sentido para la operación.
+
+```{python}
+#| error: true
+int("hola")   # "hola" es una cadena, pero no representa un número entero
+```
+
+`KeyError` ocurre al intentar acceder a una clave que no existe en un diccionario, situación que la lección de estructuras de datos mencionó pero manejó solo con `in` para verificar previamente.
+
+```{python}
+#| error: true
+estudiante = {"nombre": "Ana", "calificacion": 9.2}
+estudiante["carrera"]   # La clave 'carrera' no existe
+```
+
+`ZeroDivisionError` ocurre al dividir entre cero, el caso que motivó la función `velocidad` con cláusula de guarda en la lección de estructuras de control.
+
+```{python}
+#| error: true
+10 / 0
+```
+
+`NameError` ocurre al usar un nombre que Python no reconoce porque no ha sido definido.
+
+```{python}
+#| error: true
+print(variable_inexistente)
+```
+
+Conocer estos nombres no es memorización trivial: cuando un traceback muestra `KeyError`, el problema es una clave ausente en un diccionario; cuando muestra `TypeError`, el problema es un tipo incorrecto. El tipo de excepción es el diagnóstico; el mensaje que lo acompaña es el detalle.
+
+## El bloque `try / except`
+
+Conocer el tipo de excepción es útil para leer errores, pero no para prevenirlos en tiempo de ejecución. Para eso existe el bloque `try / except`. La idea es directa: se intenta ejecutar un bloque de código y, si ocurre una excepción, se captura y se maneja en lugar de dejar que el programa se detenga.
+
+```python
+try:
+    # código que podría fallar
+except TipoDeExcepcion:
+    # qué hacer si falla
+```
+
+Python ejecuta el bloque `try`. Si no ocurre ninguna excepción, el bloque `except` se ignora por completo. Si ocurre una excepción del tipo indicado, la ejecución salta inmediatamente al bloque `except` y continúa desde allí.
+
+El ejemplo más directo: convertir una cadena a número entero, operación que falla si la cadena no representa un entero válido.
+
+```{python}
+def convertir_a_entero(texto):
+    try:
+        return int(texto)
+    except ValueError:
+        return None
+
+print(convertir_a_entero("42"))     # Funciona: devuelve 42
+print(convertir_a_entero("hola"))   # Falla: devuelve None
+print(convertir_a_entero("3.14"))   # También falla: "3.14" no es un entero
+```
+
+La función intenta convertir; si `int()` lanza un `ValueError`, lo captura y devuelve `None`. El código que llama a la función recibe un resultado en cualquier caso: no se detiene, no hay traceback.
+
+### Capturar excepciones específicas
+
+Es posible capturar más de un tipo de excepción en el mismo bloque `try`, con una cláusula `except` por cada tipo. El orden importa: Python prueba cada cláusula en orden y ejecuta la primera que coincide.
+
+```{python}
+def acceder_elemento(coleccion, clave):
+    try:
+        return coleccion[clave]
+    except KeyError:
+        print(f"La clave '{clave}' no existe en el diccionario.")
+        return None
+    except IndexError:
+        print(f"El índice {clave} está fuera de rango.")
+        return None
+    except TypeError:
+        print(f"El tipo de clave no es compatible con esta colección.")
+        return None
+
+estudiante = {"nombre": "Ana", "calificacion": 9.2}
+temperaturas = [23.5, 24.0, 22.8]
+
+print(acceder_elemento(estudiante, "nombre"))       # Funciona
+print(acceder_elemento(estudiante, "carrera"))      # KeyError
+print(acceder_elemento(temperaturas, 10))           # IndexError
+print(acceder_elemento(temperaturas, "primero"))    # TypeError
+```
+
+También es posible capturar varios tipos en una sola cláusula usando una tupla:
+
+```{python}
+def acceder_seguro(coleccion, clave):
+    try:
+        return coleccion[clave]
+    except (KeyError, IndexError):
+        return None   # Cualquiera de los dos produce el mismo resultado
+
+print(acceder_seguro({"a": 1}, "b"))   # KeyError → None
+print(acceder_seguro([1, 2, 3], 10))   # IndexError → None
+```
+
+### Por qué no capturar todo indiscriminadamente
+
+Una tentación frecuente es escribir `except Exception` o simplemente `except:` para capturar cualquier excepción posible. Eso es casi siempre una mala idea: silencia errores que deberían ser visibles, hace que el código falle de formas misteriosas y dificulta el diagnóstico. Si un `NameError` indica que hay un error de programación —un nombre mal escrito— lo último que conviene es capturarlo y continuar como si nada.
+
+La regla es capturar solo las excepciones que se sabe cómo manejar. Si una excepción puede ocurrir pero no se sabe qué hacer con ella, lo correcto es dejarla propagar: el traceback que produce es más útil que un silencio que oculta el problema.
+
+```python
+# Esto oculta cualquier error, incluso los que indican bugs en el código
+try:
+    resultado = operacion_compleja()
+except:          # nunca hacer esto
+    pass
+
+# Esto solo captura lo que realmente se puede manejar
+try:
+    resultado = operacion_compleja()
+except ValueError:
+    resultado = valor_por_defecto
+```
+
+## La cláusula `else`
+
+El bloque `try / except` admite una cláusula `else` que se ejecuta únicamente cuando el bloque `try` terminó sin lanzar ninguna excepción. Es útil para separar el código que puede fallar del código que debe ejecutarse solo si todo salió bien.
+
+```{python}
+def dividir(a, b):
+    try:
+        resultado = a / b
+    except ZeroDivisionError:
+        print("Error: no se puede dividir entre cero.")
+        return None
+    else:
+        print(f"La división fue exitosa: {resultado:.4f}")
+        return resultado
+
+dividir(10, 3)
+dividir(10, 0)
+```
+
+Sin la cláusula `else`, habría que colocar el `print` y el `return` dentro del bloque `try`, lo que haría que cualquier excepción que surgiera en esas líneas también fuera capturada por el `except`. La cláusula `else` delimita con precisión qué código pertenece al "camino que puede fallar" y qué pertenece al "camino feliz".
+
+## La cláusula `finally`
+
+La cláusula `finally` se ejecuta siempre, haya ocurrido una excepción o no, haya sido capturada o no. Su propósito es garantizar que ciertas operaciones de limpieza ocurran sin importar cómo termine el bloque. El caso más natural es liberar un recurso —cerrar un archivo, cerrar una conexión— que debe cerrarse independientemente de si la operación tuvo éxito.
+
+```{python}
+def leer_primera_linea(ruta):
+    archivo = None
+    try:
+        archivo = open(ruta, "r", encoding="utf-8")
+        return archivo.readline()
+    except FileNotFoundError:
+        print(f"El archivo '{ruta}' no existe.")
+        return None
+    finally:
+        if archivo is not None:
+            archivo.close()   # Se ejecuta siempre, haya error o no
+            print("Archivo cerrado.")
+
+leer_primera_linea("archivo_inexistente.txt")
+```
+
+Este ejemplo anticipa la lección siguiente, que se ocupa precisamente de la lectura y escritura de archivos. Por ahora basta con notar que `finally` garantiza que el archivo se cierre incluso si ocurre un error al leerlo. La lección 9 mostrará una forma más elegante de lograr lo mismo con el bloque `with`, que es la que se usa en la práctica.
+
+La estructura completa del bloque, con todas sus cláusulas, es:
+
+```python
+try:
+    # código que puede fallar
+except TipoA:
+    # manejo si ocurre TipoA
+except TipoB:
+    # manejo si ocurre TipoB
+else:
+    # solo si no ocurrió ninguna excepción
+finally:
+    # siempre, sin excepción (literalmente)
+```
+
+No todas las cláusulas son necesarias en cada caso. La combinación más frecuente es `try / except`; `else` y `finally` se añaden cuando la situación lo requiere.
+
+## Acceder al objeto de la excepción
+
+A veces no basta con saber que ocurrió una excepción del tipo correcto: también interesa el mensaje que la acompaña. La cláusula `except` permite capturar el objeto de la excepción con la sintaxis `except TipoDeExcepcion as e`, y ese objeto puede usarse dentro del bloque.
+
+```{python}
+calificaciones = [8.2, 5.9, 9.5]
+
+try:
+    print(calificaciones[10])
+except IndexError as e:
+    print(f"Error de índice: {e}")
+```
+
+El objeto `e` es la excepción misma. Convertirlo a cadena con `str(e)` o incluirlo en un f-string produce el mensaje descriptivo que Python generó. Esto es útil para registrar errores, mostrar mensajes informativos al usuario o depurar código.
+
+## Lanzar excepciones con `raise`
+
+Hasta ahora hemos capturado excepciones que Python lanza. También es posible lanzar excepciones propias con `raise`, lo que permite señalar condiciones de error desde el propio código.
+
+La lección de estructuras de control introdujo el patrón de devolver `None` cuando una función recibe datos inválidos:
+
+```python
+def velocidad(distancia, tiempo):
+    if distancia < 0:
+        return None
+    if tiempo <= 0:
+        return None
+    return distancia / tiempo
+```
+
+Ese patrón funciona, pero tiene una limitación: el código que llama a la función recibe `None` y debe verificarlo con `is not None`. Si olvida verificarlo, continúa con un valor inválido sin saberlo. `raise` ofrece una alternativa más expresiva: en lugar de devolver silenciosamente un valor especial, la función declara explícitamente que los datos son incorrectos.
+
+```{python}
+def velocidad(distancia, tiempo):
+    if distancia < 0:
+        raise ValueError("La distancia no puede ser negativa.")
+    if tiempo <= 0:
+        raise ValueError("El tiempo debe ser estrictamente positivo.")
+    return distancia / tiempo
+```
+
+Cuando el código que llama a `velocidad` no maneja el `ValueError`, el programa se detiene con un traceback claro que señala exactamente qué fue incorrecto. Cuando sí lo maneja, puede distinguir entre el caso válido y los distintos casos inválidos:
+
+```{python}
+def calcular_velocidad_segura(distancia, tiempo):
+    try:
+        v = velocidad(distancia, tiempo)
+        print(f"Velocidad: {v:.2f} m/s")
+    except ValueError as e:
+        print(f"Datos inválidos: {e}")
+
+calcular_velocidad_segura(100, 2)
+calcular_velocidad_segura(-10, 2)
+calcular_velocidad_segura(100, 0)
+```
+
+La distinción entre `return None` y `raise` es conceptual: `None` comunica "no hay resultado", mientras que `raise` comunica "los datos son incorrectos y continuar sería un error". Cuando la ausencia de resultado es una posibilidad normal y esperada —una búsqueda que no encuentra nada, un cálculo indefinido pero legítimo— `None` es apropiado. Cuando los datos violan una precondición de la función —algo que nunca debería ocurrir si el código que llama es correcto— `raise` es más preciso.
+
+### `raise` sin argumento
+
+Dentro de un bloque `except`, `raise` sin argumento relanza la excepción que se capturó, propagándola hacia arriba. Esto es útil cuando se quiere hacer algo con la excepción —registrarla, limpiar recursos— sin silenciarla:
+
+```{python}
+def procesar(valor):
+    try:
+        resultado = 100 / valor
+    except ZeroDivisionError:
+        print("Advertencia: se intentó dividir entre cero. El error se propaga.")
+        raise   # relanza el ZeroDivisionError original
+    return resultado
+```
+
+## Cuándo usar excepciones y cuándo cláusulas de guarda
+
+Ahora que existen dos mecanismos para manejar situaciones anómalas —las cláusulas de guarda con `if` y `return None` de la lección 5, y el bloque `try / except` con `raise`— conviene tener claro cuándo usar cada uno.
+
+Las cláusulas de guarda son apropiadas cuando la condición se puede verificar de forma barata antes de hacer el cálculo: comprobar si una lista está vacía, si un valor es negativo, si una clave existe. Son explícitas y no dependen de que ocurra un error para activarse.
+
+El bloque `try / except` es apropiado cuando la operación puede fallar por razones que no se pueden verificar de antemano o que serían costosas de verificar: abrir un archivo, convertir una cadena a número, acceder a un recurso externo. En esos casos es más natural intentar la operación y capturar el error si ocurre que verificar todas las condiciones posibles antes de intentarla.
+
+Una regla práctica de la comunidad Python es preferir el estilo "pedir perdón en lugar de pedir permiso": intentar la operación y manejar la excepción si falla, en lugar de verificar todas las condiciones posibles antes de intentarla. Ese estilo produce código más conciso y maneja automáticamente condiciones de carrera —situaciones donde la condición cambia entre la verificación y la operación— que las cláusulas de guarda no pueden prevenir.
+
+## Ejemplo integrador
+
+Para cerrar, una función que procesa una lista de registros de temperaturas representados como cadenas, convierte cada uno a número, filtra los valores inválidos, y calcula estadísticas básicas. Combina cláusulas de guarda, `try / except`, `raise`, y las estructuras de datos y comprensiones de lecciones anteriores.
+
+```{python}
+def parsear_temperatura(texto):
+    """Convierte una cadena a float. Lanza ValueError si no es posible."""
+    try:
+        valor = float(texto.strip())
+    except ValueError:
+        raise ValueError(f"'{texto}' no es una temperatura válida.")
+    if valor < -90 or valor > 60:
+        raise ValueError(f"{valor} °C está fuera del rango físicamente posible.")
+    return valor
+
+
+def procesar_registro(registros):
+    """Procesa una lista de cadenas y devuelve estadísticas de las temperaturas válidas."""
+    if not registros:
+        raise ValueError("El registro está vacío.")
+
+    validas  = []
+    invalidas = []
+
+    for r in registros:
+        try:
+            validas = validas + [parsear_temperatura(r)]
+        except ValueError as e:
+            invalidas = invalidas + [str(e)]
+
+    if not validas:
+        raise ValueError("Ningún registro contiene una temperatura válida.")
+
+    promedio = sum(validas) / len(validas)
+    minima   = min(validas)
+    maxima   = max(validas)
+
+    return {
+        "validas":   len(validas),
+        "invalidas": len(invalidas),
+        "promedio":  promedio,
+        "minima":    minima,
+        "maxima":    maxima,
+        "errores":   invalidas
+    }
+
+
+registros = ["23.5", " 24.0", "no_es_numero", "22.8", "200.0", "19.0", "", "21.3"]
+
+try:
+    resultado = procesar_registro(registros)
+    print(f"Temperaturas válidas:   {resultado['validas']}")
+    print(f"Temperaturas inválidas: {resultado['invalidas']}")
+    print(f"Promedio: {resultado['promedio']:.2f} °C")
+    print(f"Mínima:   {resultado['minima']:.2f} °C")
+    print(f"Máxima:   {resultado['maxima']:.2f} °C")
+    print("\nRegistros con error:")
+    for error in resultado["errores"]:
+        print(f"  {error}")
+except ValueError as e:
+    print(f"No se pudo procesar el registro: {e}")
+```
+
+La función `parsear_temperatura` usa `try / except` para lo que no se puede verificar de antemano (si la cadena es convertible a número) y `raise` para lo que sí se puede verificar explícitamente (si el valor está dentro del rango físico). La función `procesar_registro` usa una cláusula de guarda para el caso vacío, acumula los errores en lugar de detenerse ante el primero, y lanza su propia excepción si el resultado sería inútil. El código que llama a ambas funciones envuelve todo en un `try / except` y maneja cualquier problema en un único lugar.
+
+## Lo que sigue
+
+El manejo de errores abre directamente la puerta a la siguiente lección. Abrir un archivo es probablemente la operación más frecuente en la que las excepciones son inevitables: el archivo puede no existir, puede estar en un formato inesperado, puede no tener permisos de lectura. Ahora que sabemos manejar esas situaciones, la lección siguiente introduce la lectura y escritura de archivos, que es el primer paso para trabajar con datos que vienen del mundo real en lugar de estar escritos directamente en el código.
