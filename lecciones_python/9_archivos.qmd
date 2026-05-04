@@ -38,6 +38,8 @@ with open("calificaciones.csv", "w", encoding="utf-8") as f:
     f.write("Roberto,7.2,Física\n")
 
 # Archivo JSON de estudiantes
+# import json usa una instrucción que se explicará en la lección 15:
+# por ahora basta saber que pone a disposición las funciones del módulo json.
 import json
 estudiantes_datos = [
     {"nombre": "Ana",    "calificacion": 9.2, "carrera": "Matemáticas"},
@@ -417,6 +419,38 @@ def clasificar(calificacion):
         return "Reprobado"
 
 
+def leer_csv(ruta):
+    """
+    Lee un archivo CSV con encabezado.
+    Devuelve una lista de diccionarios, uno por fila.
+    """
+    registros = []
+
+    try:
+        with open(ruta, "r", encoding="utf-8") as f:
+            lineas = []
+            for linea in f:
+                linea = linea.strip()
+                if linea != "":
+                    lineas = lineas + [linea]
+    except FileNotFoundError:
+        raise FileNotFoundError(f"No se encontró el archivo: {ruta}")
+
+    if not lineas:
+        return []
+
+    encabezado = lineas[0].split(",")
+
+    for linea in lineas[1:]:
+        valores  = linea.split(",")
+        registro = {}
+        for i, campo in enumerate(encabezado):
+            registro[campo] = valores[i]
+        registros = registros + [registro]
+
+    return registros
+
+
 def analizar_grupo(ruta_csv, ruta_salida):
     """
     Lee calificaciones desde un CSV, calcula estadísticas por carrera
@@ -476,7 +510,8 @@ def analizar_grupo(ruta_csv, ruta_salida):
 reporte = analizar_grupo("calificaciones.csv", "reporte_carreras.json")
 
 if reporte is not None:
-    for carrera, datos in reporte.items():
+    for carrera in reporte:
+        datos = reporte[carrera]
         print(f"{carrera}  (promedio: {datos['promedio']:.2f}, "
               f"{datos['total']} alumno(s))")
         for alumno in datos["alumnos"]:

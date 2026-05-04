@@ -375,7 +375,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Todo el código que hemos escrito hasta ahora trabaja con datos que existen únicamente mientras el programa está en ejecución: una lista de calificaciones definida directamente en el código, un diccionario de estudiantes construido línea a línea. Cuando el programa termina, esos datos desaparecen. En la práctica, los datos vienen de otra parte —un archivo generado por un instrumento, una exportación de una base de datos, un registro acumulado con el tiempo— y los resultados deben guardarse en algún lugar que persista más allá de la sesión.</p>
 <p>La lección anterior introdujo el manejo de errores precisamente porque abrir un archivo es la operación donde las excepciones son más inevitables: el archivo puede no existir, puede estar en un formato inesperado, puede haber problemas de permisos. Ahora que sabemos manejar esas situaciones, podemos ocuparnos de los archivos propiamente.</p>
 <p>Para que todos los ejemplos de esta lección funcionen de forma autónoma, comenzamos creando los archivos de muestra que usaremos a lo largo de ella. En la práctica, estos archivos ya existirían en disco —generados por un sensor, exportados de una hoja de cálculo, descargados de internet— pero crearlos aquí permite ejecutar la lección completa sin dependencias externas.</p>
-<div id="04481cc9" class="cell" data-execution_count="1">
+<div id="8968a923" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Archivo de temperaturas con comentarios</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"datos_temperatura.txt"</span>, <span class="st">"w"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"# Registro de temperaturas - Estación Toluca</span><span class="ch">\n</span><span class="st">"</span>)</span>
@@ -403,18 +403,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"Roberto,7.2,Física</span><span class="ch">\n</span><span class="st">"</span>)</span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Archivo JSON de estudiantes</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>estudiantes_datos <span class="op">=</span> [</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Ana"</span>,    <span class="st">"calificacion"</span>: <span class="fl">9.2</span>, <span class="st">"carrera"</span>: <span class="st">"Matemáticas"</span>},</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Luis"</span>,   <span class="st">"calificacion"</span>: <span class="fl">7.8</span>, <span class="st">"carrera"</span>: <span class="st">"Física"</span>},</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"María"</span>,  <span class="st">"calificacion"</span>: <span class="fl">8.5</span>, <span class="st">"carrera"</span>: <span class="st">"Matemáticas"</span>},</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Carlos"</span>, <span class="st">"calificacion"</span>: <span class="fl">6.1</span>, <span class="st">"carrera"</span>: <span class="st">"Actuaría"</span>},</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Sofía"</span>,  <span class="st">"calificacion"</span>: <span class="fl">9.7</span>, <span class="st">"carrera"</span>: <span class="st">"Física"</span>},</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"estudiantes.json"</span>, <span class="st">"w"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    json.dump(estudiantes_datos, f, ensure_ascii<span class="op">=</span><span class="va">False</span>, indent<span class="op">=</span><span class="dv">4</span>)</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Archivos de muestra creados."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co"># import json usa una instrucción que se explicará en la lección 15:</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"># por ahora basta saber que pone a disposición las funciones del módulo json.</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>estudiantes_datos <span class="op">=</span> [</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Ana"</span>,    <span class="st">"calificacion"</span>: <span class="fl">9.2</span>, <span class="st">"carrera"</span>: <span class="st">"Matemáticas"</span>},</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Luis"</span>,   <span class="st">"calificacion"</span>: <span class="fl">7.8</span>, <span class="st">"carrera"</span>: <span class="st">"Física"</span>},</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"María"</span>,  <span class="st">"calificacion"</span>: <span class="fl">8.5</span>, <span class="st">"carrera"</span>: <span class="st">"Matemáticas"</span>},</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Carlos"</span>, <span class="st">"calificacion"</span>: <span class="fl">6.1</span>, <span class="st">"carrera"</span>: <span class="st">"Actuaría"</span>},</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Sofía"</span>,  <span class="st">"calificacion"</span>: <span class="fl">9.7</span>, <span class="st">"carrera"</span>: <span class="st">"Física"</span>},</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"estudiantes.json"</span>, <span class="st">"w"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    json.dump(estudiantes_datos, f, ensure_ascii<span class="op">=</span><span class="va">False</span>, indent<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Archivos de muestra creados."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Archivos de muestra creados.</code></pre>
 </div>
@@ -489,7 +491,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>readline()</code> lee una sola línea cada vez que se llama, incluyendo el carácter de salto de línea <code>\n</code> al final. Es útil cuando se necesita procesar el archivo de forma muy controlada, aunque el <code>for</code> que veremos a continuación es más cómodo en la práctica.</p>
 <p><code>readlines()</code> lee todas las líneas y las devuelve como una lista de cadenas, donde cada elemento es una línea con su <code>\n</code> incluido. Permite acceder a líneas por índice, pero también carga todo en memoria.</p>
 <p>La forma más idiomática y eficiente de leer un archivo línea a línea es iterar directamente sobre el objeto archivo con un <code>for</code>. Python entrega una línea en cada iteración sin cargar el archivo completo en memoria, lo que lo hace adecuado incluso para archivos grandes:</p>
-<div id="821e8929" class="cell" data-execution_count="2">
+<div id="6494786b" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"datos_temperatura.txt"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> linea <span class="kw">in</span> f:</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="bu">repr</span>(linea))   <span class="co"># repr() muestra el \n explícitamente</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -508,7 +510,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Se puede observar que cada línea termina con <code>\n</code>, el carácter de salto de línea. La forma de eliminarlo es <code>linea.strip()</code>, que elimina espacios en blanco y saltos de línea al inicio y al final de una cadena. <code>strip()</code> es un método de cadena; los métodos de cadena se explicarán en detalle en la lección 11, pero <code>strip()</code> ya apareció en la lección anterior y su efecto es suficientemente intuitivo para usarlo aquí.</p>
-<div id="19931b71" class="cell" data-execution_count="3">
+<div id="d27f5e8d" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"datos_temperatura.txt"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> linea <span class="kw">in</span> f:</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        linea <span class="op">=</span> linea.strip()   <span class="co"># elimina \n y espacios sobrantes</span></span>
@@ -530,7 +532,7 @@ no_valido
 <section id="ignorar-líneas-de-comentario-y-vacías" class="level3">
 <h3 class="anchored" data-anchor-id="ignorar-líneas-de-comentario-y-vacías">Ignorar líneas de comentario y vacías</h3>
 <p>Un patrón muy común en archivos de datos es que algunas líneas sean comentarios o estén vacías y no deban procesarse. La combinación de <code>for</code>, <code>if</code> y <code>continue</code> que ya conocemos maneja esto directamente:</p>
-<div id="ceb6bcd3" class="cell" data-execution_count="4">
+<div id="02e21ae2" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"datos_temperatura.txt"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> linea <span class="kw">in</span> f:</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        linea <span class="op">=</span> linea.strip()</span>
@@ -553,7 +555,7 @@ no_valido
 <section id="leer-un-archivo-de-temperaturas" class="level3">
 <h3 class="anchored" data-anchor-id="leer-un-archivo-de-temperaturas">Leer un archivo de temperaturas</h3>
 <p>Retomando los datos que han acompañado toda la serie, la función siguiente lee el archivo de temperaturas, descarta comentarios y líneas vacías, convierte cada valor a <code>float</code> y devuelve la lista de temperaturas válidas usando el manejo de errores de la lección anterior:</p>
-<div id="3f79570b" class="cell" data-execution_count="5">
+<div id="e228b436" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> leer_temperaturas(ruta):</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Lee un archivo de temperaturas (una por línea).</span></span>
@@ -601,7 +603,7 @@ Máxima:   24.00 °C</code></pre>
 <section id="escribir-archivos" class="level2">
 <h2 class="anchored" data-anchor-id="escribir-archivos">Escribir archivos</h2>
 <p>Abrir un archivo en modo <code>"w"</code> o <code>"a"</code> permite escribir en él con <code>write()</code>, que recibe una cadena y la escribe tal cual. A diferencia de <code>print()</code>, <code>write()</code> no añade automáticamente un salto de línea: hay que incluirlo explícitamente con <code>\n</code>.</p>
-<div id="94f857f1" class="cell" data-execution_count="6">
+<div id="432e8ec1" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> {</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"temperaturas"</span>: <span class="bu">len</span>(temperaturas),</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"promedio"</span>:     <span class="bu">round</span>(<span class="bu">sum</span>(temperaturas) <span class="op">/</span> <span class="bu">len</span>(temperaturas), <span class="dv">2</span>),</span>
@@ -629,7 +631,7 @@ Máxima:           24.00 °C
 </div>
 </div>
 <p>El modo <code>"a"</code> es útil cuando se quiere acumular registros a lo largo del tiempo sin sobrescribir los anteriores. Por ejemplo, un sensor que añade una lectura al archivo cada vez que se ejecuta:</p>
-<div id="c7b4561e" class="cell" data-execution_count="7">
+<div id="0d031747" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> registrar_lectura(ruta, temperatura):</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Añade una lectura al final del archivo de registro."""</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(ruta, <span class="st">"a"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
@@ -645,6 +647,9 @@ Máxima:           24.00 °C
 <pre><code>23.5
 24.1
 22.8
+23.5
+24.1
+22.8
 </code></pre>
 </div>
 </div>
@@ -654,7 +659,7 @@ Máxima:           24.00 °C
 <h2 class="anchored" data-anchor-id="el-formato-csv">El formato CSV</h2>
 <p>El formato CSV (<em>comma-separated values</em>, valores separados por comas) es el más común para intercambiar datos tabulares: cada línea es un registro y los campos están separados por comas. Es el formato que exportan las hojas de cálculo y el que leen directamente las bibliotecas de ciencia de datos.</p>
 <p>Leer un CSV manualmente requiere separar cada línea en sus campos. El método <code>split(",")</code> divide una cadena en una lista usando la coma como separador —también es un método de cadena, explicado en la lección 11, pero su comportamiento es directo:</p>
-<div id="f66a562f" class="cell" data-execution_count="8">
+<div id="553375cc" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> leer_csv(ruta):</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Lee un archivo CSV con encabezado.</span></span>
@@ -705,7 +710,7 @@ Máxima:           24.00 °C
 </div>
 <p>Esta función ilustra el patrón completo: leer líneas, separar encabezado de datos, construir un diccionario por cada fila usando <code>enumerate()</code> para emparejar cada campo con su nombre. El resultado es exactamente la estructura de lista de diccionarios que hemos usado desde la lección de estructuras de datos.</p>
 <p>Una observación importante: los valores del CSV se leen como cadenas. Para usar la calificación como número hay que convertirla explícitamente:</p>
-<div id="b37688e5" class="cell" data-execution_count="9">
+<div id="63b1d88d" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> alumno <span class="kw">in</span> grupo:</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    nombre       <span class="op">=</span> alumno[<span class="st">"nombre"</span>]</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    calificacion <span class="op">=</span> <span class="bu">float</span>(alumno[<span class="st">"calificacion"</span>])</span>
@@ -726,7 +731,7 @@ Roberto (Física): 7.2</code></pre>
 <section id="escribir-un-csv" class="level3">
 <h3 class="anchored" data-anchor-id="escribir-un-csv">Escribir un CSV</h3>
 <p>Escribir un CSV es el proceso inverso: convertir cada registro en una línea de texto uniendo sus campos con comas. El método <code>join()</code> une los elementos de una lista con un separador dado —método de cadena explicado en la lección 11—:</p>
-<div id="22bcfcb0" class="cell" data-execution_count="10">
+<div id="a2e84386" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> escribir_csv(ruta, registros, campos):</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Escribe una lista de diccionarios como archivo CSV.</span></span>
@@ -765,7 +770,7 @@ María,8.7,Matemáticas
 <h2 class="anchored" data-anchor-id="el-formato-json">El formato JSON</h2>
 <p>JSON (<em>JavaScript Object Notation</em>) es el otro formato universal para intercambiar datos. Su estructura de pares clave-valor, listas y valores anidados se corresponde directamente con los diccionarios y listas de Python, lo que hace la conversión entre ambos especialmente natural.</p>
 <p>Python incluye el módulo <code>json</code> en su biblioteca estándar. Esta es la primera vez en la serie que usamos <code>import</code> de forma explícita —apareció de forma silenciosa en la primera celda de esta lección, que creó los archivos de muestra. Los módulos se explicarán en profundidad en la lección 15; por ahora basta con saber que <code>import json</code> pone a disposición las funciones del módulo bajo el nombre <code>json</code>, y que se accede a ellas con la notación <code>json.función()</code>. Esa notación de punto es exactamente la misma que veremos con profundidad cuando se introduzca la programación orientada a objetos en la lección 11.</p>
-<div id="61661341" class="cell" data-execution_count="11">
+<div id="db910ea7" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> leer_json(ruta):</span>
@@ -792,7 +797,7 @@ Sofía (Física): 9.7</code></pre>
 </div>
 <p><code>json.load(f)</code> lee el contenido del archivo y lo convierte automáticamente al tipo Python correspondiente: un objeto JSON se convierte en un diccionario, un array en una lista, una cadena en <code>str</code>, un número en <code>int</code> o <code>float</code>. La conversión de tipos que había que hacer manualmente con el CSV aquí es automática.</p>
 <p>Para escribir un objeto Python como JSON en un archivo se usa <code>json.dump()</code>:</p>
-<div id="eee0c6dd" class="cell" data-execution_count="12">
+<div id="e34b32fa" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="op">=</span> {</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"fecha"</span>:    <span class="st">"2024-01-15"</span>,</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"estacion"</span>: <span class="st">"Toluca"</span>,</span>
@@ -824,7 +829,7 @@ Sofía (Física): 9.7</code></pre>
 <section id="json-en-memoria-sin-archivos" class="level3">
 <h3 class="anchored" data-anchor-id="json-en-memoria-sin-archivos">JSON en memoria sin archivos</h3>
 <p>El módulo <code>json</code> también ofrece <code>json.loads()</code> y <code>json.dumps()</code> (con <code>s</code> final, de <em>string</em>) para convertir entre objetos Python y cadenas JSON sin pasar por un archivo. Esto es útil cuando los datos llegan como texto, por ejemplo desde una API web:</p>
-<div id="42f73a59" class="cell" data-execution_count="13">
+<div id="f5123f8e" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># De cadena JSON a objeto Python</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>texto_json <span class="op">=</span> <span class="st">'{"nombre": "Ana", "calificacion": 9.2}'</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>datos <span class="op">=</span> json.loads(texto_json)</span>
@@ -846,7 +851,7 @@ Sofía (Física): 9.7</code></pre>
 <p>Hasta aquí todos los ejemplos han usado rutas simples como <code>"datos_temperatura.txt"</code>, que Python interpreta como relativas al directorio de trabajo actual. En Google Colab, ese directorio es <code>/content</code> por defecto. Para trabajar con archivos en otras ubicaciones, la ruta debe ser más específica.</p>
 <p>Una ruta relativa como <code>"datos/temperaturas.txt"</code> busca el archivo en una carpeta <code>datos</code> dentro del directorio actual. Una ruta absoluta como <code>"/content/drive/MyDrive/datos.txt"</code> especifica la ubicación completa desde la raíz del sistema.</p>
 <p>Antes de intentar abrir un archivo, a veces es útil verificar que existe. El módulo <code>os</code> de la biblioteca estándar ofrece <code>os.path.exists()</code> para eso:</p>
-<div id="06935b3f" class="cell" data-execution_count="14">
+<div id="7ec075e0" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> leer_datos_seguro(ruta):</span>
@@ -871,7 +876,7 @@ El archivo 'archivo_que_no_existe.txt' no existe.</code></pre>
 <section id="ejemplo-integrador" class="level2">
 <h2 class="anchored" data-anchor-id="ejemplo-integrador">Ejemplo integrador</h2>
 <p>Para cerrar, una función que lee el CSV de calificaciones, calcula estadísticas por carrera y guarda el resultado como JSON. Combina todo lo visto en esta lección con las estructuras de datos y comprensiones de lecciones anteriores.</p>
-<div id="5cf929ec" class="cell" data-execution_count="15">
+<div id="e7d1027f" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clasificar(calificacion):</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> calificacion <span class="op">&gt;=</span> <span class="fl">9.0</span>:</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Sobresaliente"</span></span>
@@ -883,72 +888,105 @@ El archivo 'archivo_que_no_existe.txt' no existe.</code></pre>
 <span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Reprobado"</span></span>
 <span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> analizar_grupo(ruta_csv, ruta_salida):</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> leer_csv(ruta):</span>
 <span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="co">    Lee calificaciones desde un CSV, calcula estadísticas por carrera</span></span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="co">    y guarda el resultado en un archivo JSON.</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="co">    Lee un archivo CSV con encabezado.</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="co">    Devuelve una lista de diccionarios, uno por fila.</span></span>
 <span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
-<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>        grupo <span class="op">=</span> leer_csv(ruta_csv)</span>
-<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">FileNotFoundError</span> <span class="im">as</span> e:</span>
-<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(e)</span>
-<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
-<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convertir calificaciones a float</span></span>
-<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> alumno <span class="kw">in</span> grupo:</span>
-<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
-<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>            alumno[<span class="st">"calificacion"</span>] <span class="op">=</span> <span class="bu">float</span>(alumno[<span class="st">"calificacion"</span>])</span>
-<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">ValueError</span>:</span>
-<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>            alumno[<span class="st">"calificacion"</span>] <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filtrar registros con calificación válida</span></span>
-<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>    validos <span class="op">=</span> [a <span class="cf">for</span> a <span class="kw">in</span> grupo <span class="cf">if</span> a[<span class="st">"calificacion"</span>] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>]</span>
-<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> validos:</span>
-<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"No hay registros válidos para analizar."</span>)</span>
-<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
-<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Carreras únicas</span></span>
-<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a>    carreras <span class="op">=</span> {a[<span class="st">"carrera"</span>] <span class="cf">for</span> a <span class="kw">in</span> validos}</span>
-<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Estadísticas por carrera</span></span>
-<span id="cb31-41"><a href="#cb31-41" aria-hidden="true" tabindex="-1"></a>    resultado <span class="op">=</span> {}</span>
-<span id="cb31-42"><a href="#cb31-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> carrera <span class="kw">in</span> <span class="bu">sorted</span>(carreras):</span>
-<span id="cb31-43"><a href="#cb31-43" aria-hidden="true" tabindex="-1"></a>        califs <span class="op">=</span> [a[<span class="st">"calificacion"</span>] <span class="cf">for</span> a <span class="kw">in</span> validos <span class="cf">if</span> a[<span class="st">"carrera"</span>] <span class="op">==</span> carrera]</span>
-<span id="cb31-44"><a href="#cb31-44" aria-hidden="true" tabindex="-1"></a>        alumnos_carrera <span class="op">=</span> [</span>
-<span id="cb31-45"><a href="#cb31-45" aria-hidden="true" tabindex="-1"></a>            {</span>
-<span id="cb31-46"><a href="#cb31-46" aria-hidden="true" tabindex="-1"></a>                <span class="st">"nombre"</span>:       a[<span class="st">"nombre"</span>],</span>
-<span id="cb31-47"><a href="#cb31-47" aria-hidden="true" tabindex="-1"></a>                <span class="st">"calificacion"</span>: a[<span class="st">"calificacion"</span>],</span>
-<span id="cb31-48"><a href="#cb31-48" aria-hidden="true" tabindex="-1"></a>                <span class="st">"nivel"</span>:        clasificar(a[<span class="st">"calificacion"</span>])</span>
-<span id="cb31-49"><a href="#cb31-49" aria-hidden="true" tabindex="-1"></a>            }</span>
-<span id="cb31-50"><a href="#cb31-50" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> a <span class="kw">in</span> validos <span class="cf">if</span> a[<span class="st">"carrera"</span>] <span class="op">==</span> carrera</span>
-<span id="cb31-51"><a href="#cb31-51" aria-hidden="true" tabindex="-1"></a>        ]</span>
-<span id="cb31-52"><a href="#cb31-52" aria-hidden="true" tabindex="-1"></a>        resultado[carrera] <span class="op">=</span> {</span>
-<span id="cb31-53"><a href="#cb31-53" aria-hidden="true" tabindex="-1"></a>            <span class="st">"total"</span>:    <span class="bu">len</span>(califs),</span>
-<span id="cb31-54"><a href="#cb31-54" aria-hidden="true" tabindex="-1"></a>            <span class="st">"promedio"</span>: <span class="bu">round</span>(<span class="bu">sum</span>(califs) <span class="op">/</span> <span class="bu">len</span>(califs), <span class="dv">2</span>),</span>
-<span id="cb31-55"><a href="#cb31-55" aria-hidden="true" tabindex="-1"></a>            <span class="st">"minima"</span>:   <span class="bu">min</span>(califs),</span>
-<span id="cb31-56"><a href="#cb31-56" aria-hidden="true" tabindex="-1"></a>            <span class="st">"maxima"</span>:   <span class="bu">max</span>(califs),</span>
-<span id="cb31-57"><a href="#cb31-57" aria-hidden="true" tabindex="-1"></a>            <span class="st">"alumnos"</span>:  alumnos_carrera</span>
-<span id="cb31-58"><a href="#cb31-58" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb31-59"><a href="#cb31-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-60"><a href="#cb31-60" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Guardar como JSON</span></span>
-<span id="cb31-61"><a href="#cb31-61" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(ruta_salida, <span class="st">"w"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
-<span id="cb31-62"><a href="#cb31-62" aria-hidden="true" tabindex="-1"></a>        json.dump(resultado, f, ensure_ascii<span class="op">=</span><span class="va">False</span>, indent<span class="op">=</span><span class="dv">4</span>)</span>
-<span id="cb31-63"><a href="#cb31-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-64"><a href="#cb31-64" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Análisis guardado en '</span><span class="sc">{</span>ruta_salida<span class="sc">}</span><span class="ss">'.</span><span class="ch">\n</span><span class="ss">"</span>)</span>
-<span id="cb31-65"><a href="#cb31-65" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> resultado</span>
-<span id="cb31-66"><a href="#cb31-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-67"><a href="#cb31-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-68"><a href="#cb31-68" aria-hidden="true" tabindex="-1"></a>reporte <span class="op">=</span> analizar_grupo(<span class="st">"calificaciones.csv"</span>, <span class="st">"reporte_carreras.json"</span>)</span>
-<span id="cb31-69"><a href="#cb31-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-70"><a href="#cb31-70" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> reporte <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb31-71"><a href="#cb31-71" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> carrera, datos <span class="kw">in</span> reporte.items():</span>
-<span id="cb31-72"><a href="#cb31-72" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>carrera<span class="sc">}</span><span class="ss">  (promedio: </span><span class="sc">{</span>datos[<span class="st">'promedio'</span>]<span class="sc">:.2f}</span><span class="ss">, "</span></span>
-<span id="cb31-73"><a href="#cb31-73" aria-hidden="true" tabindex="-1"></a>              <span class="ss">f"</span><span class="sc">{</span>datos[<span class="st">'total'</span>]<span class="sc">}</span><span class="ss"> alumno(s))"</span>)</span>
-<span id="cb31-74"><a href="#cb31-74" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> alumno <span class="kw">in</span> datos[<span class="st">"alumnos"</span>]:</span>
-<span id="cb31-75"><a href="#cb31-75" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>alumno[<span class="st">'nombre'</span>]<span class="sc">:&lt;10}</span><span class="ss"> </span><span class="sc">{</span>alumno[<span class="st">'calificacion'</span>]<span class="sc">:.1f}</span><span class="ss">"</span></span>
-<span id="cb31-76"><a href="#cb31-76" aria-hidden="true" tabindex="-1"></a>                  <span class="ss">f"  </span><span class="sc">{</span>alumno[<span class="st">'nivel'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb31-77"><a href="#cb31-77" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>    registros <span class="op">=</span> []</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(ruta, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>            lineas <span class="op">=</span> []</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> linea <span class="kw">in</span> f:</span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>                linea <span class="op">=</span> linea.strip()</span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> linea <span class="op">!=</span> <span class="st">""</span>:</span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>                    lineas <span class="op">=</span> lineas <span class="op">+</span> [linea]</span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">FileNotFoundError</span>:</span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">FileNotFoundError</span>(<span class="ss">f"No se encontró el archivo: </span><span class="sc">{</span>ruta<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> lineas:</span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> []</span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>    encabezado <span class="op">=</span> lineas[<span class="dv">0</span>].split(<span class="st">","</span>)</span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> linea <span class="kw">in</span> lineas[<span class="dv">1</span>:]:</span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a>        valores  <span class="op">=</span> linea.split(<span class="st">","</span>)</span>
+<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a>        registro <span class="op">=</span> {}</span>
+<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i, campo <span class="kw">in</span> <span class="bu">enumerate</span>(encabezado):</span>
+<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a>            registro[campo] <span class="op">=</span> valores[i]</span>
+<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a>        registros <span class="op">=</span> registros <span class="op">+</span> [registro]</span>
+<span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-41"><a href="#cb31-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> registros</span>
+<span id="cb31-42"><a href="#cb31-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-43"><a href="#cb31-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-44"><a href="#cb31-44" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> analizar_grupo(ruta_csv, ruta_salida):</span>
+<span id="cb31-45"><a href="#cb31-45" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb31-46"><a href="#cb31-46" aria-hidden="true" tabindex="-1"></a><span class="co">    Lee calificaciones desde un CSV, calcula estadísticas por carrera</span></span>
+<span id="cb31-47"><a href="#cb31-47" aria-hidden="true" tabindex="-1"></a><span class="co">    y guarda el resultado en un archivo JSON.</span></span>
+<span id="cb31-48"><a href="#cb31-48" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb31-49"><a href="#cb31-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb31-50"><a href="#cb31-50" aria-hidden="true" tabindex="-1"></a>        grupo <span class="op">=</span> leer_csv(ruta_csv)</span>
+<span id="cb31-51"><a href="#cb31-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">FileNotFoundError</span> <span class="im">as</span> e:</span>
+<span id="cb31-52"><a href="#cb31-52" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(e)</span>
+<span id="cb31-53"><a href="#cb31-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb31-54"><a href="#cb31-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-55"><a href="#cb31-55" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convertir calificaciones a float</span></span>
+<span id="cb31-56"><a href="#cb31-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> alumno <span class="kw">in</span> grupo:</span>
+<span id="cb31-57"><a href="#cb31-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb31-58"><a href="#cb31-58" aria-hidden="true" tabindex="-1"></a>            alumno[<span class="st">"calificacion"</span>] <span class="op">=</span> <span class="bu">float</span>(alumno[<span class="st">"calificacion"</span>])</span>
+<span id="cb31-59"><a href="#cb31-59" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb31-60"><a href="#cb31-60" aria-hidden="true" tabindex="-1"></a>            alumno[<span class="st">"calificacion"</span>] <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb31-61"><a href="#cb31-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-62"><a href="#cb31-62" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filtrar registros con calificación válida</span></span>
+<span id="cb31-63"><a href="#cb31-63" aria-hidden="true" tabindex="-1"></a>    validos <span class="op">=</span> [a <span class="cf">for</span> a <span class="kw">in</span> grupo <span class="cf">if</span> a[<span class="st">"calificacion"</span>] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>]</span>
+<span id="cb31-64"><a href="#cb31-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-65"><a href="#cb31-65" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> validos:</span>
+<span id="cb31-66"><a href="#cb31-66" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"No hay registros válidos para analizar."</span>)</span>
+<span id="cb31-67"><a href="#cb31-67" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb31-68"><a href="#cb31-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-69"><a href="#cb31-69" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Carreras únicas</span></span>
+<span id="cb31-70"><a href="#cb31-70" aria-hidden="true" tabindex="-1"></a>    carreras <span class="op">=</span> {a[<span class="st">"carrera"</span>] <span class="cf">for</span> a <span class="kw">in</span> validos}</span>
+<span id="cb31-71"><a href="#cb31-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-72"><a href="#cb31-72" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Estadísticas por carrera</span></span>
+<span id="cb31-73"><a href="#cb31-73" aria-hidden="true" tabindex="-1"></a>    resultado <span class="op">=</span> {}</span>
+<span id="cb31-74"><a href="#cb31-74" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> carrera <span class="kw">in</span> <span class="bu">sorted</span>(carreras):</span>
+<span id="cb31-75"><a href="#cb31-75" aria-hidden="true" tabindex="-1"></a>        califs <span class="op">=</span> [a[<span class="st">"calificacion"</span>] <span class="cf">for</span> a <span class="kw">in</span> validos <span class="cf">if</span> a[<span class="st">"carrera"</span>] <span class="op">==</span> carrera]</span>
+<span id="cb31-76"><a href="#cb31-76" aria-hidden="true" tabindex="-1"></a>        alumnos_carrera <span class="op">=</span> [</span>
+<span id="cb31-77"><a href="#cb31-77" aria-hidden="true" tabindex="-1"></a>            {</span>
+<span id="cb31-78"><a href="#cb31-78" aria-hidden="true" tabindex="-1"></a>                <span class="st">"nombre"</span>:       a[<span class="st">"nombre"</span>],</span>
+<span id="cb31-79"><a href="#cb31-79" aria-hidden="true" tabindex="-1"></a>                <span class="st">"calificacion"</span>: a[<span class="st">"calificacion"</span>],</span>
+<span id="cb31-80"><a href="#cb31-80" aria-hidden="true" tabindex="-1"></a>                <span class="st">"nivel"</span>:        clasificar(a[<span class="st">"calificacion"</span>])</span>
+<span id="cb31-81"><a href="#cb31-81" aria-hidden="true" tabindex="-1"></a>            }</span>
+<span id="cb31-82"><a href="#cb31-82" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> a <span class="kw">in</span> validos <span class="cf">if</span> a[<span class="st">"carrera"</span>] <span class="op">==</span> carrera</span>
+<span id="cb31-83"><a href="#cb31-83" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="cb31-84"><a href="#cb31-84" aria-hidden="true" tabindex="-1"></a>        resultado[carrera] <span class="op">=</span> {</span>
+<span id="cb31-85"><a href="#cb31-85" aria-hidden="true" tabindex="-1"></a>            <span class="st">"total"</span>:    <span class="bu">len</span>(califs),</span>
+<span id="cb31-86"><a href="#cb31-86" aria-hidden="true" tabindex="-1"></a>            <span class="st">"promedio"</span>: <span class="bu">round</span>(<span class="bu">sum</span>(califs) <span class="op">/</span> <span class="bu">len</span>(califs), <span class="dv">2</span>),</span>
+<span id="cb31-87"><a href="#cb31-87" aria-hidden="true" tabindex="-1"></a>            <span class="st">"minima"</span>:   <span class="bu">min</span>(califs),</span>
+<span id="cb31-88"><a href="#cb31-88" aria-hidden="true" tabindex="-1"></a>            <span class="st">"maxima"</span>:   <span class="bu">max</span>(califs),</span>
+<span id="cb31-89"><a href="#cb31-89" aria-hidden="true" tabindex="-1"></a>            <span class="st">"alumnos"</span>:  alumnos_carrera</span>
+<span id="cb31-90"><a href="#cb31-90" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb31-91"><a href="#cb31-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-92"><a href="#cb31-92" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Guardar como JSON</span></span>
+<span id="cb31-93"><a href="#cb31-93" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(ruta_salida, <span class="st">"w"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb31-94"><a href="#cb31-94" aria-hidden="true" tabindex="-1"></a>        json.dump(resultado, f, ensure_ascii<span class="op">=</span><span class="va">False</span>, indent<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb31-95"><a href="#cb31-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-96"><a href="#cb31-96" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Análisis guardado en '</span><span class="sc">{</span>ruta_salida<span class="sc">}</span><span class="ss">'.</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb31-97"><a href="#cb31-97" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> resultado</span>
+<span id="cb31-98"><a href="#cb31-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-99"><a href="#cb31-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-100"><a href="#cb31-100" aria-hidden="true" tabindex="-1"></a>reporte <span class="op">=</span> analizar_grupo(<span class="st">"calificaciones.csv"</span>, <span class="st">"reporte_carreras.json"</span>)</span>
+<span id="cb31-101"><a href="#cb31-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-102"><a href="#cb31-102" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> reporte <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb31-103"><a href="#cb31-103" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> carrera <span class="kw">in</span> reporte:</span>
+<span id="cb31-104"><a href="#cb31-104" aria-hidden="true" tabindex="-1"></a>        datos <span class="op">=</span> reporte[carrera]</span>
+<span id="cb31-105"><a href="#cb31-105" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>carrera<span class="sc">}</span><span class="ss">  (promedio: </span><span class="sc">{</span>datos[<span class="st">'promedio'</span>]<span class="sc">:.2f}</span><span class="ss">, "</span></span>
+<span id="cb31-106"><a href="#cb31-106" aria-hidden="true" tabindex="-1"></a>              <span class="ss">f"</span><span class="sc">{</span>datos[<span class="st">'total'</span>]<span class="sc">}</span><span class="ss"> alumno(s))"</span>)</span>
+<span id="cb31-107"><a href="#cb31-107" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> alumno <span class="kw">in</span> datos[<span class="st">"alumnos"</span>]:</span>
+<span id="cb31-108"><a href="#cb31-108" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>alumno[<span class="st">'nombre'</span>]<span class="sc">:&lt;10}</span><span class="ss"> </span><span class="sc">{</span>alumno[<span class="st">'calificacion'</span>]<span class="sc">:.1f}</span><span class="ss">"</span></span>
+<span id="cb31-109"><a href="#cb31-109" aria-hidden="true" tabindex="-1"></a>                  <span class="ss">f"  </span><span class="sc">{</span>alumno[<span class="st">'nivel'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb31-110"><a href="#cb31-110" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Análisis guardado en 'reporte_carreras.json'.
 
