@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Curso introductorio de Python",
     "section": "",
-    "text": "Este es un curso introductorio de Python dirigido a estudiantes con formación matemática. El punto de partida no es la sintaxis del lenguaje sino la necesidad: cada concepto se introduce en el momento en que una limitación concreta lo exige. Ningún término aparece antes de que su utilidad haya quedado establecida.\nEl curso cubre los elementos fundamentales del lenguaje —tipos de datos, operadores, funciones, estructuras de datos y control de flujo— con la misma atención al detalle y a la motivación conceptual que se esperaría de un texto de matemáticas."
+    "text": "Cada lección está escrita como un texto continuo, no como una lista de comandos. Los ejemplos están elegidos para que la necesidad del concepto sea visible antes de que aparezca su nombre. El lector que complete el curso habrá construido una base sólida para adentrarse en bibliotecas como NumPy, Pandas o scikit-learn."
   },
   {
     "objectID": "index.html#introducción-al-notebook",
@@ -67,7 +67,7 @@
     "href": "index.html#lecciones",
     "title": "Curso introductorio de Python",
     "section": "Lecciones",
-    "text": "Lecciones\n\n1. Introducción a Google Colab y Python\nPython como calculadora: el punto de partida más natural. Introducción a los tipos de números (int y float), las operaciones aritméticas y el concepto de variable como mecanismo para nombrar y reutilizar valores.\n\n\n2. Operadores y secuencias\nLos operadores de comparación amplían el lenguaje más allá del cálculo numérico. A partir de ahí, se introduce la necesidad de manejar varios datos simultáneamente: listas, tuplas y cadenas como instancias del concepto unificador de secuencia, con sus operaciones comunes —indexación, rebanado y pertenencia.\n\n\n3. Funciones\nLas funciones como mecanismo para nombrar no valores sino procesos. Funciones predefinidas de Python (len, min, max, round, print) y definición de funciones propias. Cómo explorar la biblioteca estándar.\n\n\n4. Estructuras de datos\nLas cuatro estructuras fundamentales del lenguaje: listas, tuplas, conjuntos y diccionarios. Cada una responde a una necesidad distinta. El notebook culmina con una tabla comparativa y un estudio de las conversiones entre estructuras.\n\n\n5. Estructuras de control\nLa instrucción if como respuesta a la limitación de un código que no puede tomar decisiones. Cláusulas else y elif, condiciones compuestas con operadores lógicos, if anidados y el uso de if dentro de funciones como mecanismo de validación mediante return anticipado."
+    "text": "Lecciones\n\n1. Introducción a Google Colab y Python\n\n\n2. Operadores y secuencias\n\n\n3. Funciones\n\n\n4. Estructuras de datos\n\n\n5. Estructuras de control: if / elif / else"
   },
   {
     "objectID": "index.html#sobre-el-enfoque",
