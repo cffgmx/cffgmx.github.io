@@ -365,7 +365,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="de-un-for-a-una-comprensión" class="level2">
 <h2 class="anchored" data-anchor-id="de-un-for-a-una-comprensión">De un <code>for</code> a una comprensión</h2>
 <p>El punto de partida es un bucle que ya sabemos escribir. Supongamos que tenemos una lista de temperaturas en Celsius y queremos convertirlas todas a Fahrenheit:</p>
-<div id="6e767490" class="cell" data-execution_count="1">
+<div id="66280f9f" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>celsius <span class="op">=</span> [<span class="fl">0.0</span>, <span class="fl">20.0</span>, <span class="fl">37.0</span>, <span class="fl">100.0</span>]</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>fahrenheit <span class="op">=</span> []</span>
@@ -378,7 +378,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Tres líneas para el bucle, más la inicialización. La comprensión de lista expresa exactamente lo mismo en una sola línea:</p>
-<div id="2f72e2aa" class="cell" data-execution_count="2">
+<div id="1ac62058" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>celsius    <span class="op">=</span> [<span class="fl">0.0</span>, <span class="fl">20.0</span>, <span class="fl">37.0</span>, <span class="fl">100.0</span>]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fahrenheit <span class="op">=</span> [(c <span class="op">*</span> <span class="dv">9</span> <span class="op">/</span> <span class="dv">5</span>) <span class="op">+</span> <span class="dv">32</span> <span class="cf">for</span> c <span class="kw">in</span> celsius]</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -405,7 +405,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>El patrón de acumulación con <code>for</code> también aparecía combinado con un <code>if</code> para incluir solo los elementos que cumplen cierta condición. Eso también se puede expresar en una comprensión añadiendo la condición al final:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>[expresión <span class="cf">for</span> variable <span class="kw">in</span> colección <span class="cf">if</span> condición]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Por ejemplo, de la lista de calificaciones que hemos venido usando, extraer solo las aprobatorias:</p>
-<div id="fe587603" class="cell" data-execution_count="3">
+<div id="2fb1408f" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">8.2</span>, <span class="fl">5.9</span>, <span class="fl">9.5</span>, <span class="fl">7.1</span>, <span class="fl">6.0</span>, <span class="fl">4.3</span>, <span class="fl">9.8</span>]</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>aprobadas <span class="op">=</span> [cal <span class="cf">for</span> cal <span class="kw">in</span> calificaciones <span class="cf">if</span> cal <span class="op">&gt;=</span> <span class="fl">6.0</span>]</span>
@@ -416,7 +416,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>El <code>if</code> actúa como filtro: solo los elementos para los que la condición es <code>True</code> entran en la lista resultante. Los demás se descartan sin necesidad de <code>continue</code> ni de anidar código.</p>
 <p>La transformación y el filtro pueden combinarse. Por ejemplo, convertir a Fahrenheit solo las temperaturas que estén por encima de cero:</p>
-<div id="3f0ec640" class="cell" data-execution_count="4">
+<div id="96f77836" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>celsius <span class="op">=</span> [<span class="op">-</span><span class="fl">10.0</span>, <span class="fl">0.0</span>, <span class="fl">20.0</span>, <span class="fl">37.0</span>, <span class="fl">100.0</span>]</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>fahrenheit_positivas <span class="op">=</span> [(c <span class="op">*</span> <span class="dv">9</span> <span class="op">/</span> <span class="dv">5</span>) <span class="op">+</span> <span class="dv">32</span> <span class="cf">for</span> c <span class="kw">in</span> celsius <span class="cf">if</span> c <span class="op">&gt;</span> <span class="dv">0</span>]</span>
@@ -431,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="comprensiones-sobre-distintas-colecciones">Comprensiones sobre distintas colecciones</h2>
 <p>Así como el <code>for</code> funciona sobre cualquier estructura de datos, las comprensiones también. Cualquier colección iterable puede aparecer después del <code>in</code>.</p>
 <p>Sobre una cadena, la comprensión recorre sus caracteres. Esto permite, por ejemplo, extraer solo las vocales de una palabra:</p>
-<div id="5ee9c0f0" class="cell" data-execution_count="5">
+<div id="22263a5d" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>palabra <span class="op">=</span> <span class="st">"murciélago"</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>vocales <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> palabra <span class="cf">if</span> c <span class="kw">in</span> {<span class="st">"a"</span>, <span class="st">"e"</span>, <span class="st">"i"</span>, <span class="st">"o"</span>, <span class="st">"u"</span>, <span class="st">"á"</span>, <span class="st">"é"</span>, <span class="st">"í"</span>, <span class="st">"ó"</span>, <span class="st">"ú"</span>}]</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(vocales)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -440,7 +440,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Sobre un conjunto, la comprensión recorre sus elementos en orden no garantizado, igual que el <code>for</code>. Combinada con <code>sorted()</code>, que ya conocemos, permite obtener una lista ordenada a partir de un conjunto:</p>
-<div id="f48995ab" class="cell" data-execution_count="6">
+<div id="46129bd3" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>materias <span class="op">=</span> {<span class="st">"Cálculo"</span>, <span class="st">"Estadística"</span>, <span class="st">"Álgebra"</span>, <span class="st">"Física"</span>, <span class="st">"Geometría"</span>}</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Materias cuyo nombre tiene más de 7 caracteres, ordenadas</span></span>
@@ -451,7 +451,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Sobre un diccionario, la comprensión recorre las claves por defecto, igual que el <code>for</code>. Si se necesitan los valores o los pares clave-valor, se accede a ellos con la notación de corchetes que ya conocemos:</p>
-<div id="53541ea2" class="cell" data-execution_count="7">
+<div id="63585be8" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>estudiante <span class="op">=</span> {</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nombre"</span>:   <span class="st">"Ana"</span>,</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"edad"</span>:     <span class="dv">20</span>,</span>
@@ -467,7 +467,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>También es muy natural construir una lista de valores a partir de una lista de diccionarios, patrón que apareció en el ejemplo integrador de la lección anterior:</p>
-<div id="74f26761" class="cell" data-execution_count="8">
+<div id="82e210bf" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>grupo <span class="op">=</span> [</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Ana"</span>,    <span class="st">"calificacion"</span>: <span class="fl">9.2</span>, <span class="st">"carrera"</span>: <span class="st">"Matemáticas"</span>},</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Luis"</span>,   <span class="st">"calificacion"</span>: <span class="fl">7.8</span>, <span class="st">"carrera"</span>: <span class="st">"Física"</span>},</span>
@@ -484,7 +484,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>['Luis', 'Sofía']</code></pre>
 </div>
 </div>
-<div id="e82d5bb0" class="cell" data-execution_count="9">
+<div id="3a0be81d" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Todas las calificaciones, sin importar la carrera</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>todas <span class="op">=</span> [a[<span class="st">"calificacion"</span>] <span class="cf">for</span> a <span class="kw">in</span> grupo]</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Promedio general: </span><span class="sc">{</span><span class="bu">sum</span>(todas) <span class="op">/</span> <span class="bu">len</span>(todas)<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -497,7 +497,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="comprensiones-con-funciones-propias" class="level2">
 <h2 class="anchored" data-anchor-id="comprensiones-con-funciones-propias">Comprensiones con funciones propias</h2>
 <p>La expresión de una comprensión puede ser cualquier cosa que Python pueda evaluar, incluyendo llamadas a funciones que nosotros mismos hayamos definido. Esto conecta directamente con la función <code>clasificar</code> que hemos venido usando desde la lección de estructuras de control:</p>
-<div id="b717aa30" class="cell" data-execution_count="10">
+<div id="49d42c0f" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clasificar(calificacion):</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> calificacion <span class="op">&gt;=</span> <span class="fl">9.0</span>:</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Sobresaliente"</span></span>
@@ -519,7 +519,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Lo que antes requería un <code>for</code> con dos líneas en el cuerpo —llamar a <code>clasificar</code> y guardar el resultado— ahora queda en una sola expresión. La función se aplica a cada elemento exactamente igual que en el bucle, pero sin el andamiaje de la acumulación.</p>
 <p>También es posible combinar la llamada a una función con un filtro. Por ejemplo, obtener la clasificación solo de los alumnos que pertenecen a una carrera concreta:</p>
-<div id="6a0474e5" class="cell" data-execution_count="11">
+<div id="6ced70e4" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> [</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    (a[<span class="st">"nombre"</span>], clasificar(a[<span class="st">"calificacion"</span>]))</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> a <span class="kw">in</span> grupo</span>
@@ -546,7 +546,7 @@ María: Bien</code></pre>
 <h2 class="anchored" data-anchor-id="comprensiones-anidadas">Comprensiones anidadas</h2>
 <p>Así como los bucles <code>for</code> pueden anidarse, las comprensiones también. Una comprensión anidada tiene dos cláusulas <code>for</code>, y el resultado es equivalente a dos bucles uno dentro del otro.</p>
 <p>El caso más natural es aplanar una lista de listas: convertir una estructura de dos niveles en una lista simple con todos los elementos:</p>
-<div id="9ceeff82" class="cell" data-execution_count="12">
+<div id="f65565c9" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>matriz <span class="op">=</span> [</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>],</span>
@@ -565,7 +565,7 @@ María: Bien</code></pre>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> elemento <span class="kw">in</span> fila:</span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>        plana <span class="op">=</span> plana <span class="op">+</span> [elemento]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Otro ejemplo natural con los datos que ya conocemos: a partir de una lista de ciudades y una lista de días, generar todos los pares posibles para planificar visitas:</p>
-<div id="516f5a4e" class="cell" data-execution_count="13">
+<div id="70a4158c" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>ciudades <span class="op">=</span> [<span class="st">"CDMX"</span>, <span class="st">"Guadalajara"</span>, <span class="st">"Monterrey"</span>]</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>dias     <span class="op">=</span> [<span class="st">"lunes"</span>, <span class="st">"miércoles"</span>, <span class="st">"viernes"</span>]</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -590,7 +590,7 @@ viernes: Monterrey</code></pre>
 <h2 class="anchored" data-anchor-id="comprensiones-de-conjuntos-y-diccionarios">Comprensiones de conjuntos y diccionarios</h2>
 <p>La idea detrás de las comprensiones no se limita a las listas. Con una pequeña variación en la sintaxis, el mismo mecanismo produce conjuntos y diccionarios.</p>
 <p>Una <em>comprensión de conjunto</em> usa llaves <code>{}</code> en lugar de corchetes. El resultado es un conjunto, lo que significa que los duplicados se eliminan automáticamente:</p>
-<div id="8a643b21" class="cell" data-execution_count="14">
+<div id="affa5913" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">8.2</span>, <span class="fl">5.9</span>, <span class="fl">9.5</span>, <span class="fl">7.1</span>, <span class="fl">6.0</span>, <span class="fl">4.3</span>, <span class="fl">9.8</span>, <span class="fl">8.2</span>, <span class="fl">7.1</span>]</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Valores únicos, como un conjunto</span></span>
@@ -600,16 +600,16 @@ viernes: Monterrey</code></pre>
 <pre><code>{4.3, 5.9, 6.0, 7.1, 8.2, 9.5, 9.8}</code></pre>
 </div>
 </div>
-<div id="f19f9404" class="cell" data-execution_count="15">
+<div id="40c633cf" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Carreras únicas presentes en el grupo</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>carreras <span class="op">=</span> {a[<span class="st">"carrera"</span>] <span class="cf">for</span> a <span class="kw">in</span> grupo}</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(carreras)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>{'Matemáticas', 'Física', 'Actuaría'}</code></pre>
+<pre><code>{'Física', 'Matemáticas', 'Actuaría'}</code></pre>
 </div>
 </div>
 <p>Una <em>comprensión de diccionario</em> también usa llaves, pero con la forma <code>clave: valor</code> para cada entrada, igual que la sintaxis literal de los diccionarios:</p>
-<div id="c91aba44" class="cell" data-execution_count="16">
+<div id="3b6d6d88" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diccionario: nombre → calificación, para cada alumno del grupo</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>califs_por_nombre <span class="op">=</span> {a[<span class="st">"nombre"</span>]: a[<span class="st">"calificacion"</span>] <span class="cf">for</span> a <span class="kw">in</span> grupo}</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(califs_por_nombre)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -617,7 +617,7 @@ viernes: Monterrey</code></pre>
 <pre><code>{'Ana': 9.2, 'Luis': 7.8, 'María': 8.5, 'Carlos': 6.1, 'Sofía': 9.7, 'Pedro': 5.4}</code></pre>
 </div>
 </div>
-<div id="11fab1af" class="cell" data-execution_count="17">
+<div id="8ee8fd39" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diccionario: nombre → nivel de clasificación</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>niveles_por_nombre <span class="op">=</span> {a[<span class="st">"nombre"</span>]: clasificar(a[<span class="st">"calificacion"</span>]) <span class="cf">for</span> a <span class="kw">in</span> grupo}</span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(niveles_por_nombre)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -626,7 +626,7 @@ viernes: Monterrey</code></pre>
 </div>
 </div>
 <p>Con una comprensión de diccionario también se puede filtrar, igual que con las de lista:</p>
-<div id="d9648032" class="cell" data-execution_count="18">
+<div id="dcd42003" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Solo los alumnos con promedio sobresaliente</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>sobresalientes <span class="op">=</span> {</span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    a[<span class="st">"nombre"</span>]: a[<span class="st">"calificacion"</span>]</span>
@@ -680,7 +680,7 @@ viernes: Monterrey</code></pre>
 <h2 class="anchored" data-anchor-id="ejemplo-integrador">Ejemplo integrador</h2>
 <p>Para cerrar, un problema que requiere transformar, filtrar y resumir una colección de datos, usando comprensiones donde simplifican el código y bucles donde la lógica lo pide.</p>
 <p>El problema: dado el grupo de alumnos que hemos venido usando, queremos producir un reporte que muestre, por carrera, la lista de alumnos ordenada por calificación descendente, junto con su nivel de clasificación y si están por encima del promedio de su carrera.</p>
-<div id="85f4e92f" class="cell" data-execution_count="19">
+<div id="4efd8e10" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clasificar(calificacion):</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> calificacion <span class="op">&gt;=</span> <span class="fl">9.0</span>:</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Sobresaliente"</span></span>
@@ -746,11 +746,12 @@ Matemáticas  (promedio: 8.57)
     Lucía      8.0  Bien</code></pre>
 </div>
 </div>
-<p>El ejemplo usa comprensiones de conjunto para obtener las carreras únicas, comprensiones de lista para filtrar alumnos por carrera y extraer sus calificaciones, <code>sum()</code> y <code>len()</code> para el promedio, <code>sorted()</code> con una función anónima como criterio de ordenamiento, y un <code>for</code> explícito para el reporte final porque su propósito es imprimir, no construir una colección. Cada herramienta aparece donde su uso es más natural.</p>
+<p>El ejemplo usa comprensiones de conjunto para obtener las carreras únicas, comprensiones de lista para filtrar alumnos por carrera y extraer sus calificaciones, <code>sum()</code> y <code>len()</code> para el promedio, y un <code>for</code> explícito para el reporte final porque su propósito es imprimir, no construir una colección. Hay un elemento que aparece sin explicación: <code>lambda a: a["calificacion"]</code>, que se usa como criterio de ordenamiento en <code>sorted()</code>. Por ahora basta con leerlo como “una función sin nombre que recibe un alumno y devuelve su calificación”. La explicación completa de qué es una función anónima y por qué se puede pasar una función como argumento a otra es el tema de una lección posterior.</p>
 </section>
 <section id="lo-que-sigue" class="level2">
 <h2 class="anchored" data-anchor-id="lo-que-sigue">Lo que sigue</h2>
-<p>Con las comprensiones, el vocabulario del lenguaje está prácticamente completo para los propósitos de esta serie. Hasta ahora todo el código ha dependido exclusivamente de lo que Python incluye de fábrica: sus tipos de datos, sus funciones built-in y las funciones que nosotros mismos hemos definido. Pero Python tiene un ecosistema enorme de código ya escrito, organizado en <em>módulos</em>, que extiende enormemente lo que es posible hacer sin implementar nada desde cero: cálculo numérico, estadística, visualización, manejo de datos. La siguiente lección introduce la forma de acceder a ese ecosistema.</p>
+<p>Con las comprensiones, el vocabulario central del lenguaje está prácticamente completo. Pero hay una dimensión que toda la serie ha ignorado deliberadamente: qué ocurre cuando algo falla. Hasta ahora el código ha trabajado con datos perfectos, listas que siempre tienen elementos, diccionarios que siempre tienen las claves que se piden, operaciones que siempre reciben el tipo correcto. En la práctica eso no ocurre nunca. Los programas reales reciben datos inesperados, intentan abrir archivos que no existen, encuentran claves ausentes en diccionarios. Cuando eso sucede, Python lanza una <em>excepción</em> y detiene la ejecución.</p>
+<p>Saber leer ese mensaje, saber anticiparlo y saber manejarlo es lo que separa el código que funciona en condiciones controladas del código que funciona en el mundo real. Eso es exactamente lo que introduce la siguiente lección.</p>
 
 
 </section>
