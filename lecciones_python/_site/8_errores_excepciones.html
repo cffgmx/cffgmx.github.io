@@ -379,7 +379,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="leer-un-traceback">Leer un traceback</h2>
 <p>Un traceback se lee de abajo hacia arriba. La última línea es siempre la más importante: indica el <em>tipo</em> de la excepción y el <em>mensaje</em> que la acompaña. Las líneas anteriores muestran la cadena de llamadas que condujo al error, desde la más externa hasta la más interna.</p>
 <p>El siguiente código produce un error intencional:</p>
-<div id="d184d867" class="cell" data-execution_count="1">
+<div id="7de281df" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">8.2</span>, <span class="fl">5.9</span>, <span class="fl">9.5</span>]</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(calificaciones[<span class="dv">10</span>])   <span class="co"># El índice 10 no existe</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
@@ -397,7 +397,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>El traceback muestra <code>IndexError: list index out of range</code>. <code>IndexError</code> es el tipo de excepción; <code>list index out of range</code> es el mensaje. Ambos juntos describen exactamente el problema: se intentó acceder a una posición que no existe en la lista.</p>
 <p>Los tipos de excepción que el alumno ya ha encontrado a lo largo de la serie, ahora con nombre explícito:</p>
 <p><code>TypeError</code> ocurre cuando una operación se aplica a un objeto del tipo incorrecto. Por ejemplo, intentar sumar un número y una cadena, o intentar modificar un elemento de una tupla, que fue lo primero que vimos en la lección de secuencias.</p>
-<div id="ae4bfabc" class="cell" data-execution_count="2">
+<div id="7649d9f1" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">"La temperatura es: "</span> <span class="op">+</span> <span class="fl">23.5</span>   <span class="co"># No se puede concatenar str y float directamente</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
@@ -411,7 +411,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><code>ValueError</code> ocurre cuando el tipo es correcto pero el valor no tiene sentido para la operación.</p>
-<div id="2ef90c30" class="cell" data-execution_count="3">
+<div id="625ea51f" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">int</span>(<span class="st">"hola"</span>)   <span class="co"># "hola" es una cadena, pero no representa un número entero</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
@@ -425,7 +425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><code>KeyError</code> ocurre al intentar acceder a una clave que no existe en un diccionario, situación que la lección de estructuras de datos mencionó pero manejó solo con <code>in</code> para verificar previamente.</p>
-<div id="5bdb25db" class="cell" data-execution_count="4">
+<div id="b81c58e1" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>estudiante <span class="op">=</span> {<span class="st">"nombre"</span>: <span class="st">"Ana"</span>, <span class="st">"calificacion"</span>: <span class="fl">9.2</span>}</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>estudiante[<span class="st">"carrera"</span>]   <span class="co"># La clave 'carrera' no existe</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
@@ -441,7 +441,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><code>ZeroDivisionError</code> ocurre al dividir entre cero, el caso que motivó la función <code>velocidad</code> con cláusula de guarda en la lección de estructuras de control.</p>
-<div id="7ade2789" class="cell" data-execution_count="5">
+<div id="08081811" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="op">/</span> <span class="dv">0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
@@ -455,7 +455,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><code>NameError</code> ocurre al usar un nombre que Python no reconoce porque no ha sido definido.</p>
-<div id="260df1f6" class="cell" data-execution_count="6">
+<div id="20e94c93" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(variable_inexistente)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
@@ -479,7 +479,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># qué hacer si falla</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Python ejecuta el bloque <code>try</code>. Si no ocurre ninguna excepción, el bloque <code>except</code> se ignora por completo. Si ocurre una excepción del tipo indicado, la ejecución salta inmediatamente al bloque <code>except</code> y continúa desde allí.</p>
 <p>El ejemplo más directo: convertir una cadena a número entero, operación que falla si la cadena no representa un entero válido.</p>
-<div id="82ac7afb" class="cell" data-execution_count="7">
+<div id="615050a8" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> convertir_a_entero(texto):</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">int</span>(texto)</span>
@@ -499,7 +499,7 @@ None</code></pre>
 <section id="capturar-excepciones-específicas" class="level3">
 <h3 class="anchored" data-anchor-id="capturar-excepciones-específicas">Capturar excepciones específicas</h3>
 <p>Es posible capturar más de un tipo de excepción en el mismo bloque <code>try</code>, con una cláusula <code>except</code> por cada tipo. El orden importa: Python prueba cada cláusula en orden y ejecuta la primera que coincide.</p>
-<div id="18be845e" class="cell" data-execution_count="8">
+<div id="19af858c" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> acceder_elemento(coleccion, clave):</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> coleccion[clave]</span>
@@ -531,7 +531,7 @@ None</code></pre>
 </div>
 </div>
 <p>También es posible capturar varios tipos en una sola cláusula usando una tupla:</p>
-<div id="ce0ffc8f" class="cell" data-execution_count="9">
+<div id="70cf2a69" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> acceder_seguro(coleccion, clave):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> coleccion[clave]</span>
@@ -566,7 +566,7 @@ None</code></pre>
 <section id="la-cláusula-else" class="level2">
 <h2 class="anchored" data-anchor-id="la-cláusula-else">La cláusula <code>else</code></h2>
 <p>El bloque <code>try / except</code> admite una cláusula <code>else</code> que se ejecuta únicamente cuando el bloque <code>try</code> terminó sin lanzar ninguna excepción. Es útil para separar el código que puede fallar del código que debe ejecutarse solo si todo salió bien.</p>
-<div id="4bb69c72" class="cell" data-execution_count="10">
+<div id="c1b36a59" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> dividir(a, b):</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        resultado <span class="op">=</span> a <span class="op">/</span> b</span>
@@ -589,7 +589,7 @@ Error: no se puede dividir entre cero.</code></pre>
 <section id="la-cláusula-finally" class="level2">
 <h2 class="anchored" data-anchor-id="la-cláusula-finally">La cláusula <code>finally</code></h2>
 <p>La cláusula <code>finally</code> se ejecuta siempre, haya ocurrido una excepción o no, haya sido capturada o no. Su propósito es garantizar que ciertas operaciones de limpieza ocurran sin importar cómo termine el bloque. El caso más natural es liberar un recurso —cerrar un archivo, cerrar una conexión— que debe cerrarse independientemente de si la operación tuvo éxito.</p>
-<div id="c0215f74" class="cell" data-execution_count="11">
+<div id="fa565357" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> leer_primera_linea(ruta):</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    archivo <span class="op">=</span> <span class="va">None</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
@@ -625,7 +625,7 @@ Error: no se puede dividir entre cero.</code></pre>
 <section id="acceder-al-objeto-de-la-excepción" class="level2">
 <h2 class="anchored" data-anchor-id="acceder-al-objeto-de-la-excepción">Acceder al objeto de la excepción</h2>
 <p>A veces no basta con saber que ocurrió una excepción del tipo correcto: también interesa el mensaje que la acompaña. La cláusula <code>except</code> permite capturar el objeto de la excepción con la sintaxis <code>except TipoDeExcepcion as e</code>, y ese objeto puede usarse dentro del bloque.</p>
-<div id="6b751cca" class="cell" data-execution_count="12">
+<div id="624df697" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">8.2</span>, <span class="fl">5.9</span>, <span class="fl">9.5</span>]</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
@@ -649,7 +649,7 @@ Error: no se puede dividir entre cero.</code></pre>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> distancia <span class="op">/</span> tiempo</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Ese patrón funciona, pero tiene una limitación: el código que llama a la función recibe <code>None</code> y debe verificarlo con <code>is not None</code>. Si olvida verificarlo, continúa con un valor inválido sin saberlo. <code>raise</code> ofrece una alternativa más expresiva: en lugar de devolver silenciosamente un valor especial, la función declara explícitamente que los datos son incorrectos.</p>
-<div id="9f89f17c" class="cell" data-execution_count="13">
+<div id="640e4974" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> velocidad(distancia, tiempo):</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> distancia <span class="op">&lt;</span> <span class="dv">0</span>:</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"La distancia no puede ser negativa."</span>)</span>
@@ -658,7 +658,7 @@ Error: no se puede dividir entre cero.</code></pre>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> distancia <span class="op">/</span> tiempo</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Cuando el código que llama a <code>velocidad</code> no maneja el <code>ValueError</code>, el programa se detiene con un traceback claro que señala exactamente qué fue incorrecto. Cuando sí lo maneja, puede distinguir entre el caso válido y los distintos casos inválidos:</p>
-<div id="e2079615" class="cell" data-execution_count="14">
+<div id="93f3d950" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calcular_velocidad_segura(distancia, tiempo):</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> velocidad(distancia, tiempo)</span>
@@ -679,7 +679,7 @@ Datos inválidos: El tiempo debe ser estrictamente positivo.</code></pre>
 <section id="raise-sin-argumento" class="level3">
 <h3 class="anchored" data-anchor-id="raise-sin-argumento"><code>raise</code> sin argumento</h3>
 <p>Dentro de un bloque <code>except</code>, <code>raise</code> sin argumento relanza la excepción que se capturó, propagándola hacia arriba. Esto es útil cuando se quiere hacer algo con la excepción —registrarla, limpiar recursos— sin silenciarla:</p>
-<div id="71e448ed" class="cell" data-execution_count="15">
+<div id="57faf574" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> procesar(valor):</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>        resultado <span class="op">=</span> <span class="dv">100</span> <span class="op">/</span> valor</span>
@@ -700,7 +700,7 @@ Datos inválidos: El tiempo debe ser estrictamente positivo.</code></pre>
 <section id="ejemplo-integrador" class="level2">
 <h2 class="anchored" data-anchor-id="ejemplo-integrador">Ejemplo integrador</h2>
 <p>Para cerrar, una función que procesa una lista de registros de temperaturas representados como cadenas, convierte cada uno a número, filtra los valores inválidos, y calcula estadísticas básicas. Combina cláusulas de guarda, <code>try / except</code>, <code>raise</code>, y las estructuras de datos y comprensiones de lecciones anteriores.</p>
-<div id="2bb0237d" class="cell" data-execution_count="16">
+<div id="2b4153e2" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parsear_temperatura(texto):</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Convierte una cadena a float. Lanza ValueError si no es posible."""</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
@@ -771,11 +771,11 @@ Registros con error:
 </div>
 </div>
 <p>La función <code>parsear_temperatura</code> usa <code>try / except</code> para lo que no se puede verificar de antemano (si la cadena es convertible a número) y <code>raise</code> para lo que sí se puede verificar explícitamente (si el valor está dentro del rango físico). La función <code>procesar_registro</code> usa una cláusula de guarda para el caso vacío, acumula los errores en lugar de detenerse ante el primero, y lanza su propia excepción si el resultado sería inútil. El código que llama a ambas funciones envuelve todo en un <code>try / except</code> y maneja cualquier problema en un único lugar.</p>
-<p>Vale la pena señalar que <code>texto.strip()</code> usa una notación que todavía no hemos explicado formalmente: la notación de punto para invocar una operación sobre un objeto. <code>strip()</code> es un método de cadena que elimina espacios en blanco y saltos de línea al inicio y al final; su efecto es intuitivo en este contexto. La explicación completa de qué es un método y por qué esa notación existe es el tema de la lección 11.</p>
+<p>Vale la pena señalar que <code>texto.strip()</code> usa una notación que todavía no hemos explicado formalmente: la notación de punto para invocar una operación sobre un objeto. <code>strip()</code> es un método de cadena que elimina espacios en blanco y saltos de línea al inicio y al final; su efecto es intuitivo en este contexto. La explicación completa de qué es un método y por qué esa notación existe es el tema de la lección 10.</p>
 </section>
 <section id="lo-que-sigue" class="level2">
 <h2 class="anchored" data-anchor-id="lo-que-sigue">Lo que sigue</h2>
-<p>El manejo de errores abre directamente la puerta a la siguiente lección. Abrir un archivo es probablemente la operación más frecuente en la que las excepciones son inevitables: el archivo puede no existir, puede estar en un formato inesperado, puede no tener permisos de lectura. Ahora que sabemos manejar esas situaciones, la lección siguiente introduce la lectura y escritura de archivos, que es el primer paso para trabajar con datos que vienen del mundo real en lugar de estar escritos directamente en el código.</p>
+<p>Con el manejo de errores, el código sabe reaccionar cuando algo sale mal. Pero hay una capacidad que la serie ha usado sin explicar del todo: en la lección 7 apareció <code>lambda a: a["calificacion"]</code> como criterio de ordenamiento en <code>sorted()</code>, con la promesa de que su explicación vendría más adelante. Esa expresión asume algo que nunca se ha dicho explícitamente: que las funciones en Python son objetos como cualquier otro, y que por tanto pueden pasarse como argumentos a otras funciones. Entender eso no es solo útil para descifrar aquella línea: es la base conceptual que hará que los métodos, las clases y la notación de punto tengan una explicación precisa en las lecciones que siguen. Eso es lo que introduce la siguiente lección.</p>
 
 
 </section>

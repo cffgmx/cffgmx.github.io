@@ -23,6 +23,6 @@ Cada lección está escrita como un texto continuo, no como una lista de comando
 
 ### [8. Errores y excepciones](8_errores_excepciones.qmd)
 
-### [9. Lectura y escritura de archivos](9_archivos.qmd)
+### [9. Funciones como objetos: `lambda` y orden superior](9_funciones_objetos.qmd)
 
 Con estas lecciones concluye el estudio de Python como lenguaje. Desde aquí, deja de ser un fin y pasa a ser un medio. Lo que sigue no es simplemente “más Python”, sino una exigencia distinta. La ciencia de datos, tomada en serio, no se aprende acumulando cursos ni replicando ejemplos, exige precisión, fundamento y criterio. Ahí es donde la formación matemática se vuelve decisiva, no permite improvisar ni quedarse en la superficie. Python, entonces, no guía el proceso, lo ejecuta.
