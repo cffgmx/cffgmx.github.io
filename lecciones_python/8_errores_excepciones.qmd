@@ -199,7 +199,7 @@ def leer_primera_linea(ruta):
 leer_primera_linea("archivo_inexistente.txt")
 ```
 
-Este ejemplo anticipa la lección siguiente, que se ocupa precisamente de la lectura y escritura de archivos. Por ahora basta con notar que `finally` garantiza que el archivo se cierre incluso si ocurre un error al leerlo. La lección 9 mostrará una forma más elegante de lograr lo mismo con el bloque `with`, que es la que se usa en la práctica.
+Este ejemplo anticipa la lección de archivos, que llega más adelante en la serie. Por ahora basta con notar que `finally` garantiza que el archivo se cierre incluso si ocurre un error al leerlo. Esa lección mostrará una forma más elegante de lograr lo mismo con el bloque `with`, que es la que se usa en la práctica.
 
 La estructura completa del bloque, con todas sus cláusulas, es:
 
@@ -365,8 +365,8 @@ except ValueError as e:
 
 La función `parsear_temperatura` usa `try / except` para lo que no se puede verificar de antemano (si la cadena es convertible a número) y `raise` para lo que sí se puede verificar explícitamente (si el valor está dentro del rango físico). La función `procesar_registro` usa una cláusula de guarda para el caso vacío, acumula los errores en lugar de detenerse ante el primero, y lanza su propia excepción si el resultado sería inútil. El código que llama a ambas funciones envuelve todo en un `try / except` y maneja cualquier problema en un único lugar.
 
-Vale la pena señalar que `texto.strip()` usa una notación que todavía no hemos explicado formalmente: la notación de punto para invocar una operación sobre un objeto. `strip()` es un método de cadena que elimina espacios en blanco y saltos de línea al inicio y al final; su efecto es intuitivo en este contexto. La explicación completa de qué es un método y por qué esa notación existe es el tema de la lección 10.
+Vale la pena señalar que `texto.strip()` usa una notación que todavía no hemos explicado formalmente: la notación de punto para invocar una operación sobre un objeto. `strip()` es un método de cadena que elimina espacios en blanco y saltos de línea al inicio y al final; su efecto es intuitivo en este contexto. La explicación completa de qué es un método y por qué esa notación existe es el tema de la siguiente lección.
 
 ## Lo que sigue
 
-Con el manejo de errores, el código sabe reaccionar cuando algo sale mal. Pero hay una capacidad que la serie ha usado sin explicar del todo: en la lección 7 apareció `lambda a: a["calificacion"]` como criterio de ordenamiento en `sorted()`, con la promesa de que su explicación vendría más adelante. Esa expresión asume algo que nunca se ha dicho explícitamente: que las funciones en Python son objetos como cualquier otro, y que por tanto pueden pasarse como argumentos a otras funciones. Entender eso no es solo útil para descifrar aquella línea: es la base conceptual que hará que los métodos, las clases y la notación de punto tengan una explicación precisa en las lecciones que siguen. Eso es lo que introduce la siguiente lección.
+Con el manejo de errores, el código sabe reaccionar cuando algo sale mal. Pero hay una notación que la serie ha venido usando de forma pragmática sin explicar del todo: `texto.strip()` acaba de aparecer en el ejemplo integrador, y expresiones similares aparecieron en lecciones anteriores. Esa notación de punto —`objeto.operación()`— no es arbitraria. Tiene una explicación precisa que parte de una idea central: en Python, todo valor es un objeto, y un objeto lleva consigo tanto sus datos como las operaciones que pueden hacerse con él. La siguiente lección introduce esa idea de forma sistemática y, de paso, salda todas las operaciones sobre listas, cadenas y diccionarios que la serie ha tenido que diferir desde la lección 4.

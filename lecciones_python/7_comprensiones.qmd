@@ -301,6 +301,8 @@ Para cerrar, un problema que requiere transformar, filtrar y resumir una colecci
 
 El problema: dado el grupo de alumnos que hemos venido usando, queremos producir un reporte que muestre, por carrera, la lista de alumnos ordenada por calificación descendente, junto con su nivel de clasificación y si están por encima del promedio de su carrera.
 
+El único obstáculo es el ordenamiento descendente: `sorted()` ordena de menor a mayor por defecto, pero queremos de mayor a menor. Para ordenar una lista de diccionarios por un campo numérico sin herramientas que aún no hemos introducido, construimos una lista de tuplas `(valor_negativo, índice)` aprovechando que `sorted()` compara tuplas elemento a elemento. Negar la calificación convierte el problema de ordenar de mayor a menor en uno de ordenar de menor a mayor, que es lo que `sorted()` ya sabe hacer.
+
 ```{python}
 def clasificar(calificacion):
     if calificacion >= 9.0:
@@ -324,7 +326,7 @@ grupo = [
     {"nombre": "Roberto", "calificacion": 7.2, "carrera": "Física"},
 ]
 
-# Carreras únicas presentes en el grupo (comprensión de conjunto)
+# Carreras únicas (comprensión de conjunto)
 carreras = {a["carrera"] for a in grupo}
 
 for carrera in sorted(carreras):
@@ -333,23 +335,27 @@ for carrera in sorted(carreras):
 
     # Calificaciones de esta carrera (comprensión de lista)
     califs = [a["calificacion"] for a in alumnos_carrera]
-
     promedio = sum(califs) / len(califs)
 
-    # Ordenar por calificación descendente usando sorted() con key
-    alumnos_ordenados = sorted(alumnos_carrera, key=lambda a: a["calificacion"], reverse=True)
+    # Ordenar por calificación descendente sin herramientas pendientes:
+    # construimos tuplas (-calificacion, índice) y ordenamos de menor a mayor.
+    # Como la calificación está negada, el menor valor negativo corresponde
+    # a la mayor calificación original.
+    pares          = [(-a["calificacion"], i) for i, a in enumerate(alumnos_carrera)]
+    indices_ord    = [i for _, i in sorted(pares)]
+    alumnos_ord    = [alumnos_carrera[i] for i in indices_ord]
 
     print(f"\n{carrera}  (promedio: {promedio:.2f})")
     print("-" * 35)
 
-    for alumno in alumnos_ordenados:
+    for alumno in alumnos_ord:
         cal   = alumno["calificacion"]
         nivel = clasificar(cal)
         marca = "▲" if cal > promedio else " "
         print(f"  {marca} {alumno['nombre']:<10} {cal:.1f}  {nivel}")
 ```
 
-El ejemplo usa comprensiones de conjunto para obtener las carreras únicas, comprensiones de lista para filtrar alumnos por carrera y extraer sus calificaciones, `sum()` y `len()` para el promedio, y un `for` explícito para el reporte final porque su propósito es imprimir, no construir una colección. Hay un elemento que aparece sin explicación: `lambda a: a["calificacion"]`, que se usa como criterio de ordenamiento en `sorted()`. Por ahora basta con leerlo como "una función sin nombre que recibe un alumno y devuelve su calificación". La explicación completa de qué es una función anónima y por qué se puede pasar una función como argumento a otra es el tema de una lección posterior.
+El ejemplo usa comprensiones de conjunto para obtener las carreras únicas, comprensiones de lista con filtro para seleccionar alumnos por carrera y extraer calificaciones, `enumerate()` para emparejar cada alumno con su índice, comprensiones anidadas para construir el orden descendente, y un `for` explícito para el reporte final porque su propósito es imprimir, no construir una colección. Todo lo que aparece aquí ha sido introducido en lecciones anteriores.
 
 ## Lo que sigue
 
