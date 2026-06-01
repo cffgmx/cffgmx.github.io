@@ -616,11 +616,11 @@
   }
 
   document.addEventListener('click', function(e) {
-    const target = e.target.closest('[data-md], [data-pdf]');
-    if (target) {
-      e.preventDefault();
-      const path = target.getAttribute('data-md') || target.getAttribute('data-pdf');
-      loadFile(path);
+    let el = e.target;
+    while (el && el !== document) {
+      const path = el.getAttribute && (el.getAttribute('data-md') || el.getAttribute('data-pdf'));
+      if (path) { loadFile(path); break; }
+      el = el.parentElement;
     }
   });
 
@@ -633,7 +633,8 @@
     }
     if (hash.startsWith('/')) {
       const path = hash.slice(1);
-      const el = document.querySelector('[data-md="' + path + '"], [data-pdf="' + path + '"]');
+      const el = document.querySelector('[data-md="' + path + '"]') ||
+                  document.querySelector('[data-pdf="' + path + '"]');
       if (el) loadFile(path);
       return;
     }
