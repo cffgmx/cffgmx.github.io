@@ -108,6 +108,7 @@ El sitio usa `location.hash` para que cada sección y artículo tenga su propia 
 - **Visor de PDFs**: vía `<object>` nativo del navegador (barra de herramientas, zoom, descarga)
 - **Enrutamiento**: por hash (`location.hash` + flag `ignoreHash`), soporta navegación atrás/adelante
 - **Meta tags**: Open Graph (`og:title`, `og:description`, `og:url`, `og:type`) y Twitter Card para previsualización en redes sociales
+- **Meta description**: `<meta name="description">` controla el texto que aparece en resultados de búsqueda de Google
 - **Curso de Python**: [Quarto](https://quarto.org)
 - **Servicio de hosting**: GitHub Pages (Jekyll desactivado)
 
