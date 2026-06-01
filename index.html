@@ -6,6 +6,7 @@
   <title>Carlos Flores — Inicio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
     :root {
       --ink:       #1a1a1a;
@@ -311,14 +312,9 @@
     <p class="section-intro">Textos donde expongo mi punto de vista sobre temas matemáticos y afines.</p>
     <ul class="entry-list">
       <li>
-        <div class="entry-title">Por qué se trabaja con gérmenes en geometría diferencial</div>
-        <div class="entry-meta">Geometría diferencial · Ensayo</div>
-        <div class="entry-desc">Una defensa del concepto de germen: por qué esta abstracción, aparentemente innecesaria, es la respuesta natural a una limitación concreta.</div>
-      </li>
-      <li>
-        <div class="entry-title">Título de otra pieza</div>
-        <div class="entry-meta">Tema · Tipo de texto</div>
-        <div class="entry-desc">Descripción breve.</div>
+        <div class="entry-title" data-md="piezas-sueltas/gestion-paquetes-arch.md">Gestión de paquetes en Arch Linux</div>
+        <div class="entry-meta">GNU/Linux · Guía</div>
+        <div class="entry-desc">Guía práctica que explica desde cero cómo funciona el sistema de paquetes, dependencias, pacman y el ecosistema de Arch Linux.</div>
       </li>
     </ul>
   </div>
@@ -336,7 +332,7 @@
     </p>
     <ul class="entry-list">
       <li>
-        <div class="entry-title"><a href="https://cffga.github.io/lecciones_python/_site" target="_blank">Lecciones de Python</a></div>
+        <div class="entry-title"><a href="https://cffga.github.io/programacion/lecciones_python/_site" target="_blank">Lecciones de Python</a></div>
         <div class="entry-meta">Python · Curso introductorio</div>
         <div class="entry-desc">Curso introductorio de Python dirigido a estudiantes con formación matemática. Presenta de manera clara y progresiva los fundamentos del lenguaje, ofreciendo además una breve introducción a la programación orientada a objetos. Su propósito es sentar una base sólida que facilite la transición hacia áreas como la ciencia de datos y la estadística en un sentido amplio.
 </div>
@@ -352,11 +348,6 @@
     </div>
     <p class="section-intro">Proyectos activos y concluidos en matemáticas, estadística y ciencia de datos.</p>
     <ul class="entry-list">
-      <li>
-        <div class="entry-title">Título del proyecto</div>
-        <div class="entry-meta">Área temática · Estado: en curso</div>
-        <div class="entry-desc">Descripción del proyecto, metodología y objetivo.</div>
-      </li>
     </ul>
   </div>
 
@@ -421,12 +412,132 @@
 
 </main>
 
+<!-- ══════════ ARTICLE VIEWER ══════════ -->
+<div id="article-viewer" style="display:none;">
+  <button onclick="closeArticle()" style="
+    background:none;border:none;cursor:pointer;
+    font-family:'DM Mono',monospace;font-size:0.75rem;
+    color:var(--warm-mid);letter-spacing:0.1em;
+    text-transform:uppercase;margin-bottom:1.5rem;
+    padding:0.5rem 0;display:block;">
+    ← Volver
+  </button>
+  <div id="article-content"></div>
+</div>
+
+<style>
+  #article-viewer {
+    margin-left: var(--sidebar-w);
+    flex: 1;
+    max-width: 780px;
+    padding: 4rem 3.5rem;
+  }
+  #article-viewer h1,
+  #article-viewer h2,
+  #article-viewer h3 {
+    color: var(--accent);
+    font-weight: 400;
+  }
+  #article-viewer h1 { font-size: 1.8rem; font-style: italic; margin-bottom: 0.5rem; }
+  #article-viewer h2 { font-size: 1.35rem; margin-top: 2rem; margin-bottom: 0.5rem; }
+  #article-viewer h3 { font-size: 1.15rem; margin-top: 1.5rem; margin-bottom: 0.3rem; }
+  #article-viewer p { margin-bottom: 0.9rem; line-height: 1.75; }
+  #article-viewer ul, #article-viewer ol { margin: 0.5rem 0 1rem 1.5rem; }
+  #article-viewer li { margin-bottom: 0.3rem; }
+  #article-viewer code {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85em;
+    background: #e8e8e6;
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+  }
+  #article-viewer pre {
+    background: #e8e8e6;
+    padding: 1rem 1.2rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+  #article-viewer pre code {
+    background: none;
+    padding: 0;
+  }
+  #article-viewer table {
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+  }
+  #article-viewer th, #article-viewer td {
+    border: 1px solid var(--rule);
+    padding: 0.5rem 0.8rem;
+    text-align: left;
+  }
+  #article-viewer th {
+    background: var(--rule);
+    font-weight: 500;
+  }
+  #article-viewer blockquote {
+    border-left: 3px solid var(--warm-mid);
+    padding-left: 1rem;
+    margin-left: 0;
+    margin-bottom: 0.9rem;
+    color: var(--warm-mid);
+    font-style: italic;
+  }
+  #article-viewer hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 1.5rem 0;
+  }
+  #article-viewer img { max-width: 100%; }
+  @media (max-width: 700px) {
+    #article-viewer { margin-left: 0; padding: 2rem 1.5rem; }
+  }
+</style>
+
 <script>
+  let activeSectionId = 'home';
+
   function showPage(id, linkEl) {
+    const viewer = document.getElementById('article-viewer');
+    viewer.style.display = 'none';
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-' + id).classList.add('active');
     document.querySelectorAll('nav ul li a').forEach(a => a.classList.remove('active'));
     if (linkEl) linkEl.classList.add('active');
+    activeSectionId = id;
     return false;
   }
+
+  function loadArticle(path) {
+    const viewer = document.getElementById('article-viewer');
+    const content = document.getElementById('article-content');
+    fetch(path)
+      .then(res => {
+        if (!res.ok) throw new Error('No se pudo cargar el artículo');
+        return res.text();
+      })
+      .then(md => {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        viewer.style.display = 'block';
+        content.innerHTML = marked.parse(md);
+      })
+      .catch(err => {
+        content.innerHTML = '<p>Error al cargar el artículo.</p>';
+      });
+  }
+
+  function closeArticle() {
+    document.getElementById('article-viewer').style.display = 'none';
+    document.getElementById('page-' + activeSectionId).classList.add('active');
+  }
+
+  document.addEventListener('click', function(e) {
+    const target = e.target.closest('[data-md]');
+    if (target) {
+      e.preventDefault();
+      loadArticle(target.getAttribute('data-md'));
+    }
+  });
 </script>
