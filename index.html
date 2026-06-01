@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Carlos Flores — Inicio</title>
+  <meta property="og:title" content="Carlos Flores" />
+  <meta property="og:description" content="Matemático, profesor universitario y estudiante de maestría en Ciencia de Datos." />
+  <meta property="og:url" content="https://cffga.github.io" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -271,12 +276,12 @@
     <span>cffga.github.io</span>
   </div>
   <ul>
-    <li><a href="#" class="active" onclick="showPage('home', this)">Inicio</a></li>
-    <li><a href="#" onclick="showPage('piezas', this)">Piezas sueltas</a></li>
-    <li><a href="#" onclick="showPage('programacion', this)">Programación</a></li>
-    <li><a href="#" onclick="showPage('proyectos', this)">Proyectos</a></li>
-    <li><a href="#" onclick="showPage('notas', this)">Notas</a></li>
-    <li><a href="#" onclick="showPage('material', this)">Material recomendado</a></li>
+    <li><a href="#home" class="active" onclick="showPage('home', this)">Inicio</a></li>
+    <li><a href="#piezas" onclick="showPage('piezas', this)">Piezas sueltas</a></li>
+    <li><a href="#programacion" onclick="showPage('programacion', this)">Programación</a></li>
+    <li><a href="#proyectos" onclick="showPage('proyectos', this)">Proyectos</a></li>
+    <li><a href="#notas" onclick="showPage('notas', this)">Notas</a></li>
+    <li><a href="#material" onclick="showPage('material', this)">Material recomendado</a></li>
   </ul>
 </nav>
 
@@ -300,7 +305,7 @@
         <p>
           Esta página reúne mis piezas sueltas, notas de curso, proyectos y material
           de referencia. Si buscas los cuadernos de Python, puedes encontrarlos en
-          la sección <a href="#" onclick="showPage('programacion', document.querySelector('[onclick*=programacion]'))">Programación</a>.
+          la sección <a href="#programacion">Programación</a>.
         </p>
         <div class="contact-card">
           <h3>Contacto</h3>
@@ -512,6 +517,8 @@
 
 <script>
   let activeSectionId = 'home';
+  const articleCache = {};
+  let ignoreHash = false;
 
   function showPage(id, linkEl) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -519,35 +526,65 @@
     document.querySelectorAll('nav ul li a').forEach(a => a.classList.remove('active'));
     if (linkEl) linkEl.classList.add('active');
     activeSectionId = id;
-    return false;
+    if (!ignoreHash) {
+      ignoreHash = true;
+      location.hash = id;
+      ignoreHash = false;
+    }
   }
 
   function loadArticle(path) {
     const content = document.getElementById('article-content');
+
+    if (!ignoreHash) {
+      ignoreHash = true;
+      location.hash = '/' + path;
+      ignoreHash = false;
+    }
+
+    if (articleCache[path]) {
+      displayArticle(path);
+      return;
+    }
+
     content.innerHTML = '<p style="color:var(--warm-mid);font-style:italic;">Cargando…</p>';
+
     fetch(path)
       .then(res => {
         if (!res.ok) throw new Error('No se pudo cargar el artículo');
         return res.text();
       })
       .then(md => {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.getElementById('page-viewer').classList.add('active');
-        if (typeof marked !== 'undefined') {
-          content.innerHTML = marked.parse(md);
-        } else {
-          content.innerHTML = '<p>Error: la librería marked no está disponible.</p>';
-        }
-        window.scrollTo(0, 0);
+        articleCache[path] = md;
+        displayArticle(path);
       })
       .catch(err => {
         content.innerHTML = '<p>Error al cargar el artículo: ' + err.message + '</p>';
       });
   }
 
+  function displayArticle(path) {
+    const content = document.getElementById('article-content');
+    const md = articleCache[path];
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-viewer').classList.add('active');
+    document.querySelectorAll('nav ul li a').forEach(a => a.classList.remove('active'));
+    if (typeof marked !== 'undefined') {
+      content.innerHTML = marked.parse(md);
+    } else {
+      content.innerHTML = '<p>Error: la librería marked no está disponible.</p>';
+    }
+    window.scrollTo(0, 0);
+  }
+
   function closeArticle() {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-' + activeSectionId).classList.add('active');
+    if (!ignoreHash) {
+      ignoreHash = true;
+      location.hash = activeSectionId;
+      ignoreHash = false;
+    }
   }
 
   document.addEventListener('click', function(e) {
@@ -557,4 +594,30 @@
       loadArticle(target.getAttribute('data-md'));
     }
   });
+
+  window.addEventListener('hashchange', function() {
+    if (ignoreHash) return;
+    const hash = location.hash.slice(1);
+    if (!hash) {
+      showPage('home', document.querySelector('nav ul li a'));
+      return;
+    }
+    if (hash.startsWith('/')) {
+      const path = hash.slice(1);
+      const el = document.querySelector('[data-md="' + path + '"]');
+      if (el) loadArticle(path);
+      return;
+    }
+    const link = document.querySelector('nav ul li a[href="#' + hash + '"]');
+    if (document.getElementById('page-' + hash)) {
+      showPage(hash, link);
+    }
+  });
+
+  if (location.hash) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    setTimeout(function() {
+      window.dispatchEvent(new Event('hashchange'));
+    }, 0);
+  }
 </script>

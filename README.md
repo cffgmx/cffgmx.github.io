@@ -67,15 +67,35 @@ El SPA tiene un `#page-viewer` oculto (clase `.page`) dentro de `<main>`. El flu
 
 1. Usuario hace clic en un título con `data-md`.
 2. El listener de clic en `document` detecta el `data-md` con `e.target.closest('[data-md]')`.
-3. `loadArticle(path)` hace `fetch()` del archivo `.md`, esconde todas las `.page` y activa `#page-viewer`.
-4. `marked.parse(md)` convierte el markdown a HTML y se inyecta en `#article-content`.
-5. `window.scrollTo(0, 0)` asegura que el artículo se vea desde el inicio.
-6. "← Volver" llama `closeArticle()`: esconde `#page-viewer` y restaura la sección que estaba activa.
-7. Cambiar de sección (clic en navbar) también esconde el visor.
+3. `loadArticle(path)` actualiza la URL via `history.replaceState()` a `#/ruta/del/articulo.md`.
+4. Si el artículo ya se cargó antes, se usa `articleCache[path]` (evita fetch repetido). Si no, se hace `fetch()`, se guarda en caché y se muestra.
+5. `displayArticle()` esconde todas las `.page` y activa `#page-viewer`. `marked.parse(md)` convierte a HTML y se inyecta en `#article-content`.
+6. `window.scrollTo(0, 0)` asegura que el artículo se vea desde el inicio.
+7. "← Volver" llama `closeArticle()`: restaura la URL a `#seccion`, esconde `#page-viewer` y activa la sección que estaba activa.
+8. Cambiar de sección (clic en navbar) también esconde el visor.
+
+## Navegación por hash (URLs compartibles)
+
+El sitio usa `location.hash` para que cada sección y artículo tenga su propia URL:
+
+| URL | Abre |
+|---|---|
+| `https://cffga.github.io` | Inicio |
+| `https://cffga.github.io#piezas` | Piezas sueltas |
+| `https://cffga.github.io#programacion` | Programación |
+| `https://cffga.github.io#/piezas-sueltas/gestion-paquetes-arch.md` | Artículo directamente |
+
+- `showPage(id)` actualiza el hash con `history.replaceState(null, '', '#' + id)` (sin recargar ni disparar hashchange).
+- `loadArticle(path)` actualiza el hash a `#/ruta/al/articulo.md`.
+- El listener `hashchange` permite que los botones **atrás/adelante** del navegador naveguen correctamente entre secciones y artículos.
+- Al cargar la página, si hay un hash en la URL, se navega automáticamente al destino correspondiente.
 
 ## Tecnología
 
 - **Frontend**: HTML + CSS + JavaScript (vanilla)
 - **Renderizado de Markdown**: [marked](https://marked.js.org/) via CDN
+- **Cache de artículos**: en memoria (`articleCache{}`), evita fetch repetido del mismo `.md`
+- **Enrutamiento**: por hash (`location.hash` + `history.replaceState`), soporta navegación atrás/adelante
+- **Meta tags**: Open Graph (`og:title`, `og:description`, `og:url`, `og:type`) y Twitter Card para previsualización en redes sociales
 - **Curso de Python**: [Quarto](https://quarto.org)
 - **Servicio de hosting**: GitHub Pages (Jekyll desactivado)
