@@ -20,7 +20,7 @@ El código fuente, por sí solo, no hace nada. Es como una receta de cocina que 
 
 ### La compilación: traducir para que la máquina entienda
 
-Las computadoras no entienden inglés ni ningún lenguaje de programación. Solo entienden secuencias de ceros y unos, el llamado **código binario** o **lenguaje máquina**. Para que el código fuente pueda ejecutarse, hay que traducirlo a ese lenguaje. Ese proceso de traducción se llama **compilación**, y lo realiza un programa especializado llamado **compilador**.
+Las computadoras no entienden español ni ningún lenguaje de programación. Solo entienden secuencias de ceros y unos, el llamado **código binario** o **lenguaje máquina**. Para que el código fuente pueda ejecutarse, hay que traducirlo a ese lenguaje. Ese proceso de traducción se llama **compilación**, y lo realiza un programa especializado llamado **compilador**.
 
 Siguiendo con la analogía, si el código fuente es la receta, la compilación es cocinarla. El resultado es el plato terminado.
 
@@ -153,22 +153,23 @@ Un **repositorio** es un servidor remoto que aloja una colección de paquetes Ar
 
 ### Los repositorios oficiales
 
-Arch Linux mantiene actualmente siete repositorios oficiales:
+Arch Linux mantiene actualmente tres repositorios estables y tres de pruebas:
 
 | Repositorio | Para qué sirve |
 |---|---|
 | `core` | El núcleo del sistema. Incluye herramientas básicas, el kernel de Linux y gestores de arranque. Sin esto, Arch no funciona. |
-| `extra` | Programas adicionales mantenidos por el equipo de Arch, como entornos de escritorio, navegadores y editores. |
-| `community` | Paquetes mantenidos por los *Trusted Users* (usuarios de confianza de la comunidad), no por el equipo principal. |
-| `multilib` | Versiones de 32 bits de librerías, necesarias en sistemas de 64 bits para ejecutar algunas aplicaciones antiguas o juegos. |
-| `testing` | Versiones nuevas de paquetes de `core` y `extra` que aún están siendo probadas. No recomendado para uso diario. |
-| `community-testing` | Lo mismo que `testing`, pero para paquetes de `community`. |
-| `multilib-testing` | Lo mismo, para paquetes de `multilib`. |
+| `extra` | Todo lo demás: entornos de escritorio, navegadores, reproductores multimedia, herramientas de desarrollo y mucho más. Desde mayo de 2023 también contiene todo lo que antes estaba en `community`. |
+| `multilib` | Versiones de 32 bits de librerías, necesarias para ejecutar programas de 32 bits en sistemas de 64 bits, como Steam o Wine. No está activado por defecto. |
+| `core-testing` | Versiones candidatas de paquetes de `core` antes de llegar al público general. No recomendado para uso diario. |
+| `extra-testing` | Versiones candidatas de paquetes de `extra` antes de llegar al público general. Tampoco recomendado para uso diario. |
+| `multilib-testing` | Versiones candidatas de paquetes de `multilib`. |
 
-Para la mayoría de los usuarios, los repositorios relevantes son `core`, `extra` y `community`. Los repositorios `testing` solo deberían activarse si quieres contribuir a Arch reportando errores, ya que pueden contener paquetes inestables.
+Para la mayoría de los usuarios, los repositorios relevantes son únicamente `core`, `extra` y, si se necesitan programas de 32 bits, `multilib`. Los repositorios `*-testing` solo deberían activarse para contribuir a Arch reportando errores, ya que pueden contener paquetes inestables.
+
+> **Nota histórica:** hasta mayo de 2023 existía un repositorio separado llamado `[community]`, mantenido por voluntarios conocidos como *Trusted Users*. En esa fecha fue fusionado con `[extra]` como parte de una migración del sistema de empaquetado a Git. Si tu archivo `/etc/pacman.conf` aún hace referencia a `[community]` o `[testing]`, debes eliminar esas líneas: esos repositorios fueron eliminados definitivamente en marzo de 2025 y pacman mostrará errores al intentar sincronizarlos.
 
 Más información sobre los repositorios oficiales:  
-https://wiki.archlinux.org/index.php/Official_repositories_(Español)
+https://wiki.archlinux.org/title/Official_repositories_(Español)
 
 ### El AUR: el repositorio de la comunidad
 
@@ -220,7 +221,7 @@ Supongamos que quieres un editor de video pero no sabes qué opciones existen. B
 pacman -Ss video editor
 ```
 
-`pacman` buscará en todos los repositorios paquetes cuyo nombre o descripción contenga esas palabras. El resultado se ve así:
+`pacman` buscará en todos los repositorios paquetes cuyo nombre o descripción contenga esas palabras. Ten en cuenta que los nombres y descripciones de los paquetes están casi siempre en inglés, así que las búsquedas suelen dar mejores resultados si se escriben en ese idioma. El resultado se ve así:
 
 ```
 extra/kdenlive 21.04.0-1 (kde-applications kde-multimedia)
