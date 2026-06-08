@@ -6,7 +6,8 @@ Página personal [cffga.github.io](https://cffga.github.io). Sitio estático de 
 
 ```
 /
-├── index.html                  ← Página principal (SPA con navegador de artículos)
+├── index.html                  ← Página principal (SPA)
+├── favicon.png                 ← Icono de pestaña (murciélago de Escher, fondo transp.)
 ├── .nojekyll
 │
 ├── piezas-sueltas/             ← Artículos y escritos personales
@@ -20,16 +21,17 @@ Página personal [cffga.github.io](https://cffga.github.io). Sitio estático de 
 │       ├── Figures/            ← Figuras originales (PDF + PNG)
 │       ├── PROGRESS.md         ← Bitácora del proyecto
 │       ├── environment.yml     ← Entorno Conda para compilar
-│       └── _site/              ← Sitio compilado (trackeado para GitHub Pages)
+│       ├── favicon.png         ← Copia local para Quarto
+│       └── _site/              ← Sitio compilado (trackeado)
 ├── notas/
 └── material-recomendado/
 ```
 
-## Gestión del SPA (secciones del sitio personal)
+## Gestión del SPA (sitio personal)
 
-Cada sección (Piezas sueltas, Programación, Proyectos, Notas, Material recomendado) es una lista de entradas definida directamente en `index.html` dentro de un `<ul class="entry-list">`.
+### Agregar contenido a una sección existente
 
-Para agregar contenido nuevo:
+Las secciones (Piezas sueltas, Programación, Proyectos, Notas, etc.) son listas definidas en `index.html` dentro de `<ul class="entry-list">`. Para agregar una entrada:
 
 ```html
 <li>
@@ -39,40 +41,85 @@ Para agregar contenido nuevo:
 </li>
 ```
 
-- `data-md="ruta/al/archivo.md"` → se renderiza con marked.js (Markdown → HTML)
-- `data-pdf="ruta/al/archivo.pdf"` → se muestra con visor de PDF nativo
-- Sin atributo → entrada informativa sin archivo (usar `<span>` en vez de `<div>`)
+| Atributo | Comportamiento |
+|---|---|
+| `data-md="ruta/al/archivo.md"` | Renderiza Markdown con marked.js |
+| `data-pdf="ruta/al/archivo.pdf"` | Muestra PDF con visor nativo |
+| Sin atributo | Entrada informativa (usar `<span>` en vez de `<div>`) |
 
-## Gestión de ISL — Introducción al Aprendizaje Estadístico
+Para abrir un enlace externo en nueva pestaña, usa `<a href="..." target="_blank">`.
 
-Traducción al español de *An Introduction to Statistical Learning with Applications in Python* (James, Witten, Hastie, Tibshirani, Taylor).
+### Crear una sección nueva
 
-**URL**: [cffga.github.io/proyectos/isl-esp/_site/](https://cffga.github.io/proyectos/isl-esp/_site/)
+1. Añadir en el navbar (`<nav>`) dentro de `index.html`:
+   ```html
+   <li><a href="#nueva-seccion" onclick="showPage('nueva-seccion', this)">Mi sección</a></li>
+   ```
+2. Añadir el contenedor de la página:
+   ```html
+   <div id="page-nueva-seccion" class="page">
+     <div class="page-header">
+       <h1>Mi sección</h1>
+     </div>
+     <ul class="entry-list">
+       <!-- entradas aquí -->
+     </ul>
+   </div>
+   ```
 
-### Requisitos para compilar
+### Favicon
 
-- [Quarto](https://quarto.org/) >= 1.4
+El archivo `favicon.png` (32×32, RGBA con fondo transparente) se referencia desde `<head>` del `index.html` principal. Para actualizarlo:
+
+1. Reemplazar `favicon.png` (usar misma resolución y formato)
+2. Commitear y pushear
+3. Si el navegador no lo actualiza, forzar recarga (`Ctrl+F5`) o cambiar el query param en el `<link>`:
+
+```html
+<link rel="icon" type="image/png" href="favicon.png?v=2">
+```
+
+Los proyectos Quarto (ISL, curso Python) tienen su propia copia de `favicon.png` y lo configuran en `_quarto.yml` con `favicon: favicon.png` bajo `website:`. Al hacer `quarto render`, Quarto lo copia automáticamente a `_site/`.
+
+## Gestión de proyectos Quarto
+
+El sitio incluye dos proyectos construidos con [Quarto](https://quarto.org/):
+
+| Proyecto | Directorio | URL |
+|---|---|---|
+| Curso de Python | `programacion/lecciones_python/` | `.../lecciones_python/_site/` |
+| Traducción ISL | `proyectos/isl-esp/` | `.../isl-esp/_site/` |
+
+### Requisitos
+
+- Quarto >= 1.4
 - Python >= 3.12
-- `conda env create -f environment.yml && conda activate ISL`
+- Entorno Conda compartido (ambos proyectos usan el mismo):
+  ```bash
+  conda env create -f proyectos/isl-esp/environment.yml
+  conda activate ISL
+  ```
 
-### Cómo actualizar
+### Cómo actualizar (cualquier proyecto Quarto)
 
 ```bash
 conda activate ISL
+cd <directorio-del-proyecto>
 quarto render
-git add -A && git commit -m "Actualiza ISL" && git push
+git add -A && git commit -m "Actualiza <proyecto>" && git push
 ```
 
-### Detalles técnicos importantes
+**Nota**: cada proyecto se renderiza por separado. Si modificas ISL y el curso Python, ejecuta `quarto render` en cada uno.
+
+### Detalles técnicos (aplican a ambos)
 
 | Aspecto | Explicación |
 |---|---|
-| `_site/` trackeado | Normalmente se ignora; aquí se trackea porque GitHub Pages sirve desde este directorio. Sin CI/CD, es la única forma de desplegar. |
-| URL | Se accede directamente a `_site/` (Quarto elimina el `index.html` de redirección durante el render). |
-| `.gitignore` modificado | Se eliminaron las reglas `_site/` y `*.pdf` del ignore original (ver `proyectos/isl-esp/.gitignore`). |
-| `_freeze/` | Cache de ejecución de Quarto. Se regenera solo, se ignora en git. |
-| Traducción | Solo cubre el texto explicativo. Laboratorios y ejercicios no traducidos (enlaces a fuentes oficiales al final de cada capítulo). |
-| Origen | Copia del repositorio original `~/Projects/ISL_esp/` (con historial git propio), migrada aquí sin historial. |
+| `_site/` trackeado | Se trackea deliberadamente para que GitHub Pages sirva el contenido. Sin CI/CD, es necesario. |
+| URL con `_site/` | Se accede directamente al subdirectorio `_site/`. Quarto elimina cualquier `index.html` en la raíz del proyecto durante el render. |
+| `.gitignore` | En ISL se modificó: se eliminaron `_site/` y `*.pdf` del ignore original para trackearlos. |
+| `_freeze/` | Cache de ejecución de Quarto. Se ignora en git, se regenera con `quarto render`. |
+| Favicon | Cada proyecto tiene su copia de `favicon.png`; configurado en `_quarto.yml` bajo `website: favicon:`. Quarto lo copia a `_site/` automáticamente. |
 
 ## Despliegue
 
@@ -83,3 +130,12 @@ git push
 ```
 
 GitHub Pages despliega desde `main`. Los cambios tardan ~30 s – 2 min en reflejarse.
+
+## Solución de problemas
+
+| Problema | Causa probable | Solución |
+|---|---|---|
+| `quarto render` falla con "Jupyter no disponible" | Falta `nbformat` o Jupyter en el Python que usa Quarto | Activar el entorno ISL: `conda activate ISL` y volver a ejecutar |
+| 404 en `.../_site/` | `_site/` fue eliminado (git limpió archivos no trackeados o commit previo lo borró) | Ejecutar `quarto render` para regenerarlo |
+| El favicon no se actualiza en el navegador | Caché del navegador (los favicons se cachean agresivamente) | `Ctrl+F5` o abrir `favicon.png` directamente y forzar recarga |
+| `git push` rechazado | La rama `main` está protegida o hay cambios remotos | `git pull --rebase && git push` |
