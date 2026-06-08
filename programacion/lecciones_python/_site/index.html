@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Carlos Flores">
 
-<title>ISL — Introducción al Aprendizaje Estadístico</title>
+<title>Curso introductorio de Python – Python</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,7 +34,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./chapters/00-prefacio/index.html" rel="next">
 <link href="./favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -41,16 +41,20 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ea2c7f5f25cb2f106c68b43028de7506.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-8b348f4b4b74a528bf910da1e8c5139e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -59,188 +63,262 @@ ul.task-list li input[type="checkbox"] {
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "No se han encontrado resultados",
-    "search-matching-documents-text": "documentos encontrados",
-    "search-copy-link-title": "Copiar el enlace en la búsqueda",
-    "search-hide-matches-text": "Ocultar resultados adicionales",
-    "search-more-match-text": "resultado adicional en este documento",
-    "search-more-matches-text": "resultados adicionales en este documento",
-    "search-clear-button-title": "Borrar",
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancelar",
-    "search-submit-button-title": "Enviar",
-    "search-label": "Buscar"
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-sidebar docked fullcontent quarto-light">
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">El libro</a></li><li class="breadcrumb-item"><a href="./index.html">Portada</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
-    </div>
-  </nav>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Python</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">Acerca de</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">ISL — Introducción al Aprendizaje Estadístico</a> 
-    </div>
-      </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Buscar"></div>
-        </div>
-        </div>
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">El libro</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Portada</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapters/00-prefacio/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Prefacio</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Capítulos</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapters/01-introduccion/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">1. Introducción</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapters/02-aprendizaje-estadistico/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2. Aprendizaje Estadístico</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapters/03-regresion-lineal/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3. Regresión Lineal</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapters/04-clasificacion/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4. Clasificación</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapters/05-metodos-remuestreo/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">5. Métodos de Remuestreo</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapters/06-seleccion-modelos/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">6. Selección de Modelos Lineales y Regularización</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapters/07-mas-alla-linealidad/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">7. Más Allá de la Linealidad</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapters/08-arboles-decision/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">8. Métodos Basados en Árboles</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapters/09-svm/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">9. Máquinas de Vectores de Soporte</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapters/10-aprendizaje-profundo/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">10. Aprendizaje Profundo</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapters/11-analisis-supervivencia/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">11. Análisis de Supervivencia y Datos Censurados</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapters/12-aprendizaje-no-supervisado/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">12. Aprendizaje No Supervisado</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./chapters/13-pruebas-multiples/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">13. Pruebas Múltiples</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#prólogo" id="toc-prólogo" class="nav-link active" data-scroll-target="#prólogo">Prólogo</a></li>
+  <li><a href="#lecciones" id="toc-lecciones" class="nav-link" data-scroll-target="#lecciones">Lecciones</a>
+  <ul class="collapse">
+  <li><a href="#introducción-a-google-colab-y-python" id="toc-introducción-a-google-colab-y-python" class="nav-link" data-scroll-target="#introducción-a-google-colab-y-python">1. Introducción a Google Colab y Python</a></li>
+  <li><a href="#operadores-y-secuencias" id="toc-operadores-y-secuencias" class="nav-link" data-scroll-target="#operadores-y-secuencias">2. Operadores y secuencias</a></li>
+  <li><a href="#funciones" id="toc-funciones" class="nav-link" data-scroll-target="#funciones">3. Funciones</a></li>
+  <li><a href="#estructuras-de-datos" id="toc-estructuras-de-datos" class="nav-link" data-scroll-target="#estructuras-de-datos">4. Estructuras de datos</a></li>
+  <li><a href="#estructuras-de-control-if-elif-else" id="toc-estructuras-de-control-if-elif-else" class="nav-link" data-scroll-target="#estructuras-de-control-if-elif-else">5. Estructuras de control: if / elif / else</a></li>
+  <li><a href="#bucles-for-y-while" id="toc-bucles-for-y-while" class="nav-link" data-scroll-target="#bucles-for-y-while">6. Bucles: for y while</a></li>
+  <li><a href="#comprensiones-de-listas" id="toc-comprensiones-de-listas" class="nav-link" data-scroll-target="#comprensiones-de-listas">7. Comprensiones de listas</a></li>
+  <li><a href="#errores-y-excepciones" id="toc-errores-y-excepciones" class="nav-link" data-scroll-target="#errores-y-excepciones">8. Errores y excepciones</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">El libro</a></li><li class="breadcrumb-item"><a href="./index.html">Portada</a></li></ol></nav>
+
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">ISL — Introducción al Aprendizaje Estadístico</h1>
-<p class="subtitle lead">Traducción al español de <em>An Introduction to Statistical Learning with Applications in Python</em></p>
+<h1 class="title">Curso introductorio de Python</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Carlos Flores </p>
+          </div>
+  </div>
     
   
     
@@ -251,34 +329,59 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="lead">
-<p><strong>Gareth James · Daniela Witten · Trevor Hastie · Robert Tibshirani · Jonathan Taylor</strong></p>
-</div>
-<hr>
-<p>Este sitio contiene la traducción al español del libro <strong>An Introduction to Statistical Learning with Applications in Python (ISLP)</strong>, obra de Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani y Jonathan Taylor, publicada por Springer.</p>
-<p>El libro original presenta una introducción accesible a las herramientas del aprendizaje estadístico, incluyendo regresión lineal, clasificación, remuestreo, métodos basados en árboles, máquinas de vectores de soporte, aprendizaje profundo, análisis de supervivencia, aprendizaje no supervisado y pruebas múltiples.</p>
-<p>Este proyecto comunitario, sin fines de lucro, busca hacer accesible el contenido del libro a lectores hispanohablantes. Todo el crédito corresponde a los autores originales.</p>
-<hr>
-<section id="acerca-de-esta-traducción" class="level2">
-<h2 class="anchored" data-anchor-id="acerca-de-esta-traducción">Acerca de esta traducción</h2>
-<p>Esta traducción <strong>solo cubre el texto explicativo</strong> de cada capítulo. Los <strong>laboratorios prácticos</strong> (código en Python) y los <strong>ejercicios</strong> no han sido traducidos ni incluidos en este sitio.</p>
-<p>El libro original (ISLP) está disponible gratuitamente en PDF en el sitio oficial del libro, junto con materiales complementarios:</p>
-<ul>
-<li>Sitio oficial: <a href="https://www.statlearning.com" target="_blank">statlearning.com</a></li>
-<li>Repositorio de laboratorios (Jupyter Notebooks): <a href="https://github.com/intro-stat-learning/ISLP_labs" target="_blank">ISLP_labs en GitHub</a></li>
-<li>Paquete Python ISLP: <a href="https://pypi.org/project/ISLP/" target="_blank">ISLP en PyPI</a></li>
-<li>Repositorio del libro original (ISLR en R): <a href="https://github.com/stat-learning/ISLR" target="_blank">ISLR en GitHub</a></li>
-</ul>
-<p>Al final de cada capítulo encontrarás un enlace directo a los laboratorios correspondientes.</p>
-<hr>
-<p>Si encuentras algún error, tienes sugerencias o deseas contribuir, puedes escribir a <a href="mailto:cffg@protonmail.com">cffg@protonmail.com</a>.</p>
+<section id="prólogo" class="level2">
+<h2 class="anchored" data-anchor-id="prólogo">Prólogo</h2>
+<p>Este curso nace de una convicción muy específica sobre cómo se aprende mejor. No se trata de acumular definiciones ni técnicas, sino de acompañar el desarrollo de una idea hasta que sus propias tensiones internas vuelven inevitable la aparición de nuevos conceptos. Esa convicción tiene un origen claro y personal. La profunda influencia que ha tenido en mí el estilo de Michael Spivak, en particular a través de su obra maestra <em>Calculus</em> y sus maravillosos volúmenes de geometría diferencial, ha sido decisiva. En esos textos encontré no solo contenido, sino una forma de pensar y de escribir ideas, una en la que cada concepto aparece en el momento justo, cuando ya no puede postergarse más. Ese paradigma es el que da forma a estas lecciones.</p>
+<p>Por ello, Python no se presenta aquí como un lenguaje que deba aprenderse mediante listas de instrucciones o repertorios de herramientas. Cada elemento (desde los tipos de datos más básicos hasta las construcciones más abstractas) surge como respuesta a una limitación previa. Antes de que un concepto reciba un nombre, ya ha sido exigido por el propio desarrollo. La intención es que el lector no solo entienda cómo se usa algo, sino que perciba por qué su existencia resulta necesaria.</p>
+<p>Las lecciones están escritas como un texto continuo, siguiendo esta misma filosofía. No hay fragmentación en temas independientes ni una organización pensada para la consulta ocasional. Los ejemplos no ilustran definiciones ya dadas, están elegidos para generar una tensión que haga inevitable lo que sigue. Con frecuencia, una idea introducida en una lección encuentra su verdadera justificación más adelante, y ejercicios que en un inicio parecen locales adquieren un sentido más amplio cuando se los retoma en otro contexto.</p>
+<p>Por esta razón, el curso solo alcanza su propósito <em>si se lee en orden y de manera completa</em>. Abordarlo como una colección de temas independientes no solo reduce su utilidad, sino que rompe la lógica interna que lo sostiene. Aquí, la comprensión es progresiva y dependiente, cada paso se apoya en los anteriores, y muchas nociones solo se clarifican plenamente cuando reaparecen bajo una nueva luz.</p>
+</section>
+<section id="lecciones" class="level2">
+<h2 class="anchored" data-anchor-id="lecciones">Lecciones</h2>
+<section id="introducción-a-google-colab-y-python" class="level3">
+<h3 class="anchored" data-anchor-id="introducción-a-google-colab-y-python"><a href="./1_introduccion.html">1. Introducción a Google Colab y Python</a></h3>
+</section>
+<section id="operadores-y-secuencias" class="level3">
+<h3 class="anchored" data-anchor-id="operadores-y-secuencias"><a href="./2_operadores_secuencias.html">2. Operadores y secuencias</a></h3>
+</section>
+<section id="funciones" class="level3">
+<h3 class="anchored" data-anchor-id="funciones"><a href="./3_funciones.html">3. Funciones</a></h3>
+</section>
+<section id="estructuras-de-datos" class="level3">
+<h3 class="anchored" data-anchor-id="estructuras-de-datos"><a href="./4_estructuras_de_datos.html">4. Estructuras de datos</a></h3>
+</section>
+<section id="estructuras-de-control-if-elif-else" class="level3">
+<h3 class="anchored" data-anchor-id="estructuras-de-control-if-elif-else"><a href="./5_estructuras_de_control.html">5. Estructuras de control: if / elif / else</a></h3>
+</section>
+<section id="bucles-for-y-while" class="level3">
+<h3 class="anchored" data-anchor-id="bucles-for-y-while"><a href="./6_bucles.html">6. Bucles: for y while</a></h3>
+</section>
+<section id="comprensiones-de-listas" class="level3">
+<h3 class="anchored" data-anchor-id="comprensiones-de-listas"><a href="./7_comprensiones.html">7. Comprensiones de listas</a></h3>
+</section>
+<section id="errores-y-excepciones" class="level3">
+<h3 class="anchored" data-anchor-id="errores-y-excepciones"><a href="./8_errores_excepciones.html">8. Errores y excepciones</a></h3>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -302,12 +405,12 @@ ul.task-list li input[type="checkbox"] {
       // flash "checked"
       button.classList.add('code-copy-button-checked');
       var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copiado");
+      button.setAttribute("title", "Copied!");
       let tooltip;
       if (window.bootstrap) {
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copiado");
+        button.setAttribute("data-bs-title", "Copied!");
         tooltip = new bootstrap.Tooltip(button, 
           { trigger: "manual", 
             customClass: "code-copy-button-tooltip",
@@ -350,7 +453,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/cffga\.github\.io\/proyectos\/isl-esp");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -677,15 +780,6 @@ ul.task-list li input[type="checkbox"] {
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="./chapters/00-prefacio/index.html" class="pagination-link" aria-label="Prefacio">
-        <span class="nav-page-text">Prefacio</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 
 

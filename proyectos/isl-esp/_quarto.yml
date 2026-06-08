@@ -8,6 +8,7 @@ website:
   site-url: "https://cffga.github.io/proyectos/isl-esp"
   page-navigation: true
   search: true
+  favicon: favicon.png
 
   sidebar:
     style: docked
@@ -50,7 +51,6 @@ website:
 format:
   html:
     lang: es
-    favicon: favicon.png
     theme:
       - cosmo
       - custom.scss

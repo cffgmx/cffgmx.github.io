@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Carlos Flores">
+
+<title>Estructuras de control: if / elif / else – Python</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-8b348f4b4b74a528bf910da1e8c5139e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Python</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">Acerca de</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#la-instrucción-if" id="toc-la-instrucción-if" class="nav-link active" data-scroll-target="#la-instrucción-if">La instrucción <code>if</code></a></li>
+  <li><a href="#la-cláusula-else" id="toc-la-cláusula-else" class="nav-link" data-scroll-target="#la-cláusula-else">La cláusula <code>else</code></a></li>
+  <li><a href="#la-cláusula-elif" id="toc-la-cláusula-elif" class="nav-link" data-scroll-target="#la-cláusula-elif">La cláusula <code>elif</code></a></li>
+  <li><a href="#condiciones-compuestas" id="toc-condiciones-compuestas" class="nav-link" data-scroll-target="#condiciones-compuestas">Condiciones compuestas</a></li>
+  <li><a href="#if-anidados" id="toc-if-anidados" class="nav-link" data-scroll-target="#if-anidados"><code>if</code> anidados</a></li>
+  <li><a href="#if-dentro-de-funciones-y-el-return-anticipado" id="toc-if-dentro-de-funciones-y-el-return-anticipado" class="nav-link" data-scroll-target="#if-dentro-de-funciones-y-el-return-anticipado"><code>if</code> dentro de funciones y el <code>return</code> anticipado</a>
+  <ul class="collapse">
+  <li><a href="#detener-la-ejecución-cuando-los-datos-no-son-válidos" id="toc-detener-la-ejecución-cuando-los-datos-no-son-válidos" class="nav-link" data-scroll-target="#detener-la-ejecución-cuando-los-datos-no-son-válidos">Detener la ejecución cuando los datos no son válidos</a></li>
+  </ul></li>
+  <li><a href="#ejemplo-integrador" id="toc-ejemplo-integrador" class="nav-link" data-scroll-target="#ejemplo-integrador">Ejemplo integrador</a></li>
+  <li><a href="#lo-que-sigue" id="toc-lo-que-sigue" class="nav-link" data-scroll-target="#lo-que-sigue">Lo que sigue</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Estructuras de control: if / elif / else</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Carlos Flores </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>En las lecciones anteriores aprendimos a organizar datos en variables y secuencias, y a expresar comparaciones que producen un valor <code>True</code> o <code>False</code>. En ese momento, los booleanos aparecieron como una respuesta a la pregunta “¿se cumple esta condición?”, pero no hicimos nada con esa respuesta más allá de observarla. Es el momento de darle uso.</p>
+<p>Todo el código que hemos escrito hasta ahora sigue un único camino: Python lee cada línea y la ejecuta en orden, de arriba hacia abajo, sin desviarse. Eso es suficiente para describir cálculos, pero no para describir decisiones. Un sistema que clasifica a un estudiante como aprobado o reprobado, un sensor que emite una alerta solo cuando la temperatura supera un umbral, una función que no puede continuar si recibe datos inválidos: en todos estos casos el programa necesita escoger qué hacer en función de los datos que tiene. Esa capacidad de elegir entre caminos distintos es lo que introduce esta lección.</p>
+<section id="la-instrucción-if" class="level2">
+<h2 class="anchored" data-anchor-id="la-instrucción-if">La instrucción <code>if</code></h2>
+<p>La forma más elemental de tomar una decisión es esta: <em>si</em> se cumple una condición, ejecuta cierto bloque de código; si no se cumple, ignóralo. En Python esa idea se escribe con la palabra clave <code>if</code>, seguida de la condición y dos puntos. El bloque de instrucciones que debe ejecutarse cuando la condición es <code>True</code> va en las líneas siguientes, desplazado hacia la derecha mediante indentación, exactamente igual que el cuerpo de una función.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> condición:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># instrucciones que se ejecutan solo si condición es True</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La condición puede ser cualquier expresión que Python pueda evaluar como <code>True</code> o <code>False</code>: una comparación, una combinación de comparaciones con <code>and</code> u <code>or</code>, o directamente una variable booleana. Si la evaluación resulta <code>True</code>, se ejecuta el bloque indentado; si resulta <code>False</code>, Python salta directamente a la primera línea que esté fuera de ese bloque.</p>
+<div id="b5b95020" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>temperatura <span class="op">=</span> <span class="fl">38.5</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> temperatura <span class="op">&gt;</span> <span class="fl">37.5</span>:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Alerta: temperatura fuera del rango normal."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Alerta: temperatura fuera del rango normal.</code></pre>
+</div>
+</div>
+<p>Si cambiamos el valor de <code>temperatura</code> a uno que no supere el umbral, el bloque indentado no se ejecuta en absoluto:</p>
+<div id="fdd1b252" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>temperatura <span class="op">=</span> <span class="fl">36.8</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> temperatura <span class="op">&gt;</span> <span class="fl">37.5</span>:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Alerta: temperatura fuera del rango normal."</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Lectura procesada."</span>)   <span class="co"># Esta línea siempre se ejecuta</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Lectura procesada.</code></pre>
+</div>
+</div>
+<p>La línea <code>print("Lectura procesada.")</code> no está indentada respecto al <code>if</code>, por lo que queda fuera de su bloque y se ejecuta siempre, independientemente de si la condición fue <code>True</code> o <code>False</code>.</p>
+</section>
+<section id="la-cláusula-else" class="level2">
+<h2 class="anchored" data-anchor-id="la-cláusula-else">La cláusula <code>else</code></h2>
+<p>Un <code>if</code> por sí solo permite reaccionar cuando algo es verdadero, pero no dice nada sobre qué hacer cuando es falso. En muchas situaciones eso no es suficiente: se quiere hacer una cosa si se cumple la condición, y otra cosa distinta si no se cumple. Para eso existe la cláusula <code>else</code>.</p>
+<p><code>else</code> se escribe al mismo nivel de indentación que el <code>if</code> al que pertenece, seguido de dos puntos. Su bloque se ejecuta únicamente cuando la condición del <code>if</code> resultó <code>False</code>. Los dos bloques son mutuamente excluyentes, o se ejecuta uno u otro, pero nunca ambos.</p>
+<div id="18da1afa" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>calificacion <span class="op">=</span> <span class="fl">7.5</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> calificacion <span class="op">&gt;=</span> <span class="fl">6.0</span>:</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Aprobado"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Reprobado"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Aprobado</code></pre>
+</div>
+</div>
+<p>Un uso típico de esta estructura es asignar un valor a una variable dependiendo de si se cumple una condición. Por ejemplo, el sistema de cobro de una red de transporte público aplica una tarifa diferente según si el pasajero es estudiante o no:</p>
+<div id="ca4e9cd3" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>precio_base <span class="op">=</span> <span class="fl">22.0</span>   <span class="co"># precio sin descuento, en pesos</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>es_estudiante <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> es_estudiante:</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    precio_final <span class="op">=</span> precio_base <span class="op">*</span> <span class="fl">0.50</span>   <span class="co"># 50 % de descuento para estudiantes</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    precio_final <span class="op">=</span> precio_base</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Tarifa a pagar: $</span><span class="sc">{</span>precio_final<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tarifa a pagar: $11.00</code></pre>
+</div>
+</div>
+<p>Aquí la condición del <code>if</code> es directamente la variable booleana <code>es_estudiante</code>. No hace falta escribir <code>es_estudiante == True</code>: la variable ya es la condición. Del mismo modo, si en algún caso se quisiera verificar la situación contraria, la forma natural es <code>not es_estudiante</code>, no <code>es_estudiante == False</code>. En ambos casos, usar el booleano directamente es más legible, la comparación con <code>True</code> o <code>False</code> es redundante, porque el valor ya es verdadero o falso.</p>
+</section>
+<section id="la-cláusula-elif" class="level2">
+<h2 class="anchored" data-anchor-id="la-cláusula-elif">La cláusula <code>elif</code></h2>
+<p>Hay problemas que no se reducen a dos casos. Una escala de calificaciones tiene varios niveles: sobresaliente, bien, suficiente, reprobado. Una clasificación de riesgo puede ser baja, media o alta. Una tarifa puede depender de tres o más tramos de consumo. Para manejar estas situaciones de forma limpia, Python ofrece la cláusula <code>elif</code>, abreviatura de <em>else if</em>.</p>
+<p><code>elif</code> permite añadir condiciones adicionales entre el <code>if</code> inicial y el <code>else</code> final. Python las evalúa en orden, de arriba hacia abajo, y ejecuta el bloque de la primera que resulte <code>True</code>. En cuanto encuentra esa condición, salta todo lo que sigue y continúa después del bloque completo. Si ninguna resulta <code>True</code>, se ejecuta el bloque del <code>else</code>, cuando existe.</p>
+<div id="d0fd5186" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>calificacion <span class="op">=</span> <span class="fl">8.2</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> calificacion <span class="op">&gt;=</span> <span class="fl">9.0</span>:</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    nivel <span class="op">=</span> <span class="st">"Sobresaliente"</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> calificacion <span class="op">&gt;=</span> <span class="fl">7.0</span>:</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    nivel <span class="op">=</span> <span class="st">"Bien"</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> calificacion <span class="op">&gt;=</span> <span class="fl">6.0</span>:</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    nivel <span class="op">=</span> <span class="st">"Suficiente"</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    nivel <span class="op">=</span> <span class="st">"Reprobado"</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Calificación: </span><span class="sc">{</span>calificacion<span class="sc">}</span><span class="ss"> → </span><span class="sc">{</span>nivel<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Calificación: 8.2 → Bien</code></pre>
+</div>
+</div>
+<p>Con <code>calificacion = 8.2</code>, Python evalúa <code>calificacion &gt;= 9.0</code> y obtiene <code>False</code>. Pasa al primer <code>elif</code> y evalúa <code>calificacion &gt;= 7.0</code>: es <code>True</code>. Ejecuta ese bloque, asigna <code>"Bien"</code> a <code>nivel</code>, y salta el resto. Los siguientes <code>elif</code> y el <code>else</code> no se evalúan siquiera.</p>
+<p>Una pregunta que surge con frecuencia al ver este código es por qué el primer <code>elif</code> no necesita escribirse como <code>calificacion &gt;= 7.0 and calificacion &lt; 9.0</code>. La respuesta está en el orden de evaluación: si la ejecución llega a ese <code>elif</code>, es porque la condición del <code>if</code> ya resultó <code>False</code>, es decir, ya se sabe que <code>calificacion &lt; 9.0</code>. No hace falta verificarlo de nuevo. Cada rama puede asumir que todas las anteriores fallaron, y limitarse a expresar la condición nueva que le corresponde.</p>
+<p>Esto explica también por qué el orden importa. Si la primera condición fuera <code>calificacion &gt;= 6.0</code> en lugar de <code>calificacion &gt;= 9.0</code>, cualquier calificación de 6 o más entraría siempre en ese primer bloque, sin importar cuán alta fuera. Al encadenar intervalos numéricos, la regla práctica es escribir primero el caso más restrictivo.</p>
+</section>
+<section id="condiciones-compuestas" class="level2">
+<h2 class="anchored" data-anchor-id="condiciones-compuestas">Condiciones compuestas</h2>
+<p>La condición de un <code>if</code> puede ser cualquier expresión booleana, incluyendo las que combinan varias comparaciones con <code>and</code>, <code>or</code> y <code>not</code>. Esto permite expresar restricciones que involucran varias variables a la vez.</p>
+<p>Para clasificar un punto del plano según el cuadrante al que pertenece, por ejemplo, hay que verificar simultáneamente el signo de <code>x</code> y el signo de <code>y</code>:</p>
+<div id="76a83619" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span>  <span class="fl">3.0</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="op">-</span><span class="fl">1.5</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> y <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    cuadrante <span class="op">=</span> <span class="st">"I"</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> x <span class="op">&lt;</span> <span class="dv">0</span> <span class="kw">and</span> y <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    cuadrante <span class="op">=</span> <span class="st">"II"</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> x <span class="op">&lt;</span> <span class="dv">0</span> <span class="kw">and</span> y <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    cuadrante <span class="op">=</span> <span class="st">"III"</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> x <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> y <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    cuadrante <span class="op">=</span> <span class="st">"IV"</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    cuadrante <span class="op">=</span> <span class="st">"sobre un eje"</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"El punto (</span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">) está en el cuadrante </span><span class="sc">{</span>cuadrante<span class="sc">}</span><span class="ss">."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>El punto (3.0, -1.5) está en el cuadrante IV.</code></pre>
+</div>
+</div>
+<p>El operador <code>in</code>, que ya conocemos de las secuencias y los conjuntos, también funciona directamente como condición de un <code>if</code>. Esto es natural cuando se quiere verificar si un valor pertenece a un grupo de opciones, sin necesidad de encadenar varios <code>or</code>:</p>
+<div id="8090edcf" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dia <span class="op">=</span> <span class="st">"jueves"</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> dia <span class="kw">in</span> {<span class="st">"jueves"</span>, <span class="st">"viernes"</span>}:</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>dia<span class="sc">}</span><span class="ss"> es día feriado."</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>dia<span class="sc">}</span><span class="ss"> es día hábil."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>jueves es día feriado.</code></pre>
+</div>
+</div>
+<p>La condición del <code>if</code> en el ejemplo anterior podría haberse escrito como <code>dia == "jueves" or dia == "viernes"</code>, pero la versión con <code>in</code> es más concisa y más fácil de extender: si en algún momento hubiera que añadir un tercer caso, bastaría con incluirlo en el conjunto <code>{"jueves", "viernes"}</code> sin modificar la estructura de la condición.</p>
+</section>
+<section id="if-anidados" class="level2">
+<h2 class="anchored" data-anchor-id="if-anidados"><code>if</code> anidados</h2>
+<p>El bloque de instrucciones dentro de un <code>if</code> puede contener cualquier código válido de Python, incluyendo otros <code>if</code>. Esto se llama <em>anidamiento</em> y sirve para expresar decisiones que solo tienen sentido dentro del contexto de una decisión anterior.</p>
+<p>El caso más claro es cuando una segunda condición solo es relevante si la primera ya se cumplió. Para determinar si un número es positivo y par, la paridad solo vale la pena verificarla si ya sabemos que el número es positivo:</p>
+<div id="01ffcd67" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>numero <span class="op">=</span> <span class="dv">14</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> numero <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> numero <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:   <span class="co"># El operador % devuelve el residuo de la división entera</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>numero<span class="sc">}</span><span class="ss"> es positivo y par."</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>numero<span class="sc">}</span><span class="ss"> es positivo e impar."</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>numero<span class="sc">}</span><span class="ss"> no es positivo."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>14 es positivo y par.</code></pre>
+</div>
+</div>
+<p>El anidamiento puede crecer varios niveles, pero conviene usarlo con moderación. Cuando hay muchos niveles de indentación, el código se vuelve difícil de leer. En muchos casos es posible aplanar la estructura usando <code>and</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> numero <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> numero <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>numero<span class="sc">}</span><span class="ss"> es positivo y par."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La elección entre anidamiento y condición compuesta depende de qué forma comunica mejor la intención. Si las dos condiciones son conceptualmente paralelas, <code>and</code> suele ser más claro. Si la segunda condición es un refinamiento que solo tiene sentido dentro del contexto de la primera, el anidamiento puede expresar esa dependencia con mayor fidelidad.</p>
+</section>
+<section id="if-dentro-de-funciones-y-el-return-anticipado" class="level2">
+<h2 class="anchored" data-anchor-id="if-dentro-de-funciones-y-el-return-anticipado"><code>if</code> dentro de funciones y el <code>return</code> anticipado</h2>
+<p>En la lección sobre funciones vimos que <code>return</code> entrega el resultado de una función al código que la llamó, y que es el único valor que cruza la frontera entre el interior (el cuerpo) y el exterior de la función. Lo que no mencionamos entonces es que una función puede tener más de un <code>return</code>. En cuanto Python ejecuta cualquiera de ellos, la función termina de inmediato, las líneas que siguen simplemente no se ejecutan.</p>
+<p>Esto se vuelve natural al combinar funciones con estructuras <code>if</code>. Una función que clasifica una calificación puede devolver su resultado directamente desde cada rama:</p>
+<div id="63901082" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clasificar(calificacion):</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> calificacion <span class="op">&gt;=</span> <span class="fl">9.0</span>:</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Sobresaliente"</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> calificacion <span class="op">&gt;=</span> <span class="fl">7.0</span>:</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Bien"</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> calificacion <span class="op">&gt;=</span> <span class="fl">6.0</span>:</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Suficiente"</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Reprobado"</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(clasificar(<span class="fl">8.2</span>))</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(clasificar(<span class="fl">5.9</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Bien
+Reprobado</code></pre>
+</div>
+</div>
+<p>Cada rama tiene su propio <code>return</code>. En cuanto Python encuentra el primero que aplica, entrega ese valor y la función concluye. El resultado es el mismo que con una variable intermedia, pero el código es más directo: no hay que leer hasta el final para saber qué devuelve cada caso.</p>
+<p>Una pregunta razonable al ver esto es si tener múltiples <code>return</code> contradice la idea matemática de que una función tiene una sola salida. En programación no hay contradicción: la función sigue produciendo exactamente un resultado por cada llamada. Lo que cambia es cuál de los posibles resultados se entrega, dependiendo de los datos que recibe. Desde fuera, el comportamiento es idéntico al de una función con un único <code>return</code>.</p>
+<section id="detener-la-ejecución-cuando-los-datos-no-son-válidos" class="level3">
+<h3 class="anchored" data-anchor-id="detener-la-ejecución-cuando-los-datos-no-son-válidos">Detener la ejecución cuando los datos no son válidos</h3>
+<p>Hasta ahora hemos visto <code>return</code> como la instrucción que entrega el resultado de una función. Pero una función solo puede hacer su trabajo si los argumentos que recibe son válidos. Cuando no lo son (porque un valor carece de sentido, o porque el cálculo produciría un error como una división entre cero) la función debería detenerse antes de intentar nada. La forma de lograrlo es colocar al principio un <code>if</code> que verifique el problema y ejecute un <code>return</code> de “emergencia” si lo encuentra. Este patrón se llama <em>retorno temprano</em> o <em>cláusula de guarda</em>. En estos casos, hay que decidir qué devuelve ese <code>return</code> de emergencia. En Python existe una convención para estos casos: devolver <code>None</code>, un valor especial que representa la ausencia de resultado. No es cero, no es una cadena vacía, es simplemente nada, y es precisamente lo que se usa cuando una función no puede producir un valor significativo.</p>
+<p>Antes de ver un ejemplo, hay una regla de Python que conviene conocer: resulta que en Python los números <code>0</code> y <code>0.0</code> se evalúan como <code>False</code> en un contexto booleano, y las colecciones vacías hacen lo mismo. Una lista vacía <code>[]</code>, una tupla vacía <code>()</code>, una cadena vacía <code>""</code>, un conjunto vacío <code>set()</code> y un diccionario vacío <code>{}</code> son todos <code>False</code>. Cualquier colección con al menos un elemento es <code>True</code>. Esta regla hace que <code>not valores</code> sea una forma concisa de preguntar “¿la lista está vacía?”.</p>
+<p>Consideremos una función que calcula el promedio de una lista de números. El promedio requiere dividir entre la cantidad de elementos, operación que no tiene sentido si la lista está vacía:</p>
+<div id="7c59d26f" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> promedio(valores):</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> valores:       <span class="co"># True cuando la lista está vacía</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span>       <span class="co"># No hay resultado posible</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span>(valores) <span class="op">/</span> <span class="bu">len</span>(valores)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(promedio([<span class="fl">7.5</span>, <span class="fl">9.0</span>, <span class="fl">8.5</span>]))</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(promedio([]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>8.333333333333334
+None</code></pre>
+</div>
+</div>
+<p>El patrón escala naturalmente cuando hay varias condiciones que verificar. Cada cláusula de guarda ocupa su propia línea al principio de la función, y el cuerpo principal permanece al primer nivel de indentación:</p>
+<div id="42178ead" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> velocidad(distancia, tiempo):</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> distancia <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span>   <span class="co"># La distancia no puede ser negativa</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> tiempo <span class="op">&lt;=</span> <span class="dv">0</span>:</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span>   <span class="co"># El tiempo debe ser estrictamente positivo</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> distancia <span class="op">/</span> tiempo</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(velocidad(<span class="dv">100</span>, <span class="dv">2</span>))    <span class="co"># Caso válido</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(velocidad(<span class="dv">100</span>, <span class="dv">0</span>))    <span class="co"># Tiempo cero: devuelve None</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(velocidad(<span class="op">-</span><span class="dv">10</span>, <span class="dv">2</span>))    <span class="co"># Distancia negativa: devuelve None</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>50.0
+None
+None</code></pre>
+</div>
+</div>
+<p>Aquí aparecen dos <code>if</code> separados en lugar de un <code>elif</code>. Esto es intencional: cada cláusula de guarda verifica un problema distinto e independiente. Usar <code>elif</code> también funcionaría en este caso concreto, pero dos <code>if</code> independientes comunican con más claridad que se trata de dos validaciones distintas y no de ramas alternativas de una misma decisión.</p>
+<p>Como las funciones <code>promedio</code> y <code>velocidad</code> anteriores pueden devolver un número o <code>None</code>, si pretendemos usar sus valores es fundamental verificar qué <code>return</code> se recibió antes de operar sobre él. Si el código que las llama no hace esa verificación, intentará operar sobre <code>None</code> y Python lanzará un error. La forma correcta de verificar si una función devolvió <code>None</code> o un valor válido es con el operador <code>is</code>, que pregunta si dos nombres apuntan exactamente al mismo objeto en memoria. <code>None</code> es un objeto único en Python, por lo que <code>is None</code> e <code>is not None</code> son las formas convencionales y precisas de verificarlo.</p>
+<div id="00c81df7" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> velocidad(<span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> resultado <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>: <span class="co"># prueba que el resultado no es None antes de usarlo</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Velocidad: </span><span class="sc">{</span>resultado<span class="sc">}</span><span class="ss"> m/s"</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"No se pudo calcular la velocidad."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Velocidad: 50.0 m/s</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="ejemplo-integrador" class="level2">
+<h2 class="anchored" data-anchor-id="ejemplo-integrador">Ejemplo integrador</h2>
+<p>Para ver cómo encajan los conceptos de esta lección, vamos a construir una función que calcula el precio final de un producto en una tienda. Los datos del producto llegan como un diccionario con claves como <code>"precio"</code>, <code>"categoria"</code> y <code>"en_oferta"</code>. La función debe rechazar datos incoherentes (un diccionario sin precio, o un precio negativo) y, si los datos son válidos, aplicar un descuento que depende de la categoría del artículo y de si está en oferta.</p>
+<p>Este problema combina tres cosas que ya conocemos: cláusulas de guarda para validar la entrada, <code>if</code> / <code>elif</code> / <code>else</code> para decidir qué descuento corresponde, y acceso a un diccionario para leer los datos.</p>
+<div id="f258db99" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calcular_precio_final(producto):</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"precio"</span> <span class="kw">not</span> <span class="kw">in</span> producto:</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span>   <span class="co"># Sin precio base no hay cálculo posible</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> producto[<span class="st">"precio"</span>] <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span>   <span class="co"># Un precio negativo no tiene sentido</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    precio <span class="op">=</span> producto[<span class="st">"precio"</span>]</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> producto[<span class="st">"en_oferta"</span>]:</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> producto[<span class="st">"categoria"</span>] <span class="op">==</span> <span class="st">"electrónica"</span>:</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>            descuento <span class="op">=</span> <span class="fl">0.12</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> producto[<span class="st">"categoria"</span>] <span class="op">==</span> <span class="st">"ropa"</span>:</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>            descuento <span class="op">=</span> <span class="fl">0.20</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>            descuento <span class="op">=</span> <span class="fl">0.08</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>        descuento <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> precio <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> descuento)</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>laptop <span class="op">=</span> {</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nombre"</span>:    <span class="st">"Laptop"</span>,</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"precio"</span>:    <span class="fl">18500.0</span>,</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"categoria"</span>: <span class="st">"electrónica"</span>,</span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"en_oferta"</span>: <span class="va">True</span></span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>precio_final <span class="op">=</span> calcular_precio_final(laptop)</span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> precio_final <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Producto:     </span><span class="sc">{</span>laptop[<span class="st">'nombre'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Precio base:  $</span><span class="sc">{</span>laptop[<span class="st">'precio'</span>]<span class="sc">:,.2f}</span><span class="ss">"</span>)</span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Precio final: $</span><span class="sc">{</span>precio_final<span class="sc">:,.2f}</span><span class="ss">"</span>)</span>
+<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Error: datos del producto incompletos o inválidos."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Producto:     Laptop
+Precio base:  $18,500.00
+Precio final: $16,280.00</code></pre>
+</div>
+</div>
+<p>Las dos primeras instrucciones de la función son cláusulas de guarda que verifican que los datos del diccionario sean coherentes antes de continuar. La lógica de descuento solo se ejecuta si esas guardas pasan. El acceso a las claves del diccionario se hace con la notación de corchetes que ya conocemos: <code>producto["en_oferta"]</code>, <code>producto["categoria"]</code>. No hay nada nuevo en los mecanismos: lo que es nuevo es la forma en que se organizan.</p>
+</section>
+<section id="lo-que-sigue" class="level2">
+<h2 class="anchored" data-anchor-id="lo-que-sigue">Lo que sigue</h2>
+<p>Con las estructuras de control de esta lección, el código puede tomar decisiones: ejecutar un camino u otro según los datos que recibe. Pero todavía no puede repetir. Si quisiéramos clasificar a cada uno de los treinta alumnos de un grupo usando la función <code>clasificar</code> que escribimos antes, la única forma disponible sería llamarla treinta veces, una línea por alumno. Eso es inmanejable cuando el grupo tiene treinta personas, e imposible cuando el tamaño de la colección no se conoce de antemano.</p>
+<p>Lo que necesitamos es una forma de decirle a Python que repita un conjunto de instrucciones para cada elemento de una colección. Esa capacidad es la que introduce la siguiente lección, y es uno de los mecanismos más poderosos del lenguaje.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

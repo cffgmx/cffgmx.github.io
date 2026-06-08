@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Carlos Flores">
+
+<title>Bucles: for y while – Python</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-8b348f4b4b74a528bf910da1e8c5139e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Python</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">Acerca de</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#el-bucle-for" id="toc-el-bucle-for" class="nav-link active" data-scroll-target="#el-bucle-for">El bucle <code>for</code></a>
+  <ul class="collapse">
+  <li><a href="#for-sobre-distintas-colecciones" id="toc-for-sobre-distintas-colecciones" class="nav-link" data-scroll-target="#for-sobre-distintas-colecciones"><code>for</code> sobre distintas colecciones</a></li>
+  <li><a href="#combinando-for-con-if" id="toc-combinando-for-con-if" class="nav-link" data-scroll-target="#combinando-for-con-if">Combinando <code>for</code> con <code>if</code></a></li>
+  <li><a href="#acumulación-dentro-de-un-for" id="toc-acumulación-dentro-de-un-for" class="nav-link" data-scroll-target="#acumulación-dentro-de-un-for">Acumulación dentro de un <code>for</code></a></li>
+  <li><a href="#la-función-range" id="toc-la-función-range" class="nav-link" data-scroll-target="#la-función-range">La función <code>range()</code></a></li>
+  <li><a href="#la-función-enumerate" id="toc-la-función-enumerate" class="nav-link" data-scroll-target="#la-función-enumerate">La función <code>enumerate()</code></a></li>
+  <li><a href="#la-función-zip" id="toc-la-función-zip" class="nav-link" data-scroll-target="#la-función-zip">La función <code>zip()</code></a></li>
+  <li><a href="#construir-una-lista-nueva-con-for" id="toc-construir-una-lista-nueva-con-for" class="nav-link" data-scroll-target="#construir-una-lista-nueva-con-for">Construir una lista nueva con <code>for</code></a></li>
+  <li><a href="#break-y-continue" id="toc-break-y-continue" class="nav-link" data-scroll-target="#break-y-continue"><code>break</code> y <code>continue</code></a></li>
+  </ul></li>
+  <li><a href="#el-bucle-while" id="toc-el-bucle-while" class="nav-link" data-scroll-target="#el-bucle-while">El bucle <code>while</code></a>
+  <ul class="collapse">
+  <li><a href="#la-condición-debe-volverse-false-en-algún-momento" id="toc-la-condición-debe-volverse-false-en-algún-momento" class="nav-link" data-scroll-target="#la-condición-debe-volverse-false-en-algún-momento">La condición debe volverse <code>False</code> en algún momento</a></li>
+  <li><a href="#while-con-condiciones-compuestas" id="toc-while-con-condiciones-compuestas" class="nav-link" data-scroll-target="#while-con-condiciones-compuestas"><code>while</code> con condiciones compuestas</a></li>
+  <li><a href="#cuándo-usar-for-y-cuándo-usar-while" id="toc-cuándo-usar-for-y-cuándo-usar-while" class="nav-link" data-scroll-target="#cuándo-usar-for-y-cuándo-usar-while">Cuándo usar <code>for</code> y cuándo usar <code>while</code></a></li>
+  </ul></li>
+  <li><a href="#ejemplo-integrador" id="toc-ejemplo-integrador" class="nav-link" data-scroll-target="#ejemplo-integrador">Ejemplo integrador</a></li>
+  <li><a href="#lo-que-sigue" id="toc-lo-que-sigue" class="nav-link" data-scroll-target="#lo-que-sigue">Lo que sigue</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Bucles: for y while</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Carlos Flores </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>La lección anterior introdujo una capacidad nueva: que el código tome decisiones. Pero al final quedó planteada una limitación. Si quisiéramos clasificar a cada alumno de un grupo usando la función <code>clasificar</code> que escribimos, la única forma disponible sería llamarla una vez por alumno, escribiendo una línea distinta para cada uno. Eso es inmanejable cuando el grupo tiene treinta personas, e imposible cuando el tamaño de la colección no se conoce de antemano.</p>
+<p>Lo que falta es la capacidad de <em>repetir</em>: decirle a Python que ejecute el mismo conjunto de instrucciones varias veces, ya sea una vez por cada elemento de una colección, o bien mientras se cumpla cierta condición. A esa capacidad se le llama <em>bucle</em>, y Python ofrece dos formas de expresarla: el bucle <code>for</code> y el bucle <code>while</code>.</p>
+<section id="el-bucle-for" class="level2">
+<h2 class="anchored" data-anchor-id="el-bucle-for">El bucle <code>for</code></h2>
+<p>La forma más común de repetición en programación consiste en recorrer una colección y hacer algo con cada uno de sus elementos. La estructura <code>for</code> expresa exactamente eso: para cada elemento de esta colección, ejecuta este bloque de instrucciones.</p>
+<p>La sintaxis es la siguiente:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> variable <span class="kw">in</span> colección:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># instrucciones que se ejecutan una vez por cada elemento</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>variable</code> es un nombre que en cada iteración toma el valor del elemento actual de la colección. <code>colección</code> puede ser cualquier secuencia o estructura de datos: una lista, una tupla, una cadena, un conjunto, un diccionario. El bloque indentado se ejecuta tantas veces como elementos tenga la colección.</p>
+<p>El ejemplo más directo es recorrer una lista e imprimir cada valor:</p>
+<div id="af31a4e4" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>temperaturas <span class="op">=</span> [<span class="fl">23.5</span>, <span class="fl">24.0</span>, <span class="fl">22.8</span>, <span class="fl">19.0</span>, <span class="fl">21.3</span>]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> temperaturas:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(t)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>23.5
+24.0
+22.8
+19.0
+21.3</code></pre>
+</div>
+</div>
+<p>En cada vuelta del bucle, la variable <code>t</code> toma el valor del siguiente elemento de la lista: primero <code>23.5</code>, luego <code>24.0</code>, y así hasta el último. Cuando se agotan los elementos, el bucle termina y Python continúa con lo que venga después.</p>
+<p>El nombre <code>t</code> es arbitrario; podría llamarse <code>temperatura</code>, <code>valor</code> o <code>x</code>. La convención es usar un nombre que describa lo que representa cada elemento dentro del bloque. Ese nombre solo existe dentro del bucle —aunque en Python, a diferencia de lo que ocurre con las funciones, la variable sigue siendo accesible después de que el bucle termina, con el valor que tenía en la última iteración.</p>
+<section id="for-sobre-distintas-colecciones" class="level3">
+<h3 class="anchored" data-anchor-id="for-sobre-distintas-colecciones"><code>for</code> sobre distintas colecciones</h3>
+<p>El bucle <code>for</code> funciona sobre cualquier colección que ya conocemos. Recorrer una tupla es idéntico a recorrer una lista:</p>
+<div id="b4b7af98" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>coordenadas <span class="op">=</span> (<span class="fl">19.4326</span>, <span class="op">-</span><span class="fl">99.1332</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> valor <span class="kw">in</span> coordenadas:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(valor)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>19.4326
+-99.1332</code></pre>
+</div>
+</div>
+<p>Aplicado a una cadena, el bucle recorre sus caracteres uno a uno, lo que tiene sentido porque una cadena es, en el fondo, una secuencia de caracteres:</p>
+<div id="99e2934a" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> caracter <span class="kw">in</span> <span class="st">"Python"</span>:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(caracter)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>P
+y
+t
+h
+o
+n</code></pre>
+</div>
+</div>
+<p>Sobre un conjunto, el bucle recorre sus elementos en un orden no garantizado, consistente con lo que ya sabemos sobre los conjuntos:</p>
+<div id="1578a706" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>materias <span class="op">=</span> {<span class="st">"Cálculo"</span>, <span class="st">"Estadística"</span>, <span class="st">"Álgebra"</span>, <span class="st">"Física"</span>}</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> materia <span class="kw">in</span> materias:</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(materia)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cálculo
+Álgebra
+Física
+Estadística</code></pre>
+</div>
+</div>
+<p>Sobre un diccionario, el comportamiento merece atención: por defecto, el bucle <code>for</code> recorre las <em>claves</em>, no los valores. Para acceder al valor correspondiente a cada clave, basta con usar la notación de corchetes que ya conocemos:</p>
+<div id="03f28a9f" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>estudiante <span class="op">=</span> {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nombre"</span>:   <span class="st">"Ana"</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"edad"</span>:     <span class="dv">20</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"promedio"</span>: <span class="fl">9.2</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> clave <span class="kw">in</span> estudiante:</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>clave<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>estudiante[clave]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>nombre: Ana
+edad: 20
+promedio: 9.2</code></pre>
+</div>
+</div>
+</section>
+<section id="combinando-for-con-if" class="level3">
+<h3 class="anchored" data-anchor-id="combinando-for-con-if">Combinando <code>for</code> con <code>if</code></h3>
+<p>El bloque de un <code>for</code> puede contener cualquier instrucción válida, incluyendo las estructuras de control de la lección anterior. Esto es donde el bucle empieza a mostrar su verdadero alcance: recorrer una colección y tomar decisiones sobre cada elemento.</p>
+<p>Retomando el ejemplo que quedó pendiente al cierre de la lección anterior, podemos ahora clasificar a todos los alumnos de un grupo de una sola vez:</p>
+<div id="55862675" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clasificar(calificacion):</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> calificacion <span class="op">&gt;=</span> <span class="fl">9.0</span>:</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Sobresaliente"</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> calificacion <span class="op">&gt;=</span> <span class="fl">7.0</span>:</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Bien"</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> calificacion <span class="op">&gt;=</span> <span class="fl">6.0</span>:</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Suficiente"</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Reprobado"</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">8.2</span>, <span class="fl">5.9</span>, <span class="fl">9.5</span>, <span class="fl">7.1</span>, <span class="fl">6.0</span>, <span class="fl">4.3</span>, <span class="fl">9.8</span>]</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cal <span class="kw">in</span> calificaciones:</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    nivel <span class="op">=</span> clasificar(cal)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>cal<span class="sc">}</span><span class="ss"> → </span><span class="sc">{</span>nivel<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>8.2 → Bien
+5.9 → Reprobado
+9.5 → Sobresaliente
+7.1 → Bien
+6.0 → Suficiente
+4.3 → Reprobado
+9.8 → Sobresaliente</code></pre>
+</div>
+</div>
+<p>Siete calificaciones, siete líneas de resultado, una sola llamada a <code>clasificar</code> por cada una, sin repetir código. Si el grupo tuviera trescientos alumnos, el bucle seguiría siendo exactamente el mismo.</p>
+<p>Otro patrón muy frecuente es filtrar: recorrer una colección y procesar solo los elementos que cumplen cierta condición.</p>
+<div id="552aa40e" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">8.2</span>, <span class="fl">5.9</span>, <span class="fl">9.5</span>, <span class="fl">7.1</span>, <span class="fl">6.0</span>, <span class="fl">4.3</span>, <span class="fl">9.8</span>]</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Alumnos reprobados:"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cal <span class="kw">in</span> calificaciones:</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> cal <span class="op">&lt;</span> <span class="fl">6.0</span>:</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>cal<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Alumnos reprobados:
+  5.9
+  4.3</code></pre>
+</div>
+</div>
+</section>
+<section id="acumulación-dentro-de-un-for" class="level3">
+<h3 class="anchored" data-anchor-id="acumulación-dentro-de-un-for">Acumulación dentro de un <code>for</code></h3>
+<p>Un patrón especialmente útil es la <em>acumulación</em>: inicializar una variable antes del bucle y actualizarla en cada iteración. El resultado al terminar el bucle es el valor acumulado a lo largo de toda la colección.</p>
+<p>Por ejemplo, para contar cuántas calificaciones aprobatorias hay en una lista:</p>
+<div id="e494834f" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">8.2</span>, <span class="fl">5.9</span>, <span class="fl">9.5</span>, <span class="fl">7.1</span>, <span class="fl">6.0</span>, <span class="fl">4.3</span>, <span class="fl">9.8</span>]</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>aprobados <span class="op">=</span> <span class="dv">0</span>   <span class="co"># contador inicial</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cal <span class="kw">in</span> calificaciones:</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> cal <span class="op">&gt;=</span> <span class="fl">6.0</span>:</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        aprobados <span class="op">=</span> aprobados <span class="op">+</span> <span class="dv">1</span>   <span class="co"># incrementamos el contador</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Alumnos aprobados: </span><span class="sc">{</span>aprobados<span class="sc">}</span><span class="ss"> de </span><span class="sc">{</span><span class="bu">len</span>(calificaciones)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Alumnos aprobados: 5 de 7</code></pre>
+</div>
+</div>
+<p>El mismo patrón sirve para construir colecciones nuevas a partir de una existente. Aquí construimos un diccionario de frecuencias: cuántas veces aparece cada nivel de clasificación en la lista de calificaciones.</p>
+<div id="2bc06cef" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">8.2</span>, <span class="fl">5.9</span>, <span class="fl">9.5</span>, <span class="fl">7.1</span>, <span class="fl">6.0</span>, <span class="fl">4.3</span>, <span class="fl">9.8</span>, <span class="fl">9.1</span>, <span class="fl">7.8</span>, <span class="fl">5.0</span>]</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>frecuencias <span class="op">=</span> {</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Sobresaliente"</span>: <span class="dv">0</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Bien"</span>:          <span class="dv">0</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Suficiente"</span>:    <span class="dv">0</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Reprobado"</span>:     <span class="dv">0</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cal <span class="kw">in</span> calificaciones:</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    nivel <span class="op">=</span> clasificar(cal)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    frecuencias[nivel] <span class="op">=</span> frecuencias[nivel] <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> nivel <span class="kw">in</span> frecuencias:</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>nivel<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>frecuencias[nivel]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Sobresaliente: 3
+Bien: 3
+Suficiente: 1
+Reprobado: 3</code></pre>
+</div>
+</div>
+<p>El primer <code>for</code> recorre la lista de calificaciones y acumula en el diccionario. El segundo recorre el diccionario para mostrar el resultado. Dos bucles, dos propósitos distintos, usando las estructuras de datos que ya conocemos.</p>
+</section>
+<section id="la-función-range" class="level3">
+<h3 class="anchored" data-anchor-id="la-función-range">La función <code>range()</code></h3>
+<p>Hasta ahora todos los bucles <code>for</code> han recorrido colecciones que ya existían: listas de calificaciones, diccionarios de estudiantes, conjuntos de materias. Pero a veces se necesita repetir algo un número fijo de veces, o generar una secuencia de números enteros para trabajar con ella.</p>
+<p>Para eso existe la función <code>range()</code>. Genera una secuencia de enteros que el <code>for</code> puede recorrer. La forma más simple es <code>range(n)</code>, que produce los enteros desde <code>0</code> hasta <code>n - 1</code>, sin incluir <code>n</code>:</p>
+<div id="47f9a4dd" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0
+1
+2
+3
+4</code></pre>
+</div>
+</div>
+<p>Al igual que el slicing que ya conocemos, el extremo superior de <code>range</code> no se incluye. <code>range(5)</code> produce <code>0, 1, 2, 3, 4</code>, cinco valores en total.</p>
+<p><code>range()</code> también acepta un punto de inicio y un paso, con la misma lógica que el slicing: <code>range(inicio, fin)</code> genera desde <code>inicio</code> hasta <code>fin - 1</code>, y <code>range(inicio, fin, paso)</code> avanza de <code>paso</code> en <code>paso</code>:</p>
+<div id="bdd98f19" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">6</span>):      <span class="co"># del 1 al 5</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1
+2
+3
+4
+5</code></pre>
+</div>
+</div>
+<div id="2542371d" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">11</span>, <span class="dv">2</span>):  <span class="co"># pares del 0 al 10</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0
+2
+4
+6
+8
+10</code></pre>
+</div>
+</div>
+<p><code>range()</code> también puede contar hacia atrás usando un paso negativo:</p>
+<div id="97be9301" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>):  <span class="co"># del 5 al 1, descendiendo</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>5
+4
+3
+2
+1</code></pre>
+</div>
+</div>
+<p>Un uso natural de <code>range()</code> es recorrer los índices de una lista cuando se necesita tanto el índice como el valor. Recordemos que los índices van de <code>0</code> a <code>len(lista) - 1</code>, exactamente el rango que produce <code>range(len(lista))</code>:</p>
+<div id="ef8cf90a" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>temperaturas <span class="op">=</span> [<span class="fl">23.5</span>, <span class="fl">24.0</span>, <span class="fl">22.8</span>, <span class="fl">19.0</span>, <span class="fl">21.3</span>]</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(temperaturas)):</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Hora </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>temperaturas[i]<span class="sc">}</span><span class="ss"> °C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hora 0: 23.5 °C
+Hora 1: 24.0 °C
+Hora 2: 22.8 °C
+Hora 3: 19.0 °C
+Hora 4: 21.3 °C</code></pre>
+</div>
+</div>
+</section>
+<section id="la-función-enumerate" class="level3">
+<h3 class="anchored" data-anchor-id="la-función-enumerate">La función <code>enumerate()</code></h3>
+<p>Recorrer una lista con <code>range(len(...))</code> para obtener el índice y el valor al mismo tiempo funciona, pero resulta algo indirecto. Python ofrece <code>enumerate()</code> para hacer exactamente eso de forma más directa: produce pares <code>(índice, valor)</code> que se pueden desempaquetar en dos variables, usando el desempaquetado de tuplas que ya conocemos de la lección de estructuras de datos.</p>
+<div id="bb394805" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>temperaturas <span class="op">=</span> [<span class="fl">23.5</span>, <span class="fl">24.0</span>, <span class="fl">22.8</span>, <span class="fl">19.0</span>, <span class="fl">21.3</span>]</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, t <span class="kw">in</span> <span class="bu">enumerate</span>(temperaturas):</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Hora </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>t<span class="sc">}</span><span class="ss"> °C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hora 0: 23.5 °C
+Hora 1: 24.0 °C
+Hora 2: 22.8 °C
+Hora 3: 19.0 °C
+Hora 4: 21.3 °C</code></pre>
+</div>
+</div>
+<p>El resultado es idéntico al ejemplo anterior, pero el código expresa la intención con más claridad: queremos recorrer <code>temperaturas</code> obteniendo en cada paso tanto el índice como el valor. <code>enumerate()</code> acepta un segundo argumento opcional para especificar desde qué número empieza a contar:</p>
+<div id="b3443c7f" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, t <span class="kw">in</span> <span class="bu">enumerate</span>(temperaturas, start<span class="op">=</span><span class="dv">1</span>):   <span class="co"># empieza a contar desde 1</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Hora </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>t<span class="sc">}</span><span class="ss"> °C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hora 1: 23.5 °C
+Hora 2: 24.0 °C
+Hora 3: 22.8 °C
+Hora 4: 19.0 °C
+Hora 5: 21.3 °C</code></pre>
+</div>
+</div>
+</section>
+<section id="la-función-zip" class="level3">
+<h3 class="anchored" data-anchor-id="la-función-zip">La función <code>zip()</code></h3>
+<p>A veces se tienen dos listas relacionadas elemento a elemento y se quiere recorrerlas en paralelo. <code>zip()</code> combina dos o más secuencias en pares, produciendo en cada iteración una tupla con un elemento de cada una:</p>
+<div id="fe2f766e" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>ciudades      <span class="op">=</span> [<span class="st">"CDMX"</span>, <span class="st">"Guadalajara"</span>, <span class="st">"Monterrey"</span>]</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>temperaturas  <span class="op">=</span> [<span class="fl">22.5</span>,   <span class="fl">18.3</span>,          <span class="fl">28.1</span>]</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ciudad, temp <span class="kw">in</span> <span class="bu">zip</span>(ciudades, temperaturas):</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>ciudad<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>temp<span class="sc">}</span><span class="ss"> °C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>CDMX: 22.5 °C
+Guadalajara: 18.3 °C
+Monterrey: 28.1 °C</code></pre>
+</div>
+</div>
+<p>El desempaquetado de la tupla en <code>ciudad, temp</code> es exactamente el mismo mecanismo que ya vimos con las tuplas en la lección de estructuras de datos. <code>zip()</code> se detiene cuando la secuencia más corta se agota, lo que evita errores si las listas tienen longitudes distintas.</p>
+</section>
+<section id="construir-una-lista-nueva-con-for" class="level3">
+<h3 class="anchored" data-anchor-id="construir-una-lista-nueva-con-for">Construir una lista nueva con <code>for</code></h3>
+<p>Uno de los patrones de acumulación más frecuentes no produce un número ni un diccionario, sino una lista nueva. La idea es simple: se inicializa una lista vacía antes del bucle y, dentro de él, se va extendiendo con nuevos elementos. Añadir un elemento al final de una lista es una operación que normalmente requeriría un método, mecanismo que todavía no hemos introducido. Sin embargo, hay una forma de construirlas sin necesidad de ningún método: la concatenación con <code>+</code>, que ya conocemos de las secuencias.</p>
+<p>Dentro de un bucle, <code>lista = lista + [elemento]</code> extiende la lista en cada iteración asignándole una nueva lista que incluye el elemento adicional:</p>
+<div id="66421757" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">8.2</span>, <span class="fl">5.9</span>, <span class="fl">9.5</span>, <span class="fl">7.1</span>, <span class="fl">6.0</span>, <span class="fl">4.3</span>, <span class="fl">9.8</span>]</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>aprobados <span class="op">=</span> []   <span class="co"># lista vacía</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cal <span class="kw">in</span> calificaciones:</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> cal <span class="op">&gt;=</span> <span class="fl">6.0</span>:</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>        aprobados <span class="op">=</span> aprobados <span class="op">+</span> [cal]   <span class="co"># concatenamos una lista de un solo elemento</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(aprobados)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[8.2, 9.5, 7.1, 6.0, 9.8]</code></pre>
+</div>
+</div>
+<p>El patrón tiene tres partes invariables: una lista vacía antes del bucle, una condición que decide qué incluir, y la concatenación que extiende la lista. Es un esquema que aparece tan seguido que Python desarrolló una sintaxis especial para expresarlo en una sola línea, que es exactamente lo que introduce la siguiente lección.</p>
+</section>
+<section id="break-y-continue" class="level3">
+<h3 class="anchored" data-anchor-id="break-y-continue"><code>break</code> y <code>continue</code></h3>
+<p>Dentro de un bucle <code>for</code> o <code>while</code> es posible alterar el flujo normal de la iteración con dos instrucciones: <code>break</code> y <code>continue</code>.</p>
+<p><code>break</code> interrumpe el bucle de inmediato, sin esperar a que se agoten los elementos ni a que la condición cambie. Es útil cuando se busca algo dentro de una colección y no tiene sentido seguir recorriendo el resto una vez encontrado:</p>
+<div id="70e637f3" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">8.2</span>, <span class="fl">5.9</span>, <span class="fl">9.5</span>, <span class="fl">7.1</span>, <span class="fl">6.0</span>, <span class="fl">4.3</span>, <span class="fl">9.8</span>]</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>primera_reprobada <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cal <span class="kw">in</span> calificaciones:</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> cal <span class="op">&lt;</span> <span class="fl">6.0</span>:</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>        primera_reprobada <span class="op">=</span> cal</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span>   <span class="co"># encontramos lo que buscábamos; no hace falta seguir</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> primera_reprobada <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Primera calificación reprobatoria: </span><span class="sc">{</span>primera_reprobada<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"No hay calificaciones reprobatorias."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Primera calificación reprobatoria: 5.9</code></pre>
+</div>
+</div>
+<p>Sin <code>break</code>, el bucle seguiría recorriendo toda la lista aunque ya hubiera encontrado lo que buscaba. Con <code>break</code>, se detiene exactamente en ese punto.</p>
+<p><code>continue</code> no termina el bucle, sino solo la iteración actual: descarta el resto del bloque y pasa directamente al siguiente elemento. Es útil cuando ciertos elementos deben ignorarse sin necesidad de anidar todo el código dentro de un <code>if</code>:</p>
+<div id="f8f691b6" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">8.2</span>, <span class="fl">5.9</span>, <span class="fl">9.5</span>, <span class="fl">7.1</span>, <span class="fl">6.0</span>, <span class="fl">4.3</span>, <span class="fl">9.8</span>]</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Calificaciones aprobatorias:"</span>)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cal <span class="kw">in</span> calificaciones:</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> cal <span class="op">&lt;</span> <span class="fl">6.0</span>:</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span>   <span class="co"># ignoramos las reprobadas y pasamos a la siguiente</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>cal<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Calificaciones aprobatorias:
+  8.2
+  9.5
+  7.1
+  6.0
+  9.8</code></pre>
+</div>
+</div>
+<p>La diferencia entre usar <code>continue</code> y envolver el <code>print</code> dentro de un <code>if cal &gt;= 6.0</code> es de organización: con <code>continue</code> se expresa primero la condición de exclusión y después el código que aplica a los elementos que pasan el filtro, sin añadir un nivel extra de indentación. En bucles con varias condiciones de exclusión, esto puede hacer el código considerablemente más plano y legible.</p>
+</section>
+</section>
+<section id="el-bucle-while" class="level2">
+<h2 class="anchored" data-anchor-id="el-bucle-while">El bucle <code>while</code></h2>
+<p>El bucle <code>for</code> es la elección natural cuando se conoce de antemano la colección o el número de repeticiones. Pero hay situaciones donde no se sabe cuántas veces hay que repetir: el bucle debe continuar mientras se cumpla una condición, y detenerse en cuanto esa condición deje de ser verdadera. Para eso existe el bucle <code>while</code>.</p>
+<p>La sintaxis es directa: la condición se evalúa antes de cada iteración, y el bloque se ejecuta mientras sea <code>True</code>. En cuanto la condición resulta <code>False</code>, el bucle termina.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> condición:</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># instrucciones que se repiten mientras condición sea True</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Un ejemplo elemental: calcular cuántas veces hay que doblar una hoja de papel para que su grosor supere un metro. El grosor inicial es de 0.1 mm y se duplica en cada doblez.</p>
+<div id="0517d9c2" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>grosor    <span class="op">=</span> <span class="fl">0.1</span>   <span class="co"># milímetros</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>dobleces  <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> grosor <span class="op">&lt;</span> <span class="dv">1000</span>:          <span class="co"># 1000 mm = 1 metro</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    grosor   <span class="op">=</span> grosor <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>    dobleces <span class="op">=</span> dobleces <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Dobleces necesarios: </span><span class="sc">{</span>dobleces<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Grosor final: </span><span class="sc">{</span>grosor<span class="sc">:.2f}</span><span class="ss"> mm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Dobleces necesarios: 14
+Grosor final: 1638.40 mm</code></pre>
+</div>
+</div>
+<p>No había forma de saber de antemano cuántos dobleces serían necesarios: el número de repeticiones dependía del resultado de las operaciones dentro del bucle. El <code>while</code> maneja exactamente esa situación.</p>
+<section id="la-condición-debe-volverse-false-en-algún-momento" class="level3">
+<h3 class="anchored" data-anchor-id="la-condición-debe-volverse-false-en-algún-momento">La condición debe volverse <code>False</code> en algún momento</h3>
+<p>El riesgo del <code>while</code> es escribir una condición que nunca deje de ser verdadera, produciendo un <em>bucle infinito</em> que el programa nunca abandona. En Google Colab, un bucle infinito se interrumpe manualmente con el botón de detener ejecución, o con <code>Ctrl + C</code>. El ejemplo siguiente ilustra la forma correcta: la variable que controla la condición se actualiza dentro del bucle, garantizando que en algún momento la condición resulte <code>False</code>.</p>
+<div id="5ae5603b" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>contador <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> contador <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(contador)</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>    contador <span class="op">=</span> contador <span class="op">-</span> <span class="dv">1</span>   <span class="co"># sin esta línea, el bucle nunca terminaría</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Fin."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+Fin.</code></pre>
+</div>
+</div>
+<p>La regla práctica es que siempre debe haber dentro del bloque del <code>while</code> alguna instrucción que acerque el estado del programa hacia el momento en que la condición deje de cumplirse.</p>
+</section>
+<section id="while-con-condiciones-compuestas" class="level3">
+<h3 class="anchored" data-anchor-id="while-con-condiciones-compuestas"><code>while</code> con condiciones compuestas</h3>
+<p>La condición del <code>while</code> puede ser tan compleja como se necesite, usando los mismos operadores lógicos que ya conocemos. Un uso frecuente es mantener un proceso hasta que se cumplan varias condiciones simultáneamente, o hasta que alguna de varias condiciones deje de cumplirse.</p>
+<p>Por ejemplo, simular la búsqueda del primer elemento de una lista que supere un umbral, avanzando posición por posición:</p>
+<div id="8c986f2a" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>temperaturas <span class="op">=</span> [<span class="fl">21.3</span>, <span class="fl">22.1</span>, <span class="fl">23.5</span>, <span class="fl">26.8</span>, <span class="fl">25.0</span>, <span class="fl">24.4</span>]</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>umbral       <span class="op">=</span> <span class="fl">25.0</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>indice       <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> indice <span class="op">&lt;</span> <span class="bu">len</span>(temperaturas) <span class="kw">and</span> temperaturas[indice] <span class="op">&lt;=</span> umbral:</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>    indice <span class="op">=</span> indice <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> indice <span class="op">&lt;</span> <span class="bu">len</span>(temperaturas):</span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Primera temperatura sobre </span><span class="sc">{</span>umbral<span class="sc">}</span><span class="ss"> °C: </span><span class="sc">{</span>temperaturas[indice]<span class="sc">}</span><span class="ss"> en la posición </span><span class="sc">{</span>indice<span class="sc">}</span><span class="ss">."</span>)</span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Ninguna temperatura supera el umbral."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Primera temperatura sobre 25.0 °C: 26.8 en la posición 3.</code></pre>
+</div>
+</div>
+<p>La condición combina dos verificaciones con <code>and</code>: que el índice no se haya salido de los límites de la lista, y que el elemento actual no supere el umbral. Ambas deben ser verdaderas para que el bucle continúe. La verificación del índice va primero porque, si el índice ya se salió de rango, Python no debe intentar acceder a <code>temperaturas[indice]</code>.</p>
+</section>
+<section id="cuándo-usar-for-y-cuándo-usar-while" class="level3">
+<h3 class="anchored" data-anchor-id="cuándo-usar-for-y-cuándo-usar-while">Cuándo usar <code>for</code> y cuándo usar <code>while</code></h3>
+<p>La distinción entre los dos bucles es conceptual antes que técnica.</p>
+<p>El <code>for</code> es la elección natural cuando se recorre una colección existente o cuando el número de repeticiones se conoce de antemano. La mayor parte de los bucles en programación cotidiana son <code>for</code>: recorrer una lista de registros, procesar cada carácter de una cadena, repetir una operación un número fijo de veces con <code>range()</code>. Cuando se necesita detener ese recorrido antes de llegar al final, <code>break</code> hace el trabajo sin necesidad de pasar a un <code>while</code>.</p>
+<p>El <code>while</code> es la elección natural cuando el número de repeticiones depende de algo que solo se puede saber mientras el bucle avanza: esperar a que una condición cambie, repetir hasta que un cálculo converja, o avanzar en una estructura sin un final predefinido. Si la condición de parada no se puede expresar como “hemos llegado al final de esta colección”, probablemente corresponde un <code>while</code>.</p>
+</section>
+</section>
+<section id="ejemplo-integrador" class="level2">
+<h2 class="anchored" data-anchor-id="ejemplo-integrador">Ejemplo integrador</h2>
+<p>Para cerrar, un ejemplo que pone en juego todo lo que hemos aprendido en las últimas tres lecciones: estructuras de datos, <code>if</code> / <code>elif</code> / <code>else</code>, y los dos tipos de bucle.</p>
+<p>El problema: dada una lista de diccionarios, cada uno representando a un estudiante con nombre, calificación y carrera, queremos calcular el promedio por carrera y reportar cuántos alumnos están por encima de ese promedio en cada una.</p>
+<div id="a139b8ce" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clasificar(calificacion):</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> calificacion <span class="op">&gt;=</span> <span class="fl">9.0</span>:</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Sobresaliente"</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> calificacion <span class="op">&gt;=</span> <span class="fl">7.0</span>:</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Bien"</span></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> calificacion <span class="op">&gt;=</span> <span class="fl">6.0</span>:</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Suficiente"</span></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Reprobado"</span></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>grupo <span class="op">=</span> [</span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Ana"</span>,     <span class="st">"calificacion"</span>: <span class="fl">9.2</span>, <span class="st">"carrera"</span>: <span class="st">"Matemáticas"</span>},</span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Luis"</span>,    <span class="st">"calificacion"</span>: <span class="fl">7.8</span>, <span class="st">"carrera"</span>: <span class="st">"Física"</span>},</span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"María"</span>,   <span class="st">"calificacion"</span>: <span class="fl">8.5</span>, <span class="st">"carrera"</span>: <span class="st">"Matemáticas"</span>},</span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Carlos"</span>,  <span class="st">"calificacion"</span>: <span class="fl">6.1</span>, <span class="st">"carrera"</span>: <span class="st">"Actuaría"</span>},</span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Sofía"</span>,   <span class="st">"calificacion"</span>: <span class="fl">9.7</span>, <span class="st">"carrera"</span>: <span class="st">"Física"</span>},</span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Pedro"</span>,   <span class="st">"calificacion"</span>: <span class="fl">5.4</span>, <span class="st">"carrera"</span>: <span class="st">"Actuaría"</span>},</span>
+<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Lucía"</span>,   <span class="st">"calificacion"</span>: <span class="fl">8.0</span>, <span class="st">"carrera"</span>: <span class="st">"Matemáticas"</span>},</span>
+<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Roberto"</span>, <span class="st">"calificacion"</span>: <span class="fl">7.2</span>, <span class="st">"carrera"</span>: <span class="st">"Física"</span>},</span>
+<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Paso 1: acumular la suma y el conteo por carrera</span></span>
+<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a>sumas   <span class="op">=</span> {}</span>
+<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a>conteos <span class="op">=</span> {}</span>
+<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> alumno <span class="kw">in</span> grupo:</span>
+<span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a>    carrera <span class="op">=</span> alumno[<span class="st">"carrera"</span>]</span>
+<span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a>    cal     <span class="op">=</span> alumno[<span class="st">"calificacion"</span>]</span>
+<span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> carrera <span class="kw">not</span> <span class="kw">in</span> sumas:</span>
+<span id="cb49-32"><a href="#cb49-32" aria-hidden="true" tabindex="-1"></a>        sumas[carrera]   <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb49-33"><a href="#cb49-33" aria-hidden="true" tabindex="-1"></a>        conteos[carrera] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb49-34"><a href="#cb49-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-35"><a href="#cb49-35" aria-hidden="true" tabindex="-1"></a>    sumas[carrera]   <span class="op">=</span> sumas[carrera] <span class="op">+</span> cal</span>
+<span id="cb49-36"><a href="#cb49-36" aria-hidden="true" tabindex="-1"></a>    conteos[carrera] <span class="op">=</span> conteos[carrera] <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb49-37"><a href="#cb49-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-38"><a href="#cb49-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Paso 2: calcular el promedio por carrera</span></span>
+<span id="cb49-39"><a href="#cb49-39" aria-hidden="true" tabindex="-1"></a>promedios <span class="op">=</span> {}</span>
+<span id="cb49-40"><a href="#cb49-40" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> carrera <span class="kw">in</span> sumas:</span>
+<span id="cb49-41"><a href="#cb49-41" aria-hidden="true" tabindex="-1"></a>    promedios[carrera] <span class="op">=</span> sumas[carrera] <span class="op">/</span> conteos[carrera]</span>
+<span id="cb49-42"><a href="#cb49-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-43"><a href="#cb49-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Paso 3: reportar</span></span>
+<span id="cb49-44"><a href="#cb49-44" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> carrera <span class="kw">in</span> promedios:</span>
+<span id="cb49-45"><a href="#cb49-45" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="sc">{</span>carrera<span class="sc">}</span><span class="ss"> — promedio: </span><span class="sc">{</span>promedios[carrera]<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb49-46"><a href="#cb49-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> alumno <span class="kw">in</span> grupo:</span>
+<span id="cb49-47"><a href="#cb49-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> alumno[<span class="st">"carrera"</span>] <span class="op">==</span> carrera:</span>
+<span id="cb49-48"><a href="#cb49-48" aria-hidden="true" tabindex="-1"></a>            cal   <span class="op">=</span> alumno[<span class="st">"calificacion"</span>]</span>
+<span id="cb49-49"><a href="#cb49-49" aria-hidden="true" tabindex="-1"></a>            nivel <span class="op">=</span> clasificar(cal)</span>
+<span id="cb49-50"><a href="#cb49-50" aria-hidden="true" tabindex="-1"></a>            marca <span class="op">=</span> <span class="st">"▲"</span> <span class="cf">if</span> cal <span class="op">&gt;</span> promedios[carrera] <span class="cf">else</span> <span class="st">" "</span></span>
+<span id="cb49-51"><a href="#cb49-51" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>marca<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>alumno[<span class="st">'nombre'</span>]<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>cal<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>nivel<span class="sc">}</span><span class="ss">)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Matemáticas — promedio: 8.57
+  ▲ Ana: 9.2 (Sobresaliente)
+    María: 8.5 (Bien)
+    Lucía: 8.0 (Bien)
+
+Física — promedio: 8.23
+    Luis: 7.8 (Bien)
+  ▲ Sofía: 9.7 (Sobresaliente)
+    Roberto: 7.2 (Bien)
+
+Actuaría — promedio: 5.75
+  ▲ Carlos: 6.1 (Suficiente)
+    Pedro: 5.4 (Reprobado)</code></pre>
+</div>
+</div>
+<p>El ejemplo usa listas, diccionarios, <code>if</code> / <code>elif</code> / <code>else</code>, funciones propias, <code>for</code> anidado, y acumulación con diccionarios. Nada de lo que aparece aquí es nuevo: todo son las herramientas que hemos ido construyendo a lo largo de las últimas lecciones, combinadas para resolver un problema que ninguna de ellas podría abordar sola.</p>
+</section>
+<section id="lo-que-sigue" class="level2">
+<h2 class="anchored" data-anchor-id="lo-que-sigue">Lo que sigue</h2>
+<p>Un patrón que ha aparecido varias veces en esta lección es el de construir una lista nueva a partir de una existente: recorrer la colección original con un <code>for</code>, aplicar alguna transformación o filtro a cada elemento, y acumular los resultados. Es un patrón tan frecuente que Python ofrece una sintaxis especial para expresarlo de forma más concisa y directa, sin necesidad de inicializar una lista vacía ni escribir el bloque de acumulación explícitamente. Esa sintaxis se llama <em>comprensión de lista</em>, y es exactamente lo que introduce la siguiente lección.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Carlos Flores">
+
+<title>Comprensiones de listas – Python</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-8b348f4b4b74a528bf910da1e8c5139e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Python</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">Acerca de</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#de-un-for-a-una-comprensión" id="toc-de-un-for-a-una-comprensión" class="nav-link active" data-scroll-target="#de-un-for-a-una-comprensión">De un <code>for</code> a una comprensión</a></li>
+  <li><a href="#comprensiones-con-filtro" id="toc-comprensiones-con-filtro" class="nav-link" data-scroll-target="#comprensiones-con-filtro">Comprensiones con filtro</a></li>
+  <li><a href="#comprensiones-sobre-distintas-colecciones" id="toc-comprensiones-sobre-distintas-colecciones" class="nav-link" data-scroll-target="#comprensiones-sobre-distintas-colecciones">Comprensiones sobre distintas colecciones</a></li>
+  <li><a href="#comprensiones-con-funciones-propias" id="toc-comprensiones-con-funciones-propias" class="nav-link" data-scroll-target="#comprensiones-con-funciones-propias">Comprensiones con funciones propias</a></li>
+  <li><a href="#comprensiones-anidadas" id="toc-comprensiones-anidadas" class="nav-link" data-scroll-target="#comprensiones-anidadas">Comprensiones anidadas</a></li>
+  <li><a href="#comprensiones-de-conjuntos-y-diccionarios" id="toc-comprensiones-de-conjuntos-y-diccionarios" class="nav-link" data-scroll-target="#comprensiones-de-conjuntos-y-diccionarios">Comprensiones de conjuntos y diccionarios</a></li>
+  <li><a href="#cuándo-usar-una-comprensión-y-cuándo-un-bucle" id="toc-cuándo-usar-una-comprensión-y-cuándo-un-bucle" class="nav-link" data-scroll-target="#cuándo-usar-una-comprensión-y-cuándo-un-bucle">Cuándo usar una comprensión y cuándo un bucle</a></li>
+  <li><a href="#ejemplo-integrador" id="toc-ejemplo-integrador" class="nav-link" data-scroll-target="#ejemplo-integrador">Ejemplo integrador</a></li>
+  <li><a href="#lo-que-sigue" id="toc-lo-que-sigue" class="nav-link" data-scroll-target="#lo-que-sigue">Lo que sigue</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Comprensiones de listas</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Carlos Flores </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>En la lección anterior construimos listas nuevas a partir de colecciones existentes siguiendo siempre el mismo esquema: una lista vacía antes del bucle, un <code>for</code> que recorre la colección original, y una concatenación que acumula los elementos que nos interesan. El patrón es tan regular que resulta casi mecánico escribirlo. Cuando algo en programación es tan repetitivo que se puede describir con una receta fija, suele ser señal de que existe una forma más directa de expresarlo.</p>
+<p>En Python esa forma existe y se llama <em>comprensión de lista</em>. Permite construir una lista nueva a partir de cualquier colección en una sola línea, con una sintaxis que refleja directamente la intención sin el andamiaje del bucle explícito. Esta lección parte del patrón que ya conocemos, muestra cómo comprimirlo, y explora hasta dónde puede llevarse esa idea.</p>
+<section id="de-un-for-a-una-comprensión" class="level2">
+<h2 class="anchored" data-anchor-id="de-un-for-a-una-comprensión">De un <code>for</code> a una comprensión</h2>
+<p>El punto de partida es un bucle que ya sabemos escribir. Supongamos que tenemos una lista de temperaturas en Celsius y queremos convertirlas todas a Fahrenheit:</p>
+<div id="3dad0832" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>celsius <span class="op">=</span> [<span class="fl">0.0</span>, <span class="fl">20.0</span>, <span class="fl">37.0</span>, <span class="fl">100.0</span>]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>fahrenheit <span class="op">=</span> []</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> celsius:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    fahrenheit <span class="op">=</span> fahrenheit <span class="op">+</span> [(c <span class="op">*</span> <span class="dv">9</span> <span class="op">/</span> <span class="dv">5</span>) <span class="op">+</span> <span class="dv">32</span>]</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fahrenheit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[32.0, 68.0, 98.6, 212.0]</code></pre>
+</div>
+</div>
+<p>Tres líneas para el bucle, más la inicialización. La comprensión de lista expresa exactamente lo mismo en una sola línea:</p>
+<div id="e70ae6f9" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>celsius    <span class="op">=</span> [<span class="fl">0.0</span>, <span class="fl">20.0</span>, <span class="fl">37.0</span>, <span class="fl">100.0</span>]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fahrenheit <span class="op">=</span> [(c <span class="op">*</span> <span class="dv">9</span> <span class="op">/</span> <span class="dv">5</span>) <span class="op">+</span> <span class="dv">32</span> <span class="cf">for</span> c <span class="kw">in</span> celsius]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fahrenheit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[32.0, 68.0, 98.6, 212.0]</code></pre>
+</div>
+</div>
+<p>El resultado es idéntico. La sintaxis general de una comprensión de lista es:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>[expresión <span class="cf">for</span> variable <span class="kw">in</span> colección]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Leída en voz alta casi suena a lenguaje natural: “la lista de <code>expresión</code> para cada <code>variable</code> en <code>colección</code>”. La <code>expresión</code> es cualquier cálculo que use <code>variable</code>, y define qué valor va en la lista nueva para cada elemento de la colección original.</p>
+<p>Una comparación directa deja clara la correspondencia entre las dos formas:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Con for explícito</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> []</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> variable <span class="kw">in</span> colección:</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    resultado <span class="op">=</span> resultado <span class="op">+</span> [expresión]</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Con comprensión</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> [expresión <span class="cf">for</span> variable <span class="kw">in</span> colección]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Lo que antes ocupaba tres líneas ahora ocupa una, y la intención —“construir una lista aplicando esta transformación a cada elemento”— queda expresada de forma más directa.</p>
+</section>
+<section id="comprensiones-con-filtro" class="level2">
+<h2 class="anchored" data-anchor-id="comprensiones-con-filtro">Comprensiones con filtro</h2>
+<p>El patrón de acumulación con <code>for</code> también aparecía combinado con un <code>if</code> para incluir solo los elementos que cumplen cierta condición. Eso también se puede expresar en una comprensión añadiendo la condición al final:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>[expresión <span class="cf">for</span> variable <span class="kw">in</span> colección <span class="cf">if</span> condición]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Por ejemplo, de la lista de calificaciones que hemos venido usando, extraer solo las aprobatorias:</p>
+<div id="e575b914" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">8.2</span>, <span class="fl">5.9</span>, <span class="fl">9.5</span>, <span class="fl">7.1</span>, <span class="fl">6.0</span>, <span class="fl">4.3</span>, <span class="fl">9.8</span>]</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>aprobadas <span class="op">=</span> [cal <span class="cf">for</span> cal <span class="kw">in</span> calificaciones <span class="cf">if</span> cal <span class="op">&gt;=</span> <span class="fl">6.0</span>]</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(aprobadas)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[8.2, 9.5, 7.1, 6.0, 9.8]</code></pre>
+</div>
+</div>
+<p>El <code>if</code> actúa como filtro: solo los elementos para los que la condición es <code>True</code> entran en la lista resultante. Los demás se descartan sin necesidad de <code>continue</code> ni de anidar código.</p>
+<p>La transformación y el filtro pueden combinarse. Por ejemplo, convertir a Fahrenheit solo las temperaturas que estén por encima de cero:</p>
+<div id="b4643e47" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>celsius <span class="op">=</span> [<span class="op">-</span><span class="fl">10.0</span>, <span class="fl">0.0</span>, <span class="fl">20.0</span>, <span class="fl">37.0</span>, <span class="fl">100.0</span>]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>fahrenheit_positivas <span class="op">=</span> [(c <span class="op">*</span> <span class="dv">9</span> <span class="op">/</span> <span class="dv">5</span>) <span class="op">+</span> <span class="dv">32</span> <span class="cf">for</span> c <span class="kw">in</span> celsius <span class="cf">if</span> c <span class="op">&gt;</span> <span class="dv">0</span>]</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fahrenheit_positivas)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[68.0, 98.6, 212.0]</code></pre>
+</div>
+</div>
+<p>El orden de lectura es el mismo que el del bucle equivalente: primero se itera, luego se filtra, luego se transforma. La <code>expresión</code> al principio de la comprensión es lo último que se evalúa, solo para los elementos que pasaron el filtro.</p>
+</section>
+<section id="comprensiones-sobre-distintas-colecciones" class="level2">
+<h2 class="anchored" data-anchor-id="comprensiones-sobre-distintas-colecciones">Comprensiones sobre distintas colecciones</h2>
+<p>Así como el <code>for</code> funciona sobre cualquier estructura de datos, las comprensiones también. Cualquier colección iterable puede aparecer después del <code>in</code>.</p>
+<p>Sobre una cadena, la comprensión recorre sus caracteres. Esto permite, por ejemplo, extraer solo las vocales de una palabra:</p>
+<div id="ed2643d2" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>palabra <span class="op">=</span> <span class="st">"murciélago"</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>vocales <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> palabra <span class="cf">if</span> c <span class="kw">in</span> {<span class="st">"a"</span>, <span class="st">"e"</span>, <span class="st">"i"</span>, <span class="st">"o"</span>, <span class="st">"u"</span>, <span class="st">"á"</span>, <span class="st">"é"</span>, <span class="st">"í"</span>, <span class="st">"ó"</span>, <span class="st">"ú"</span>}]</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(vocales)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['u', 'i', 'é', 'a', 'o']</code></pre>
+</div>
+</div>
+<p>Sobre un conjunto, la comprensión recorre sus elementos en orden no garantizado, igual que el <code>for</code>. Combinada con <code>sorted()</code>, que ya conocemos, permite obtener una lista ordenada a partir de un conjunto:</p>
+<div id="88150b1a" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>materias <span class="op">=</span> {<span class="st">"Cálculo"</span>, <span class="st">"Estadística"</span>, <span class="st">"Álgebra"</span>, <span class="st">"Física"</span>, <span class="st">"Geometría"</span>}</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Materias cuyo nombre tiene más de 7 caracteres, ordenadas</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>largas <span class="op">=</span> <span class="bu">sorted</span>([m <span class="cf">for</span> m <span class="kw">in</span> materias <span class="cf">if</span> <span class="bu">len</span>(m) <span class="op">&gt;</span> <span class="dv">7</span>])</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(largas)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['Estadística', 'Geometría']</code></pre>
+</div>
+</div>
+<p>Sobre un diccionario, la comprensión recorre las claves por defecto, igual que el <code>for</code>. Si se necesitan los valores o los pares clave-valor, se accede a ellos con la notación de corchetes que ya conocemos:</p>
+<div id="7fadc6c3" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>estudiante <span class="op">=</span> {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nombre"</span>:   <span class="st">"Ana"</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"edad"</span>:     <span class="dv">20</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"promedio"</span>: <span class="fl">9.2</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"semestre"</span>: <span class="dv">4</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Solo los valores numéricos del diccionario</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>numericos <span class="op">=</span> [estudiante[clave] <span class="cf">for</span> clave <span class="kw">in</span> estudiante <span class="cf">if</span> <span class="bu">type</span>(estudiante[clave]) <span class="op">!=</span> <span class="bu">str</span>]</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(numericos)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[20, 9.2, 4]</code></pre>
+</div>
+</div>
+<p>También es muy natural construir una lista de valores a partir de una lista de diccionarios, patrón que apareció en el ejemplo integrador de la lección anterior:</p>
+<div id="093d1e98" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>grupo <span class="op">=</span> [</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Ana"</span>,    <span class="st">"calificacion"</span>: <span class="fl">9.2</span>, <span class="st">"carrera"</span>: <span class="st">"Matemáticas"</span>},</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Luis"</span>,   <span class="st">"calificacion"</span>: <span class="fl">7.8</span>, <span class="st">"carrera"</span>: <span class="st">"Física"</span>},</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"María"</span>,  <span class="st">"calificacion"</span>: <span class="fl">8.5</span>, <span class="st">"carrera"</span>: <span class="st">"Matemáticas"</span>},</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Carlos"</span>, <span class="st">"calificacion"</span>: <span class="fl">6.1</span>, <span class="st">"carrera"</span>: <span class="st">"Actuaría"</span>},</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Sofía"</span>,  <span class="st">"calificacion"</span>: <span class="fl">9.7</span>, <span class="st">"carrera"</span>: <span class="st">"Física"</span>},</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Pedro"</span>,  <span class="st">"calificacion"</span>: <span class="fl">5.4</span>, <span class="st">"carrera"</span>: <span class="st">"Actuaría"</span>},</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Solo los nombres de los alumnos de Física</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>fisica <span class="op">=</span> [a[<span class="st">"nombre"</span>] <span class="cf">for</span> a <span class="kw">in</span> grupo <span class="cf">if</span> a[<span class="st">"carrera"</span>] <span class="op">==</span> <span class="st">"Física"</span>]</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fisica)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['Luis', 'Sofía']</code></pre>
+</div>
+</div>
+<div id="f8ea3b5e" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Todas las calificaciones, sin importar la carrera</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>todas <span class="op">=</span> [a[<span class="st">"calificacion"</span>] <span class="cf">for</span> a <span class="kw">in</span> grupo]</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Promedio general: </span><span class="sc">{</span><span class="bu">sum</span>(todas) <span class="op">/</span> <span class="bu">len</span>(todas)<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Promedio general: 7.78</code></pre>
+</div>
+</div>
+<p>La segunda comprensión extrae todas las calificaciones en una sola línea; <code>sum()</code> y <code>len()</code>, que ya conocemos, hacen el resto.</p>
+</section>
+<section id="comprensiones-con-funciones-propias" class="level2">
+<h2 class="anchored" data-anchor-id="comprensiones-con-funciones-propias">Comprensiones con funciones propias</h2>
+<p>La expresión de una comprensión puede ser cualquier cosa que Python pueda evaluar, incluyendo llamadas a funciones que nosotros mismos hayamos definido. Esto conecta directamente con la función <code>clasificar</code> que hemos venido usando desde la lección de estructuras de control:</p>
+<div id="f6c6b715" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clasificar(calificacion):</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> calificacion <span class="op">&gt;=</span> <span class="fl">9.0</span>:</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Sobresaliente"</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> calificacion <span class="op">&gt;=</span> <span class="fl">7.0</span>:</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Bien"</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> calificacion <span class="op">&gt;=</span> <span class="fl">6.0</span>:</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Suficiente"</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Reprobado"</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">8.2</span>, <span class="fl">5.9</span>, <span class="fl">9.5</span>, <span class="fl">7.1</span>, <span class="fl">6.0</span>, <span class="fl">4.3</span>, <span class="fl">9.8</span>]</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>niveles <span class="op">=</span> [clasificar(cal) <span class="cf">for</span> cal <span class="kw">in</span> calificaciones]</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(niveles)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['Bien', 'Reprobado', 'Sobresaliente', 'Bien', 'Suficiente', 'Reprobado', 'Sobresaliente']</code></pre>
+</div>
+</div>
+<p>Lo que antes requería un <code>for</code> con dos líneas en el cuerpo —llamar a <code>clasificar</code> y guardar el resultado— ahora queda en una sola expresión. La función se aplica a cada elemento exactamente igual que en el bucle, pero sin el andamiaje de la acumulación.</p>
+<p>También es posible combinar la llamada a una función con un filtro. Por ejemplo, obtener la clasificación solo de los alumnos que pertenecen a una carrera concreta:</p>
+<div id="f99392ba" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> [</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    (a[<span class="st">"nombre"</span>], clasificar(a[<span class="st">"calificacion"</span>]))</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> a <span class="kw">in</span> grupo</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> a[<span class="st">"carrera"</span>] <span class="op">==</span> <span class="st">"Matemáticas"</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> nombre, nivel <span class="kw">in</span> resultado:</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>nombre<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>nivel<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ana: Sobresaliente
+María: Bien</code></pre>
+</div>
+</div>
+<p>La comprensión produce una lista de tuplas, una por cada alumno de Matemáticas. El <code>for</code> final las desempaqueta en dos variables, usando el mismo mecanismo de desempaquetado que conocemos de la lección de estructuras de datos. Nada aquí es nuevo en términos de herramientas; lo nuevo es la forma en que se combinan.</p>
+<p>Cuando una comprensión empieza a ser larga, es perfectamente válido distribuirla en varias líneas. Python permite esto dentro de los corchetes sin necesidad de ningún carácter especial:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> [</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    expresión</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> variable <span class="kw">in</span> colección</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> condición</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La regla de estilo es que si la comprensión cabe cómodamente en una línea, se escribe en una línea; si no, se distribuye. En ambos casos la semántica es idéntica.</p>
+</section>
+<section id="comprensiones-anidadas" class="level2">
+<h2 class="anchored" data-anchor-id="comprensiones-anidadas">Comprensiones anidadas</h2>
+<p>Así como los bucles <code>for</code> pueden anidarse, las comprensiones también. Una comprensión anidada tiene dos cláusulas <code>for</code>, y el resultado es equivalente a dos bucles uno dentro del otro.</p>
+<p>El caso más natural es aplanar una lista de listas: convertir una estructura de dos niveles en una lista simple con todos los elementos:</p>
+<div id="78b37d4b" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>matriz <span class="op">=</span> [</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>],</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>plana <span class="op">=</span> [elemento <span class="cf">for</span> fila <span class="kw">in</span> matriz <span class="cf">for</span> elemento <span class="kw">in</span> fila]</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(plana)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre>
+</div>
+</div>
+<p>El orden de las cláusulas <code>for</code> en la comprensión corresponde al orden en que se anidan los bucles: primero <code>for fila in matriz</code> (el bucle externo), luego <code>for elemento in fila</code> (el bucle interno). El bucle equivalente sería:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>plana <span class="op">=</span> []</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fila <span class="kw">in</span> matriz:</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> elemento <span class="kw">in</span> fila:</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>        plana <span class="op">=</span> plana <span class="op">+</span> [elemento]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Otro ejemplo natural con los datos que ya conocemos: a partir de una lista de ciudades y una lista de días, generar todos los pares posibles para planificar visitas:</p>
+<div id="e8eb4fd4" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>ciudades <span class="op">=</span> [<span class="st">"CDMX"</span>, <span class="st">"Guadalajara"</span>, <span class="st">"Monterrey"</span>]</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>dias     <span class="op">=</span> [<span class="st">"lunes"</span>, <span class="st">"miércoles"</span>, <span class="st">"viernes"</span>]</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>agenda <span class="op">=</span> [(ciudad, dia) <span class="cf">for</span> ciudad <span class="kw">in</span> ciudades <span class="cf">for</span> dia <span class="kw">in</span> dias]</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ciudad, dia <span class="kw">in</span> agenda:</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>dia<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>ciudad<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>lunes: CDMX
+miércoles: CDMX
+viernes: CDMX
+lunes: Guadalajara
+miércoles: Guadalajara
+viernes: Guadalajara
+lunes: Monterrey
+miércoles: Monterrey
+viernes: Monterrey</code></pre>
+</div>
+</div>
+<p>Las comprensiones anidadas son útiles cuando el anidamiento es simple y la intención es clara. Cuando la lógica se vuelve difícil de leer en una sola expresión, un par de bucles <code>for</code> explícitos suele comunicar mejor la intención.</p>
+</section>
+<section id="comprensiones-de-conjuntos-y-diccionarios" class="level2">
+<h2 class="anchored" data-anchor-id="comprensiones-de-conjuntos-y-diccionarios">Comprensiones de conjuntos y diccionarios</h2>
+<p>La idea detrás de las comprensiones no se limita a las listas. Con una pequeña variación en la sintaxis, el mismo mecanismo produce conjuntos y diccionarios.</p>
+<p>Una <em>comprensión de conjunto</em> usa llaves <code>{}</code> en lugar de corchetes. El resultado es un conjunto, lo que significa que los duplicados se eliminan automáticamente:</p>
+<div id="950214ce" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">8.2</span>, <span class="fl">5.9</span>, <span class="fl">9.5</span>, <span class="fl">7.1</span>, <span class="fl">6.0</span>, <span class="fl">4.3</span>, <span class="fl">9.8</span>, <span class="fl">8.2</span>, <span class="fl">7.1</span>]</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Valores únicos, como un conjunto</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>unicos <span class="op">=</span> {cal <span class="cf">for</span> cal <span class="kw">in</span> calificaciones}</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(unicos)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{4.3, 5.9, 6.0, 7.1, 8.2, 9.5, 9.8}</code></pre>
+</div>
+</div>
+<div id="f0e843bf" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Carreras únicas presentes en el grupo</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>carreras <span class="op">=</span> {a[<span class="st">"carrera"</span>] <span class="cf">for</span> a <span class="kw">in</span> grupo}</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(carreras)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'Matemáticas', 'Actuaría', 'Física'}</code></pre>
+</div>
+</div>
+<p>Una <em>comprensión de diccionario</em> también usa llaves, pero con la forma <code>clave: valor</code> para cada entrada, igual que la sintaxis literal de los diccionarios:</p>
+<div id="586e5d95" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diccionario: nombre → calificación, para cada alumno del grupo</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>califs_por_nombre <span class="op">=</span> {a[<span class="st">"nombre"</span>]: a[<span class="st">"calificacion"</span>] <span class="cf">for</span> a <span class="kw">in</span> grupo}</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(califs_por_nombre)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'Ana': 9.2, 'Luis': 7.8, 'María': 8.5, 'Carlos': 6.1, 'Sofía': 9.7, 'Pedro': 5.4}</code></pre>
+</div>
+</div>
+<div id="82b5b96b" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diccionario: nombre → nivel de clasificación</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>niveles_por_nombre <span class="op">=</span> {a[<span class="st">"nombre"</span>]: clasificar(a[<span class="st">"calificacion"</span>]) <span class="cf">for</span> a <span class="kw">in</span> grupo}</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(niveles_por_nombre)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'Ana': 'Sobresaliente', 'Luis': 'Bien', 'María': 'Bien', 'Carlos': 'Suficiente', 'Sofía': 'Sobresaliente', 'Pedro': 'Reprobado'}</code></pre>
+</div>
+</div>
+<p>Con una comprensión de diccionario también se puede filtrar, igual que con las de lista:</p>
+<div id="3ee7a78c" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Solo los alumnos con promedio sobresaliente</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>sobresalientes <span class="op">=</span> {</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    a[<span class="st">"nombre"</span>]: a[<span class="st">"calificacion"</span>]</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> a <span class="kw">in</span> grupo</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> a[<span class="st">"calificacion"</span>] <span class="op">&gt;=</span> <span class="fl">9.0</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sobresalientes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'Ana': 9.2, 'Sofía': 9.7}</code></pre>
+</div>
+</div>
+<p>La tabla siguiente resume las tres variantes:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 37%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Tipo</th>
+<th style="text-align: center;">Sintaxis</th>
+<th style="text-align: center;">Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Lista</td>
+<td style="text-align: center;"><code>[expr for x in col]</code></td>
+<td style="text-align: center;">Lista ordenada, permite duplicados</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Conjunto</td>
+<td style="text-align: center;"><code>{expr for x in col}</code></td>
+<td style="text-align: center;">Conjunto sin orden, sin duplicados</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Diccionario</td>
+<td style="text-align: center;"><code>{clave: valor for x in col}</code></td>
+<td style="text-align: center;">Diccionario indexado por clave</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cuándo-usar-una-comprensión-y-cuándo-un-bucle" class="level2">
+<h2 class="anchored" data-anchor-id="cuándo-usar-una-comprensión-y-cuándo-un-bucle">Cuándo usar una comprensión y cuándo un bucle</h2>
+<p>Las comprensiones son más concisas, pero no siempre son la mejor elección. La regla práctica es sencilla: una comprensión comunica bien cuando su propósito es producir una colección nueva a partir de otra mediante una transformación, un filtro, o ambas cosas a la vez. Un bucle <code>for</code> explícito es más apropiado cuando el bloque de código produce efectos adicionales además de construir una colección (imprimir, acumular en varias variables al mismo tiempo, modificar estructuras externas), o cuando la lógica es suficientemente compleja como para que una sola línea resulte difícil de leer.</p>
+<p>En la práctica, el criterio más confiable es la legibilidad. Si al leer la comprensión en voz alta su intención queda inmediatamente clara, úsala. Si hay que detenerse a descifrarla, un bucle explícito probablemente comunica mejor.</p>
+</section>
+<section id="ejemplo-integrador" class="level2">
+<h2 class="anchored" data-anchor-id="ejemplo-integrador">Ejemplo integrador</h2>
+<p>Para cerrar, un problema que requiere transformar, filtrar y resumir una colección de datos, usando comprensiones donde simplifican el código y bucles donde la lógica lo pide.</p>
+<p>El problema: dado el grupo de alumnos que hemos venido usando, queremos producir un reporte que muestre, por carrera, la lista de alumnos ordenada por calificación descendente, junto con su nivel de clasificación y si están por encima del promedio de su carrera.</p>
+<p>El único obstáculo es el ordenamiento descendente: <code>sorted()</code> ordena de menor a mayor por defecto, pero queremos de mayor a menor. Para ordenar una lista de diccionarios por un campo numérico sin herramientas que aún no hemos introducido, construimos una lista de tuplas <code>(valor_negativo, índice)</code> aprovechando que <code>sorted()</code> compara tuplas elemento a elemento. Negar la calificación convierte el problema de ordenar de mayor a menor en uno de ordenar de menor a mayor, que es lo que <code>sorted()</code> ya sabe hacer.</p>
+<div id="76de4363" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clasificar(calificacion):</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> calificacion <span class="op">&gt;=</span> <span class="fl">9.0</span>:</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Sobresaliente"</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> calificacion <span class="op">&gt;=</span> <span class="fl">7.0</span>:</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Bien"</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> calificacion <span class="op">&gt;=</span> <span class="fl">6.0</span>:</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Suficiente"</span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Reprobado"</span></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>grupo <span class="op">=</span> [</span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Ana"</span>,     <span class="st">"calificacion"</span>: <span class="fl">9.2</span>, <span class="st">"carrera"</span>: <span class="st">"Matemáticas"</span>},</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Luis"</span>,    <span class="st">"calificacion"</span>: <span class="fl">7.8</span>, <span class="st">"carrera"</span>: <span class="st">"Física"</span>},</span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"María"</span>,   <span class="st">"calificacion"</span>: <span class="fl">8.5</span>, <span class="st">"carrera"</span>: <span class="st">"Matemáticas"</span>},</span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Carlos"</span>,  <span class="st">"calificacion"</span>: <span class="fl">6.1</span>, <span class="st">"carrera"</span>: <span class="st">"Actuaría"</span>},</span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Sofía"</span>,   <span class="st">"calificacion"</span>: <span class="fl">9.7</span>, <span class="st">"carrera"</span>: <span class="st">"Física"</span>},</span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Pedro"</span>,   <span class="st">"calificacion"</span>: <span class="fl">5.4</span>, <span class="st">"carrera"</span>: <span class="st">"Actuaría"</span>},</span>
+<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Lucía"</span>,   <span class="st">"calificacion"</span>: <span class="fl">8.0</span>, <span class="st">"carrera"</span>: <span class="st">"Matemáticas"</span>},</span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Roberto"</span>, <span class="st">"calificacion"</span>: <span class="fl">7.2</span>, <span class="st">"carrera"</span>: <span class="st">"Física"</span>},</span>
+<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Carreras únicas (comprensión de conjunto)</span></span>
+<span id="cb42-24"><a href="#cb42-24" aria-hidden="true" tabindex="-1"></a>carreras <span class="op">=</span> {a[<span class="st">"carrera"</span>] <span class="cf">for</span> a <span class="kw">in</span> grupo}</span>
+<span id="cb42-25"><a href="#cb42-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-26"><a href="#cb42-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> carrera <span class="kw">in</span> <span class="bu">sorted</span>(carreras):</span>
+<span id="cb42-27"><a href="#cb42-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Alumnos de esta carrera (comprensión de lista con filtro)</span></span>
+<span id="cb42-28"><a href="#cb42-28" aria-hidden="true" tabindex="-1"></a>    alumnos_carrera <span class="op">=</span> [a <span class="cf">for</span> a <span class="kw">in</span> grupo <span class="cf">if</span> a[<span class="st">"carrera"</span>] <span class="op">==</span> carrera]</span>
+<span id="cb42-29"><a href="#cb42-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-30"><a href="#cb42-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calificaciones de esta carrera (comprensión de lista)</span></span>
+<span id="cb42-31"><a href="#cb42-31" aria-hidden="true" tabindex="-1"></a>    califs <span class="op">=</span> [a[<span class="st">"calificacion"</span>] <span class="cf">for</span> a <span class="kw">in</span> alumnos_carrera]</span>
+<span id="cb42-32"><a href="#cb42-32" aria-hidden="true" tabindex="-1"></a>    promedio <span class="op">=</span> <span class="bu">sum</span>(califs) <span class="op">/</span> <span class="bu">len</span>(califs)</span>
+<span id="cb42-33"><a href="#cb42-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-34"><a href="#cb42-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ordenar por calificación descendente sin herramientas pendientes:</span></span>
+<span id="cb42-35"><a href="#cb42-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># construimos tuplas (-calificacion, índice) y ordenamos de menor a mayor.</span></span>
+<span id="cb42-36"><a href="#cb42-36" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Como la calificación está negada, el menor valor negativo corresponde</span></span>
+<span id="cb42-37"><a href="#cb42-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># a la mayor calificación original.</span></span>
+<span id="cb42-38"><a href="#cb42-38" aria-hidden="true" tabindex="-1"></a>    pares          <span class="op">=</span> [(<span class="op">-</span>a[<span class="st">"calificacion"</span>], i) <span class="cf">for</span> i, a <span class="kw">in</span> <span class="bu">enumerate</span>(alumnos_carrera)]</span>
+<span id="cb42-39"><a href="#cb42-39" aria-hidden="true" tabindex="-1"></a>    indices_ord    <span class="op">=</span> [i <span class="cf">for</span> _, i <span class="kw">in</span> <span class="bu">sorted</span>(pares)]</span>
+<span id="cb42-40"><a href="#cb42-40" aria-hidden="true" tabindex="-1"></a>    alumnos_ord    <span class="op">=</span> [alumnos_carrera[i] <span class="cf">for</span> i <span class="kw">in</span> indices_ord]</span>
+<span id="cb42-41"><a href="#cb42-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-42"><a href="#cb42-42" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="sc">{</span>carrera<span class="sc">}</span><span class="ss">  (promedio: </span><span class="sc">{</span>promedio<span class="sc">:.2f}</span><span class="ss">)"</span>)</span>
+<span id="cb42-43"><a href="#cb42-43" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"-"</span> <span class="op">*</span> <span class="dv">35</span>)</span>
+<span id="cb42-44"><a href="#cb42-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-45"><a href="#cb42-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> alumno <span class="kw">in</span> alumnos_ord:</span>
+<span id="cb42-46"><a href="#cb42-46" aria-hidden="true" tabindex="-1"></a>        cal   <span class="op">=</span> alumno[<span class="st">"calificacion"</span>]</span>
+<span id="cb42-47"><a href="#cb42-47" aria-hidden="true" tabindex="-1"></a>        nivel <span class="op">=</span> clasificar(cal)</span>
+<span id="cb42-48"><a href="#cb42-48" aria-hidden="true" tabindex="-1"></a>        marca <span class="op">=</span> <span class="st">"▲"</span> <span class="cf">if</span> cal <span class="op">&gt;</span> promedio <span class="cf">else</span> <span class="st">" "</span></span>
+<span id="cb42-49"><a href="#cb42-49" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>marca<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>alumno[<span class="st">'nombre'</span>]<span class="sc">:&lt;10}</span><span class="ss"> </span><span class="sc">{</span>cal<span class="sc">:.1f}</span><span class="ss">  </span><span class="sc">{</span>nivel<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Actuaría  (promedio: 5.75)
+-----------------------------------
+  ▲ Carlos     6.1  Suficiente
+    Pedro      5.4  Reprobado
+
+Física  (promedio: 8.23)
+-----------------------------------
+  ▲ Sofía      9.7  Sobresaliente
+    Luis       7.8  Bien
+    Roberto    7.2  Bien
+
+Matemáticas  (promedio: 8.57)
+-----------------------------------
+  ▲ Ana        9.2  Sobresaliente
+    María      8.5  Bien
+    Lucía      8.0  Bien</code></pre>
+</div>
+</div>
+<p>El ejemplo usa comprensiones de conjunto para obtener las carreras únicas, comprensiones de lista con filtro para seleccionar alumnos por carrera y extraer calificaciones, <code>enumerate()</code> para emparejar cada alumno con su índice, comprensiones anidadas para construir el orden descendente, y un <code>for</code> explícito para el reporte final porque su propósito es imprimir, no construir una colección. Todo lo que aparece aquí ha sido introducido en lecciones anteriores.</p>
+</section>
+<section id="lo-que-sigue" class="level2">
+<h2 class="anchored" data-anchor-id="lo-que-sigue">Lo que sigue</h2>
+<p>Con las comprensiones, el vocabulario central del lenguaje está prácticamente completo. Pero hay una dimensión que toda la serie ha ignorado deliberadamente: qué ocurre cuando algo falla. Hasta ahora el código ha trabajado con datos perfectos, listas que siempre tienen elementos, diccionarios que siempre tienen las claves que se piden, operaciones que siempre reciben el tipo correcto. En la práctica eso no ocurre nunca. Los programas reales reciben datos inesperados, intentan abrir archivos que no existen, encuentran claves ausentes en diccionarios. Cuando eso sucede, Python lanza una <em>excepción</em> y detiene la ejecución.</p>
+<p>Saber leer ese mensaje, saber anticiparlo y saber manejarlo es lo que separa el código que funciona en condiciones controladas del código que funciona en el mundo real. Eso es exactamente lo que introduce la siguiente lección.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
