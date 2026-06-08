@@ -93,6 +93,22 @@ Ver [`PROGRESS.md`](PROGRESS.md) para el estado actual y los capítulos pendient
 3. Al final del capítulo, agrega un enlace a los laboratorios oficiales si aplica
 4. Renderiza para verificar: `quarto render`
 
+### Consistencia en la notación
+
+Todas las traducciones deben seguir las convenciones notacionales establecidas en la sección *Notación y Álgebra Matricial Simple* del Capítulo 1:
+
+- $n$: número de observaciones; $p$: número de variables.
+- $x_{ij}$: valor de la $j$-ésima variable para la $i$-ésima observación.
+- $\mathbf{X}$: matriz $n \times p$ de predictores.
+- $x_i$: vector fila (observación $i$); $\mathbf{x}_j$: vector columna (variable $j$).
+- $y_i$: respuesta para la $i$-ésima observación; $\mathbf{y}$: vector de respuestas.
+- $\hat{\beta}$: coeficiente estimado; $\hat{y}$: valor predicho.
+- Vectores de longitud $n$ en negrita minúscula ($\mathbf{a}$); vectores más cortos en fuente normal ($a$).
+- Matrices en negrita mayúscula ($\mathbf{A}$); escalares en fuente normal ($a$).
+- $a \in \mathbb{R}$, $\mathbf{a} \in \mathbb{R}^n$, $\mathbf{A} \in \mathbb{R}^{r \times s}$.
+- Los números grandes usan separador de miles con llaves: $3{,}000$.
+- Las ecuaciones llevan etiqueta `\tag{2.1}` y se referencian como `@eq-` o simplemente "Ecuación 2.1".
+
 ## Despliegue
 
 El workflow de GitHub Actions (`.github/workflows/deploy.yml`) construye y publica automáticamente en GitHub Pages.

@@ -45,7 +45,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-ea2c7f5f25cb2f106c68b43028de7506.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-d0dcf73a2c6cfa2d496579af7b131e12.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -347,6 +347,225 @@ Figura&nbsp;4: Izquierda: representación del conjunto de datos de expresión g�
 <p>Para predecir valores cualitativos, como si un paciente sobrevive o muere, o si el mercado de valores aumenta o disminuye, se propuso el análisis discriminante lineal en 1936. En la década de 1940, varios autores presentaron un enfoque alternativo, la regresión logística. A principios de la década de 1970, se desarrolló el término <em>modelo lineal generalizado</em> para describir una clase completa de métodos de aprendizaje estadístico que incluyen tanto la regresión lineal como la logística como casos especiales.</p>
 <p>A finales de la década de 1970, ya estaban disponibles muchas más técnicas para aprender de los datos. Sin embargo, eran casi exclusivamente métodos lineales porque ajustar relaciones no lineales era computacionalmente difícil en ese momento. Para la década de 1980, la tecnología informática había mejorado lo suficiente como para que los métodos no lineales ya no fueran computacionalmente prohibitivos. A mediados de la década de 1980, se desarrollaron los árboles de clasificación y regresión, seguidos poco después por los modelos aditivos generalizados. Las redes neuronales ganaron popularidad en la década de 1980, y las máquinas de vectores de soporte surgieron en la década de 1990.</p>
 <p>Desde entonces, el aprendizaje estadístico ha emergido como un nuevo subcampo de la estadística, centrado en la modelización y predicción supervisada y no supervisada. En los últimos años, el progreso en el aprendizaje estadístico ha estado marcado por la creciente disponibilidad de software potente y relativamente fácil de usar, como el popular y gratuito sistema Python. Esto tiene el potencial de continuar la transformación del campo de un conjunto de técnicas utilizadas y desarrolladas principalmente por estadísticos y científicos de datos a un conjunto de herramientas ampliamente accesibles para cualquier persona interesada en el análisis de datos.</p>
+</section>
+<section id="este-libro" class="level2">
+<h2 class="anchored" data-anchor-id="este-libro">Este Libro</h2>
+<p><em>The Elements of Statistical Learning</em> (ESL) de Hastie, Tibshirani y Friedman se publicó por primera vez en 2001. Desde entonces, se ha convertido en una referencia importante sobre los fundamentos del aprendizaje estadístico y automático. Su éxito se debe a su tratamiento completo y detallado de muchos temas importantes en el aprendizaje estadístico, así como al hecho de que (en relación con muchos libros de texto de estadística de nivel superior) es accesible para una amplia audiencia. Sin embargo, el mayor factor detrás del éxito de ESL ha sido su naturaleza oportuna. En el momento de su publicación, el interés en el campo del aprendizaje estadístico comenzaba a explotar. ESL proporcionó una de las primeras introducciones accesibles y completas al tema.</p>
+<p>Desde que ESL se publicó por primera vez, el campo del aprendizaje estadístico ha seguido floreciendo. La expansión del campo ha tomado dos formas. El crecimiento más obvio ha involucrado el desarrollo de enfoques de aprendizaje estadístico nuevos y mejorados destinados a responder una variedad de preguntas científicas en numerosos campos. Sin embargo, el campo del aprendizaje estadístico también ha ampliado su audiencia. En la década de 1990, los aumentos en la capacidad computacional generaron un aumento del interés en el campo por parte de no estadísticos que estaban ansiosos por usar herramientas estadísticas de vanguardia para analizar sus datos. Desafortunadamente, la naturaleza altamente técnica de estos enfoques significaba que la comunidad de usuarios permanecía principalmente restringida a expertos en estadística, ciencias de la computación y campos relacionados con la formación (y el tiempo) para comprenderlos e implementarlos.</p>
+<p>En los últimos años, los paquetes de software nuevos y mejorados han aliviado significativamente la carga de implementación de muchos métodos de aprendizaje estadístico. Al mismo tiempo, ha habido un reconocimiento creciente en varios campos, desde los negocios hasta la atención médica, la genética, las ciencias sociales y más allá, de que el aprendizaje estadístico es una herramienta poderosa con importantes aplicaciones prácticas. Como resultado, el campo ha pasado de ser principalmente de interés académico a una disciplina generalizada, con una audiencia potencial enorme. Esta tendencia seguramente continuará con la creciente disponibilidad de enormes cantidades de datos y el software para analizarlos.</p>
+<p>El propósito de <em>An Introduction to Statistical Learning</em> (ISL) es facilitar la transición del aprendizaje estadístico de un campo académico a una disciplina generalizada. ISL no pretende reemplazar a ESL, que es un texto mucho más completo tanto en términos del número de enfoques considerados como de la profundidad con la que se exploran. Consideramos a ESL como un compañero importante para profesionales (con títulos de posgrado en estadística, aprendizaje automático o campos relacionados) que necesitan comprender los detalles técnicos detrás de los enfoques de aprendizaje estadístico. Sin embargo, la comunidad de usuarios de técnicas de aprendizaje estadístico se ha expandido para incluir individuos con una gama más amplia de intereses y antecedentes. Por lo tanto, hay un lugar para una versión menos técnica y más accesible de ESL.</p>
+<p>A lo largo de años enseñando estos temas, hemos descubierto que son de interés para estudiantes de maestría y doctorado en campos tan diversos como administración de empresas, biología y ciencias de la computación, así como para estudiantes universitarios de últimos años con orientación cuantitativa. Es importante que este grupo diverso pueda comprender los modelos, las intuiciones, y las fortalezas y debilidades de los diversos enfoques. Pero para esta audiencia, muchos de los detalles técnicos detrás de los métodos de aprendizaje estadístico, como los algoritmos de optimización y las propiedades teóricas, no son de interés primordial. Creemos que estos estudiantes no necesitan una comprensión profunda de estos aspectos para convertirse en usuarios informados de las diversas metodologías, y para contribuir a sus campos elegidos mediante el uso de herramientas de aprendizaje estadístico.</p>
+<p>ISL se basa en las siguientes cuatro premisas:</p>
+<ol type="1">
+<li><p>Muchos métodos de aprendizaje estadístico son relevantes y útiles en una amplia gama de disciplinas académicas y no académicas, más allá de las ciencias estadísticas. Creemos que muchos procedimientos contemporáneos de aprendizaje estadístico deberían, y lo harán, estar tan ampliamente disponibles y ser tan utilizados como lo son actualmente métodos clásicos como la regresión lineal. Como resultado, en lugar de intentar considerar todos los enfoques posibles (una tarea imposible), nos hemos concentrado en presentar los métodos que creemos que son más ampliamente aplicables.</p></li>
+<li><p>El aprendizaje estadístico no debe verse como una serie de cajas negras. Ningún enfoque único funcionará bien en todas las aplicaciones posibles. Sin comprender todos los engranajes dentro de la caja, o la interacción entre esos engranajes, es imposible seleccionar la mejor caja. Por lo tanto, hemos intentado describir cuidadosamente el modelo, la intuición, los supuestos y las compensaciones detrás de cada uno de los métodos que consideramos.</p></li>
+<li><p>Si bien es importante saber qué trabajo realiza cada engranaje, no es necesario tener las habilidades para construir la máquina dentro de la caja. Por lo tanto, hemos minimizado la discusión de los detalles técnicos relacionados con los procedimientos de ajuste y las propiedades teóricas. Suponemos que el lector se siente cómodo con conceptos matemáticos básicos, pero no asumimos un título de posgrado en ciencias matemáticas. Por ejemplo, casi hemos evitado por completo el uso del álgebra matricial, y es posible entender todo el libro sin un conocimiento detallado de matrices y vectores.</p></li>
+<li><p>Presuponemos que el lector está interesado en aplicar métodos de aprendizaje estadístico a problemas del mundo real. Para facilitar esto, así como para motivar las técnicas discutidas, hemos dedicado una sección dentro de cada capítulo a laboratorios de computación. En cada laboratorio, guiamos al lector a través de una aplicación realista de los métodos considerados en ese capítulo. Cuando hemos enseñado este material en nuestros cursos, hemos asignado aproximadamente un tercio del tiempo de clase a trabajar en los laboratorios, y los hemos encontrado extremadamente útiles. Muchos de los estudiantes menos orientados a la computación que inicialmente se sintieron intimidados por los laboratorios terminaron dominándolos en el transcurso del trimestre o semestre. Este libro apareció originalmente (2013, segunda edición 2021) con laboratorios de computación escritos en el lenguaje R. Desde entonces, ha habido una demanda creciente de implementaciones en Python de las técnicas importantes en aprendizaje estadístico. En consecuencia, esta versión tiene laboratorios en Python. Hay un número cada vez mayor de paquetes de Python disponibles, y mediante el examen de las importaciones al comienzo de cada laboratorio, los lectores verán que hemos seleccionado y utilizado cuidadosamente los más apropiados. También hemos proporcionado algo de código y funcionalidad adicional en nuestro paquete ISLP. Sin embargo, los laboratorios en ISL son autocontenidos, y pueden omitirse si el lector desea utilizar un paquete de software diferente o no desea aplicar los métodos discutidos a problemas del mundo real.</p></li>
+</ol>
+</section>
+<section id="quién-debería-leer-este-libro" class="level2">
+<h2 class="anchored" data-anchor-id="quién-debería-leer-este-libro">Quién Debería Leer Este Libro</h2>
+<p>Este libro está dirigido a cualquier persona interesada en utilizar métodos estadísticos modernos para la modelización y predicción a partir de datos. Este grupo incluye científicos, ingenieros, analistas de datos, científicos de datos y <em>quants</em>, pero también personas menos técnicas con títulos en campos no cuantitativos como las ciencias sociales o los negocios. Esperamos que el lector haya tenido al menos un curso elemental de estadística. Conocimientos de regresión lineal también son útiles, aunque no necesarios, ya que repasamos los conceptos clave detrás de la regresión lineal en el Capítulo 3. El nivel matemático de este libro es modesto, y no se requiere un conocimiento detallado de operaciones matriciales. Este libro proporciona una introducción a Python. La exposición previa a un lenguaje de programación, como MATLAB o R, es útil pero no necesaria.</p>
+<p>La primera edición de este libro de texto se ha utilizado para enseñar a estudiantes de maestría y doctorado en negocios, economía, ciencias de la computación, biología, ciencias de la tierra, psicología y muchas otras áreas de las ciencias físicas y sociales. También se ha utilizado para enseñar a estudiantes universitarios avanzados que ya han tomado un curso de regresión lineal. En el contexto de un curso matemáticamente más riguroso en el que ESL sirve como libro de texto principal, ISL podría utilizarse como texto complementario para la enseñanza de los aspectos computacionales de los diversos enfoques.</p>
+</section>
+<section id="notación-y-álgebra-matricial-simple" class="level2">
+<h2 class="anchored" data-anchor-id="notación-y-álgebra-matricial-simple">Notación y Álgebra Matricial Simple</h2>
+<p>Elegir la notación para un libro de texto es siempre una tarea difícil. En su mayor parte, adoptamos las mismas convenciones notacionales que ESL.</p>
+<p>Usaremos <span class="math inline">\(n\)</span> para representar el número de puntos de datos distintos, u observaciones, en nuestra muestra. Denotaremos con <span class="math inline">\(p\)</span> el número de variables que están disponibles para su uso en la realización de predicciones. Por ejemplo, el conjunto de datos Wage consta de 11 variables para 3,000 personas, por lo que tenemos <span class="math inline">\(n = 3{,}000\)</span> observaciones y <span class="math inline">\(p = 11\)</span> variables (como año, edad, raza y más). Tenga en cuenta que a lo largo de este libro, indicamos los nombres de las variables usando un color de fuente diferente: <code>VariableNombre</code>. En algunos ejemplos, <span class="math inline">\(p\)</span> puede ser bastante grande, del orden de miles o incluso millones; esta situación se da con bastante frecuencia, por ejemplo, en el análisis de datos biológicos modernos o datos de publicidad en línea.</p>
+<p>En general, denotaremos con <span class="math inline">\(x_{ij}\)</span> el valor de la <span class="math inline">\(j\)</span>-ésima variable para la <span class="math inline">\(i\)</span>-ésima observación, donde <span class="math inline">\(i = 1, 2, \dots, n\)</span> y <span class="math inline">\(j = 1, 2, \dots, p\)</span>. A lo largo de este libro, <span class="math inline">\(i\)</span> se utilizará para indexar las muestras u observaciones (de 1 a <span class="math inline">\(n\)</span>) y <span class="math inline">\(j\)</span> se utilizará para indexar las variables (de 1 a <span class="math inline">\(p\)</span>). Sea <span class="math inline">\(\mathbf{X}\)</span> una matriz <span class="math inline">\(n \times p\)</span> cuyo elemento <span class="math inline">\((i, j)\)</span>-ésimo es <span class="math inline">\(x_{ij}\)</span>. Es decir,</p>
+<p><span class="math display">\[
+\mathbf{X} = \begin{pmatrix}
+x_{11} &amp; x_{12} &amp; \dots &amp; x_{1p} \\
+x_{21} &amp; x_{22} &amp; \dots &amp; x_{2p} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+x_{n1} &amp; x_{n2} &amp; \dots &amp; x_{np}
+\end{pmatrix}.
+\]</span></p>
+<p>Para los lectores que no están familiarizados con las matrices, es útil visualizar <span class="math inline">\(\mathbf{X}\)</span> como una hoja de cálculo de números con <span class="math inline">\(n\)</span> filas y <span class="math inline">\(p\)</span> columnas.</p>
+<p>A veces nos interesaremos por las filas de <span class="math inline">\(\mathbf{X}\)</span>, que escribimos como <span class="math inline">\(x_1, x_2, \dots, x_n\)</span>. Aquí <span class="math inline">\(x_i\)</span> es un vector de longitud <span class="math inline">\(p\)</span>, que contiene las <span class="math inline">\(p\)</span> mediciones de las variables para la <span class="math inline">\(i\)</span>-ésima observación. Es decir,</p>
+<p><span class="math display">\[
+x_i = \begin{pmatrix} x_{i1} \\ x_{i2} \\ \vdots \\ x_{ip} \end{pmatrix}. \tag{1.1}
+\]</span></p>
+<p>(Los vectores se representan por defecto como columnas.) Por ejemplo, para los datos Wage, <span class="math inline">\(x_i\)</span> es un vector de longitud 11, que consiste en el año, la edad, la raza y otros valores para el <span class="math inline">\(i\)</span>-ésimo individuo. En otras ocasiones nos interesaremos por las columnas de <span class="math inline">\(\mathbf{X}\)</span>, que escribimos como <span class="math inline">\(\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_p\)</span>. Cada una es un vector de longitud <span class="math inline">\(n\)</span>. Es decir,</p>
+<p><span class="math display">\[
+\mathbf{x}_j = \begin{pmatrix} x_{1j} \\ x_{2j} \\ \vdots \\ x_{nj} \end{pmatrix}.
+\]</span></p>
+<p>Por ejemplo, para los datos Wage, <span class="math inline">\(\mathbf{x}_1\)</span> contiene los <span class="math inline">\(n = 3{,}000\)</span> valores del año.</p>
+<p>Usando esta notación, la matriz <span class="math inline">\(\mathbf{X}\)</span> puede escribirse como</p>
+<p><span class="math display">\[
+\mathbf{X} = \begin{pmatrix} \mathbf{x}_1 &amp; \mathbf{x}_2 &amp; \cdots &amp; \mathbf{x}_p \end{pmatrix},
+\]</span></p>
+<p>o</p>
+<p><span class="math display">\[
+\mathbf{X} = \begin{pmatrix} x_1^{\mathsf T} \\ x_2^{\mathsf T} \\ \vdots \\ x_n^{\mathsf T} \end{pmatrix}.
+\]</span></p>
+<p>La notación <span class="math inline">\(^{\mathsf T}\)</span> denota la transpuesta de una matriz o vector. Así, por ejemplo,</p>
+<p><span class="math display">\[
+\mathbf{X}^{\mathsf T} = \begin{pmatrix}
+x_{11} &amp; x_{21} &amp; \dots &amp; x_{n1} \\
+x_{12} &amp; x_{22} &amp; \dots &amp; x_{n2} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+x_{1p} &amp; x_{2p} &amp; \dots &amp; x_{np}
+\end{pmatrix},
+\]</span></p>
+<p>mientras que</p>
+<p><span class="math display">\[
+x_i^{\mathsf T} = \begin{pmatrix} x_{i1} &amp; x_{i2} &amp; \cdots &amp; x_{ip} \end{pmatrix}.
+\]</span></p>
+<p>Usamos <span class="math inline">\(y_i\)</span> para denotar la <span class="math inline">\(i\)</span>-ésima observación de la variable sobre la que deseamos hacer predicciones, como el salario. Por lo tanto, escribimos el conjunto de todas las <span class="math inline">\(n\)</span> observaciones en forma vectorial como</p>
+<p><span class="math display">\[
+\mathbf{y} = \begin{pmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{pmatrix}.
+\]</span></p>
+<p>Entonces nuestros datos observados consisten en <span class="math inline">\(\{(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)\}\)</span>, donde cada <span class="math inline">\(x_i\)</span> es un vector de longitud <span class="math inline">\(p\)</span>. (Si <span class="math inline">\(p = 1\)</span>, entonces <span class="math inline">\(x_i\)</span> es simplemente un escalar.)</p>
+<p>En este texto, un vector de longitud <span class="math inline">\(n\)</span> se denotará siempre en negrita minúscula; por ejemplo,</p>
+<p><span class="math display">\[
+\mathbf{a} = \begin{pmatrix} a_1 \\ a_2 \\ \vdots \\ a_n \end{pmatrix}.
+\]</span></p>
+<p>Sin embargo, los vectores que no son de longitud <span class="math inline">\(n\)</span> (como los vectores de características de longitud <span class="math inline">\(p\)</span>, como en (1.1)) se denotarán en fuente normal minúscula, por ejemplo, <span class="math inline">\(a\)</span>. Los escalares también se denotarán en fuente normal minúscula, por ejemplo, <span class="math inline">\(a\)</span>. En los raros casos en que estos dos usos de la fuente normal minúscula generen ambigüedad, aclararemos qué uso se pretende. Las matrices se denotarán usando negrita mayúscula, como <span class="math inline">\(\mathbf{A}\)</span>. Las variables aleatorias se denotarán usando mayúscula normal, por ejemplo, <span class="math inline">\(A\)</span>, independientemente de sus dimensiones.</p>
+<p>Ocasionalmente querremos indicar la dimensión de un objeto particular. Para indicar que un objeto es un escalar, usaremos la notación <span class="math inline">\(a \in \mathbb{R}\)</span>. Para indicar que es un vector de longitud <span class="math inline">\(k\)</span>, usaremos <span class="math inline">\(a \in \mathbb{R}^k\)</span> (o <span class="math inline">\(\mathbf{a} \in \mathbb{R}^n\)</span> si es de longitud <span class="math inline">\(n\)</span>). Indicaremos que un objeto es una matriz <span class="math inline">\(r \times s\)</span> usando <span class="math inline">\(\mathbf{A} \in \mathbb{R}^{r \times s}\)</span>.</p>
+<p>Hemos evitado usar álgebra matricial siempre que ha sido posible. Sin embargo, en algunas ocasiones resulta demasiado engorroso evitarla por completo. En estos raros casos es importante entender el concepto de multiplicación de dos matrices. Supongamos que <span class="math inline">\(\mathbf{A} \in \mathbb{R}^{r \times d}\)</span> y <span class="math inline">\(\mathbf{B} \in \mathbb{R}^{d \times s}\)</span>. Entonces el producto de <span class="math inline">\(\mathbf{A}\)</span> y <span class="math inline">\(\mathbf{B}\)</span> se denota <span class="math inline">\(\mathbf{A}\mathbf{B}\)</span>. El elemento <span class="math inline">\((i, j)\)</span>-ésimo de <span class="math inline">\(\mathbf{A}\mathbf{B}\)</span> se calcula multiplicando cada elemento de la <span class="math inline">\(i\)</span>-ésima fila de <span class="math inline">\(\mathbf{A}\)</span> por el elemento correspondiente de la <span class="math inline">\(j\)</span>-ésima columna de <span class="math inline">\(\mathbf{B}\)</span>. Es decir, <span class="math inline">\((\mathbf{A}\mathbf{B})_{ij} = \sum_{k=1}^d a_{ik} b_{kj}\)</span>. Como ejemplo, considere</p>
+<p><span class="math display">\[
+\mathbf{A} = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix} \quad \text{y} \quad \mathbf{B} = \begin{pmatrix} 5 &amp; 6 \\ 7 &amp; 8 \end{pmatrix}.
+\]</span></p>
+<p>Entonces</p>
+<p><span class="math display">\[
+\mathbf{A}\mathbf{B} = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}
+\begin{pmatrix} 5 &amp; 6 \\ 7 &amp; 8 \end{pmatrix}
+= \begin{pmatrix} 1\times5+2\times7 &amp; 1\times6+2\times8 \\ 3\times5+4\times7 &amp; 3\times6+4\times8 \end{pmatrix}
+= \begin{pmatrix} 19 &amp; 22 \\ 43 &amp; 50 \end{pmatrix}.
+\]</span></p>
+<p>Tenga en cuenta que esta operación produce una matriz <span class="math inline">\(r \times s\)</span>. Solo es posible calcular <span class="math inline">\(\mathbf{A}\mathbf{B}\)</span> si el número de columnas de <span class="math inline">\(\mathbf{A}\)</span> es el mismo que el número de filas de <span class="math inline">\(\mathbf{B}\)</span>.</p>
+</section>
+<section id="organización-de-este-libro" class="level2">
+<h2 class="anchored" data-anchor-id="organización-de-este-libro">Organización de Este Libro</h2>
+<p>El Capítulo 2 introduce la terminología básica y los conceptos detrás del aprendizaje estadístico. Este capítulo también presenta el clasificador de vecinos más cercanos K, un método muy simple que funciona sorprendentemente bien en muchos problemas. Los Capítulos 3 y 4 cubren métodos lineales clásicos para regresión y clasificación. En particular, el Capítulo 3 revisa la regresión lineal, el punto de partida fundamental para todos los métodos de regresión. En el Capítulo 4 discutimos dos de los métodos de clasificación clásicos más importantes, la regresión logística y el análisis discriminante lineal.</p>
+<p>Un problema central en todas las situaciones de aprendizaje estadístico implica elegir el mejor método para una aplicación determinada. Por lo tanto, en el Capítulo 5 introducimos la validación cruzada y el bootstrap, que pueden usarse para estimar la precisión de varios métodos diferentes con el fin de elegir el mejor.</p>
+<p>Gran parte de la investigación reciente en aprendizaje estadístico se ha concentrado en métodos no lineales. Sin embargo, los métodos lineales a menudo tienen ventajas sobre sus competidores no lineales en términos de interpretabilidad y, a veces, también de precisión. Por lo tanto, en el Capítulo 6 consideramos una serie de métodos lineales, tanto clásicos como más modernos, que ofrecen mejoras potenciales sobre la regresión lineal estándar. Estos incluyen la selección paso a paso, la regresión ridge, la regresión de componentes principales y el lasso.</p>
+<p>Los capítulos restantes se adentran en el mundo del aprendizaje estadístico no lineal. Primero introducimos en el Capítulo 7 varios métodos no lineales que funcionan bien para problemas con una sola variable de entrada. Luego mostramos cómo estos métodos pueden usarse para ajustar modelos aditivos no lineales cuando hay más de una entrada. En el Capítulo 8, investigamos métodos basados en árboles, incluyendo bagging, boosting y bosques aleatorios. Las máquinas de vectores de soporte, un conjunto de enfoques para realizar clasificación tanto lineal como no lineal, se discuten en el Capítulo 9. Cubrimos el aprendizaje profundo, un enfoque para la regresión y clasificación no lineales que ha recibido mucha atención en los últimos años, en el Capítulo 10. El Capítulo 11 explora el análisis de supervivencia, un enfoque de regresión especializado para el contexto en el que la variable de salida está censurada, es decir, no se observa completamente.</p>
+<p>En el Capítulo 12, consideramos el contexto no supervisado en el que tenemos variables de entrada pero ninguna variable de salida. En particular, presentamos el análisis de componentes principales, el agrupamiento de K-medias y el agrupamiento jerárquico. Finalmente, en el Capítulo 13 cubrimos el tema muy importante de las pruebas de hipótesis múltiples.</p>
+<p>Al final de cada capítulo, presentamos una o más secciones de laboratorio de Python en las que trabajamos sistemáticamente a través de aplicaciones de los diversos métodos discutidos en ese capítulo. Estos laboratorios demuestran las fortalezas y debilidades de los diversos enfoques, y también proporcionan una referencia útil para la sintaxis requerida para implementar los diversos métodos. El lector puede optar por trabajar en los laboratorios a su propio ritmo, o los laboratorios pueden ser el foco de sesiones grupales como parte de un entorno de aula. Dentro de cada laboratorio de Python, presentamos los resultados que obtuvimos cuando realizamos el laboratorio en el momento de escribir este libro. Sin embargo, se lanzan continuamente nuevas versiones de Python y, con el tiempo, los paquetes llamados en los laboratorios se actualizarán. Por lo tanto, en el futuro, es posible que los resultados mostrados en las secciones de laboratorio ya no se correspondan precisamente con los resultados obtenidos por el lector que realiza los laboratorios. Según sea necesario, publicaremos actualizaciones de los laboratorios en el sitio web del libro.</p>
+<p>Usamos el símbolo <span class="math inline">\(\bigstar\)</span> para denotar secciones o ejercicios que contienen conceptos más desafiantes. Estos pueden omitirse fácilmente por parte de los lectores que no deseen profundizar tanto en el material, o que carezcan de la formación matemática necesaria.</p>
+</section>
+<section id="conjuntos-de-datos-utilizados-en-laboratorios-y-ejercicios" class="level2">
+<h2 class="anchored" data-anchor-id="conjuntos-de-datos-utilizados-en-laboratorios-y-ejercicios">Conjuntos de Datos Utilizados en Laboratorios y Ejercicios</h2>
+<p>En este libro de texto, ilustramos los métodos de aprendizaje estadístico utilizando aplicaciones de marketing, finanzas, biología y otras áreas. El paquete ISLP contiene varios conjuntos de datos que son necesarios para realizar los laboratorios y ejercicios asociados con este libro. Otro conjunto de datos es parte de la distribución base de R (los datos USArrests), y mostramos cómo acceder a él desde Python en la Sección 12.5.1. La <a href="#tbl-datasets" class="quarto-xref">Tabla&nbsp;1</a> contiene un resumen de los conjuntos de datos necesarios para realizar los laboratorios y ejercicios. Un par de estos conjuntos de datos también están disponibles como archivos de texto en el sitio web del libro, para su uso en el Capítulo 2.</p>
+<div id="tbl-datasets" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-datasets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;1: Lista de conjuntos de datos necesarios para realizar los laboratorios y ejercicios de este libro de texto. Todos los conjuntos de datos están disponibles en el paquete ISLP, con la excepción de USArrests, que forma parte de la distribución base de R, pero accesible desde Python.
+</figcaption>
+<div aria-describedby="tbl-datasets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 38%">
+<col style="width: 61%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Nombre</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Auto</td>
+<td>Rendimiento de gasolina, potencia y otra información para automóviles.</td>
+</tr>
+<tr class="even">
+<td>Bikeshare</td>
+<td>Uso horario de un programa de bicicletas compartidas en Washington, DC.</td>
+</tr>
+<tr class="odd">
+<td>Boston</td>
+<td>Valores de viviendas y otra información sobre distritos censales de Boston.</td>
+</tr>
+<tr class="even">
+<td>BrainCancer</td>
+<td>Tiempos de supervivencia para pacientes diagnosticados con cáncer cerebral.</td>
+</tr>
+<tr class="odd">
+<td>Caravan</td>
+<td>Información sobre personas a las que se les ofrece seguro para caravanas.</td>
+</tr>
+<tr class="even">
+<td>Carseats</td>
+<td>Información sobre ventas de asientos para automóviles en 400 tiendas.</td>
+</tr>
+<tr class="odd">
+<td>College</td>
+<td>Características demográficas, matrícula y más para universidades de EE. UU.</td>
+</tr>
+<tr class="even">
+<td>Credit</td>
+<td>Información sobre deudas de tarjetas de crédito para 400 clientes.</td>
+</tr>
+<tr class="odd">
+<td>Default</td>
+<td>Registros de incumplimiento de clientes de una compañía de tarjetas de crédito.</td>
+</tr>
+<tr class="even">
+<td>Fund</td>
+<td>Rendimientos de 2,000 gestores de fondos de cobertura durante 50 meses.</td>
+</tr>
+<tr class="odd">
+<td>Hitters</td>
+<td>Registros y salarios de jugadores de béisbol.</td>
+</tr>
+<tr class="even">
+<td>Khan</td>
+<td>Mediciones de expresión génica para cuatro tipos de cáncer.</td>
+</tr>
+<tr class="odd">
+<td>NCI60</td>
+<td>Mediciones de expresión génica para 64 líneas celulares cancerosas.</td>
+</tr>
+<tr class="even">
+<td>NYSE</td>
+<td>Rendimientos, volatilidad y volumen para la Bolsa de Nueva York.</td>
+</tr>
+<tr class="odd">
+<td>OJ</td>
+<td>Información de ventas de jugo de naranja Citrus Hill y Minute Maid.</td>
+</tr>
+<tr class="even">
+<td>Portfolio</td>
+<td>Valores pasados de activos financieros, para uso en asignación de cartera.</td>
+</tr>
+<tr class="odd">
+<td>Publication</td>
+<td>Tiempo hasta la publicación de 244 ensayos clínicos.</td>
+</tr>
+<tr class="even">
+<td>Smarket</td>
+<td>Rendimientos porcentuales diarios del S&amp;P 500 durante un período de 5 años.</td>
+</tr>
+<tr class="odd">
+<td>USArrests</td>
+<td>Estadísticas de criminalidad por cada 100,000 habitantes en 50 estados de EE. UU.</td>
+</tr>
+<tr class="even">
+<td>Wage</td>
+<td>Datos de encuesta de ingresos para hombres en la región central del Atlántico de EE. UU.</td>
+</tr>
+<tr class="odd">
+<td>Weekly</td>
+<td>Rendimientos semanales del mercado de valores durante 21 años.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="sitio-web-del-libro" class="level2">
+<h2 class="anchored" data-anchor-id="sitio-web-del-libro">Sitio Web del Libro</h2>
+<p>El sitio web de este libro se encuentra en</p>
+<p><a href="https://www.statlearning.com" target="_blank">www.statlearning.com</a></p>
+<p>Contiene varios recursos, incluyendo el paquete de Python asociado con este libro y algunos conjuntos de datos adicionales.</p>
+</section>
+<section id="agradecimientos" class="level2">
+<h2 class="anchored" data-anchor-id="agradecimientos">Agradecimientos</h2>
+<p>Algunos de los gráficos de este libro fueron tomados de ESL: Figuras 6.7, 8.3 y 12.14. Todos los demás gráficos fueron producidos para la versión R de ISL, excepto la Figura 13.10, que difiere debido al software de Python que respalda el gráfico.</p>
 
 
 </section>
