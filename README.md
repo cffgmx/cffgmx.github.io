@@ -34,7 +34,14 @@ El contenido de las secciones **Piezas sueltas**, **Notas**, **Proyectos**, **Pr
 │       ├── _site/              ← Sitio generado por Quarto
 │       └── *.qmd               ← Lecciones en formato Quarto
 │
-├── proyectos/                  ← Artículos de la sección "Proyectos" (vacía)
+├── proyectos/                  ← Artículos de la sección "Proyectos"
+│   └── isl-esp/                ← ISL — Introducción al Aprendizaje Estadístico (Quarto)
+│       ├── index.html          ← Redirección → _site/
+│       ├── _quarto.yml
+│       ├── index.qmd
+│       ├── chapters/           ← 13 capítulos traducidos
+│       ├── Figures/            ← Figuras originales del libro
+│       └── _site/              ← Sitio generado por Quarto
 ├── notas/                      ← Artículos de la sección "Notas"
 │   └── notas-calculo-dif-varias-var.pdf
 └── material-recomendado/       ← Artículos de la sección "Material recomendado" (vacía)
@@ -63,7 +70,7 @@ El contenido de las secciones **Piezas sueltas**, **Notas**, **Proyectos**, **Pr
 | Inicio | — | Página de presentación personal |
 | Piezas sueltas | `piezas-sueltas/` | Textos propios sobre matemáticas y afines |
 | Programación | `programacion/` | Materiales de programación en español |
-| Proyectos | `proyectos/` | Proyectos de investigación y desarrollo |
+| Proyectos | `proyectos/` | Proyectos de investigación y desarrollo ([ISL](README.md#isl--introducción-al-aprendizaje-estadístico)) |
 | Notas | `notas/` | Apuntes de trabajo y textos en progreso |
 | Material recomendado | `material-recomendado/` | Libros, videos y recursos externos |
 
@@ -110,6 +117,7 @@ El sitio usa `location.hash` para que cada sección y artículo tenga su propia 
 - **Meta tags**: Open Graph (`og:title`, `og:description`, `og:url`, `og:type`) y Twitter Card para previsualización en redes sociales
 - **Meta description**: `<meta name="description">` controla el texto que aparece en resultados de búsqueda de Google
 - **Curso de Python**: [Quarto](https://quarto.org)
+- **Traducción ISL**: [Quarto](https://quarto.org)
 - **Servicio de hosting**: GitHub Pages (Jekyll desactivado)
 
 ## Tipos de entrada en las listas
@@ -163,6 +171,60 @@ Cada enlace en la navbar necesita dos cosas:
 - `href="#seccion"` permite navegación directa por URL.
 - `onclick="showPage('seccion', this)"` maneja el cambio de sección sin recargar.
 - La función `showPage` también oculta el visor si estaba abierto.
+
+## ISL — Introducción al Aprendizaje Estadístico
+
+### Descripción
+
+Traducción al español del libro **An Introduction to Statistical Learning with Applications in Python (ISLP)** de James, Witten, Hastie, Tibshirani y Taylor. El sitio completo de la traducción está disponible en:
+
+[https://cffga.github.io/proyectos/isl-esp/](https://cffga.github.io/proyectos/isl-esp/)
+
+La URL redirige automáticamente a `proyectos/isl-esp/_site/` mediante el archivo `index.html` que contiene un `<meta http-equiv="refresh">`.
+
+### Estructura
+
+```
+proyectos/isl-esp/
+├── index.html                  ← Redirección → _site/
+├── index.qmd                   ← Portada del libro
+├── _quarto.yml                 ← Configuración del sitio Quarto
+├── custom.scss                 ← Estilos personalizados
+├── PROGRESS.md                 ← Bitácora del proyecto
+├── README.md                   ← Documentación del proyecto
+├── .gitignore                  ← Ignora _freeze/, .quarto/, __pycache__/
+├── chapters/                   ← 13 capítulos en formato .qmd
+│   ├── 00-prefacio/
+│   ├── 01-introduccion/
+│   ├── 02-aprendizaje-estadistico/
+│   ├── ...
+│   └── 13-pruebas-multiples/
+├── Figures/                    ← Figuras originales del libro (PDF + PNG)
+├── environment.yml             ← Entorno Conda
+└── _site/                      ← Sitio compilado (HTML generado por Quarto)
+```
+
+### Cómo actualizar
+
+1. Editar los archivos fuente (`.qmd`) en `chapters/` o la portada `index.qmd`, la bitácora `PROGRESS.md`, etc.
+2. Recompilar el sitio:
+   ```bash
+   quarto render
+   ```
+3. Commitear y pushear:
+   ```bash
+   git add -A
+   git commit -m "Actualiza traducción ISL"
+   git push
+   ```
+
+### Notas
+
+- **Traducción**: solo cubre el texto explicativo. Los laboratorios y ejercicios no están traducidos. Cada capítulo incluye un enlace a los repositorios oficiales de ISLP.
+- **Figuras**: se trackean tanto los PDF originales como los PNG generados (~58 MB). Los PDF están en `Figures/ChapterX/` y los PNG en `Figures/ChapterX/png/`.
+- **`_site/`**: se trackea en git (~37 MB) para que GitHub Pages sirva el contenido directamente.
+- **`_freeze/`**: se ignora (se regenera con `quarto render`).
+- **Calidad**: se realizó una revisión exhaustiva de la traducción en todos los capítulos. Calificación general: Excelente. Se corrigieron errores puntuales en capítulos 4 y 5.
 
 ## Flujo de trabajo (Git)
 
