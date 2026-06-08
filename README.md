@@ -204,14 +204,25 @@ proyectos/isl-esp/
 └── _site/                      ← Sitio compilado (HTML generado por Quarto)
 ```
 
+### Requisitos para compilar
+
+- [Quarto](https://quarto.org/) >= 1.4
+- Python >= 3.12 con los paquetes listados en `environment.yml`
+- Crear el entorno:
+  ```bash
+  conda env create -f environment.yml
+  conda activate ISL
+  ```
+
 ### Cómo actualizar
 
-1. Editar los archivos fuente (`.qmd`) en `chapters/` o la portada `index.qmd`, la bitácora `PROGRESS.md`, etc.
-2. Recompilar el sitio:
+1. Activar el entorno Conda: `conda activate ISL`
+2. Editar los archivos fuente (`.qmd`) en `chapters/`, la portada `index.qmd`, la bitácora `PROGRESS.md`, etc.
+3. Recompilar el sitio:
    ```bash
    quarto render
    ```
-3. Commitear y pushear:
+4. Commitear y pushear:
    ```bash
    git add -A
    git commit -m "Actualiza traducción ISL"
@@ -222,9 +233,45 @@ proyectos/isl-esp/
 
 - **Traducción**: solo cubre el texto explicativo. Los laboratorios y ejercicios no están traducidos. Cada capítulo incluye un enlace a los repositorios oficiales de ISLP.
 - **Figuras**: se trackean tanto los PDF originales como los PNG generados (~58 MB). Los PDF están en `Figures/ChapterX/` y los PNG en `Figures/ChapterX/png/`.
-- **`_site/`**: se trackea en git (~37 MB) para que GitHub Pages sirva el contenido directamente.
-- **`_freeze/`**: se ignora (se regenera con `quarto render`).
 - **Calidad**: se realizó una revisión exhaustiva de la traducción en todos los capítulos. Calificación general: Excelente. Se corrigieron errores puntuales en capítulos 4 y 5.
+
+### Detalles técnicos
+
+#### Por qué `_site/` está en git
+
+Normalmente los directorios de salida (`_site/`, `_book/`, etc.) se ignoran en git porque se regeneran con cada build. Aquí se trackea deliberadamente para que GitHub Pages sirva el contenido directamente. Si `_site/` se ignorara, el sitio no se desplegaría a menos que se configure un workflow de CI/CD.
+
+#### Archivo de redirección (`index.html`)
+
+GitHub Pages busca un `index.html` en cada subdirectorio para servir contenido. El archivo `proyectos/isl-esp/index.html` contiene:
+
+```html
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>ISL — Introducción al Aprendizaje Estadístico</title>
+<meta http-equiv="refresh" content="0;url=_site/">
+```
+
+Esto hace que `cffga.github.io/proyectos/isl-esp/` redirija automáticamente a `.../isl-esp/_site/` donde está el sitio compilado. Sin este archivo, la URL limpia daría 404 aunque `_site/` funcione correctamente.
+
+#### `.gitignore`
+
+Modificado respecto al repositorio original de la traducción:
+
+| Regla | En ISL_esp original | En cffga.github.io | Razón |
+|---|---|---|---|
+| `_site/` | Ignorado | **No ignorado** | Necesario para GitHub Pages |
+| `*.pdf` | Ignorado | **No ignorado** | Los PDFs de Figures/ se trackean como fuente |
+| `_freeze/` | Ignorado | Ignorado | Cache de ejecución; se regenera solo |
+| `.quarto/` | Ignorado | Ignorado | Archivos internos de Quarto |
+
+#### `_freeze/`
+
+Quarto guarda en `_freeze/` los resultados de ejecución de celdas Python para no re-ejecutarlas en cada build. Se ignora en git porque se regenera automáticamente con `quarto render`. No afecta al sitio desplegado.
+
+#### Origen del proyecto
+
+Esta sección es una copia del repositorio original de la traducción, que reside en `~/Projects/ISL_esp/` con su propio historial git. Se migró aquí sin historial para integrarlo en el sitio personal. Cualquier cambio importante debe replicarse en ambos repositorios para mantener consistencia.
 
 ## Flujo de trabajo (Git)
 
