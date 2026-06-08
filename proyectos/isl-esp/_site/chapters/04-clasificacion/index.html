@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>4. Clasificación – ISL — Introducción al Aprendizaje Estadístico</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../chapters/05-metodos-remuestreo/index.html" rel="next">
+<link href="../../chapters/03-regresion-lineal/index.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-d0dcf73a2c6cfa2d496579af7b131e12.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/01-introduccion/index.html">Capítulos</a></li><li class="breadcrumb-item"><a href="../../chapters/04-clasificacion/index.html">4. Clasificación</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">ISL — Introducción al Aprendizaje Estadístico</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">El libro</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Portada</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/00-prefacio/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prefacio</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Capítulos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/01-introduccion/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Introducción</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/02-aprendizaje-estadistico/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Aprendizaje Estadístico</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/03-regresion-lineal/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Regresión Lineal</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/04-clasificacion/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">4. Clasificación</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/05-metodos-remuestreo/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5. Métodos de Remuestreo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/06-seleccion-modelos/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6. Selección de Modelos Lineales y Regularización</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/07-mas-alla-linealidad/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7. Más Allá de la Linealidad</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/08-arboles-decision/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">8. Métodos Basados en Árboles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/09-svm/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">9. Máquinas de Vectores de Soporte</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/10-aprendizaje-profundo/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10. Aprendizaje Profundo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/11-analisis-supervivencia/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11. Análisis de Supervivencia y Datos Censurados</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/12-aprendizaje-no-supervisado/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12. Aprendizaje No Supervisado</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/13-pruebas-multiples/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13. Pruebas Múltiples</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/01-introduccion/index.html">Capítulos</a></li><li class="breadcrumb-item"><a href="../../chapters/04-clasificacion/index.html">4. Clasificación</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">4. Clasificación</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="resumen" class="level2">
+<h2 class="anchored" data-anchor-id="resumen">Resumen</h2>
+<p>En este capítulo, abordamos problemas de <strong>clasificación</strong>, donde la variable respuesta es cualitativa o categórica. Predecir una respuesta cualitativa requiere un enfoque distinto al de la regresión lineal. Presentamos tres de los métodos de clasificación más utilizados: <strong>regresión logística</strong>, <strong>análisis de discriminante lineal</strong> (LDA) y <strong>análisis de discriminante cuadrático</strong> (QDA). También se discuten los <strong>K vecinos más cercanos</strong> (KNN), que fueron introducidos en el Capítulo 2. El capítulo concluye con un laboratorio práctico que aplica estos métodos al conjunto de datos <em>Smarket</em> y a datos de seguros.</p>
+</section>
+<section id="visión-general-de-la-clasificación" class="level2">
+<h2 class="anchored" data-anchor-id="visión-general-de-la-clasificación">Visión General de la Clasificación</h2>
+<p>La clasificación es probablemente la tarea de aprendizaje supervisado más utilizada. Aparece en campos como la medicina (diagnóstico), finanzas (detección de fraude), marketing (predicción de abandono), etc.</p>
+<p>Al igual que en regresión, tenemos un conjunto de entrenamiento <span class="math inline">\(\{(x_1, y_1), \ldots, (x_n, y_n)\}\)</span> donde cada <span class="math inline">\(x_i\)</span> es un vector de predictores y <span class="math inline">\(y_i\)</span> es la respuesta cualitativa, que puede tomar valores en un conjunto discreto de clases <span class="math inline">\(C_1, C_2, \ldots, C_K\)</span>.</p>
+<p>El objetivo es construir un clasificador <span class="math inline">\(f(X)\)</span> que asigne una observación a una de las <span class="math inline">\(K\)</span> clases. También nos interesa medir la <strong>incertidumbre</strong> de nuestras predicciones, por ejemplo a través de la <strong>probabilidad condicional</strong> <span class="math inline">\(P(Y = k \mid X = x_0)\)</span>.</p>
+</section>
+<section id="por-qué-no-regresión-lineal" class="level2">
+<h2 class="anchored" data-anchor-id="por-qué-no-regresión-lineal">¿Por Qué No Regresión Lineal?</h2>
+<p>Cuando la respuesta <span class="math inline">\(Y\)</span> es binaria (dos clases, codificadas como 0 y 1), la regresión lineal puede parecer un enfoque natural. Sin embargo, tiene varios inconvenientes:</p>
+<ol type="1">
+<li><strong>Predicciones fuera de rango</strong>: <span class="math inline">\(\hat{Y}\)</span> puede ser menor que 0 o mayor que 1, lo que no tiene sentido como probabilidad.</li>
+<li><strong>Interpretabilidad</strong>: con más de dos clases, la codificación numérica arbitraria (1, 2, 3) impone un orden que no necesariamente existe.</li>
+<li><strong>Mala calidad del ajuste</strong>: los errores no son homoscedásticos ni normales.</li>
+</ol>
+<p>Por estas razones, se prefieren métodos diseñados específicamente para clasificación.</p>
+</section>
+<section id="regresión-logística" class="level2">
+<h2 class="anchored" data-anchor-id="regresión-logística">Regresión Logística</h2>
+<section id="el-modelo-logístico" class="level3">
+<h3 class="anchored" data-anchor-id="el-modelo-logístico">El Modelo Logístico</h3>
+<p>En lugar de modelar <span class="math inline">\(Y\)</span> directamente, modelamos la <strong>probabilidad</strong> de que <span class="math inline">\(Y\)</span> pertenezca a una clase particular. Para la regresión logística simple con un predictor <span class="math inline">\(X\)</span>, usamos la <strong>función logística</strong>:</p>
+<p><span class="math display">\[p(X) = \frac{e^{\beta_0 + \beta_1 X}}{1 + e^{\beta_0 + \beta_1 X}}\]</span></p>
+<p>Esta función produce valores entre 0 y 1 para cualquier valor de <span class="math inline">\(X\)</span>. Reordenando, obtenemos las <strong>odds</strong>:</p>
+<p><span class="math display">\[\frac{p(X)}{1 - p(X)} = e^{\beta_0 + \beta_1 X}\]</span></p>
+<p>y el <strong>log-odds</strong> (logit):</p>
+<p><span class="math display">\[\log\left(\frac{p(X)}{1 - p(X)}\right) = \beta_0 + \beta_1 X\]</span></p>
+<p>El logit es lineal en <span class="math inline">\(X\)</span>, pero la probabilidad <span class="math inline">\(p(X)\)</span> no lo es.</p>
+<p>La <a href="#fig-4-1a" class="quarto-xref">Figura&nbsp;1</a> muestra la función logística ajustada a datos simulados, donde la respuesta binaria representa si un cliente incumplió o no un préstamo (datos <em>Default</em>). El panel izquierdo (<a href="#fig-4-1a" class="quarto-xref">Figura&nbsp;1</a>) usa el saldo como predictor en un rango limitado; el derecho (<a href="#fig-4-1b" class="quarto-xref">Figura&nbsp;2</a>) muestra la función logística completa.</p>
+<div id="fig-4-1a" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-1a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter4/png/4_1a.png" class="img-fluid figure-img" style="width:40.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-1a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1: Panel izquierdo: función logística ajustada a datos Default con saldo como predictor en el rango $0–$2000.
+</figcaption>
+</figure>
+</div>
+<div id="fig-4-1b" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-1b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter4/png/4_1b.png" class="img-fluid figure-img" style="width:40.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-1b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2: Panel derecho: función logística en el rango completo de saldo (hasta $3000).
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="estimación-de-los-coeficientes-de-regresión" class="level3">
+<h3 class="anchored" data-anchor-id="estimación-de-los-coeficientes-de-regresión">Estimación de los Coeficientes de Regresión</h3>
+<p>Los coeficientes <span class="math inline">\(\beta_0\)</span> y <span class="math inline">\(\beta_1\)</span> en (4.2) se estiman mediante <strong>máxima verosimilitud</strong> (EMV). La verosimilitud para una muestra de <span class="math inline">\(n\)</span> observaciones independientes es:</p>
+<p><span class="math display">\[\ell(\beta_0, \beta_1) = \prod_{i: y_i=1} p(x_i) \prod_{i: y_i=0} (1 - p(x_i))\]</span></p>
+<p>Maximizar esta función (o su logaritmo) produce las estimaciones <span class="math inline">\(\hat{\beta}_0\)</span> y <span class="math inline">\(\hat{\beta}_1\)</span>. Este proceso se realiza numéricamente, ya que no existe una solución cerrada como en regresión lineal.</p>
+<p>En la Tabla 4.1 se muestran los coeficientes estimados para la regresión logística de <em>default</em> sobre <em>balance</em>, junto con sus errores estándar, estadísticos <span class="math inline">\(z\)</span> y valores <span class="math inline">\(p\)</span>.</p>
+</section>
+<section id="predicciones" class="level3">
+<h3 class="anchored" data-anchor-id="predicciones">Predicciones</h3>
+<p>Una vez estimados los coeficientes, podemos calcular la probabilidad de incumplimiento para un saldo dado:</p>
+<p><span class="math display">\[\hat{p}(X) = \frac{e^{\hat{\beta}_0 + \hat{\beta}_1 X}}{1 + e^{\hat{\beta}_0 + \hat{\beta}_1 X}}\]</span></p>
+<p>Por ejemplo, con un saldo de $1000, la probabilidad estimada de incumplimiento es 0.00576; con $2000, 0.586. Esta no linealidad es una característica clave de la regresión logística.</p>
+<p>La <a href="#fig-4-2" class="quarto-xref">Figura&nbsp;3</a> muestra la curva logística ajustada con los datos Default, con las observaciones reales superpuestas (con dispersión aleatoria para visualizar la densidad).</p>
+<div id="fig-4-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter4/png/4_2.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3: Regresión logística en datos Default con saldo como predictor. Las marcas en la parte superior e inferior muestran observaciones de incumplidores y no incumplidores.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="regresión-logística-múltiple" class="level3">
+<h3 class="anchored" data-anchor-id="regresión-logística-múltiple">Regresión Logística Múltiple</h3>
+<p>Generalizamos la regresión logística a múltiples predictores:</p>
+<p><span class="math display">\[p(X) = \frac{e^{\beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p}}{1 + e^{\beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p}}\]</span></p>
+<p>o equivalentemente:</p>
+<p><span class="math display">\[\log\left(\frac{p(X)}{1 - p(X)}\right) = \beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p\]</span></p>
+<p>Para los datos <em>Default</em>, usando saldo, estudiante (indicador) e ingresos como predictores, los coeficientes estimados se muestran en la Tabla 4.3. Un resultado interesante es que el coeficiente de <em>estudiante</em> es negativo (los estudiantes tienen menor riesgo cuando se controla por saldo e ingresos), aunque en el análisis univariado parecía positivo. Esto se debe a una <strong>variable de confusión</strong>: los estudiantes tienden a tener saldos más altos.</p>
+<p>La <a href="#fig-4-12" class="quarto-xref">Figura&nbsp;4</a> muestra la regresión logística múltiple con dos predictores (saldo y estudiante) en los datos Default, ilustrando cómo se combinan predictores cuantitativos y cualitativos.</p>
+<div id="fig-4-12" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter4/png/4_12.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;4: Regresión logística múltiple con predictores de saldo y condición de estudiante para los datos Default.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="regresión-logística-multinomial" class="level3">
+<h3 class="anchored" data-anchor-id="regresión-logística-multinomial">Regresión Logística Multinomial</h3>
+<p>Para problemas con más de dos clases, usamos la <strong>regresión logística multinomial</strong>. Si <span class="math inline">\(Y\)</span> puede tomar valores <span class="math inline">\(1, 2, \ldots, K\)</span>, la probabilidad de pertenecer a la clase <span class="math inline">\(k\)</span> es:</p>
+<p><span class="math display">\[P(Y = k \mid X = x) = \frac{e^{\beta_{k0} + \beta_{k1} X_1 + \cdots + \beta_{kp} X_p}}{\sum_{\ell=1}^{K} e^{\beta_{\ell 0} + \beta_{\ell 1} X_1 + \cdots + \beta_{\ell p} X_p}}\]</span></p>
+<p>Se requieren <span class="math inline">\(K\)</span> conjuntos de coeficientes, pero solo <span class="math inline">\(K-1\)</span> son libres (por la restricción de que las probabilidades suman 1). En la práctica, se fija una clase de referencia, por ejemplo la clase <span class="math inline">\(K\)</span>, con coeficientes <span class="math inline">\(\beta_K = 0\)</span>.</p>
+</section>
+</section>
+<section id="modelos-generativos-para-clasificación" class="level2">
+<h2 class="anchored" data-anchor-id="modelos-generativos-para-clasificación">Modelos Generativos para Clasificación</h2>
+<p>Además de la regresión logística (que modela <span class="math inline">\(P(Y \mid X)\)</span> directamente), existen <strong>modelos generativos</strong> que modelan la <strong>distribución conjunta</strong> <span class="math inline">\(P(X, Y)\)</span> y luego usan el teorema de Bayes para obtener <span class="math inline">\(P(Y \mid X)\)</span>.</p>
+<section id="teorema-de-bayes-para-clasificación" class="level3">
+<h3 class="anchored" data-anchor-id="teorema-de-bayes-para-clasificación">Teorema de Bayes para Clasificación</h3>
+<p>Recordemos el teorema de Bayes para clasificación:</p>
+<p><span class="math display">\[P(Y = k \mid X = x) = \frac{\pi_k \, f_k(x)}{\sum_{\ell=1}^{K} \pi_\ell \, f_\ell(x)}\]</span></p>
+<p>donde:</p>
+<ul>
+<li><span class="math inline">\(\pi_k\)</span> es la <strong>probabilidad previa</strong> (prior) de la clase <span class="math inline">\(k\)</span> (proporción de observaciones de esa clase en la población)</li>
+<li><span class="math inline">\(f_k(x) = P(X = x \mid Y = k)\)</span> es la <strong>densidad</strong> de <span class="math inline">\(X\)</span> en la clase <span class="math inline">\(k\)</span></li>
+</ul>
+<p>Estimamos <span class="math inline">\(\pi_k\)</span> y <span class="math inline">\(f_k(x)\)</span> a partir de los datos de entrenamiento, y luego usamos Bayes para obtener <span class="math inline">\(P(Y = k \mid X = x)\)</span>. Asignamos una observación a la clase con mayor probabilidad posterior, lo que se conoce como el <strong>clasificador de Bayes</strong> (óptimo, pero inalcanzable porque no conocemos las distribuciones verdaderas).</p>
+<p>Diferentes supuestos sobre <span class="math inline">\(f_k(x)\)</span> dan lugar a diferentes métodos:</p>
+<ul>
+<li>Si <span class="math inline">\(X\)</span> es <strong>una dimensión</strong> y <span class="math inline">\(f_k(x)\)</span> es <strong>normal</strong> con varianza común <span class="math inline">\(\rightarrow\)</span> <strong>LDA univariado</strong></li>
+<li>Si <span class="math inline">\(X\)</span> es <strong>multivariante</strong> y <span class="math inline">\(f_k(x)\)</span> es normal <strong>con matriz de covarianza común</strong> <span class="math inline">\(\rightarrow\)</span> <strong>LDA</strong></li>
+<li>Si <span class="math inline">\(X\)</span> es <strong>multivariante</strong> y <span class="math inline">\(f_k(x)\)</span> es normal <strong>con matrices de covarianza distintas</strong> <span class="math inline">\(\rightarrow\)</span> <strong>QDA</strong></li>
+<li>Cada <span class="math inline">\(f_k(x)\)</span> se estima de forma no paramétrica <span class="math inline">\(\rightarrow\)</span> <strong>KNN</strong></li>
+</ul>
+</section>
+<section id="análisis-de-discriminante-lineal-para-p-1" class="level3">
+<h3 class="anchored" data-anchor-id="análisis-de-discriminante-lineal-para-p-1">Análisis de Discriminante Lineal para <span class="math inline">\(p = 1\)</span></h3>
+<p>Cuando <span class="math inline">\(p = 1\)</span> y <span class="math inline">\(f_k(x)\)</span> es normal con media <span class="math inline">\(\mu_k\)</span> y varianza <span class="math inline">\(\sigma^2\)</span>, la probabilidad posterior se simplifica a:</p>
+<p><span class="math display">\[P(Y = k \mid X = x) = \frac{\pi_k \, \frac{1}{\sqrt{2\pi}\sigma} \exp\left(-\frac{(x - \mu_k)^2}{2\sigma^2}\right)}{\sum_{\ell=1}^{K} \pi_\ell \, \frac{1}{\sqrt{2\pi}\sigma} \exp\left(-\frac{(x - \mu_\ell)^2}{2\sigma^2}\right)}\]</span></p>
+<p>Tomando logaritmos y simplificando, la regla de clasificación asigna <span class="math inline">\(x\)</span> a la clase <span class="math inline">\(k\)</span> que maximiza:</p>
+<p><span class="math display">\[\delta_k(x) = x \cdot \frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2} + \log(\pi_k)\]</span></p>
+<p>Esta es una <strong>función lineal</strong> en <span class="math inline">\(x\)</span>, de ahí el nombre de discriminante lineal. Los parámetros <span class="math inline">\(\mu_k\)</span>, <span class="math inline">\(\sigma^2\)</span> y <span class="math inline">\(\pi_k\)</span> se estiman a partir de los datos:</p>
+<ul>
+<li><span class="math inline">\(\hat{\pi}_k = n_k / n\)</span></li>
+<li><span class="math inline">\(\hat{\mu}_k = \frac{1}{n_k} \sum_{i: y_i=k} x_i\)</span></li>
+<li><span class="math inline">\(\hat{\sigma}^2 = \frac{1}{n - K} \sum_{k=1}^{K} \sum_{i: y_i=k} (x_i - \hat{\mu}_k)^2\)</span></li>
+</ul>
+<p>La <a href="#fig-4-5" class="quarto-xref">Figura&nbsp;5</a> ilustra el LDA univariado aplicado a los datos <em>Default</em> usando el saldo como predictor, mostrando las densidades normales ajustadas para cada clase y la frontera de decisión resultante.</p>
+<div id="fig-4-5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter4/png/4_5.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5: LDA univariado para los datos Default usando saldo como predictor. Se muestran las densidades normales ajustadas y la frontera de decisión.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="análisis-de-discriminante-lineal-para-p-1-1" class="level3">
+<h3 class="anchored" data-anchor-id="análisis-de-discriminante-lineal-para-p-1-1">Análisis de Discriminante Lineal para <span class="math inline">\(p &gt; 1\)</span></h3>
+<p>Cuando <span class="math inline">\(p &gt; 1\)</span>, <span class="math inline">\(f_k(x)\)</span> se modela como una <strong>normal multivariante</strong> con media <span class="math inline">\(\mu_k\)</span> y matriz de covarianza común <span class="math inline">\(\Sigma\)</span> (compartida por todas las clases):</p>
+<p><span class="math display">\[f_k(x) = \frac{1}{(2\pi)^{p/2} |\Sigma|^{1/2}} \exp\left(-\frac{1}{2} (x - \mu_k)^T \Sigma^{-1} (x - \mu_k)\right)\]</span></p>
+<p>La función discriminante lineal es:</p>
+<p><span class="math display">\[\delta_k(x) = x^T \Sigma^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma^{-1} \mu_k + \log \pi_k\]</span></p>
+<p>La frontera de decisión entre dos clases <span class="math inline">\(k\)</span> y <span class="math inline">\(\ell\)</span> es el conjunto de puntos donde <span class="math inline">\(\delta_k(x) = \delta_\ell(x)\)</span>, que es un <strong>hiperplano</strong> en el espacio de predictores.</p>
+<p>La <a href="#fig-4-6" class="quarto-xref">Figura&nbsp;6</a> muestra el LDA multivariante aplicado a los datos <em>Default</em> usando saldo e ingresos, con la frontera de decisión lineal que separa a los clientes que incumplen de los que no.</p>
+<div id="fig-4-6" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter4/png/4_6.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;6: LDA multivariante para los datos Default con dos predictores. La línea recta muestra la frontera de decisión lineal.
+</figcaption>
+</figure>
+</div>
+<p>La <a href="#fig-4-4" class="quarto-xref">Figura&nbsp;7</a> compara la frontera de decisión del LDA (lineal) con la de QDA (cuadrática) en datos simulados, ilustrando cuándo cada una es más apropiada.</p>
+<div id="fig-4-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter4/png/4_4.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;7: Comparación de fronteras de decisión: LDA (lineal) vs QDA (cuadrática) en datos simulados.
+</figcaption>
+</figure>
+</div>
+<section id="tasa-de-error-de-clasificación-matriz-de-confusión" class="level4">
+<h4 class="anchored" data-anchor-id="tasa-de-error-de-clasificación-matriz-de-confusión">Tasa de Error de Clasificación (Matriz de Confusión)</h4>
+<p>Para evaluar el rendimiento de un clasificador, construimos una <strong>matriz de confusión</strong> que tabula las clasificaciones correctas e incorrectas. La <a href="#fig-4-3" class="quarto-xref">Figura&nbsp;8</a> muestra una matriz de confusión típica para un problema de clasificación binaria.</p>
+<div id="fig-4-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter4/png/4_3.png" class="img-fluid figure-img" style="width:45.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;8: Matriz de confusión que muestra verdaderos positivos, verdaderos negativos, falsos positivos y falsos negativos.
+</figcaption>
+</figure>
+</div>
+<p>A partir de la matriz de confusión, derivamos métricas como:</p>
+<ul>
+<li><strong>Tasa de error</strong> = (FP + FN) / total</li>
+<li><strong>Exactitud</strong> = (VP + VN) / total = 1 - tasa de error</li>
+<li><strong>Tasa de verdaderos positivos</strong> (sensibilidad) = VP / (VP + FN)</li>
+<li><strong>Tasa de falsos positivos</strong> = FP / (FP + VN)</li>
+<li><strong>Precisión positiva</strong> (precision) = VP / (VP + FP)</li>
+</ul>
+</section>
+</section>
+<section id="análisis-de-discriminante-cuadrático-qda" class="level3">
+<h3 class="anchored" data-anchor-id="análisis-de-discriminante-cuadrático-qda">Análisis de Discriminante Cuadrático (QDA)</h3>
+<p>El QDA relaja el supuesto de covarianza común. Cada clase tiene su propia matriz de covarianza <span class="math inline">\(\Sigma_k\)</span>:</p>
+<p><span class="math display">\[f_k(x) = \frac{1}{(2\pi)^{p/2} |\Sigma_k|^{1/2}} \exp\left(-\frac{1}{2} (x - \mu_k)^T \Sigma_k^{-1} (x - \mu_k)\right)\]</span></p>
+<p>La función discriminante se vuelve <strong>cuadrática</strong> en <span class="math inline">\(x\)</span>:</p>
+<p><span class="math display">\[\delta_k(x) = -\frac{1}{2} (x - \mu_k)^T \Sigma_k^{-1} (x - \mu_k) - \frac{1}{2} \log |\Sigma_k| + \log \pi_k\]</span></p>
+<p>QDA es más flexible que LDA, pero requiere estimar más parámetros (cada <span class="math inline">\(\Sigma_k\)</span> tiene <span class="math inline">\(p(p+1)/2\)</span> parámetros), por lo que necesita más datos.</p>
+<p>La <a href="#fig-4-7" class="quarto-xref">Figura&nbsp;9</a> muestra la aplicación de QDA a datos simulados donde las clases tienen diferentes estructuras de covarianza, destacando la frontera de decisión curva.</p>
+<div id="fig-4-7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter4/png/4_7.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;9: QDA aplicado a datos simulados con diferentes matrices de covarianza por clase. La frontera de decisión es curva (cuadrática).
+</figcaption>
+</figure>
+</div>
+<p>La <a href="#fig-4-13" class="quarto-xref">Figura&nbsp;10</a> y <a href="#fig-4-14" class="quarto-xref">Figura&nbsp;11</a> proporcionan una comparación visual más detallada de LDA y QDA en datos simulados adicionales, mostrando cómo la elección entre ambos depende de la estructura de covarianza de los datos.</p>
+<div id="fig-4-13" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter4/png/4_13.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;10: Datos simulados para ilustrar la diferencia entre LDA y QDA.
+</figcaption>
+</figure>
+</div>
+<div id="fig-4-14" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-14-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter4/png/4_14.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-14-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;11: Comparación de fronteras de decisión LDA y QDA en datos simulados.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="naive-bayes" class="level3">
+<h3 class="anchored" data-anchor-id="naive-bayes">Naive Bayes</h3>
+<p><strong>Naive Bayes</strong> es un enfoque generativo alternativo que asume que los predictores son <strong>condicionalmente independientes</strong> dada la clase:</p>
+<p><span class="math display">\[f_k(x) = f_{k1}(x_1) \times f_{k2}(x_2) \times \cdots \times f_{kp}(x_p)\]</span></p>
+<p>Cada <span class="math inline">\(f_{kj}\)</span> se estima por separado (por ejemplo, como normal univariada o mediante estimación de densidad no paramétrica). Este supuesto simplifica enormemente la estimación, aunque es poco realista en la práctica.</p>
+<p>Sorprendentemente, Naive Bayes puede funcionar muy bien incluso cuando la independencia condicional no se cumple, y es especialmente útil cuando <span class="math inline">\(p\)</span> es grande.</p>
+</section>
+</section>
+<section id="comparación-de-métodos-de-clasificación" class="level2">
+<h2 class="anchored" data-anchor-id="comparación-de-métodos-de-clasificación">Comparación de Métodos de Clasificación</h2>
+<p>La <a href="#fig-4-8" class="quarto-xref">Figura&nbsp;12</a> y <a href="#fig-4-9" class="quarto-xref">Figura&nbsp;13</a> comparan el rendimiento de varios clasificadores en diferentes escenarios, mostrando la tasa de error de prueba en función de la flexibilidad del modelo.</p>
+<div id="fig-4-8" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter4/png/4_8.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;12: Comparación de tasas de error de prueba para diferentes clasificadores en datos simulados.
+</figcaption>
+</figure>
+</div>
+<div id="fig-4-9" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter4/png/4_9.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;13: Tasa de error de prueba vs flexibilidad del modelo para varios métodos de clasificación.
+</figcaption>
+</figure>
+</div>
+<section id="curvas-roc" class="level3">
+<h3 class="anchored" data-anchor-id="curvas-roc">Curvas ROC</h3>
+<p>La <strong>curva ROC</strong> (Receiver Operating Characteristic) es una herramienta para visualizar el rendimiento de un clasificador binario variando el umbral de decisión. Representa la tasa de verdaderos positivos (sensibilidad) frente a la tasa de falsos positivos (1 – especificidad) para todos los umbrales posibles.</p>
+<p>La <a href="#fig-4-10a" class="quarto-xref">Figura&nbsp;14</a> y <a href="#fig-4-10b" class="quarto-xref">Figura&nbsp;15</a> muestran curvas ROC para la regresión logística en los datos <em>Default</em> (entrenamiento y prueba).</p>
+<div id="fig-4-10a" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-10a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter4/png/4_10a.png" class="img-fluid figure-img" style="width:40.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-10a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;14: Curva ROC para regresión logística en datos Default: conjunto de entrenamiento.
+</figcaption>
+</figure>
+</div>
+<div id="fig-4-10b" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-10b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter4/png/4_10b.png" class="img-fluid figure-img" style="width:40.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-10b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;15: Curva ROC para regresión logística en datos Default: conjunto de prueba.
+</figcaption>
+</figure>
+</div>
+<p>El <strong>AUC</strong> (área bajo la curva ROC) es una métrica resumen: un AUC de 1 indica un clasificador perfecto, mientras que 0.5 indica un clasificador aleatorio. En la práctica, valores superiores a 0.8 se consideran buenos.</p>
+<p>La <a href="#fig-4-11" class="quarto-xref">Figura&nbsp;16</a> compara KNN y regresión logística en datos simulados, mostrando que KNN puede superar a la regresión logística cuando la frontera de decisión verdadera es no lineal, pero requiere más datos y una buena elección de <span class="math inline">\(K\)</span>.</p>
+<div id="fig-4-11" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter4/png/4_11.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;16: Comparación de KNN vs regresión logística en datos simulados con frontera de decisión no lineal.
+</figcaption>
+</figure>
+</div>
+<p>La <a href="#fig-4-15" class="quarto-xref">Figura&nbsp;17</a> compara las curvas ROC de diferentes clasificadores en un mismo conjunto de datos.</p>
+<div id="fig-4-15" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter4/png/4_15.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;17: Comparación de curvas ROC para diferentes métodos de clasificación.
+</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+</section>
+<section id="laboratorio" class="level2">
+<h2 class="anchored" data-anchor-id="laboratorio">Laboratorio</h2>
+<p>Los laboratorios con el código completo de este capítulo están disponibles en el sitio oficial del libro: <a href="https://www.statlearning.com" target="_blank">statlearning.com</a>. También puedes acceder a los notebooks en el repositorio oficial de ISLP: <a href="https://github.com/intro-stat-learning/ISLP_labs" target="_blank">ISLP en GitHub</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/cffga\.github\.io\/proyectos\/isl-esp");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../chapters/03-regresion-lineal/index.html" class="pagination-link" aria-label="3. Regresión Lineal">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">3. Regresión Lineal</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../chapters/05-metodos-remuestreo/index.html" class="pagination-link" aria-label="5. Métodos de Remuestreo">
+        <span class="nav-page-text">5. Métodos de Remuestreo</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

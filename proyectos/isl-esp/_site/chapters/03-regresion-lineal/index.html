@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3. Regresión Lineal – ISL — Introducción al Aprendizaje Estadístico</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../chapters/04-clasificacion/index.html" rel="next">
+<link href="../../chapters/02-aprendizaje-estadistico/index.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-d0dcf73a2c6cfa2d496579af7b131e12.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/01-introduccion/index.html">Capítulos</a></li><li class="breadcrumb-item"><a href="../../chapters/03-regresion-lineal/index.html">3. Regresión Lineal</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">ISL — Introducción al Aprendizaje Estadístico</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">El libro</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Portada</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/00-prefacio/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prefacio</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Capítulos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/01-introduccion/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Introducción</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/02-aprendizaje-estadistico/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Aprendizaje Estadístico</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/03-regresion-lineal/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">3. Regresión Lineal</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/04-clasificacion/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4. Clasificación</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/05-metodos-remuestreo/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5. Métodos de Remuestreo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/06-seleccion-modelos/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6. Selección de Modelos Lineales y Regularización</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/07-mas-alla-linealidad/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7. Más Allá de la Linealidad</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/08-arboles-decision/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">8. Métodos Basados en Árboles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/09-svm/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">9. Máquinas de Vectores de Soporte</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/10-aprendizaje-profundo/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10. Aprendizaje Profundo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/11-analisis-supervivencia/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11. Análisis de Supervivencia y Datos Censurados</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/12-aprendizaje-no-supervisado/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12. Aprendizaje No Supervisado</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/13-pruebas-multiples/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13. Pruebas Múltiples</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/01-introduccion/index.html">Capítulos</a></li><li class="breadcrumb-item"><a href="../../chapters/03-regresion-lineal/index.html">3. Regresión Lineal</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">3. Regresión Lineal</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="regresión-lineal" class="level2">
+<h2 class="anchored" data-anchor-id="regresión-lineal">Regresión Lineal</h2>
+<p>En el Capítulo 2, presentamos el contexto del conjunto de datos Advertising (Figura 2.1), que consiste en las ventas de un producto en 200 mercados diferentes, junto con los presupuestos de publicidad para tres medios: TV, radio y periódico. En este capítulo, analizamos el uso de la regresión lineal para predecir las ventas sobre la base de los presupuestos de publicidad. El conjunto de datos Advertising nos servirá para ilustrar los conceptos de la regresión lineal. Al examinar los datos de Advertising, podemos hacer algunas preguntas:</p>
+<ol type="1">
+<li>¿Existe una relación entre el presupuesto de publicidad y las ventas?</li>
+<li>¿Qué tan fuerte es la relación entre el presupuesto de publicidad y las ventas?</li>
+<li>¿Qué medios están asociados con las ventas?</li>
+<li>¿Qué tan grande es la asociación entre cada medio y las ventas?</li>
+<li>¿Con qué precisión podemos predecir las ventas futuras?</li>
+<li>¿La relación es lineal?</li>
+<li>¿Existe sinergia entre los medios de publicidad?</li>
+</ol>
+<p>Resulta que la regresión lineal puede usarse para responder cada una de estas preguntas. Primero discutiremos todas estas preguntas en un contexto general, y luego volveremos a ellas en este contexto específico en la Sección 3.4.</p>
+</section>
+<section id="regresión-lineal-simple" class="level2">
+<h2 class="anchored" data-anchor-id="regresión-lineal-simple">Regresión Lineal Simple</h2>
+<p>La regresión lineal simple cumple con su nombre: es un enfoque muy directo para predecir una respuesta cuantitativa <span class="math inline">\(Y\)</span> sobre la base de una única variable predictora <span class="math inline">\(X\)</span>. Asume que existe una relación aproximadamente lineal entre <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>. Matemáticamente, podemos escribir esta relación lineal como</p>
+<p><span class="math display">\[Y \approx \beta_0 + \beta_1 X. \tag{3.1}\]</span></p>
+<p>Podemos leer “<span class="math inline">\(\approx\)</span>” como “es aproximadamente modelada por”. A veces describiremos (3.1) diciendo que estamos regresando <span class="math inline">\(Y\)</span> sobre <span class="math inline">\(X\)</span> (o <span class="math inline">\(Y\)</span> sobre <span class="math inline">\(X\)</span>).</p>
+<p>Por ejemplo, <span class="math inline">\(X\)</span> podría representar la publicidad en TV e <span class="math inline">\(Y\)</span> las ventas. Entonces podemos regresar las ventas sobre TV ajustando el modelo</p>
+<p><span class="math display">\[\text{ventas} \approx \beta_0 + \beta_1 \times \text{TV}.\]</span></p>
+<p>En la Ecuación 3.1, <span class="math inline">\(\beta_0\)</span> y <span class="math inline">\(\beta_1\)</span> son dos constantes desconocidas que representan los términos de intercepto y pendiente en el modelo lineal. Juntos, <span class="math inline">\(\beta_0\)</span> y <span class="math inline">\(\beta_1\)</span> se conocen como los coeficientes o parámetros del modelo.</p>
+<p>Una vez que hemos usado nuestros datos de entrenamiento para producir estimaciones <span class="math inline">\(\hat{\beta}_0\)</span> y <span class="math inline">\(\hat{\beta}_1\)</span> para los coeficientes del modelo, podemos predecir las ventas futuras basándonos en un valor particular de publicidad en TV mediante el cálculo</p>
+<p><span class="math display">\[\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x, \tag{3.2}\]</span></p>
+<p>donde <span class="math inline">\(\hat{y}\)</span> indica una predicción de <span class="math inline">\(Y\)</span> basada en <span class="math inline">\(X = x\)</span>. Aquí usamos un símbolo de sombrero, <span class="math inline">\(\hat{}\)</span>, para denotar el valor estimado de un parámetro o coeficiente desconocido, o para denotar el valor predicho de la respuesta.</p>
+<section id="estimación-de-los-coeficientes" class="level3">
+<h3 class="anchored" data-anchor-id="estimación-de-los-coeficientes">Estimación de los Coeficientes</h3>
+<p>En la práctica, <span class="math inline">\(\beta_0\)</span> y <span class="math inline">\(\beta_1\)</span> son desconocidos. Así que antes de poder usar (3.1) para hacer predicciones, debemos usar datos para estimar los coeficientes. Sean</p>
+<p><span class="math display">\[(x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\]</span></p>
+<p><span class="math inline">\(n\)</span> pares de observaciones, cada uno consistente en una medición de <span class="math inline">\(X\)</span> y una medición de <span class="math inline">\(Y\)</span>. En el ejemplo de Advertising, este conjunto de datos consiste en el presupuesto de publicidad en TV y las ventas del producto en <span class="math inline">\(n = 200\)</span> mercados diferentes. Nuestro objetivo es obtener estimaciones de los coeficientes <span class="math inline">\(\hat{\beta}_0\)</span> y <span class="math inline">\(\hat{\beta}_1\)</span> tales que el modelo lineal (3.1) se ajuste bien a los datos disponibles —es decir, que <span class="math inline">\(y_i \approx \hat{\beta}_0 + \hat{\beta}_1 x_i\)</span> para <span class="math inline">\(i = 1, \ldots, n\)</span>. En otras palabras, queremos encontrar un intercepto <span class="math inline">\(\hat{\beta}_0\)</span> y una pendiente <span class="math inline">\(\hat{\beta}_1\)</span> tales que la línea resultante esté lo más cerca posible de los <span class="math inline">\(n = 200\)</span> puntos de datos. Hay varias formas de medir la cercanía. Sin embargo, el enfoque más común implica minimizar el criterio de mínimos cuadrados, y adoptamos ese enfoque en este capítulo. Los enfoques alternativos se considerarán en el Capítulo 6.</p>
+<p>Sea <span class="math inline">\(\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_i\)</span> la predicción para <span class="math inline">\(Y\)</span> basada en el <span class="math inline">\(i\)</span>-ésimo valor de <span class="math inline">\(X\)</span>. Entonces <span class="math inline">\(e_i = y_i - \hat{y}_i\)</span> representa el <span class="math inline">\(i\)</span>-ésimo residual —esta es la diferencia entre el <span class="math inline">\(i\)</span>-ésimo valor observado de la respuesta y el <span class="math inline">\(i\)</span>-ésimo valor de la respuesta predicho por nuestro modelo lineal. Definimos la suma de cuadrados residual (RSS) como</p>
+<p><span class="math display">\[\text{RSS} = e_1^2 + e_2^2 + \cdots + e_n^2,\]</span></p>
+<p>o equivalentemente como</p>
+<p><span class="math display">\[\text{RSS} = (y_1 - \hat{\beta}_0 - \hat{\beta}_1 x_1)^2 + (y_2 - \hat{\beta}_0 - \hat{\beta}_1 x_2)^2 + \cdots + (y_n - \hat{\beta}_0 - \hat{\beta}_1 x_n)^2. \tag{3.3}\]</span></p>
+<p>El enfoque de mínimos cuadrados elige <span class="math inline">\(\hat{\beta}_0\)</span> y <span class="math inline">\(\hat{\beta}_1\)</span> para minimizar la RSS. Usando algo de cálculo, se puede mostrar que los minimizadores son</p>
+<p><span class="math display">\[\hat{\beta}_1 = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n (x_i - \bar{x})^2}, \qquad \hat{\beta}_0 = \bar{y} - \hat{\beta}_1 \bar{x}, \tag{3.4}\]</span></p>
+<p>donde <span class="math inline">\(\bar{y} \equiv \frac{1}{n}\sum_{i=1}^n y_i\)</span> y <span class="math inline">\(\bar{x} \equiv \frac{1}{n}\sum_{i=1}^n x_i\)</span> son las medias muestrales. En otras palabras, (3.4) define las estimaciones de coeficientes de mínimos cuadrados para la regresión lineal simple.</p>
+<p>La <a href="#fig-3-1" class="quarto-xref">Figura&nbsp;1</a> muestra el ajuste de regresión lineal simple a los datos de Advertising, donde <span class="math inline">\(\hat{\beta}_0 = 7.03\)</span> y <span class="math inline">\(\hat{\beta}_1 = 0.0475\)</span>. En otras palabras, según esta aproximación, un adicional de $1,000 gastados en publicidad en TV está asociado con la venta de aproximadamente 47.5 unidades adicionales del producto.</p>
+<div id="fig-3-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter3/png/3_1.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1: Para los datos de Advertising, se muestra el ajuste de mínimos cuadrados para la regresión de ventas sobre TV. El ajuste se encuentra minimizando la suma de cuadrados residual. Cada segmento de línea gris representa un residual. En este caso, un ajuste lineal captura la esencia de la relación, aunque sobreestima la tendencia en la parte izquierda del gráfico.
+</figcaption>
+</figure>
+</div>
+<p>En la <a href="#fig-3-2" class="quarto-xref">Figura&nbsp;2</a>, hemos calculado la RSS para varios valores de <span class="math inline">\(\beta_0\)</span> y <span class="math inline">\(\beta_1\)</span>, usando los datos de Advertising con ventas como respuesta y TV como predictor. En cada gráfico, el punto rojo representa el par de estimaciones de mínimos cuadrados <span class="math inline">\((\hat{\beta}_0, \hat{\beta}_1)\)</span> dado por (3.4). Estos valores minimizan claramente la RSS.</p>
+<div id="fig-3-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter3/png/3_2a.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2: Gráficos de contorno y tridimensionales de la RSS para los datos de Advertising, usando ventas como respuesta y TV como predictor. Los puntos rojos corresponden a las estimaciones de mínimos cuadrados <span class="math inline">\(\hat{\beta}_0\)</span> y <span class="math inline">\(\hat{\beta}_1\)</span>.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="evaluación-de-la-precisión-de-las-estimaciones-de-los-coeficientes" class="level3">
+<h3 class="anchored" data-anchor-id="evaluación-de-la-precisión-de-las-estimaciones-de-los-coeficientes">Evaluación de la Precisión de las Estimaciones de los Coeficientes</h3>
+<p>Recordemos de (2.1) que asumimos que la verdadera relación entre <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span> toma la forma <span class="math inline">\(Y = f(X) + \epsilon\)</span> para alguna función desconocida <span class="math inline">\(f\)</span>, donde <span class="math inline">\(\epsilon\)</span> es un término de error aleatorio con media cero. Si <span class="math inline">\(f\)</span> se aproxima mediante una función lineal, entonces podemos escribir esta relación como</p>
+<p><span class="math display">\[Y = \beta_0 + \beta_1 X + \epsilon. \tag{3.5}\]</span></p>
+<p>Aquí <span class="math inline">\(\beta_0\)</span> es el término de intercepto —es decir, el valor esperado de <span class="math inline">\(Y\)</span> cuando <span class="math inline">\(X = 0\)</span>, y <span class="math inline">\(\beta_1\)</span> es la pendiente —el aumento promedio en <span class="math inline">\(Y\)</span> asociado con un aumento de una unidad en <span class="math inline">\(X\)</span>. El término de error es un cajón de sastre para lo que perdemos con este modelo simple: la verdadera relación probablemente no sea lineal, puede haber otras variables que causen variación en <span class="math inline">\(Y\)</span>, y puede haber error de medición. Típicamente asumimos que el término de error es independiente de <span class="math inline">\(X\)</span>.</p>
+<p>El modelo dado por (3.5) define la línea de regresión poblacional, que es la mejor aproximación lineal a la verdadera relación entre <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>. Las estimaciones de coeficientes de regresión por mínimos cuadrados (3.4) caracterizan la línea de mínimos cuadrados (3.2). El panel izquierdo de la <a href="#fig-3-3" class="quarto-xref">Figura&nbsp;3</a> muestra estas dos líneas en un ejemplo simulado simple. Creamos 100 valores <span class="math inline">\(X\)</span> aleatorios, y generamos 100 valores <span class="math inline">\(Y\)</span> correspondientes a partir del modelo</p>
+<p><span class="math display">\[Y = 2 + 3X + \epsilon, \tag{3.6}\]</span></p>
+<p>donde <span class="math inline">\(\epsilon\)</span> se generó a partir de una distribución normal con media cero. La línea roja en el panel izquierdo de la <a href="#fig-3-3" class="quarto-xref">Figura&nbsp;3</a> muestra la verdadera relación, <span class="math inline">\(f(X) = 2 + 3X\)</span>, mientras que la línea azul es la estimación de mínimos cuadrados basada en los datos observados. La verdadera relación generalmente no se conoce para datos reales, pero la línea de mínimos cuadrados siempre puede calcularse usando las estimaciones de coeficientes dadas en (3.4). En otras palabras, en aplicaciones reales, tenemos acceso a un conjunto de observaciones a partir del cual podemos calcular la línea de mínimos cuadrados; sin embargo, la línea de regresión poblacional no se observa. En el panel derecho de la <a href="#fig-3-3" class="quarto-xref">Figura&nbsp;3</a> hemos generado diez conjuntos de datos diferentes a partir del modelo dado por (3.6) y hemos trazado las diez líneas de mínimos cuadrados correspondientes. Nótese que diferentes conjuntos de datos generados a partir del mismo modelo verdadero resultan en líneas de mínimos cuadrados ligeramente diferentes, pero la línea de regresión poblacional no observada no cambia.</p>
+<div id="fig-3-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter3/png/3_3.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3: Un conjunto de datos simulado. Izquierda: La línea roja representa la verdadera relación, f(X) = 2 + 3X, que se conoce como la línea de regresión poblacional. La línea azul es la línea de mínimos cuadrados; es la estimación de mínimos cuadrados para f(X) basada en los datos observados, mostrados en negro. Derecha: La línea de regresión poblacional se muestra nuevamente en rojo, y la línea de mínimos cuadrados en azul oscuro. En azul claro, se muestran diez líneas de mínimos cuadrados, cada una calculada sobre la base de un conjunto separado de observaciones aleatorias. Cada línea de mínimos cuadrados es diferente, pero en promedio, las líneas de mínimos cuadrados están bastante cerca de la línea de regresión poblacional.
+</figcaption>
+</figure>
+</div>
+<p>La analogía entre la regresión lineal y la estimación de la media de una variable aleatoria es apropiada y se basa en el concepto de sesgo. Si usamos la media muestral <span class="math inline">\(\hat{\mu}\)</span> para estimar <span class="math inline">\(\mu\)</span>, esta estimación es insesgada, en el sentido de que en promedio, esperamos que <span class="math inline">\(\hat{\mu}\)</span> sea igual a <span class="math inline">\(\mu\)</span>. ¿Qué significa esto exactamente? Significa que sobre la base de un conjunto particular de observaciones <span class="math inline">\(y_1, \ldots, y_n\)</span>, <span class="math inline">\(\hat{\mu}\)</span> podría sobreestimar <span class="math inline">\(\mu\)</span>, y sobre la base de otro conjunto de observaciones, <span class="math inline">\(\hat{\mu}\)</span> podría subestimar <span class="math inline">\(\mu\)</span>. Pero si pudiéramos promediar una gran cantidad de estimaciones de <span class="math inline">\(\mu\)</span> obtenidas de una gran cantidad de conjuntos de observaciones, entonces este promedio sería exactamente igual a <span class="math inline">\(\mu\)</span>. Por lo tanto, un estimador insesgado no sobreestima ni subestima sistemáticamente el verdadero parámetro. La propiedad de insesgamiento también se cumple para las estimaciones de coeficientes de mínimos cuadrados dadas por (3.4): si estimamos <span class="math inline">\(\beta_0\)</span> y <span class="math inline">\(\beta_1\)</span> sobre la base de un conjunto de datos particular, entonces nuestras estimaciones no serán exactamente iguales a <span class="math inline">\(\beta_0\)</span> y <span class="math inline">\(\beta_1\)</span>. Pero si pudiéramos promediar las estimaciones obtenidas sobre una gran cantidad de conjuntos de datos, entonces el promedio de estas estimaciones sería exactamente correcto. De hecho, podemos ver en el panel derecho de la <a href="#fig-3-3" class="quarto-xref">Figura&nbsp;3</a> que el promedio de muchas líneas de mínimos cuadrados, cada una estimada a partir de un conjunto de datos separado, está bastante cerca de la verdadera línea de regresión poblacional.</p>
+<p>Continuamos la analogía con la estimación de la media poblacional <span class="math inline">\(\mu\)</span> de una variable aleatoria <span class="math inline">\(Y\)</span>. Una pregunta natural es: ¿qué tan precisa es la media muestral <span class="math inline">\(\hat{\mu}\)</span> como estimación de <span class="math inline">\(\mu\)</span>? Hemos establecido que el promedio de <span class="math inline">\(\hat{\mu}\)</span> sobre muchos conjuntos de datos estará muy cerca de <span class="math inline">\(\mu\)</span>, pero que una estimación única <span class="math inline">\(\hat{\mu}\)</span> puede ser una subestimación o sobreestimación sustancial de <span class="math inline">\(\mu\)</span>. ¿Qué tan lejos estará esa estimación única de <span class="math inline">\(\hat{\mu}\)</span>? En general, respondemos esta pregunta calculando el error estándar de <span class="math inline">\(\hat{\mu}\)</span>, escrito como <span class="math inline">\(\text{SE}(\hat{\mu})\)</span>. Tenemos la conocida fórmula</p>
+<p><span class="math display">\[\text{Var}(\hat{\mu}) = \text{SE}(\hat{\mu})^2 = \frac{\sigma^2}{n}, \tag{3.7}\]</span></p>
+<p>donde <span class="math inline">\(\sigma\)</span> es la desviación estándar de cada una de las realizaciones <span class="math inline">\(y_i\)</span> de <span class="math inline">\(Y\)</span>. En términos generales, el error estándar nos dice la cantidad promedio en que esta estimación <span class="math inline">\(\hat{\mu}\)</span> difiere del valor real de <span class="math inline">\(\mu\)</span>. La ecuación 3.7 también nos dice cómo se reduce esta desviación con <span class="math inline">\(n\)</span> —cuantas más observaciones tengamos, menor será el error estándar de <span class="math inline">\(\hat{\mu}\)</span>.</p>
+<p>De manera similar, podemos preguntarnos qué tan cerca están <span class="math inline">\(\hat{\beta}_0\)</span> y <span class="math inline">\(\hat{\beta}_1\)</span> de los valores verdaderos <span class="math inline">\(\beta_0\)</span> y <span class="math inline">\(\beta_1\)</span>. Para calcular los errores estándar asociados con <span class="math inline">\(\hat{\beta}_0\)</span> y <span class="math inline">\(\hat{\beta}_1\)</span>, usamos las siguientes fórmulas:</p>
+<p><span class="math display">\[\text{SE}(\hat{\beta}_0)^2 = \sigma^2\left[\frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^n (x_i - \bar{x})^2}\right], \quad \text{SE}(\hat{\beta}_1)^2 = \frac{\sigma^2}{\sum_{i=1}^n (x_i - \bar{x})^2}, \tag{3.8}\]</span></p>
+<p>donde <span class="math inline">\(\sigma^2 = \text{Var}(\epsilon)\)</span>. Para que estas fórmulas sean estrictamente válidas, necesitamos asumir que los errores <span class="math inline">\(\epsilon_i\)</span> para cada observación tienen varianza común <span class="math inline">\(\sigma^2\)</span> y no están correlacionados. Esto claramente no es cierto en la <a href="#fig-3-1" class="quarto-xref">Figura&nbsp;1</a>, pero la fórmula sigue siendo una buena aproximación. Nótese en la fórmula que <span class="math inline">\(\text{SE}(\hat{\beta}_1)\)</span> es menor cuando los <span class="math inline">\(x_i\)</span> están más dispersos; intuitivamente tenemos más apalancamiento para estimar una pendiente cuando este es el caso. También vemos que <span class="math inline">\(\text{SE}(\hat{\beta}_0)\)</span> sería el mismo que <span class="math inline">\(\text{SE}(\hat{\mu})\)</span> si <span class="math inline">\(\bar{x}\)</span> fuera cero (en cuyo caso <span class="math inline">\(\hat{\beta}_0\)</span> sería igual a <span class="math inline">\(\bar{y}\)</span>). En general, <span class="math inline">\(\sigma^2\)</span> no se conoce, pero puede estimarse a partir de los datos. Esta estimación de <span class="math inline">\(\sigma\)</span> se conoce como el error estándar residual, y viene dada por la fórmula <span class="math inline">\(\text{RSE} = \sqrt{\text{RSS}/(n-2)}\)</span>. Estrictamente hablando, cuando <span class="math inline">\(\sigma^2\)</span> se estima a partir de los datos, deberíamos escribir <span class="math inline">\(\widehat{\text{SE}}(\hat{\beta}_1)\)</span> para indicar que se ha hecho una estimación, pero por simplicidad en la notación omitiremos este “sombrero” adicional.</p>
+<p>Los errores estándar pueden usarse para calcular intervalos de confianza. Un intervalo de confianza del 95 % se define como un rango de valores tal que, con una probabilidad del 95 %, el rango contendrá el verdadero valor desconocido del parámetro. El rango se define en términos de límites inferior y superior calculados a partir de la muestra de datos. Un intervalo de confianza del 95 % tiene la siguiente propiedad: si tomamos muestras repetidas y construimos el intervalo de confianza para cada muestra, el 95 % de los intervalos contendrá el verdadero valor desconocido del parámetro. Para la regresión lineal, el intervalo de confianza del 95 % para <span class="math inline">\(\beta_1\)</span> aproximadamente toma la forma</p>
+<p><span class="math display">\[\hat{\beta}_1 \pm 2 \cdot \text{SE}(\hat{\beta}_1). \tag{3.9}\]</span></p>
+<p>Es decir, hay aproximadamente un 95 % de probabilidad de que el intervalo</p>
+<p><span class="math display">\[[\hat{\beta}_1 - 2 \cdot \text{SE}(\hat{\beta}_1),\; \hat{\beta}_1 + 2 \cdot \text{SE}(\hat{\beta}_1)] \tag{3.10}\]</span></p>
+<p>contendrá el verdadero valor de <span class="math inline">\(\beta_1\)</span>. De manera similar, un intervalo de confianza para <span class="math inline">\(\beta_0\)</span> aproximadamente toma la forma</p>
+<p><span class="math display">\[\hat{\beta}_0 \pm 2 \cdot \text{SE}(\hat{\beta}_0). \tag{3.11}\]</span></p>
+<p>En el caso de los datos de Advertising, el intervalo de confianza del 95 % para <span class="math inline">\(\beta_0\)</span> es [6.130, 7.935] y el intervalo de confianza del 95 % para <span class="math inline">\(\beta_1\)</span> es [0.042, 0.053]. Por lo tanto, podemos concluir que en ausencia de cualquier publicidad, las ventas estarán, en promedio, entre 6,130 y 7,935 unidades. Además, por cada $1,000 adicionales en publicidad en televisión, habrá un aumento promedio en las ventas de entre 42 y 53 unidades.</p>
+<p>Los errores estándar también pueden usarse para realizar pruebas de hipótesis sobre los coeficientes. La prueba de hipótesis más común implica probar la hipótesis nula</p>
+<p><span class="math display">\[H_0: \text{No hay relación entre } X \text{ e } Y \tag{3.12}\]</span></p>
+<p>frente a la hipótesis alternativa</p>
+<p><span class="math display">\[H_a: \text{Hay alguna relación entre } X \text{ e } Y. \tag{3.13}\]</span></p>
+<p>Matemáticamente, esto corresponde a probar</p>
+<p><span class="math display">\[H_0: \beta_1 = 0\]</span></p>
+<p>frente a</p>
+<p><span class="math display">\[H_a: \beta_1 \neq 0,\]</span></p>
+<p>ya que si <span class="math inline">\(\beta_1 = 0\)</span>, entonces el modelo (3.5) se reduce a <span class="math inline">\(Y = \beta_0 + \epsilon\)</span>, y <span class="math inline">\(X\)</span> no está asociado con <span class="math inline">\(Y\)</span>. Para probar la hipótesis nula, necesitamos determinar si <span class="math inline">\(\hat{\beta}_1\)</span>, nuestra estimación para <span class="math inline">\(\beta_1\)</span>, está suficientemente lejos de cero para que podamos estar seguros de que <span class="math inline">\(\beta_1\)</span> es distinto de cero. ¿Qué tan lejos es suficientemente lejos? Esto depende de la precisión de <span class="math inline">\(\hat{\beta}_1\)</span> —es decir, depende de <span class="math inline">\(\text{SE}(\hat{\beta}_1)\)</span>. Si <span class="math inline">\(\text{SE}(\hat{\beta}_1)\)</span> es pequeño, entonces incluso valores relativamente pequeños de <span class="math inline">\(\hat{\beta}_1\)</span> pueden proporcionar evidencia sólida de que <span class="math inline">\(\beta_1 \neq 0\)</span>, y por lo tanto de que existe una relación entre <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>. En contraste, si <span class="math inline">\(\text{SE}(\hat{\beta}_1)\)</span> es grande, entonces <span class="math inline">\(\hat{\beta}_1\)</span> debe ser grande en valor absoluto para que podamos rechazar la hipótesis nula. En la práctica, calculamos un estadístico <span class="math inline">\(t\)</span>, dado por</p>
+<p><span class="math display">\[t = \frac{\hat{\beta}_1 - 0}{\text{SE}(\hat{\beta}_1)}, \tag{3.14}\]</span></p>
+<p>que mide el número de desviaciones estándar que <span class="math inline">\(\hat{\beta}_1\)</span> está alejado de 0. Si realmente no hay relación entre <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>, entonces esperamos que (3.14) tenga una distribución <span class="math inline">\(t\)</span> con <span class="math inline">\(n-2\)</span> grados de libertad. La distribución <span class="math inline">\(t\)</span> tiene forma de campana y para valores de <span class="math inline">\(n\)</span> mayores de aproximadamente 30 es bastante similar a la distribución normal estándar. En consecuencia, es simple calcular la probabilidad de observar cualquier número igual a <span class="math inline">\(|t|\)</span> o mayor en valor absoluto, asumiendo <span class="math inline">\(\beta_1 = 0\)</span>. Llamamos a esta probabilidad el valor <span class="math inline">\(p\)</span>. En términos generales, interpretamos el valor <span class="math inline">\(p\)</span> de la siguiente manera: un valor <span class="math inline">\(p\)</span> pequeño indica que es improbable observar una asociación tan sustancial entre el predictor y la respuesta debido al azar, en ausencia de cualquier asociación real entre el predictor y la respuesta. Por lo tanto, si vemos un valor <span class="math inline">\(p\)</span> pequeño, entonces podemos inferir que existe una asociación entre el predictor y la respuesta. Rechazamos la hipótesis nula —es decir, declaramos que existe una relación entre <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>— si el valor <span class="math inline">\(p\)</span> es suficientemente pequeño. Los puntos de corte típicos del valor <span class="math inline">\(p\)</span> para rechazar la hipótesis nula son del 5 % o 1 %, aunque este tema se explorará con mucho más detalle en el Capítulo 13.</p>
+<p>La <a href="#tbl-3-1" class="quarto-xref">Tabla&nbsp;1</a> proporciona detalles del modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre el presupuesto de publicidad en TV para los datos de Advertising. Nótese que los coeficientes para <span class="math inline">\(\hat{\beta}_0\)</span> y <span class="math inline">\(\hat{\beta}_1\)</span> son muy grandes en relación con sus errores estándar, por lo que los estadísticos <span class="math inline">\(t\)</span> también son grandes; las probabilidades de ver tales valores si <span class="math inline">\(H_0\)</span> es verdadera son virtualmente cero. Por lo tanto, podemos concluir que <span class="math inline">\(\beta_0 \neq 0\)</span> y <span class="math inline">\(\beta_1 \neq 0\)</span>.</p>
+<div id="tbl-3-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;1: Para los datos de Advertising, coeficientes del modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre el presupuesto de publicidad en TV. Un aumento de $1,000 en el presupuesto de publicidad en TV está asociado con un aumento en las ventas de alrededor de 50 unidades. (Recuerde que la variable de ventas está en miles de unidades, y la variable TV está en miles de dólares.)
+</figcaption>
+<div aria-describedby="tbl-3-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Coeficiente</th>
+<th style="text-align: center;">Error estándar</th>
+<th style="text-align: center;">Estadístico <span class="math inline">\(t\)</span></th>
+<th style="text-align: center;">Valor <span class="math inline">\(p\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Intercepto</td>
+<td style="text-align: center;">7.0325</td>
+<td style="text-align: center;">0.4578</td>
+<td style="text-align: center;">15.36</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">TV</td>
+<td style="text-align: center;">0.0475</td>
+<td style="text-align: center;">0.0027</td>
+<td style="text-align: center;">17.67</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="evaluación-de-la-precisión-del-modelo" class="level3">
+<h3 class="anchored" data-anchor-id="evaluación-de-la-precisión-del-modelo">Evaluación de la Precisión del Modelo</h3>
+<p>Una vez que hemos rechazado la hipótesis nula (3.12) a favor de la hipótesis alternativa (3.13), es natural querer cuantificar en qué medida el modelo se ajusta a los datos. La calidad de un ajuste de regresión lineal se evalúa típicamente usando dos cantidades relacionadas: el error estándar residual (RSE) y el estadístico <span class="math inline">\(R^2\)</span>.</p>
+<p>La <a href="#tbl-3-2" class="quarto-xref">Tabla&nbsp;2</a> muestra el RSE, el estadístico <span class="math inline">\(R^2\)</span> y el estadístico <span class="math inline">\(F\)</span> (que se describirá en la Sección 3.2.2) para la regresión lineal del número de unidades vendidas sobre el presupuesto de publicidad en TV.</p>
+<div id="tbl-3-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;2: Para los datos de Advertising, más información sobre el modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre el presupuesto de publicidad en TV.
+</figcaption>
+<div aria-describedby="tbl-3-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Cantidad</th>
+<th style="text-align: center;">Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Error estándar residual</td>
+<td style="text-align: center;">3.26</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(R^2\)</span></td>
+<td style="text-align: center;">0.612</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Estadístico <span class="math inline">\(F\)</span></td>
+<td style="text-align: center;">312.1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<section id="error-estándar-residual" class="level4">
+<h4 class="anchored" data-anchor-id="error-estándar-residual">Error Estándar Residual</h4>
+<p>Recordemos del modelo (3.5) que a cada observación se le asocia un término de error <span class="math inline">\(\epsilon\)</span>. Debido a la presencia de estos términos de error, incluso si conociéramos la verdadera línea de regresión (es decir, incluso si <span class="math inline">\(\beta_0\)</span> y <span class="math inline">\(\beta_1\)</span> fueran conocidos), no podríamos predecir perfectamente <span class="math inline">\(Y\)</span> a partir de <span class="math inline">\(X\)</span>. El RSE es una estimación de la desviación estándar de <span class="math inline">\(\epsilon\)</span>. En términos generales, es la cantidad promedio en que la respuesta se desviará de la verdadera línea de regresión. Se calcula usando la fórmula</p>
+<p><span class="math display">\[\text{RSE} = \sqrt{\frac{1}{n-2}\text{RSS}} = \sqrt{\frac{1}{n-2}\sum_{i=1}^n (y_i - \hat{y}_i)^2}. \tag{3.15}\]</span></p>
+<p>Nótese que la RSS se definió en la Sección 3.1.1, y viene dada por la fórmula</p>
+<p><span class="math display">\[\text{RSS} = \sum_{i=1}^n (y_i - \hat{y}_i)^2. \tag{3.16}\]</span></p>
+<p>En el caso de los datos de Advertising, vemos de la salida de regresión lineal en la <a href="#tbl-3-2" class="quarto-xref">Tabla&nbsp;2</a> que el RSE es 3.26. En otras palabras, las ventas reales en cada mercado se desvían de la verdadera línea de regresión en aproximadamente 3,260 unidades, en promedio. Otra forma de pensar en esto es que incluso si el modelo fuera correcto y los valores verdaderos de los coeficientes desconocidos <span class="math inline">\(\beta_0\)</span> y <span class="math inline">\(\beta_1\)</span> se conocieran exactamente, cualquier predicción de ventas basada en la publicidad en TV aún estaría desviada por aproximadamente 3,260 unidades en promedio. Por supuesto, si 3,260 unidades es un error de predicción aceptable depende del contexto del problema. En el conjunto de datos de Advertising, el valor medio de las ventas en todos los mercados es de aproximadamente 14,000 unidades, por lo que el error porcentual es 3,260/14,000 = 23 %.</p>
+<p>El RSE se considera una medida de la falta de ajuste del modelo (3.5) a los datos. Si las predicciones obtenidas usando el modelo están muy cerca de los valores reales del resultado —es decir, si <span class="math inline">\(\hat{y}_i \approx y_i\)</span> para <span class="math inline">\(i = 1, \ldots, n\)</span>— entonces (3.15) será pequeño, y podemos concluir que el modelo se ajusta muy bien a los datos. Por otro lado, si <span class="math inline">\(\hat{y}_i\)</span> está muy lejos de <span class="math inline">\(y_i\)</span> para una o más observaciones, entonces el RSE puede ser bastante grande, indicando que el modelo no se ajusta bien a los datos.</p>
+</section>
+<section id="estadístico-r2" class="level4">
+<h4 class="anchored" data-anchor-id="estadístico-r2">Estadístico <span class="math inline">\(R^2\)</span></h4>
+<p>El RSE proporciona una medida absoluta de falta de ajuste del modelo (3.5) a los datos. Pero dado que se mide en las unidades de <span class="math inline">\(Y\)</span>, no siempre está claro qué constituye un buen RSE. El estadístico <span class="math inline">\(R^2\)</span> proporciona una medida alternativa de ajuste. Toma la forma de una proporción —la proporción de varianza explicada— y por lo tanto siempre toma un valor entre 0 y 1, y es independiente de la escala de <span class="math inline">\(Y\)</span>.</p>
+<p>Para calcular <span class="math inline">\(R^2\)</span>, usamos la fórmula</p>
+<p><span class="math display">\[R^2 = \frac{\text{TSS} - \text{RSS}}{\text{TSS}} = 1 - \frac{\text{RSS}}{\text{TSS}}, \tag{3.17}\]</span></p>
+<p>donde <span class="math inline">\(\text{TSS} = \sum (y_i - \bar{y})^2\)</span> es la suma total de cuadrados, y la RSS se define en (3.16). TSS mide la varianza total en la respuesta <span class="math inline">\(Y\)</span>, y puede pensarse como la cantidad de variabilidad inherente en la respuesta antes de realizar la regresión. En contraste, la RSS mide la cantidad de variabilidad que queda sin explicar después de realizar la regresión. Por lo tanto, TSS <span class="math inline">\(-\)</span> RSS mide la cantidad de variabilidad en la respuesta que es explicada (o eliminada) al realizar la regresión, y <span class="math inline">\(R^2\)</span> mide la proporción de variabilidad en <span class="math inline">\(Y\)</span> que puede explicarse usando <span class="math inline">\(X\)</span>. Un estadístico <span class="math inline">\(R^2\)</span> cercano a 1 indica que una gran proporción de la variabilidad en la respuesta es explicada por la regresión. Un número cercano a 0 indica que la regresión no explica mucha de la variabilidad en la respuesta; esto puede ocurrir porque el modelo lineal es incorrecto, o porque la varianza del error <span class="math inline">\(\sigma^2\)</span> es alta, o ambas.</p>
+<p>En la <a href="#tbl-3-2" class="quarto-xref">Tabla&nbsp;2</a>, el <span class="math inline">\(R^2\)</span> fue 0.61, por lo que algo menos de dos tercios de la variabilidad en las ventas se explica mediante una regresión lineal sobre TV.</p>
+<p>El estadístico <span class="math inline">\(R^2\)</span> (3.17) tiene una ventaja interpretativa sobre el RSE (3.15), ya que a diferencia del RSE, siempre se encuentra entre 0 y 1. Sin embargo, todavía puede ser difícil determinar qué es un buen valor de <span class="math inline">\(R^2\)</span>, y en general, esto dependerá de la aplicación. Por ejemplo, en ciertos problemas de física, podemos saber que los datos provienen verdaderamente de un modelo lineal con un pequeño error residual. En este caso, esperaríamos ver un valor de <span class="math inline">\(R^2\)</span> extremadamente cercano a 1, y un valor de <span class="math inline">\(R^2\)</span> sustancialmente más pequeño podría indicar un problema grave con el experimento en el que se generaron los datos. Por otro lado, en aplicaciones típicas en biología, psicología, marketing y otros dominios, el modelo lineal (3.5) es en el mejor de los casos una aproximación extremadamente burda a los datos, y los errores residuales debidos a otros factores no medidos son a menudo muy grandes. En este contexto, esperaríamos que solo una proporción muy pequeña de la varianza en la respuesta sea explicada por el predictor, ¡y un valor de <span class="math inline">\(R^2\)</span> muy por debajo de 0.1 podría ser más realista!</p>
+<p>El estadístico <span class="math inline">\(R^2\)</span> es una medida de la relación lineal entre <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>. Recordemos que la correlación, definida como</p>
+<p><span class="math display">\[\text{Cor}(X, Y) = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^n (x_i - \bar{x})^2}\sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}}, \tag{3.18}\]</span></p>
+<p>es también una medida de la relación lineal entre <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>. Esto sugiere que podríamos usar <span class="math inline">\(r = \text{Cor}(X, Y)\)</span> en lugar de <span class="math inline">\(R^2\)</span> para evaluar el ajuste del modelo lineal. De hecho, se puede mostrar que en el contexto de regresión lineal simple, <span class="math inline">\(R^2 = r^2\)</span>. En otras palabras, la correlación al cuadrado y el estadístico <span class="math inline">\(R^2\)</span> son idénticos. Sin embargo, en la siguiente sección discutiremos el problema de regresión lineal múltiple, en el que usamos varios predictores simultáneamente para predecir la respuesta. El concepto de correlación entre los predictores y la respuesta no se extiende automáticamente a este contexto, ya que la correlación cuantifica la asociación entre un solo par de variables en lugar de entre un número mayor de variables. Veremos que <span class="math inline">\(R^2\)</span> cumple este papel.</p>
+</section>
+</section>
+</section>
+<section id="regresión-lineal-múltiple" class="level2">
+<h2 class="anchored" data-anchor-id="regresión-lineal-múltiple">Regresión Lineal Múltiple</h2>
+<p>La regresión lineal simple es un enfoque útil para predecir una respuesta sobre la base de una única variable predictora. Sin embargo, en la práctica a menudo tenemos más de un predictor. Por ejemplo, en los datos de Advertising, hemos examinado la relación entre las ventas y la publicidad en TV. También tenemos datos sobre la cantidad de dinero gastada en publicidad en radio y en periódicos, y podemos querer saber si alguno de estos otros dos medios está asociado con las ventas. ¿Cómo podemos extender nuestro análisis de los datos de Advertising para acomodar estos dos predictores adicionales?</p>
+<p>Una opción es ejecutar tres regresiones lineales simples separadas, cada una de las cuales usa un medio publicitario diferente como predictor. Por ejemplo, podemos ajustar una regresión lineal simple para predecir las ventas sobre la base de la cantidad gastada en anuncios de radio. Los resultados se muestran en la <a href="#tbl-3-3" class="quarto-xref">Tabla&nbsp;3</a> (tabla superior). Encontramos que un aumento de $1,000 en el gasto en publicidad en radio está asociado con un aumento en las ventas de alrededor de 203 unidades. La <a href="#tbl-3-3" class="quarto-xref">Tabla&nbsp;3</a> (tabla inferior) contiene los coeficientes de mínimos cuadrados para una regresión lineal simple de las ventas sobre el presupuesto de publicidad en periódicos. Un aumento de $1,000 en el presupuesto de publicidad en periódicos está asociado con un aumento en las ventas de aproximadamente 55 unidades.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Coeficiente</th>
+<th style="text-align: center;">Error estándar</th>
+<th style="text-align: center;">Estadístico <span class="math inline">\(t\)</span></th>
+<th style="text-align: center;">Valor <span class="math inline">\(p\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Intercepto</td>
+<td style="text-align: center;">9.312</td>
+<td style="text-align: center;">0.563</td>
+<td style="text-align: center;">16.54</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">radio</td>
+<td style="text-align: center;">0.203</td>
+<td style="text-align: center;">0.020</td>
+<td style="text-align: center;">9.92</td>
+</tr>
+</tbody>
+</table>
+<div id="tbl-3-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;3: Modelos de regresión lineal simple adicionales para los datos de Advertising. Arriba: coeficientes del modelo de regresión lineal simple para el número de unidades vendidas sobre el presupuesto de publicidad en radio. Abajo: sobre el presupuesto de publicidad en periódicos. Un aumento de $1,000 en el gasto en publicidad en radio está asociado con un aumento promedio en las ventas de alrededor de 203 unidades, mientras que el mismo aumento en el gasto en publicidad en periódicos está asociado con un aumento promedio en las ventas de alrededor de 55 unidades.
+</figcaption>
+<div aria-describedby="tbl-3-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Coeficiente</th>
+<th style="text-align: center;">Error estándar</th>
+<th style="text-align: center;">Estadístico <span class="math inline">\(t\)</span></th>
+<th style="text-align: center;">Valor <span class="math inline">\(p\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Intercepto</td>
+<td style="text-align: center;">12.351</td>
+<td style="text-align: center;">0.621</td>
+<td style="text-align: center;">19.88</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">periódico</td>
+<td style="text-align: center;">0.055</td>
+<td style="text-align: center;">0.017</td>
+<td style="text-align: center;">3.30</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Sin embargo, el enfoque de ajustar un modelo de regresión lineal simple separado para cada predictor no es completamente satisfactorio. En primer lugar, no está claro cómo hacer una predicción única de ventas dados los tres presupuestos de medios publicitarios, ya que cada uno de los presupuestos está asociado con una ecuación de regresión separada. En segundo lugar, cada una de las tres ecuaciones de regresión ignora los otros dos medios al formar estimaciones para los coeficientes de regresión. Veremos en breve que si los presupuestos de los medios están correlacionados entre sí en los 200 mercados de nuestro conjunto de datos, entonces esto puede conducir a estimaciones muy engañosas de la asociación entre el presupuesto de cada medio y las ventas.</p>
+<p>En lugar de ajustar un modelo de regresión lineal simple separado para cada predictor, un mejor enfoque es extender el modelo de regresión lineal simple (3.5) de modo que pueda acomodar directamente múltiples predictores. Podemos hacer esto dando a cada predictor un coeficiente de pendiente separado en un solo modelo. En general, supongamos que tenemos <span class="math inline">\(p\)</span> predictores distintos. Entonces el modelo de regresión lineal múltiple toma la forma</p>
+<p><span class="math display">\[Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p + \epsilon, \tag{3.19}\]</span></p>
+<p>donde <span class="math inline">\(X_j\)</span> representa el <span class="math inline">\(j\)</span>-ésimo predictor y <span class="math inline">\(\beta_j\)</span> cuantifica la asociación entre esa variable y la respuesta. Interpretamos <span class="math inline">\(\beta_j\)</span> como el efecto promedio sobre <span class="math inline">\(Y\)</span> de un aumento de una unidad en <span class="math inline">\(X_j\)</span>, manteniendo todos los demás predictores fijos. En el ejemplo de Advertising, (3.19) se convierte en</p>
+<p><span class="math display">\[\text{ventas} = \beta_0 + \beta_1 \times \text{TV} + \beta_2 \times \text{radio} + \beta_3 \times \text{periódico} + \epsilon. \tag{3.20}\]</span></p>
+<section id="estimación-de-los-coeficientes-de-regresión" class="level3">
+<h3 class="anchored" data-anchor-id="estimación-de-los-coeficientes-de-regresión">Estimación de los Coeficientes de Regresión</h3>
+<p>Como fue el caso en el contexto de regresión lineal simple, los coeficientes de regresión <span class="math inline">\(\beta_0, \beta_1, \ldots, \beta_p\)</span> en (3.19) son desconocidos y deben estimarse. Dadas las estimaciones <span class="math inline">\(\hat{\beta}_0, \hat{\beta}_1, \ldots, \hat{\beta}_p\)</span>, podemos hacer predicciones usando la fórmula</p>
+<p><span class="math display">\[\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x_1 + \hat{\beta}_2 x_2 + \cdots + \hat{\beta}_p x_p. \tag{3.21}\]</span></p>
+<p>Los parámetros se estiman usando el mismo enfoque de mínimos cuadrados que vimos en el contexto de la regresión lineal simple. Elegimos <span class="math inline">\(\beta_0, \beta_1, \ldots, \beta_p\)</span> para minimizar la suma de cuadrados residual</p>
+<p><span class="math display">\[\text{RSS} = \sum_{i=1}^n (y_i - \hat{y}_i)^2 = \sum_{i=1}^n (y_i - \hat{\beta}_0 - \hat{\beta}_1 x_{i1} - \hat{\beta}_2 x_{i2} - \cdots - \hat{\beta}_p x_{ip})^2. \tag{3.22}\]</span></p>
+<p>Los valores <span class="math inline">\(\hat{\beta}_0, \hat{\beta}_1, \ldots, \hat{\beta}_p\)</span> que minimizan (3.22) son las estimaciones de coeficientes de regresión lineal múltiple por mínimos cuadrados. A diferencia de las estimaciones de regresión lineal simple dadas en (3.4), las estimaciones de coeficientes de regresión múltiple tienen formas algo complicadas que se representan más fácilmente usando álgebra matricial. Por esta razón, no las proporcionamos aquí. Cualquier paquete de software estadístico puede usarse para calcular estas estimaciones de coeficientes, y más adelante en este capítulo mostraremos cómo se puede hacer esto en Python. La <a href="#fig-3-4" class="quarto-xref">Figura&nbsp;4</a> ilustra un ejemplo del ajuste de mínimos cuadrados a un conjunto de datos pequeño con <span class="math inline">\(p = 2\)</span> predictores.</p>
+<div id="fig-3-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter3/png/3_4.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;4: En un entorno tridimensional, con dos predictores y una respuesta, la línea de regresión de mínimos cuadrados se convierte en un plano. El plano se elige para minimizar la suma de las distancias verticales al cuadrado entre cada observación (mostrada en rojo) y el plano.
+</figcaption>
+</figure>
+</div>
+<p>La <a href="#tbl-3-4" class="quarto-xref">Tabla&nbsp;4</a> muestra las estimaciones de coeficientes de regresión múltiple cuando se usan los presupuestos de publicidad en TV, radio y periódicos para predecir las ventas del producto usando los datos de Advertising.</p>
+<div id="tbl-3-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;4: Para los datos de Advertising, estimaciones de coeficientes de mínimos cuadrados de la regresión lineal múltiple del número de unidades vendidas sobre los presupuestos de publicidad en TV, radio y periódicos.
+</figcaption>
+<div aria-describedby="tbl-3-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Coeficiente</th>
+<th style="text-align: center;">Error estándar</th>
+<th style="text-align: center;">Estadístico <span class="math inline">\(t\)</span></th>
+<th style="text-align: center;">Valor <span class="math inline">\(p\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Intercepto</td>
+<td style="text-align: center;">2.939</td>
+<td style="text-align: center;">0.3119</td>
+<td style="text-align: center;">9.42</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">TV</td>
+<td style="text-align: center;">0.046</td>
+<td style="text-align: center;">0.0014</td>
+<td style="text-align: center;">32.81</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">radio</td>
+<td style="text-align: center;">0.189</td>
+<td style="text-align: center;">0.0086</td>
+<td style="text-align: center;">21.89</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">periódico</td>
+<td style="text-align: center;">-0.001</td>
+<td style="text-align: center;">0.0059</td>
+<td style="text-align: center;">-0.18</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Interpretamos estos resultados de la siguiente manera: para una cantidad dada de publicidad en TV y periódicos, gastar $1,000 adicionales en publicidad en radio está asociado con aproximadamente 189 unidades de ventas adicionales. Comparando estas estimaciones de coeficientes con las mostradas en las Tablas 3.1 y 3.3, notamos que las estimaciones de coeficientes de regresión múltiple para TV y radio son bastante similares a las estimaciones de coeficientes de regresión lineal simple. Sin embargo, mientras que la estimación del coeficiente de regresión para periódicos en la <a href="#tbl-3-3" class="quarto-xref">Tabla&nbsp;3</a> era significativamente distinta de cero, la estimación del coeficiente para periódicos en el modelo de regresión múltiple está cerca de cero, y el valor <span class="math inline">\(p\)</span> correspondiente ya no es significativo, con un valor alrededor de 0.86. Esto ilustra que los coeficientes de regresión simple y múltiple pueden ser bastante diferentes. Esta diferencia se deriva del hecho de que en el caso de regresión simple, el término de pendiente representa el aumento promedio en las ventas del producto asociado con un aumento de $1,000 en la publicidad en periódicos, ignorando otros predictores como TV y radio. Por el contrario, en el contexto de regresión múltiple, el coeficiente para periódicos representa el aumento promedio en las ventas del producto asociado con el aumento del gasto en periódicos en $1,000 mientras se mantienen fijos TV y radio.</p>
+<p>¿Tiene sentido que la regresión múltiple sugiera que no hay relación entre las ventas y los periódicos, mientras que la regresión lineal simple implica lo contrario? De hecho, sí lo tiene. Considere la matriz de correlación para las tres variables predictoras y la variable respuesta, mostrada en la <a href="#tbl-3-5" class="quarto-xref">Tabla&nbsp;5</a>. Nótese que la correlación entre radio y periódico es 0.35. Esto indica que los mercados con alta publicidad en periódicos también tienden a tener alta publicidad en radio. Ahora supongamos que la regresión múltiple es correcta y la publicidad en periódicos no está asociada con las ventas, pero la publicidad en radio sí está asociada con las ventas. Entonces, en los mercados donde gastamos más en radio, nuestras ventas tenderán a ser más altas y, como muestra nuestra matriz de correlación, también tendemos a gastar más en publicidad en periódicos en esos mismos mercados. Por lo tanto, en una regresión lineal simple que solo examina las ventas versus los periódicos, observaremos que valores más altos de periódicos tienden a estar asociados con valores más altos de ventas, aunque la publicidad en periódicos no esté directamente asociada con las ventas. Así que la publicidad en periódicos es un sustituto de la publicidad en radio; los periódicos reciben “crédito” por la asociación entre la radio y las ventas.</p>
+<div id="tbl-3-5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;5: Matriz de correlación para TV, radio, periódico y ventas para los datos de Advertising.
+</figcaption>
+<div aria-describedby="tbl-3-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">TV</th>
+<th style="text-align: center;">radio</th>
+<th style="text-align: center;">periódico</th>
+<th style="text-align: center;">ventas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">TV</td>
+<td style="text-align: center;">1.0000</td>
+<td style="text-align: center;">0.0548</td>
+<td style="text-align: center;">0.0567</td>
+<td style="text-align: center;">0.7822</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">radio</td>
+<td style="text-align: center;">0.0548</td>
+<td style="text-align: center;">1.0000</td>
+<td style="text-align: center;">0.3541</td>
+<td style="text-align: center;">0.5762</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">periódico</td>
+<td style="text-align: center;">0.0567</td>
+<td style="text-align: center;">0.3541</td>
+<td style="text-align: center;">1.0000</td>
+<td style="text-align: center;">0.2283</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">ventas</td>
+<td style="text-align: center;">0.7822</td>
+<td style="text-align: center;">0.5762</td>
+<td style="text-align: center;">0.2283</td>
+<td style="text-align: center;">1.0000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Este resultado ligeramente contraintuitivo es muy común en muchas situaciones de la vida real. Considere un ejemplo absurdo para ilustrar el punto. Realizar una regresión de ataques de tiburones versus ventas de helados para datos recolectados en una comunidad de playa determinada durante un período de tiempo mostraría una relación positiva, similar a la observada entre ventas y periódicos. Por supuesto, nadie ha sugerido (todavía) que los helados deberían prohibirse en las playas para reducir los ataques de tiburones. En realidad, las temperaturas más altas hacen que más personas visiten la playa, lo que a su vez resulta en más ventas de helados y más ataques de tiburones. Una regresión múltiple de ataques de tiburones sobre ventas de helados y temperatura revela que, como la intuición sugiere, las ventas de helados ya no son un predictor significativo después de ajustar por temperatura.</p>
+</section>
+<section id="algunas-preguntas-importantes" class="level3">
+<h3 class="anchored" data-anchor-id="algunas-preguntas-importantes">Algunas Preguntas Importantes</h3>
+<p>Cuando realizamos una regresión lineal múltiple, generalmente estamos interesados en responder algunas preguntas importantes.</p>
+<ol type="1">
+<li>¿Es útil al menos uno de los predictores <span class="math inline">\(X_1, X_2, \ldots, X_p\)</span> para predecir la respuesta?</li>
+<li>¿Ayudan todos los predictores a explicar <span class="math inline">\(Y\)</span>, o solo es útil un subconjunto de los predictores?</li>
+<li>¿Qué tan bien se ajusta el modelo a los datos?</li>
+<li>Dado un conjunto de valores de predictores, ¿qué valor de respuesta deberíamos predecir, y qué tan precisa es nuestra predicción?</li>
+</ol>
+<p>Ahora abordamos cada una de estas preguntas por turno.</p>
+<section id="uno-existe-una-relación-entre-la-respuesta-y-los-predictores" class="level4">
+<h4 class="anchored" data-anchor-id="uno-existe-una-relación-entre-la-respuesta-y-los-predictores">Uno: ¿Existe una Relación entre la Respuesta y los Predictores?</h4>
+<p>Recordemos que en el contexto de regresión lineal simple, para determinar si existe una relación entre la respuesta y el predictor, podemos simplemente verificar si <span class="math inline">\(\beta_1 = 0\)</span>. En el contexto de regresión múltiple con <span class="math inline">\(p\)</span> predictores, necesitamos preguntarnos si todos los coeficientes de regresión son cero, es decir, si <span class="math inline">\(\beta_1 = \beta_2 = \cdots = \beta_p = 0\)</span>. Como en la regresión lineal simple, usamos una prueba de hipótesis para responder esta pregunta. Probamos la hipótesis nula</p>
+<p><span class="math display">\[H_0: \beta_1 = \beta_2 = \cdots = \beta_p = 0\]</span></p>
+<p>frente a la alternativa</p>
+<p><span class="math display">\[H_a: \text{al menos un } \beta_j \text{ es distinto de cero}.\]</span></p>
+<p>Esta prueba de hipótesis se realiza calculando el estadístico <span class="math inline">\(F\)</span>,</p>
+<p><span class="math display">\[F = \frac{(\text{TSS} - \text{RSS})/p}{\text{RSS}/(n - p - 1)}, \tag{3.23}\]</span></p>
+<p>donde, como en la regresión lineal simple, <span class="math inline">\(\text{TSS} = \sum (y_i - \bar{y})^2\)</span> y <span class="math inline">\(\text{RSS} = \sum (y_i - \hat{y}_i)^2\)</span>.</p>
+<p>El estadístico <span class="math inline">\(F\)</span> para el modelo de regresión lineal múltiple obtenido al regresar las ventas sobre radio, TV y periódicos se muestra en la <a href="#tbl-3-6" class="quarto-xref">Tabla&nbsp;6</a>. En este ejemplo, el estadístico <span class="math inline">\(F\)</span> es 570.</p>
+<div id="tbl-3-6" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;6: Más información sobre el modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre los presupuestos de publicidad en TV, periódicos y radio en los datos de Advertising.
+</figcaption>
+<div aria-describedby="tbl-3-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Cantidad</th>
+<th style="text-align: center;">Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Error estándar residual</td>
+<td style="text-align: center;">1.69</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(R^2\)</span></td>
+<td style="text-align: center;">0.897</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Estadístico <span class="math inline">\(F\)</span></td>
+<td style="text-align: center;">570</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="dos-decisión-sobre-variables-importantes" class="level4">
+<h4 class="anchored" data-anchor-id="dos-decisión-sobre-variables-importantes">Dos: Decisión sobre Variables Importantes</h4>
+<p>Como se discutió en la sección anterior, el primer paso en un análisis de regresión múltiple es calcular el estadístico <span class="math inline">\(F\)</span> y examinar el valor <span class="math inline">\(p\)</span> asociado. Si concluimos sobre la base de ese valor <span class="math inline">\(p\)</span> que al menos uno de los predictores está relacionado con la respuesta, entonces es natural preguntarse cuáles son los culpables.</p>
+<p>La tarea de determinar qué predictores están asociados con la respuesta, para ajustar un solo modelo que involucre solo esos predictores, se conoce como selección de variables. Hay tres enfoques clásicos para esta tarea:</p>
+<ul>
+<li><strong>Selección hacia adelante.</strong> Comenzamos con el modelo nulo —un modelo que contiene un intercepto pero ningún predictor. Luego ajustamos <span class="math inline">\(p\)</span> regresiones lineales simples y agregamos al modelo nulo la variable que resulta en la RSS más baja. Este enfoque se continúa hasta que se satisface alguna regla de parada.</li>
+<li><strong>Selección hacia atrás.</strong> Comenzamos con todas las variables en el modelo, y eliminamos la variable con el valor <span class="math inline">\(p\)</span> más grande. El nuevo modelo de <span class="math inline">\((p-1)\)</span> variables se ajusta, y se elimina la variable con el valor <span class="math inline">\(p\)</span> más grande. Este procedimiento continúa hasta que se alcanza una regla de parada.</li>
+<li><strong>Selección mixta.</strong> Esta es una combinación de selección hacia adelante y hacia atrás. Comenzamos sin variables en el modelo, y agregamos la variable que proporciona el mejor ajuste. Continuamos agregando variables una por una. Si en algún momento el valor <span class="math inline">\(p\)</span> de una de las variables en el modelo supera cierto umbral, entonces eliminamos esa variable del modelo.</li>
+</ul>
+</section>
+<section id="tres-ajuste-del-modelo" class="level4">
+<h4 class="anchored" data-anchor-id="tres-ajuste-del-modelo">Tres: Ajuste del Modelo</h4>
+<p>Dos de las medidas numéricas más comunes del ajuste del modelo son el RSE y el <span class="math inline">\(R^2\)</span>, la fracción de varianza explicada. Estas cantidades se calculan e interpretan de la misma manera que para la regresión lineal simple.</p>
+<p>El modelo que contiene solo TV y radio como predictores tiene un RSE de 1.681, y el modelo que también contiene periódicos como predictor tiene un RSE de 1.686 (<a href="#tbl-3-6" class="quarto-xref">Tabla&nbsp;6</a>). En contraste, el modelo que contiene solo TV tiene un RSE de 3.26 (<a href="#tbl-3-2" class="quarto-xref">Tabla&nbsp;2</a>). Esto corrobora nuestra conclusión anterior de que un modelo que usa gastos de TV y radio para predecir las ventas es mucho más preciso que uno que solo usa gastos de TV.</p>
+<div id="fig-3-5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter3/png/3_5.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5: Para los datos de Advertising, un ajuste de regresión lineal a las ventas usando TV y radio como predictores. Por el patrón de los residuales, podemos ver que hay una relación no lineal pronunciada en los datos.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="cuatro-predicciones" class="level4">
+<h4 class="anchored" data-anchor-id="cuatro-predicciones">Cuatro: Predicciones</h4>
+<p>Una vez que hemos ajustado el modelo de regresión múltiple, es sencillo aplicar (3.21) para predecir la respuesta <span class="math inline">\(Y\)</span> sobre la base de un conjunto de valores para los predictores <span class="math inline">\(X_1, X_2, \ldots, X_p\)</span>. Sin embargo, hay tres tipos de incertidumbre asociados con esta predicción.</p>
+<ol type="1">
+<li>Las estimaciones de los coeficientes <span class="math inline">\(\hat{\beta}_0, \hat{\beta}_1, \ldots, \hat{\beta}_p\)</span> son estimaciones para <span class="math inline">\(\beta_0, \beta_1, \ldots, \beta_p\)</span>. La inexactitud en las estimaciones de los coeficientes está relacionada con el error reducible del Capítulo 2.</li>
+<li>En la práctica, asumir un modelo lineal para <span class="math inline">\(f(X)\)</span> es casi siempre una aproximación de la realidad, por lo que hay una fuente adicional de error potencialmente reducible que llamamos sesgo del modelo.</li>
+<li>Incluso si conociéramos <span class="math inline">\(f(X)\)</span>, el valor de la respuesta no puede predecirse perfectamente debido al error aleatorio <span class="math inline">\(\epsilon\)</span> en el modelo (3.20).</li>
+</ol>
+<p>Usamos un intervalo de confianza para cuantificar la incertidumbre que rodea las ventas promedio en un gran número de ciudades, y un intervalo de predicción para cuantificar la incertidumbre que rodea las ventas para una ciudad en particular. Los intervalos de predicción son siempre más anchos que los intervalos de confianza.</p>
+</section>
+</section>
+</section>
+<section id="otras-consideraciones-en-el-modelo-de-regresión" class="level2">
+<h2 class="anchored" data-anchor-id="otras-consideraciones-en-el-modelo-de-regresión">Otras Consideraciones en el Modelo de Regresión</h2>
+<section id="predictores-cualitativos" class="level3">
+<h3 class="anchored" data-anchor-id="predictores-cualitativos">Predictores Cualitativos</h3>
+<p>En nuestra discusión hasta ahora, hemos asumido que todas las variables en nuestro modelo de regresión lineal son cuantitativas. Pero en la práctica, esto no es necesariamente el caso; a menudo algunos predictores son cualitativos.</p>
+<p>Por ejemplo, el conjunto de datos Credit mostrado en la <a href="#fig-3-6" class="quarto-xref">Figura&nbsp;6</a> registra variables para un número de titulares de tarjetas de crédito.</p>
+<div id="fig-3-6" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter3/png/3_6.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;6: El conjunto de datos Credit contiene información sobre balance, edad, tarjetas, educación, ingresos, límite y calificación crediticia para un número de clientes potenciales.
+</figcaption>
+</figure>
+</div>
+<section id="predictores-con-solo-dos-niveles" class="level4">
+<h4 class="anchored" data-anchor-id="predictores-con-solo-dos-niveles">Predictores con Solo Dos Niveles</h4>
+<p>Si un predictor cualitativo (también conocido como factor) solo tiene dos niveles, o valores posibles, entonces incorporarlo en un modelo de regresión es muy simple. Simplemente creamos una variable indicadora o variable dummy que toma dos valores numéricos posibles:</p>
+<p><span class="math display">\[x_i = \begin{cases}
+1 &amp; \text{si la $i$-ésima persona posee una casa}\\
+0 &amp; \text{si la $i$-ésima persona no posee una casa},
+\end{cases} \tag{3.26}\]</span></p>
+<p>y usamos esta variable como predictor en la ecuación de regresión. Esto resulta en el modelo</p>
+<p><span class="math display">\[y_i = \beta_0 + \beta_1 x_i + \epsilon_i = \begin{cases}
+\beta_0 + \beta_1 + \epsilon_i &amp; \text{si posee una casa}\\
+\beta_0 + \epsilon_i &amp; \text{si no posee una casa}.
+\end{cases} \tag{3.27}\]</span></p>
+<p>Ahora <span class="math inline">\(\beta_0\)</span> puede interpretarse como el saldo promedio de la tarjeta de crédito entre aquellos que no poseen una casa, <span class="math inline">\(\beta_0 + \beta_1\)</span> como el saldo promedio entre aquellos que sí poseen su casa, y <span class="math inline">\(\beta_1\)</span> como la diferencia promedio en el saldo de la tarjeta de crédito entre propietarios y no propietarios.</p>
+<div id="tbl-3-7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;7: Estimaciones de coeficientes de mínimos cuadrados asociadas con la regresión de balance sobre own en el conjunto de datos Credit.
+</figcaption>
+<div aria-describedby="tbl-3-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Coeficiente</th>
+<th style="text-align: center;">Error estándar</th>
+<th style="text-align: center;">Estadístico <span class="math inline">\(t\)</span></th>
+<th style="text-align: center;">Valor <span class="math inline">\(p\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Intercepto</td>
+<td style="text-align: center;">509.80</td>
+<td style="text-align: center;">33.13</td>
+<td style="text-align: center;">15.389</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">own[Sí]</td>
+<td style="text-align: center;">19.73</td>
+<td style="text-align: center;">46.05</td>
+<td style="text-align: center;">0.429</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="predictores-cualitativos-con-más-de-dos-niveles" class="level4">
+<h4 class="anchored" data-anchor-id="predictores-cualitativos-con-más-de-dos-niveles">Predictores Cualitativos con Más de Dos Niveles</h4>
+<p>Cuando un predictor cualitativo tiene más de dos niveles, una sola variable dummy no puede representar todos los valores posibles. En esta situación, podemos crear variables dummy adicionales. Por ejemplo, para la variable region creamos dos variables dummy:</p>
+<p><span class="math display">\[x_{i1} = \begin{cases}
+1 &amp; \text{si es del Sur}\\
+0 &amp; \text{si no es del Sur},
+\end{cases} \quad
+x_{i2} = \begin{cases}
+1 &amp; \text{si es del Oeste}\\
+0 &amp; \text{si no es del Oeste}.
+\end{cases} \tag{3.28-3.29}\]</span></p>
+<p>Entonces ambas pueden usarse en la ecuación de regresión:</p>
+<p><span class="math display">\[y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \epsilon_i =
+\begin{cases}
+\beta_0 + \beta_1 + \epsilon_i &amp; \text{si es del Sur}\\
+\beta_0 + \beta_2 + \epsilon_i &amp; \text{si es del Oeste}\\
+\beta_0 + \epsilon_i &amp; \text{si es del Este}.
+\end{cases} \tag{3.30}\]</span></p>
+<div id="tbl-3-8" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;8: Estimaciones de coeficientes de mínimos cuadrados asociadas con la regresión de balance sobre region en el conjunto de datos Credit.
+</figcaption>
+<div aria-describedby="tbl-3-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Coeficiente</th>
+<th style="text-align: center;">Error estándar</th>
+<th style="text-align: center;">Estadístico <span class="math inline">\(t\)</span></th>
+<th style="text-align: center;">Valor <span class="math inline">\(p\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Intercepto</td>
+<td style="text-align: center;">531.00</td>
+<td style="text-align: center;">46.32</td>
+<td style="text-align: center;">11.464</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">region[Sur]</td>
+<td style="text-align: center;">-12.50</td>
+<td style="text-align: center;">56.68</td>
+<td style="text-align: center;">-0.221</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">region[Oeste]</td>
+<td style="text-align: center;">-18.69</td>
+<td style="text-align: center;">65.02</td>
+<td style="text-align: center;">-0.287</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="extensiones-del-modelo-lineal" class="level3">
+<h3 class="anchored" data-anchor-id="extensiones-del-modelo-lineal">Extensiones del Modelo Lineal</h3>
+<p>El modelo de regresión lineal estándar (3.19) hace varios supuestos altamente restrictivos que a menudo se violan en la práctica. Dos de los supuestos más importantes establecen que la relación entre los predictores y la respuesta es aditiva y lineal.</p>
+<section id="eliminación-del-supuesto-aditivo" class="level4">
+<h4 class="anchored" data-anchor-id="eliminación-del-supuesto-aditivo">Eliminación del Supuesto Aditivo</h4>
+<p>En nuestro análisis anterior de los datos de Advertising, concluimos que tanto TV como radio parecen estar asociados con las ventas. Los modelos lineales asumieron que el efecto sobre las ventas de aumentar un medio publicitario es independiente de la cantidad gastada en los otros medios.</p>
+<p>Una forma de extender el modelo es incluir un término de interacción, construido calculando el producto de <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span>:</p>
+<p><span class="math display">\[Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_1 X_2 + \epsilon. \tag{3.31}\]</span></p>
+<p>En el ejemplo de Advertising:</p>
+<p><span class="math display">\[\text{ventas} = \beta_0 + \beta_1 \times \text{TV} + \beta_2 \times \text{radio} + \beta_3 \times (\text{radio} \times \text{TV}) + \epsilon. \tag{3.33}\]</span></p>
+<div id="tbl-3-9" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;9: Para los datos de Advertising, estimaciones de coeficientes de mínimos cuadrados asociadas con la regresión de ventas sobre TV y radio, con un término de interacción.
+</figcaption>
+<div aria-describedby="tbl-3-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Coeficiente</th>
+<th style="text-align: center;">Error estándar</th>
+<th style="text-align: center;">Estadístico <span class="math inline">\(t\)</span></th>
+<th style="text-align: center;">Valor <span class="math inline">\(p\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Intercepto</td>
+<td style="text-align: center;">6.7502</td>
+<td style="text-align: center;">0.248</td>
+<td style="text-align: center;">27.23</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">TV</td>
+<td style="text-align: center;">0.0191</td>
+<td style="text-align: center;">0.002</td>
+<td style="text-align: center;">12.70</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">radio</td>
+<td style="text-align: center;">0.0289</td>
+<td style="text-align: center;">0.009</td>
+<td style="text-align: center;">3.24</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">TV<span class="math inline">\(\times\)</span>radio</td>
+<td style="text-align: center;">0.0011</td>
+<td style="text-align: center;">0.000</td>
+<td style="text-align: center;">20.73</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div id="fig-3-7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter3/png/3_7.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;7: Para los datos de Credit, se muestran las líneas de mínimos cuadrados para la predicción del balance a partir del ingreso para estudiantes y no estudiantes. Izquierda: El modelo (3.34) fue ajustado. No hay interacción entre ingresos y estudiante. Derecha: El modelo (3.35) fue ajustado. Hay un término de interacción entre ingresos y estudiante.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="relaciones-no-lineales" class="level4">
+<h4 class="anchored" data-anchor-id="relaciones-no-lineales">Relaciones No Lineales</h4>
+<p>Considere la <a href="#fig-3-8" class="quarto-xref">Figura&nbsp;8</a>, en la que se muestra el mpg (millas por galón) versus horsepower para varios autos en el conjunto de datos Auto.</p>
+<div id="fig-3-8" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter3/png/3_8.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;8: El conjunto de datos Auto. Para varios autos, se muestran mpg y horsepower. El ajuste de regresión lineal se muestra en naranja. El ajuste de regresión lineal para un modelo que incluye horsepower^2 se muestra como una curva azul. El ajuste de regresión lineal para un modelo que incluye todos los polinomios de horsepower hasta el quinto grado se muestra en verde.
+</figcaption>
+</figure>
+</div>
+<p>Un enfoque para incorporar asociaciones no lineales es usar regresión polinomial:</p>
+<p><span class="math display">\[\text{mpg} = \beta_0 + \beta_1 \times \text{horsepower} + \beta_2 \times \text{horsepower}^2 + \epsilon. \tag{3.36}\]</span></p>
+<div id="tbl-3-10" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;10: Para el conjunto de datos Auto, estimaciones de coeficientes de mínimos cuadrados asociadas con la regresión de mpg sobre horsepower y horsepower<span class="math inline">\(^2\)</span>.
+</figcaption>
+<div aria-describedby="tbl-3-10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Coeficiente</th>
+<th style="text-align: center;">Error estándar</th>
+<th style="text-align: center;">Estadístico <span class="math inline">\(t\)</span></th>
+<th style="text-align: center;">Valor <span class="math inline">\(p\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Intercepto</td>
+<td style="text-align: center;">56.9001</td>
+<td style="text-align: center;">1.8004</td>
+<td style="text-align: center;">31.6</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">horsepower</td>
+<td style="text-align: center;">-0.4662</td>
+<td style="text-align: center;">0.0311</td>
+<td style="text-align: center;">-15.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">horsepower<span class="math inline">\(^2\)</span></td>
+<td style="text-align: center;">0.0012</td>
+<td style="text-align: center;">0.0001</td>
+<td style="text-align: center;">10.1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="problemas-potenciales" class="level3">
+<h3 class="anchored" data-anchor-id="problemas-potenciales">Problemas Potenciales</h3>
+<p>Cuando ajustamos un modelo de regresión lineal a un conjunto de datos particular, pueden ocurrir muchos problemas. Los más comunes son:</p>
+<ol type="1">
+<li>No linealidad de las relaciones respuesta-predictor.</li>
+<li>Correlación de los términos de error.</li>
+<li>Varianza no constante de los términos de error.</li>
+<li>Valores atípicos.</li>
+<li>Puntos de alto apalancamiento.</li>
+<li>Colinealidad.</li>
+</ol>
+<section id="no-linealidad-de-los-datos" class="level4">
+<h4 class="anchored" data-anchor-id="no-linealidad-de-los-datos">1. No Linealidad de los Datos</h4>
+<p>Los gráficos de residuales son una herramienta gráfica útil para identificar no linealidad.</p>
+<div id="fig-3-9" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter3/png/3_9.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;9: Gráficos de residuales versus valores predichos para el conjunto de datos Auto. En cada gráfico, la línea roja es un ajuste suave a los residuales. Izquierda: Una regresión lineal de mpg sobre horsepower. Un patrón fuerte en los residuales indica no linealidad en los datos. Derecha: Una regresión lineal de mpg sobre horsepower y horsepower^2. Hay poco patrón en los residuales.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="correlación-de-los-términos-de-error" class="level4">
+<h4 class="anchored" data-anchor-id="correlación-de-los-términos-de-error">2. Correlación de los Términos de Error</h4>
+<p>Un supuesto importante del modelo de regresión lineal es que los términos de error no están correlacionados. Si hay correlación, los errores estándar estimados tenderán a subestimar los errores estándar verdaderos.</p>
+<div id="fig-3-10" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter3/png/3_10.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;10: Gráficos de residuales de conjuntos de datos de series de tiempo simulados generados con diferentes niveles de correlación ρ entre los términos de error para puntos de tiempo adyacentes.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="varianza-no-constante-de-los-términos-de-error" class="level4">
+<h4 class="anchored" data-anchor-id="varianza-no-constante-de-los-términos-de-error">3. Varianza No Constante de los Términos de Error</h4>
+<p>Otro supuesto importante es que los términos de error tienen una varianza constante. La heterocedasticidad puede identificarse por una forma de embudo en el gráfico de residuales. Una posible solución es transformar la respuesta <span class="math inline">\(Y\)</span> usando una función cóncava como <span class="math inline">\(\log Y\)</span> o <span class="math inline">\(\sqrt{Y}\)</span>.</p>
+<div id="fig-3-11" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter3/png/3_11.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;11: Gráficos de residuales. En cada gráfico, la línea roja es un ajuste suave a los residuales. Izquierda: La forma de embudo indica heterocedasticidad. Derecha: La respuesta se ha transformado con log, y ahora no hay evidencia de heterocedasticidad.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="valores-atípicos" class="level4">
+<h4 class="anchored" data-anchor-id="valores-atípicos">4. Valores Atípicos</h4>
+<p>Un valor atípico es un punto para el cual <span class="math inline">\(y_i\)</span> está lejos del valor predicho por el modelo.</p>
+<div id="fig-3-12" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter3/png/3_12.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;12: Izquierda: La línea de regresión de mínimos cuadrados se muestra en rojo, y la línea de regresión después de eliminar el valor atípico se muestra en azul. Centro: El gráfico de residuales identifica claramente el valor atípico. Derecha: El valor atípico tiene un residual estudentizado de 6; típicamente esperamos valores entre -3 y 3.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="puntos-de-alto-apalancamiento" class="level4">
+<h4 class="anchored" data-anchor-id="puntos-de-alto-apalancamiento">5. Puntos de Alto Apalancamiento</h4>
+<p>Las observaciones con alto apalancamiento tienen un valor inusual para <span class="math inline">\(x_i\)</span>.</p>
+<div id="fig-3-13" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter3/png/3_13.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;13: Izquierda: La observación 41 es un punto de alto apalancamiento, mientras que 20 no lo es. La línea roja es el ajuste a todos los datos, y la línea azul es el ajuste con la observación 41 eliminada. Centro: La observación roja no es inusual en términos de su valor X1 o X2, pero aún cae fuera del grueso de los datos. Derecha: La observación 41 tiene alto apalancamiento y un alto residual.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="colinealidad" class="level4">
+<h4 class="anchored" data-anchor-id="colinealidad">6. Colinealidad</h4>
+<p>La colinealidad se refiere a la situación en la que dos o más variables predictoras están estrechamente relacionadas entre sí.</p>
+<div id="fig-3-14" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-14-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter3/png/3_14.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-14-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;14: Gráficos de dispersión de las observaciones del conjunto de datos Credit. Izquierda: Un gráfico de edad versus límite. Estas dos variables no son colineales. Derecha: Un gráfico de calificación versus límite. Hay alta colinealidad.
+</figcaption>
+</figure>
+</div>
+<p>La <a href="#fig-3-15" class="quarto-xref">Figura&nbsp;15</a> ilustra algunas de las dificultades que pueden resultar de la colinealidad. El panel izquierdo muestra un gráfico de contorno de la RSS para la regresión de balance sobre limit y age. El panel derecho muestra la RSS para la regresión de balance sobre rating y limit, que están altamente correlacionados.</p>
+<div id="fig-3-15" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter3/png/3_15.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;15: Gráficos de contorno para los valores de RSS en función de los parámetros β para varias regresiones que involucran el conjunto de datos Credit. En cada gráfico, los puntos negros representan los valores de los coeficientes correspondientes al mínimo de RSS. Izquierda: RSS para la regresión de balance sobre edad y límite. Derecha: RSS para la regresión de balance sobre calificación y límite. Debido a la colinealidad, hay muchos pares con un valor similar de RSS.
+</figcaption>
+</figure>
+</div>
+<p>Un VIF que excede 5 o 10 indica una cantidad problemática de colinealidad. En los datos de Credit, una regresión de balance sobre age, rating y limit produce VIF de 1.01, 160.67 y 160.59.</p>
+<div id="tbl-3-11" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;11: Resultados para dos modelos de regresión múltiple que involucran el conjunto de datos Credit. El Modelo 1 es una regresión de balance sobre age y limit, y el Modelo 2 es una regresión de balance sobre rating y limit. El error estándar de <span class="math inline">\(\hat{\beta}_{\text{limit}}\)</span> aumenta 12 veces en la segunda regresión debido a la colinealidad.
+</figcaption>
+<div aria-describedby="tbl-3-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Coeficiente</th>
+<th style="text-align: center;">Error estándar</th>
+<th style="text-align: center;">Estadístico <span class="math inline">\(t\)</span></th>
+<th style="text-align: center;">Valor <span class="math inline">\(p\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Modelo 1</td>
+<td style="text-align: center;">Intercepto</td>
+<td style="text-align: center;">-173.411</td>
+<td style="text-align: center;">43.828</td>
+<td style="text-align: center;">-3.957</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">age</td>
+<td style="text-align: center;">-2.292</td>
+<td style="text-align: center;">0.672</td>
+<td style="text-align: center;">-3.407</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">limit</td>
+<td style="text-align: center;">0.173</td>
+<td style="text-align: center;">0.005</td>
+<td style="text-align: center;">34.496</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Modelo 2</td>
+<td style="text-align: center;">Intercepto</td>
+<td style="text-align: center;">-377.537</td>
+<td style="text-align: center;">45.254</td>
+<td style="text-align: center;">-8.343</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">rating</td>
+<td style="text-align: center;">2.202</td>
+<td style="text-align: center;">0.952</td>
+<td style="text-align: center;">2.312</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">limit</td>
+<td style="text-align: center;">0.025</td>
+<td style="text-align: center;">0.064</td>
+<td style="text-align: center;">0.384</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+</section>
+<section id="el-plan-de-marketing" class="level2">
+<h2 class="anchored" data-anchor-id="el-plan-de-marketing">El Plan de Marketing</h2>
+<p>Ahora volvemos brevemente a las siete preguntas sobre los datos de Advertising que nos propusimos responder al comienzo de este capítulo.</p>
+<ol type="1">
+<li><p><strong>¿Existe una relación entre las ventas y el presupuesto de publicidad?</strong> Esta pregunta puede responderse ajustando un modelo de regresión múltiple de ventas sobre TV, radio y periódico, y probando la hipótesis <span class="math inline">\(H_0: \beta_{\text{TV}} = \beta_{\text{radio}} = \beta_{\text{periódico}} = 0\)</span>. En este caso, el valor <span class="math inline">\(p\)</span> correspondiente al estadístico <span class="math inline">\(F\)</span> es muy bajo, indicando evidencia clara de una relación entre la publicidad y las ventas.</p></li>
+<li><p><strong>¿Qué tan fuerte es la relación?</strong> El RSE es 1.69 unidades mientras que el valor medio de la respuesta es 14.022, indicando un error porcentual de aproximadamente 12 %. Los predictores explican casi el 90 % de la varianza en las ventas (<span class="math inline">\(R^2 = 0.897\)</span>).</p></li>
+<li><p><strong>¿Qué medios están asociados con las ventas?</strong> Los valores <span class="math inline">\(p\)</span> para TV y radio son bajos, pero el valor <span class="math inline">\(p\)</span> para periódicos no lo es. Esto sugiere que solo TV y radio están relacionados con las ventas.</p></li>
+<li><p><strong>¿Qué tan grande es la asociación entre cada medio y las ventas?</strong> Los intervalos de confianza del 95 % son (0.043, 0.049) para TV, (0.172, 0.206) para radio y (-0.013, 0.011) para periódicos.</p></li>
+<li><p><strong>¿Con qué precisión podemos predecir las ventas futuras?</strong> La respuesta puede predecirse usando (3.21). La precisión depende de si deseamos predecir una respuesta individual o la respuesta promedio.</p></li>
+<li><p><strong>¿La relación es lineal?</strong> Los gráficos de residuales pueden usarse para identificar no linealidad.</p></li>
+<li><p><strong>¿Existe sinergia entre los medios de publicidad?</strong> Incluir un término de interacción en el modelo resulta en un aumento sustancial en <span class="math inline">\(R^2\)</span>, de alrededor del 90 % a casi el 97 %.</p></li>
+</ol>
+</section>
+<section id="comparación-de-la-regresión-lineal-con-k-vecinos-más-cercanos" class="level2">
+<h2 class="anchored" data-anchor-id="comparación-de-la-regresión-lineal-con-k-vecinos-más-cercanos">Comparación de la Regresión Lineal con <span class="math inline">\(K\)</span>-Vecinos Más Cercanos</h2>
+<p>La regresión lineal es un ejemplo de un enfoque paramétrico porque asume una forma funcional lineal para <span class="math inline">\(f(X)\)</span>. Los métodos paramétricos tienen varias ventajas: a menudo son fáciles de ajustar, los coeficientes tienen interpretaciones simples y las pruebas de significancia estadística pueden realizarse fácilmente. Sin embargo, tienen la desventaja de hacer supuestos fuertes sobre la forma de <span class="math inline">\(f(X)\)</span>.</p>
+<p>En contraste, los métodos no paramétricos no asumen explícitamente una forma paramétrica para <span class="math inline">\(f(X)\)</span>. Un método no paramétrico simple y bien conocido es la regresión de <span class="math inline">\(K\)</span>-vecinos más cercanos (KNN). Dado un valor para <span class="math inline">\(K\)</span> y un punto de predicción <span class="math inline">\(x_0\)</span>, KNN identifica las <span class="math inline">\(K\)</span> observaciones de entrenamiento más cercanas a <span class="math inline">\(x_0\)</span> y estima <span class="math inline">\(f(x_0)\)</span> usando el promedio de todas las respuestas de entrenamiento en esa vecindad:</p>
+<p><span class="math display">\[\hat{f}(x_0) = \frac{1}{K}\sum_{x_i \in N_0} y_i.\]</span></p>
+<div id="fig-3-16" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-16-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter3/png/3_16.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-16-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;16: Gráficos de <span class="math inline">\(\hat{f}(X)\)</span> usando regresión KNN en un conjunto de datos bidimensional con 64 observaciones (puntos naranjas). Izquierda: K = 1 resulta en un ajuste de función escalonada rugoso. Derecha: K = 9 produce un ajuste mucho más suave.
+</figcaption>
+</figure>
+</div>
+<div id="fig-3-17" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-17-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter3/png/3_17.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-17-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;17: Gráficos de <span class="math inline">\(\hat{f}(X)\)</span> usando regresión KNN en un conjunto de datos unidimensional con 50 observaciones. La verdadera relación está dada por la línea sólida negra. Izquierda: La curva azul corresponde a K = 1 e interpola los datos de entrenamiento. Derecha: La curva azul corresponde a K = 9, y representa un ajuste más suave.
+</figcaption>
+</figure>
+</div>
+<div id="fig-3-18" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-18-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter3/png/3_18.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-18-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;18: El mismo conjunto de datos de la Figura 3.17 se investiga más a fondo. Izquierda: La línea discontinua azul es el ajuste de mínimos cuadrados a los datos. Derecha: La línea horizontal discontinua representa el MSE de prueba de mínimos cuadrados, mientras que la línea sólida verde corresponde al MSE para KNN en función de 1/K.
+</figcaption>
+</figure>
+</div>
+<div id="fig-3-19" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-19-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter3/png/3_19.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-19-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;19: Arriba Izquierda: En un entorno con una relación ligeramente no lineal entre X e Y, se muestran los ajustes KNN con K = 1 (azul) y K = 9 (rojo). Arriba Derecha: MSE de prueba para regresión lineal (horizontal negra) y KNN (verde). Abajo: Lo mismo pero con una relación fuertemente no lineal.
+</figcaption>
+</figure>
+</div>
+<div id="fig-3-20" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-20-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter3/png/3_20.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-20-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;20: ECM de prueba para regresión lineal (líneas discontinuas negras) y KNN (curvas verdes) a medida que el número de variables p aumenta. La verdadera función es no lineal en la primera variable y no depende de las variables adicionales.
+</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+<section id="laboratorio" class="level2">
+<h2 class="anchored" data-anchor-id="laboratorio">Laboratorio</h2>
+<p>Los laboratorios con el código completo de este capítulo están disponibles en el sitio oficial del libro: <a href="https://www.statlearning.com" target="_blank">statlearning.com</a>. También puedes acceder a los notebooks en el repositorio oficial de ISLP: <a href="https://github.com/intro-stat-learning/ISLP_labs" target="_blank">ISLP en GitHub</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/cffga\.github\.io\/proyectos\/isl-esp");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../chapters/02-aprendizaje-estadistico/index.html" class="pagination-link" aria-label="2. Aprendizaje Estadístico">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">2. Aprendizaje Estadístico</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../chapters/04-clasificacion/index.html" class="pagination-link" aria-label="4. Clasificación">
+        <span class="nav-page-text">4. Clasificación</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

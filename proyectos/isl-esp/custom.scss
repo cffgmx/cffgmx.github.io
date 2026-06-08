@@ -1,0 +1,24 @@
+/*-- scss:defaults --*/
+
+// Color personalizado: un azul similar al del libro original
+$link-color: #1a5276;
+$navbar-bg: #1a5276;
+$sidebar-bg: #f8f9fa;
+
+/*-- scss:rules --*/
+
+// Ajustes de tipografía para el cuerpo
+body {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+// Títulos de capítulos
+h1, h2, h3, h4 {
+  margin-top: 1.5em;
+}
+
+// Figuras
+.figure {
+  margin: 1em 0;
+}

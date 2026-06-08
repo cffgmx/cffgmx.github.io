@@ -1,0 +1,133 @@
+---
+title: "12. Aprendizaje No Supervisado"
+---
+
+## Resumen
+
+El **aprendizaje no supervisado** trabaja con datos que no tienen una variable respuesta. El objetivo es descubrir patrones, grupos o estructuras subyacentes. Cubrimos **análisis de componentes principales** (PCA), **clustering** (K-means, jerárquico) y métodos mixtos.
+
+## Análisis de Componentes Principales (PCA)
+
+PCA es una técnica de reducción de dimensionalidad que encuentra las direcciones de máxima varianza en los datos. La primera **componente principal** es la combinación lineal de los predictores que maximiza la varianza:
+
+$$Z_1 = \phi_{11} X_1 + \phi_{21} X_2 + \cdots + \phi_{p1} X_p$$
+
+Las componentes principales están ordenadas por la cantidad de varianza que explican, y son **ortogonales** entre sí. Los valores $\phi_{j1}$ son los **loadings** (cargas) y los valores $Z_1$ son los **scores**.
+
+La @fig-12-1 ilustra la primera y segunda componente principal para datos simulados en dos dimensiones.
+
+![Primera y segunda componente principal para datos simulados en $p = 2$ dimensiones. La PC1 captura la dirección de máxima varianza.](../../Figures/Chapter12/png/12_1.png){#fig-12-1 width=60%}
+
+### Proporción de Varianza Explicada
+
+La @fig-12-2a y @fig-12-2b muestran la varianza explicada por cada componente principal y el **scree plot** para un conjunto de datos de expresión génica.
+
+![Varianza explicada por cada componente principal en datos de expresión génica.](../../Figures/Chapter12/png/12_2a.png){#fig-12-2a width=49%}
+
+![Scree plot: varianza explicada acumulada por las primeras componentes principales.](../../Figures/Chapter12/png/12_2b.png){#fig-12-2b width=49%}
+
+### Biplot
+
+La @fig-12-3 muestra un **biplot** de PCA, que superpone las observaciones (scores) y las variables (loadings) en el mismo gráfico, permitiendo interpretar qué variables contribuyen a cada componente.
+
+![Biplot de PCA para el conjunto de datos USArrests. Las flechas indican la dirección de cada variable original.](../../Figures/Chapter12/png/12_3.png){#fig-12-3 width=60%}
+
+La @fig-12-4 aplica PCA a los datos *NCI60* de expresión génica, coloreando las observaciones por tipo de cáncer.
+
+![PCA sobre datos NCI60. Cada punto es una línea celular, coloreada por tipo de cáncer. Se muestran las dos primeras componentes principales.](../../Figures/Chapter12/png/12_4.png){#fig-12-4 width=60%}
+
+La @fig-12-5 muestra los loadings de las primeras componentes principales para los datos NCI60.
+
+![Loadings de las primeras componentes principales para los datos NCI60. Muestran qué genes contribuyen más a cada componente.](../../Figures/Chapter12/png/12_5.png){#fig-12-5 width=60%}
+
+### PCA con Escalamiento
+
+Es fundamental **estandarizar** las variables antes de aplicar PCA cuando están en escalas diferentes. La @fig-12-6 compara PCA con y sin estandarización en los datos *USArrests*.
+
+![Comparación de PCA con y sin estandarización en USArrests. Sin estandarización, las variables con mayor magnitud dominan las componentes.](../../Figures/Chapter12/png/12_6.png){#fig-12-6 width=60%}
+
+## Clustering
+
+El **clustering** busca agrupar observaciones similares. La **similitud** entre observaciones se mide típicamente con la distancia euclidiana.
+
+### Clustering con K-Medias
+
+El algoritmo de **K-medias** (K-means) particiona las $n$ observaciones en $K$ grupos, minimizando la **varianza intra-cluster**:
+
+$$\sum_{k=1}^{K} \frac{1}{|C_k|} \sum_{i, i' \in C_k} \sum_{j=1}^{p} (x_{ij} - x_{i'j})^2$$
+
+La @fig-12-7 ilustra el algoritmo K-means en datos simulados, mostrando la asignación inicial y la convergencia.
+
+![Algoritmo K-means en datos simulados: iteraciones del algoritmo hasta la convergencia. Cada color representa un cluster.](../../Figures/Chapter12/png/12_7.png){#fig-12-7 width=60%}
+
+#### Elección de $K$
+
+La selección del número de clusters $K$ es un problema abierto. La @fig-12-8 muestra la varianza total intra-cluster en función de $K$ (método del codo) para datos simulados.
+
+![Varianza total intra-cluster en función de $K$ para el algoritmo K-means. El punto de codo sugiere un valor adecuado.](../../Figures/Chapter12/png/12_8.png){#fig-12-8 width=60%}
+
+### Clustering Jerárquico
+
+El **clustering jerárquico** produce una jerarquía de grupos representada en un **dendrograma**. A diferencia de K-means, no requiere especificar $K$ de antemano.
+
+La @fig-12-9 muestra un dendrograma para datos simulados en dos dimensiones, con las observaciones como hojas y la altura de las fusiones indicando la distancia entre grupos.
+
+![Dendrograma para datos simulados en dos dimensiones. Las observaciones similares se fusionan a baja altura.](../../Figures/Chapter12/png/12_9.png){#fig-12-9 width=60%}
+
+La @fig-12-10 compara diferentes medidas de **enlace** (linkage: completa, promedio, simple) en el clustering jerárquico para los mismos datos.
+
+![Comparación de enlace completo, promedio y simple en clustering jerárquico. Cada tipo de enlace produce dendrogramas diferentes.](../../Figures/Chapter12/png/12_10.png){#fig-12-10 width=60%}
+
+#### Cortes en el Dendrograma
+
+La @fig-12-11 muestra cómo un corte horizontal en el dendrograma produce diferentes números de clusters según la altura del corte.
+
+![Corte del dendrograma a diferentes alturas produce diferentes números y composiciones de clusters.](../../Figures/Chapter12/png/12_11.png){#fig-12-11 width=60%}
+
+### Aplicación a Datos NCI60
+
+La @fig-12-12 aplica clustering jerárquico a los datos NCI60, mostrando cómo se agrupan las líneas celulares según su tipo de cáncer.
+
+![Clustering jerárquico sobre los datos NCI60. Los colores indican el tipo de cáncer verdadero.](../../Figures/Chapter12/png/12_12.png){#fig-12-12 width=60%}
+
+La @fig-12-13 compara los clusters obtenidos con K-means (para diferentes $K$) con los tipos de cáncer verdaderos en NCI60.
+
+![Comparación de clusters K-means con los tipos de cáncer reales en NCI60 para diferentes valores de $K$.](../../Figures/Chapter12/png/12_13.png){#fig-12-13 width=60%}
+
+## Temas Avanzados
+
+### PCA y Matrices de Covarianza
+
+La @fig-12-14 visualiza la matriz de covarianza y correlación de los datos NCI60, mostrando la estructura de dependencia entre genes.
+
+![Matriz de correlación de los datos NCI60. Los patrones visuales revelan estructuras de coexpresión génica.](../../Figures/Chapter12/png/12_14.png){#fig-12-14 width=60%}
+
+### PCA como Preprocesamiento
+
+PCA se usa frecuentemente como paso previo a métodos supervisados (como en PCR, Capítulo 6). La @fig-12-15 muestra el efecto de usar PCA como preprocesamiento en un problema de clasificación.
+
+![PCA como preprocesamiento para clasificación. Reducir la dimensionalidad puede mejorar el rendimiento cuando $p$ es grande.](../../Figures/Chapter12/png/12_15.png){#fig-12-15 width=60%}
+
+### Visualización de Altas Dimensiones
+
+La @fig-12-16 muestra diferentes formas de visualizar datos de alta dimensión, incluyendo PCA, MDS (escalamiento multidimensional) y t-SNE.
+
+![Comparación de PCA, MDS y t-SNE para visualizar datos de alta dimensión en un plano.](../../Figures/Chapter12/png/12_16.png){#fig-12-16 width=60%}
+
+### Clustering con Datos de Alta Dimensión
+
+La @fig-12-17 y @fig-12-18 muestran los desafíos del clustering en alta dimensión, donde las distancias euclidianas tienden a hacerse uniformes.
+
+![Desafíos del clustering en alta dimensión: las distancias entre observaciones se vuelven cada vez más similares a medida que $p$ crece.](../../Figures/Chapter12/png/12_17.png){#fig-12-17 width=60%}
+
+![Comparación de métodos de clustering en datos de alta dimensión.](../../Figures/Chapter12/png/12_18.png){#fig-12-18 width=60%}
+
+### Matriz de Cargas y Contribución
+
+La @fig-12-19 presenta la matriz de loadings de PCA para varios conjuntos de datos, mostrando qué variables contribuyen más a cada componente.
+
+![Matriz de loadings de PCA: el color indica la magnitud y dirección de la contribución de cada variable a las componentes principales.](../../Figures/Chapter12/png/12_19.png){#fig-12-19 width=60%}
+
+## Laboratorio
+
+Los laboratorios con el código completo de este capítulo están disponibles en el sitio oficial del libro: [statlearning.com](https://www.statlearning.com){target="_blank"}. También puedes acceder a los notebooks en el repositorio oficial de ISLP: [ISLP_labs en GitHub](https://github.com/intro-stat-learning/ISLP_labs){target="_blank"}.

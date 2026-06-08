@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>2. Aprendizaje Estadístico – ISL — Introducción al Aprendizaje Estadístico</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../chapters/03-regresion-lineal/index.html" rel="next">
+<link href="../../chapters/01-introduccion/index.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-d0dcf73a2c6cfa2d496579af7b131e12.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/01-introduccion/index.html">Capítulos</a></li><li class="breadcrumb-item"><a href="../../chapters/02-aprendizaje-estadistico/index.html">2. Aprendizaje Estadístico</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">ISL — Introducción al Aprendizaje Estadístico</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">El libro</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Portada</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/00-prefacio/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prefacio</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Capítulos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/01-introduccion/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Introducción</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/02-aprendizaje-estadistico/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">2. Aprendizaje Estadístico</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/03-regresion-lineal/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Regresión Lineal</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/04-clasificacion/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4. Clasificación</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/05-metodos-remuestreo/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5. Métodos de Remuestreo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/06-seleccion-modelos/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6. Selección de Modelos Lineales y Regularización</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/07-mas-alla-linealidad/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7. Más Allá de la Linealidad</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/08-arboles-decision/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">8. Métodos Basados en Árboles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/09-svm/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">9. Máquinas de Vectores de Soporte</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/10-aprendizaje-profundo/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10. Aprendizaje Profundo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/11-analisis-supervivencia/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11. Análisis de Supervivencia y Datos Censurados</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/12-aprendizaje-no-supervisado/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12. Aprendizaje No Supervisado</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/13-pruebas-multiples/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13. Pruebas Múltiples</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/01-introduccion/index.html">Capítulos</a></li><li class="breadcrumb-item"><a href="../../chapters/02-aprendizaje-estadistico/index.html">2. Aprendizaje Estadístico</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">2. Aprendizaje Estadístico</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="qué-es-el-aprendizaje-estadístico" class="level2">
+<h2 class="anchored" data-anchor-id="qué-es-el-aprendizaje-estadístico">¿Qué es el Aprendizaje Estadístico?</h2>
+<p>Para motivar nuestro estudio del aprendizaje estadístico, comenzamos con un ejemplo sencillo. Supongamos que somos consultores estadísticos contratados por un cliente para investigar la asociación entre la publicidad y las ventas de un producto en particular. El conjunto de datos Advertising consiste en las ventas de ese producto en 200 mercados diferentes, junto con los presupuestos de publicidad para el producto en cada uno de esos mercados para tres medios diferentes: TV, radio y periódico. Los datos se muestran en <a href="#fig-advertising" class="quarto-xref">Figura&nbsp;1</a>. No es posible que nuestro cliente aumente directamente las ventas del producto. Por otro lado, pueden controlar el gasto en publicidad en cada uno de los tres medios. Por lo tanto, si determinamos que existe una asociación entre la publicidad y las ventas, podemos indicar a nuestro cliente que ajuste los presupuestos de publicidad, aumentando así indirectamente las ventas. En otras palabras, nuestro objetivo es desarrollar un modelo preciso que pueda usarse para predecir las ventas en función de los presupuestos de los tres medios.</p>
+<p>En este contexto, los presupuestos de publicidad son variables de entrada, mientras que las ventas son una variable de salida. Las variables de entrada se denotan típicamente con el símbolo <span class="math inline">\(X\)</span>, con un subíndice para distinguirlas. Así, <span class="math inline">\(X_1\)</span> podría ser el presupuesto de TV, <span class="math inline">\(X_2\)</span> el presupuesto de radio y <span class="math inline">\(X_3\)</span> el presupuesto de periódico. Las entradas reciben diferentes nombres, como predictores, variables independientes, características o simplemente variables. La variable de salida —en este caso, las ventas— a menudo se denomina respuesta o variable dependiente, y normalmente se denota con el símbolo <span class="math inline">\(Y\)</span>. A lo largo de este libro, usaremos todos estos términos de manera intercambiable.</p>
+<p>De manera más general, supongamos que observamos una respuesta cuantitativa <span class="math inline">\(Y\)</span> y <span class="math inline">\(p\)</span> predictores diferentes, <span class="math inline">\(X_1, X_2, \ldots, X_p\)</span>. Asumimos que existe alguna relación entre <span class="math inline">\(Y\)</span> y <span class="math inline">\(X = (X_1, X_2, \ldots, X_p)\)</span>, que puede escribirse en la forma muy general</p>
+<p><span class="math display">\[Y = f(X) + \epsilon. \tag{2.1}\]</span></p>
+<p>Aquí <span class="math inline">\(f\)</span> es alguna función fija pero desconocida de <span class="math inline">\(X_1, \ldots, X_p\)</span>, y <span class="math inline">\(\epsilon\)</span> es un término de error aleatorio, que es independiente de <span class="math inline">\(X\)</span> y tiene media cero. En esta formulación, <span class="math inline">\(f\)</span> representa la información sistemática que <span class="math inline">\(X\)</span> proporciona sobre <span class="math inline">\(Y\)</span>.</p>
+<div id="fig-advertising" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-advertising-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter2/png/2_1.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-advertising-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1: El conjunto de datos Advertising. El gráfico muestra las ventas, en miles de unidades, en función de los presupuestos de TV, radio y periódico, en miles de dólares, para 200 mercados diferentes. En cada gráfico mostramos el ajuste de mínimos cuadrados simple de las ventas a esa variable, como se describe en el Capítulo 3. En otras palabras, cada línea azul representa un modelo simple que puede usarse para predecir las ventas usando TV, radio y periódico, respectivamente.
+</figcaption>
+</figure>
+</div>
+<section id="por-qué-estimar-f" class="level3">
+<h3 class="anchored" data-anchor-id="por-qué-estimar-f">2.1.1 ¿Por Qué Estimar <span class="math inline">\(f\)</span>?</h3>
+<p>Hay dos razones principales por las que podemos desear estimar <span class="math inline">\(f\)</span>: predicción e inferencia. Discutimos cada una por turno.</p>
+<section id="predicción" class="level4">
+<h4 class="anchored" data-anchor-id="predicción">Predicción</h4>
+<p>En muchas situaciones, tenemos un conjunto de entradas <span class="math inline">\(X\)</span> disponibles, pero la salida <span class="math inline">\(Y\)</span> no puede obtenerse fácilmente. En este contexto, dado que el término de error promedia cero, podemos predecir <span class="math inline">\(Y\)</span> usando</p>
+<p><span class="math display">\[\hat{Y} = \hat{f}(X), \tag{2.2}\]</span></p>
+<p>donde <span class="math inline">\(\hat{f}\)</span> representa nuestra estimación de <span class="math inline">\(f\)</span>, y <span class="math inline">\(\hat{Y}\)</span> representa la predicción resultante para <span class="math inline">\(Y\)</span>. En este contexto, <span class="math inline">\(\hat{f}\)</span> a menudo se trata como una caja negra, en el sentido de que uno no suele estar preocupado por la forma exacta de <span class="math inline">\(\hat{f}\)</span>, siempre que produzca predicciones precisas para <span class="math inline">\(Y\)</span>.</p>
+<p>Como ejemplo, supongamos que <span class="math inline">\(X_1, \ldots, X_p\)</span> son características de una muestra de sangre de un paciente que pueden medirse fácilmente en un laboratorio, e <span class="math inline">\(Y\)</span> es una variable que codifica el riesgo del paciente de una reacción adversa severa a un fármaco en particular. Es natural buscar predecir <span class="math inline">\(Y\)</span> usando <span class="math inline">\(X\)</span>, ya que así podemos evitar administrar el fármaco en cuestión a pacientes que tienen un alto riesgo de una reacción adversa —es decir, pacientes para quienes la estimación de <span class="math inline">\(Y\)</span> es alta.</p>
+<p>La precisión de <span class="math inline">\(\hat{Y}\)</span> como predicción de <span class="math inline">\(Y\)</span> depende de dos cantidades, que llamaremos el error reducible y el error irreducible. En general, <span class="math inline">\(\hat{f}\)</span> no será una estimación perfecta de <span class="math inline">\(f\)</span>, y esta imprecisión introducirá algún error. Este error es reducible porque potencialmente podemos mejorar la precisión de <span class="math inline">\(\hat{f}\)</span> usando la técnica de aprendizaje estadístico más apropiada para estimar <span class="math inline">\(f\)</span>. Sin embargo, incluso si fuera posible formar una estimación perfecta de <span class="math inline">\(f\)</span>, de modo que nuestra respuesta estimada tomara la forma <span class="math inline">\(\hat{Y} = f(X)\)</span>, ¡nuestra predicción aún tendría algún error! Esto se debe a que <span class="math inline">\(Y\)</span> también es una función de <span class="math inline">\(\epsilon\)</span>, que, por definición, no puede predecirse usando <span class="math inline">\(X\)</span>. Por lo tanto, la variabilidad asociada con <span class="math inline">\(\epsilon\)</span> también afecta la precisión de nuestras predicciones. Esto se conoce como el error irreducible, porque no importa qué tan bien estimemos <span class="math inline">\(f\)</span>, no podemos reducir el error introducido por <span class="math inline">\(\epsilon\)</span>.</p>
+<p>¿Por qué el error irreducible es mayor que cero? La cantidad <span class="math inline">\(\epsilon\)</span> puede contener variables no medidas que son útiles para predecir <span class="math inline">\(Y\)</span>: como no las medimos, <span class="math inline">\(f\)</span> no puede usarlas para su predicción. La cantidad <span class="math inline">\(\epsilon\)</span> también puede contener variación no medible. Por ejemplo, el riesgo de una reacción adversa podría variar para un paciente dado en un día dado, dependiendo de la variación de fabricación en el fármaco mismo o del sentimiento general de bienestar del paciente en ese día.</p>
+<p>Consideremos una estimación dada <span class="math inline">\(\hat{f}\)</span> y un conjunto de predictores <span class="math inline">\(X\)</span>, que produce la predicción <span class="math inline">\(\hat{Y} = \hat{f}(X)\)</span>. Supongamos por un momento que tanto <span class="math inline">\(\hat{f}\)</span> como <span class="math inline">\(X\)</span> son fijos, de modo que la única variabilidad proviene de <span class="math inline">\(\epsilon\)</span>. Entonces, es fácil mostrar que</p>
+<p><span class="math display">\[E(Y - \hat{Y})^2 = E[f(X) + \epsilon - \hat{f}(X)]^2 = [f(X) - \hat{f}(X)]^2 + \operatorname{Var}(\epsilon), \tag{2.3}\]</span></p>
+<p>donde <span class="math inline">\(E(Y - \hat{Y})^2\)</span> representa el valor promedio, o esperado, de la diferencia al cuadrado entre el valor predicho y el valor real de <span class="math inline">\(Y\)</span>, y <span class="math inline">\(\operatorname{Var}(\epsilon)\)</span> representa la varianza asociada con el término de error <span class="math inline">\(\epsilon\)</span>.</p>
+<p>El enfoque de este libro está en las técnicas para estimar <span class="math inline">\(f\)</span> con el objetivo de minimizar el error reducible. Es importante tener en cuenta que el error irreducible siempre proporcionará un límite superior en la precisión de nuestra predicción para <span class="math inline">\(Y\)</span>. Este límite casi siempre es desconocido en la práctica.</p>
+</section>
+<section id="inferencia" class="level4">
+<h4 class="anchored" data-anchor-id="inferencia">Inferencia</h4>
+<p>A menudo estamos interesados en comprender la asociación entre <span class="math inline">\(Y\)</span> y <span class="math inline">\(X_1, \ldots, X_p\)</span>. En esta situación deseamos estimar <span class="math inline">\(f\)</span>, pero nuestro objetivo no es necesariamente hacer predicciones para <span class="math inline">\(Y\)</span>. Ahora <span class="math inline">\(\hat{f}\)</span> no puede tratarse como una caja negra, porque necesitamos conocer su forma exacta. En este contexto, uno puede estar interesado en responder las siguientes preguntas:</p>
+<ul>
+<li>¿Qué predictores están asociados con la respuesta? A menudo es el caso de que solo una pequeña fracción de los predictores disponibles están sustancialmente asociados con <span class="math inline">\(Y\)</span>. Identificar los pocos predictores importantes entre un gran conjunto de variables posibles puede ser extremadamente útil, dependiendo de la aplicación.</li>
+<li>¿Cuál es la relación entre la respuesta y cada predictor? Algunos predictores pueden tener una relación positiva con <span class="math inline">\(Y\)</span>, en el sentido de que valores más grandes del predictor están asociados con valores más grandes de <span class="math inline">\(Y\)</span>. Otros predictores pueden tener la relación opuesta. Dependiendo de la complejidad de <span class="math inline">\(f\)</span>, la relación entre la respuesta y un predictor dado también puede depender de los valores de los otros predictores.</li>
+<li>¿Puede la relación entre <span class="math inline">\(Y\)</span> y cada predictor resumirse adecuadamente usando una ecuación lineal, o la relación es más complicada? Históricamente, la mayoría de los métodos para estimar <span class="math inline">\(f\)</span> han tomado una forma lineal. En algunas situaciones, tal suposición es razonable o incluso deseable. Pero a menudo la verdadera relación es más complicada, en cuyo caso un modelo lineal puede no proporcionar una representación precisa de la relación entre las variables de entrada y salida.</li>
+</ul>
+<p>En este libro, veremos varios ejemplos que caen en el contexto de predicción, en el contexto de inferencia, o en una combinación de ambos.</p>
+<p>Por ejemplo, considere una empresa que está interesada en realizar una campaña de marketing directo. El objetivo es identificar individuos que probablemente respondan positivamente a un envío postal, basándose en observaciones de variables demográficas medidas en cada individuo. En este caso, las variables demográficas sirven como predictores, y la respuesta a la campaña de marketing (ya sea positiva o negativa) sirve como resultado. La empresa no está interesada en obtener una comprensión profunda de las relaciones entre cada predictor individual y la respuesta; en cambio, la empresa simplemente quiere predecir con precisión la respuesta usando los predictores. Este es un ejemplo de modelado para predicción.</p>
+<p>En contraste, considere los datos de Advertising ilustrados en <a href="#fig-advertising" class="quarto-xref">Figura&nbsp;1</a>. Uno puede estar interesado en responder preguntas como: - ¿Qué medios están asociados con las ventas? - ¿Qué medios generan el mayor aumento en las ventas? - ¿Qué tan grande es el aumento en las ventas asociado con un aumento dado en la publicidad en TV?</p>
+<p>Esta situación cae en el paradigma de inferencia. Otro ejemplo implica modelar la marca de un producto que un cliente podría comprar basándose en variables como el precio, la ubicación de la tienda, los niveles de descuento, el precio de la competencia, y así sucesivamente. En esta situación, uno podría estar más interesado en la asociación entre cada variable y la probabilidad de compra. Por ejemplo, ¿en qué medida está asociado el precio del producto con las ventas? Este es un ejemplo de modelado para inferencia.</p>
+<p>Finalmente, algunos modelos podrían realizarse tanto para predicción como para inferencia. Por ejemplo, en un contexto de bienes raíces, uno podría buscar relacionar los valores de las viviendas con entradas como la tasa de criminalidad, la zonificación, la distancia a un río, la calidad del aire, las escuelas, el nivel de ingresos de la comunidad, el tamaño de las casas, y así sucesivamente. En este caso, uno podría estar interesado en la asociación entre cada variable de entrada individual y el precio de la vivienda —por ejemplo, ¿cuánto extra valdrá una casa si tiene vista al río? Este es un problema de inferencia. Alternativamente, uno podría simplemente estar interesado en predecir el valor de una casa dadas sus características: ¿esta casa está infravalorada o sobrevalorada? Este es un problema de predicción.</p>
+<p>Dependiendo de si nuestro objetivo final es predicción, inferencia, o una combinación de ambos, diferentes métodos para estimar <span class="math inline">\(f\)</span> pueden ser apropiados. Por ejemplo, los modelos lineales permiten una inferencia relativamente simple e interpretable, pero pueden no producir predicciones tan precisas como otros enfoques. En contraste, algunos de los enfoques altamente no lineales que discutimos en los capítulos posteriores de este libro pueden proporcionar predicciones bastante precisas para <span class="math inline">\(Y\)</span>, pero esto viene a costa de un modelo menos interpretable para el cual la inferencia es más desafiante.</p>
+<p>En general, la función <span class="math inline">\(f\)</span> puede involucrar más de una variable de entrada. En <a href="#fig-income-3d" class="quarto-xref">Figura&nbsp;2</a> representamos los ingresos en función de los años de educación y la antigüedad. Aquí <span class="math inline">\(f\)</span> es una superficie bidimensional que debe estimarse basándose en los datos observados.</p>
+<div id="fig-income-3d" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-income-3d-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter2/png/2_3.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-income-3d-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2: El gráfico muestra los ingresos en función de los años de educación y la antigüedad en el conjunto de datos Income. La superficie azul representa la verdadera relación subyacente entre los ingresos y los años de educación y antigüedad, que se conoce porque los datos son simulados. Los puntos rojos indican los valores observados de estas cantidades para 30 individuos.
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="cómo-estimamos-f" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-estimamos-f">2.1.2 ¿Cómo Estimamos <span class="math inline">\(f\)</span>?</h3>
+<p>A lo largo de este libro, exploramos muchos enfoques lineales y no lineales para estimar <span class="math inline">\(f\)</span>. Sin embargo, estos métodos generalmente comparten ciertas características. Proporcionamos una visión general de estas características compartidas en esta sección. Siempre asumiremos que hemos observado un conjunto de <span class="math inline">\(n\)</span> puntos de datos diferentes. Por ejemplo, en <a href="#fig-income-data" class="quarto-xref">Figura&nbsp;3</a> observamos <span class="math inline">\(n = 30\)</span> puntos de datos. Estas observaciones se llaman los datos de entrenamiento porque usaremos estas observaciones para entrenar, o enseñar, a nuestro método cómo estimar <span class="math inline">\(f\)</span>. Sea <span class="math inline">\(x_{ij}\)</span> el valor del <span class="math inline">\(j\)</span>-ésimo predictor, o entrada, para la observación <span class="math inline">\(i\)</span>, donde <span class="math inline">\(i = 1, 2, \ldots, n\)</span> y <span class="math inline">\(j = 1, 2, \ldots, p\)</span>. Correspondientemente, sea <span class="math inline">\(y_i\)</span> la variable de respuesta para la <span class="math inline">\(i\)</span>-ésima observación. Entonces nuestros datos de entrenamiento consisten en <span class="math inline">\(\{(x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\}\)</span> donde <span class="math inline">\(x_i = (x_{i1}, x_{i2}, \ldots, x_{ip})^T\)</span>.</p>
+<p>Nuestro objetivo es aplicar un método de aprendizaje estadístico a los datos de entrenamiento para estimar la función desconocida <span class="math inline">\(f\)</span>. En otras palabras, queremos encontrar una función <span class="math inline">\(\hat{f}\)</span> tal que <span class="math inline">\(Y \approx \hat{f}(X)\)</span> para cualquier observación <span class="math inline">\((X, Y)\)</span>. En términos generales, la mayoría de los métodos de aprendizaje estadístico para esta tarea pueden caracterizarse como paramétricos o no paramétricos. Discutimos brevemente estos dos tipos de enfoques.</p>
+<div id="fig-income-data" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-income-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter2/png/2_2.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-income-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3: El conjunto de datos Income. Izquierda: Los puntos rojos son los valores observados de ingresos (en miles de dólares) y años de educación para 30 individuos. Derecha: La curva azul representa la verdadera relación subyacente entre ingresos y años de educación, que generalmente es desconocida (pero se conoce en este caso porque los datos fueron simulados). Las líneas negras representan el error asociado con cada observación. Nótese que algunos errores son positivos (si una observación está por encima de la curva azul) y algunos son negativos (si una observación está por debajo de la curva). En general, estos errores tienen aproximadamente media cero.
+</figcaption>
+</figure>
+</div>
+<section id="métodos-paramétricos" class="level4">
+<h4 class="anchored" data-anchor-id="métodos-paramétricos">Métodos Paramétricos</h4>
+<p>Los métodos paramétricos implican un enfoque basado en modelos de dos pasos.</p>
+<ol type="1">
+<li><p>Primero, hacemos una suposición sobre la forma funcional, o la forma, de <span class="math inline">\(f\)</span>. Por ejemplo, una suposición muy simple es que <span class="math inline">\(f\)</span> es lineal en <span class="math inline">\(X\)</span>: <span class="math display">\[f(X) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p. \tag{2.4}\]</span> Este es un modelo lineal, que se discutirá extensamente en el Capítulo 3. Una vez que hemos asumido que <span class="math inline">\(f\)</span> es lineal, el problema de estimar <span class="math inline">\(f\)</span> se simplifica enormemente. En lugar de tener que estimar una función <span class="math inline">\(f(X)\)</span> <span class="math inline">\(p\)</span>-dimensional completamente arbitraria, solo necesita estimar los <span class="math inline">\(p+1\)</span> coeficientes <span class="math inline">\(\beta_0, \beta_1, \ldots, \beta_p\)</span>.</p></li>
+<li><p>Después de que se ha seleccionado un modelo, necesitamos un procedimiento que use los datos de entrenamiento para ajustar o entrenar el modelo. En el caso del modelo lineal (2.4), necesitamos estimar los parámetros <span class="math inline">\(\beta_0, \beta_1, \ldots, \beta_p\)</span>. Es decir, queremos encontrar valores de estos parámetros tales que <span class="math display">\[Y \approx \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p.\]</span> El enfoque más común para ajustar el modelo (2.4) se conoce como mínimos cuadrados (ordinarios), que discutimos en el Capítulo 3. Sin embargo, mínimos cuadrados es una de muchas formas posibles de ajustar el modelo lineal. En el Capítulo 6, discutimos otros enfoques para estimar los parámetros en (2.4).</p></li>
+</ol>
+<p>El enfoque basado en modelos que acabamos de describir se denomina paramétrico; reduce el problema de estimar <span class="math inline">\(f\)</span> a uno de estimar un conjunto de parámetros. Asumir una forma paramétrica para <span class="math inline">\(f\)</span> simplifica el problema de estimar <span class="math inline">\(f\)</span> porque generalmente es mucho más fácil estimar un conjunto de parámetros, como <span class="math inline">\(\beta_0, \beta_1, \ldots, \beta_p\)</span> en el modelo lineal (2.4), que ajustar una función <span class="math inline">\(f\)</span> completamente arbitraria. La desventaja potencial de un enfoque paramétrico es que el modelo que elijamos generalmente no coincidirá con la verdadera forma desconocida de <span class="math inline">\(f\)</span>. Si el modelo elegido está demasiado lejos de la verdadera <span class="math inline">\(f\)</span>, entonces nuestra estimación será pobre. Podemos intentar abordar este problema eligiendo modelos flexibles que puedan ajustar muchas formas funcionales posibles diferentes para <span class="math inline">\(f\)</span>. Pero en general, ajustar un modelo más flexible requiere estimar un mayor número de parámetros. Estos modelos más complejos pueden llevar a un fenómeno conocido como sobreajuste de los datos, lo que esencialmente significa que siguen los errores, o ruido, demasiado de cerca. Estos problemas se discuten a lo largo de este libro.</p>
+<p><a href="#fig-income-linear" class="quarto-xref">Figura&nbsp;4</a> muestra un ejemplo del enfoque paramétrico aplicado a los datos de Income de <a href="#fig-income-data" class="quarto-xref">Figura&nbsp;3</a>. Hemos ajustado un modelo lineal de la forma</p>
+<p><span class="math display">\[\text{ingreso} \approx \beta_0 + \beta_1 \times \text{educación} + \beta_2 \times \text{antigüedad}.\]</span></p>
+<div id="fig-income-linear" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-income-linear-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter2/png/2_4.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-income-linear-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;4: Un modelo lineal ajustado por mínimos cuadrados a los datos de Income de <a href="#fig-income-3d" class="quarto-xref">Figura&nbsp;2</a>. Las observaciones se muestran en rojo, y el plano amarillo indica el ajuste de mínimos cuadrados a los datos.
+</figcaption>
+</figure>
+</div>
+<p>Dado que hemos asumido una relación lineal entre la respuesta y los dos predictores, todo el problema de ajuste se reduce a estimar <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span> y <span class="math inline">\(\beta_2\)</span>, lo que hacemos usando regresión lineal por mínimos cuadrados. Comparando <a href="#fig-income-data" class="quarto-xref">Figura&nbsp;3</a> con <a href="#fig-income-linear" class="quarto-xref">Figura&nbsp;4</a>, podemos ver que el ajuste lineal dado en <a href="#fig-income-linear" class="quarto-xref">Figura&nbsp;4</a> no es del todo correcto: la verdadera <span class="math inline">\(f\)</span> tiene cierta curvatura que no se captura en el ajuste lineal. Sin embargo, el ajuste lineal todavía parece hacer un trabajo razonable al capturar la relación positiva entre los años de educación y los ingresos, así como la relación ligeramente menos positiva entre la antigüedad y los ingresos. Puede ser que con un número tan pequeño de observaciones, esto sea lo mejor que podemos hacer.</p>
+</section>
+<section id="métodos-no-paramétricos" class="level4">
+<h4 class="anchored" data-anchor-id="métodos-no-paramétricos">Métodos No Paramétricos</h4>
+<p>Los métodos no paramétricos no hacen suposiciones explícitas sobre la forma funcional de <span class="math inline">\(f\)</span>. En cambio, buscan una estimación de <span class="math inline">\(f\)</span> que se acerque lo más posible a los puntos de datos sin ser demasiado rugosa u ondulada. Tales enfoques pueden tener una gran ventaja sobre los enfoques paramétricos: al evitar la suposición de una forma funcional particular para <span class="math inline">\(f\)</span>, tienen el potencial de ajustar con precisión una gama más amplia de formas posibles para <span class="math inline">\(f\)</span>. Cualquier enfoque paramétrico conlleva la posibilidad de que la forma funcional utilizada para estimar <span class="math inline">\(f\)</span> sea muy diferente de la verdadera <span class="math inline">\(f\)</span>, en cuyo caso el modelo resultante no se ajustará bien a los datos. En contraste, los enfoques no paramétricos evitan completamente este peligro, ya que esencialmente no se hace ninguna suposición sobre la forma de <span class="math inline">\(f\)</span>. Pero los enfoques no paramétricos sufren una gran desventaja: como no reducen el problema de estimar <span class="math inline">\(f\)</span> a un pequeño número de parámetros, se requiere un número muy grande de observaciones (mucho más del que típicamente se necesita para un enfoque paramétrico) para obtener una estimación precisa de <span class="math inline">\(f\)</span>.</p>
+<div id="fig-income-spline-smooth" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-income-spline-smooth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter2/png/2_5.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-income-spline-smooth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5: Un ajuste suave de thin-plate spline a los datos de Income de <a href="#fig-income-3d" class="quarto-xref">Figura&nbsp;2</a> se muestra en amarillo; las observaciones se muestran en rojo. Los splines se discuten en el Capítulo 7.
+</figcaption>
+</figure>
+</div>
+<p>Un ejemplo de un enfoque no paramétrico para ajustar los datos de Income se muestra en <a href="#fig-income-spline-smooth" class="quarto-xref">Figura&nbsp;5</a>. Se utiliza un thin-plate spline para estimar <span class="math inline">\(f\)</span>. Este enfoque no impone ningún modelo pre-especificado sobre <span class="math inline">\(f\)</span>. En su lugar, intenta producir una estimación de <span class="math inline">\(f\)</span> que esté lo más cerca posible de los datos observados, sujeto a que el ajuste —es decir, la superficie amarilla en <a href="#fig-income-spline-smooth" class="quarto-xref">Figura&nbsp;5</a>— sea suave. En este caso, el ajuste no paramétrico ha producido una estimación notablemente precisa de la verdadera <span class="math inline">\(f\)</span> mostrada en <a href="#fig-income-data" class="quarto-xref">Figura&nbsp;3</a>. Para ajustar un thin-plate spline, el analista de datos debe seleccionar un nivel de suavidad.</p>
+<div id="fig-income-spline-rough" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-income-spline-rough-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter2/png/2_6.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-income-spline-rough-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;6: Un ajuste rugoso de thin-plate spline a los datos de Income de <a href="#fig-income-3d" class="quarto-xref">Figura&nbsp;2</a>. Este ajuste produce cero errores en los datos de entrenamiento.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-income-spline-rough" class="quarto-xref">Figura&nbsp;6</a> muestra el mismo ajuste de thin-plate spline usando un nivel de suavidad más bajo, permitiendo un ajuste más rugoso. ¡La estimación resultante se ajusta perfectamente a los datos observados! Sin embargo, el ajuste spline mostrado en <a href="#fig-income-spline-rough" class="quarto-xref">Figura&nbsp;6</a> es mucho más variable que la verdadera función <span class="math inline">\(f\)</span>, de <a href="#fig-income-data" class="quarto-xref">Figura&nbsp;3</a>. Este es un ejemplo de sobreajuste de los datos, que discutimos anteriormente. Es una situación indeseable porque el ajuste obtenido no producirá estimaciones precisas de la respuesta en nuevas observaciones que no formaban parte del conjunto de datos de entrenamiento original. Discutimos métodos para elegir la cantidad correcta de suavidad en el Capítulo 5. Los splines se discuten en el Capítulo 7.</p>
+<p>Como hemos visto, hay ventajas y desventajas en los métodos paramétricos y no paramétricos para el aprendizaje estadístico. Exploramos ambos tipos de métodos a lo largo de este libro.</p>
+</section>
+</section>
+<section id="el-compromiso-entre-precisión-de-predicción-e-interpretabilidad-del-modelo" class="level3">
+<h3 class="anchored" data-anchor-id="el-compromiso-entre-precisión-de-predicción-e-interpretabilidad-del-modelo">2.1.3 El Compromiso entre Precisión de Predicción e Interpretabilidad del Modelo</h3>
+<p>De los muchos métodos que examinamos en este libro, algunos son menos flexibles, o más restrictivos, en el sentido de que pueden producir solo un rango relativamente pequeño de formas para estimar <span class="math inline">\(f\)</span>. Por ejemplo, la regresión lineal es un enfoque relativamente inflexible, porque solo puede generar funciones lineales como las líneas mostradas en <a href="#fig-advertising" class="quarto-xref">Figura&nbsp;1</a> o el plano mostrado en <a href="#fig-income-linear" class="quarto-xref">Figura&nbsp;4</a>. Otros métodos, como los thin-plate splines mostrados en <a href="#fig-income-spline-smooth" class="quarto-xref">Figura&nbsp;5</a> y <a href="#fig-income-spline-rough" class="quarto-xref">Figura&nbsp;6</a>, son considerablemente más flexibles porque pueden generar una gama mucho más amplia de formas posibles para estimar <span class="math inline">\(f\)</span>.</p>
+<p>Uno podría preguntarse razonablemente: ¿por qué elegiríamos usar un método más restrictivo en lugar de un enfoque muy flexible? Hay varias razones por las que podríamos preferir un modelo más restrictivo. Si estamos principalmente interesados en inferencia, entonces los modelos restrictivos son mucho más interpretables. Por ejemplo, cuando el objetivo es la inferencia, el modelo lineal puede ser una buena opción ya que será bastante fácil entender la relación entre <span class="math inline">\(Y\)</span> y <span class="math inline">\(X_1, X_2, \ldots, X_p\)</span>. En contraste, los enfoques muy flexibles, como los splines discutidos en el Capítulo 7 y mostrados en <a href="#fig-income-spline-smooth" class="quarto-xref">Figura&nbsp;5</a> y <a href="#fig-income-spline-rough" class="quarto-xref">Figura&nbsp;6</a>, y los métodos de boosting discutidos en el Capítulo 8, pueden llevar a estimaciones tan complicadas de <span class="math inline">\(f\)</span> que es difícil entender cómo cualquier predictor individual está asociado con la respuesta.</p>
+<p><a href="#fig-flexibility-interpretability" class="quarto-xref">Figura&nbsp;7</a> proporciona una ilustración del compromiso entre flexibilidad e interpretabilidad para algunos de los métodos que cubrimos en este libro. La regresión lineal por mínimos cuadrados, discutida en el Capítulo 3, es relativamente inflexible pero bastante interpretable. El lasso, discutido en el Capítulo 6, se basa en el modelo lineal (2.4) pero utiliza un procedimiento de ajuste alternativo para estimar los coeficientes <span class="math inline">\(\beta_0, \beta_1, \ldots, \beta_p\)</span>. El nuevo procedimiento es más restrictivo en la estimación de los coeficientes, y establece varios de ellos exactamente a cero. Por lo tanto, en este sentido, el lasso es un enfoque menos flexible que la regresión lineal. También es más interpretable que la regresión lineal, porque en el modelo final la variable de respuesta solo se relacionará con un pequeño subconjunto de los predictores —aquellos con estimaciones de coeficientes distintos de cero. Los modelos aditivos generalizados (GAM), discutidos en el Capítulo 7, extienden el modelo lineal (2.4) para permitir ciertas relaciones no lineales. En consecuencia, los GAM son más flexibles que la regresión lineal. También son algo menos interpretables que la regresión lineal, porque la relación entre cada predictor y la respuesta ahora se modela usando una curva. Finalmente, los métodos completamente no lineales como bagging, boosting, máquinas de vectores de soporte con kernels no lineales y redes neuronales (aprendizaje profundo), discutidos en los Capítulos 8, 9 y 10, son enfoques altamente flexibles que son más difíciles de interpretar.</p>
+<div id="fig-flexibility-interpretability" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-flexibility-interpretability-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter2/png/2_7.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-flexibility-interpretability-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;7: Una representación del compromiso entre flexibilidad e interpretabilidad, usando diferentes métodos de aprendizaje estadístico. En general, a medida que la flexibilidad de un método aumenta, su interpretabilidad disminuye.
+</figcaption>
+</figure>
+</div>
+<p>Hemos establecido que cuando el objetivo es la inferencia, hay claras ventajas en usar métodos de aprendizaje estadístico simples y relativamente inflexibles. En algunos contextos, sin embargo, solo estamos interesados en la predicción, y la interpretabilidad del modelo predictivo simplemente no es relevante. Por ejemplo, si buscamos desarrollar un algoritmo para predecir el precio de una acción, nuestro único requisito para el algoritmo es que prediga con precisión —la interpretabilidad no es una preocupación. En este contexto, podríamos esperar que sea mejor usar el modelo más flexible disponible. Sorprendentemente, ¡este no es siempre el caso! A menudo obtendremos predicciones más precisas usando un método menos flexible. Este fenómeno, que puede parecer contraintuitivo a primera vista, tiene que ver con el potencial de sobreajuste en métodos altamente flexibles. Vimos un ejemplo de sobreajuste en <a href="#fig-income-spline-rough" class="quarto-xref">Figura&nbsp;6</a>. Discutiremos este concepto muy importante más a fondo en la Sección 2.2 y a lo largo de este libro.</p>
+</section>
+<section id="aprendizaje-supervisado-vs.-no-supervisado" class="level3">
+<h3 class="anchored" data-anchor-id="aprendizaje-supervisado-vs.-no-supervisado">2.1.4 Aprendizaje Supervisado vs.&nbsp;No Supervisado</h3>
+<p>La mayoría de los problemas de aprendizaje estadístico caen en una de dos categorías: supervisado o no supervisado. Los ejemplos que hemos discutido hasta ahora en este capítulo caen todos en el dominio del aprendizaje supervisado. Para cada observación de las mediciones del predictor <span class="math inline">\(x_i\)</span>, <span class="math inline">\(i = 1, \ldots, n\)</span>, hay una medición de respuesta asociada <span class="math inline">\(y_i\)</span>. Deseamos ajustar un modelo que relacione la respuesta con los predictores, con el objetivo de predecir con precisión la respuesta para observaciones futuras (predicción) o comprender mejor la relación entre la respuesta y los predictores (inferencia). Muchos métodos clásicos de aprendizaje estadístico como la regresión lineal y la regresión logística (Capítulo 4), así como enfoques más modernos como GAM, boosting y máquinas de vectores de soporte, operan en el dominio del aprendizaje supervisado. La gran mayoría de este libro está dedicada a este contexto.</p>
+<p>Por el contrario, el aprendizaje no supervisado describe la situación algo más desafiante en la que para cada observación <span class="math inline">\(i = 1, \ldots, n\)</span>, observamos un vector de mediciones <span class="math inline">\(x_i\)</span> pero ninguna respuesta asociada <span class="math inline">\(y_i\)</span>. No es posible ajustar un modelo de regresión lineal, ya que no hay variable de respuesta que predecir. En este contexto, estamos en cierto sentido trabajando a ciegas; la situación se denomina no supervisada porque carecemos de una variable de respuesta que pueda supervisar nuestro análisis. ¿Qué tipo de análisis estadístico es posible? Podemos buscar comprender las relaciones entre las variables o entre las observaciones. Una herramienta de aprendizaje estadístico que podemos usar en este contexto es el análisis de conglomerados, o clustering. El objetivo del análisis de conglomerados es determinar, sobre la base de <span class="math inline">\(x_1, \ldots, x_n\)</span>, si las observaciones caen en grupos relativamente distintos. Por ejemplo, en un estudio de segmentación de mercado podríamos observar múltiples características (variables) para clientes potenciales, como el código postal, los ingresos familiares y los hábitos de compra. Podríamos creer que los clientes caen en diferentes grupos, como grandes gastadores versus pequeños gastadores. Si la información sobre los patrones de gasto de cada cliente estuviera disponible, entonces sería posible un análisis supervisado. Sin embargo, esta información no está disponible —es decir, no sabemos si cada cliente potencial es un gran gastador o no. En este contexto, podemos intentar agrupar a los clientes sobre la base de las variables medidas, para identificar grupos distintos de clientes potenciales. Identificar tales grupos puede ser de interés porque podría ser que los grupos difieran con respecto a alguna propiedad de interés, como los hábitos de gasto.</p>
+<div id="fig-clustering" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-clustering-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter2/png/2_8.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-clustering-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;8: Un conjunto de datos de agrupamiento que involucra tres grupos. Cada grupo se muestra usando un símbolo de color diferente. Izquierda: Los tres grupos están bien separados. En este contexto, un enfoque de agrupamiento debería identificar con éxito los tres grupos. Derecha: Hay cierta superposición entre los grupos. Ahora la tarea de agrupamiento es más desafiante.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-clustering" class="quarto-xref">Figura&nbsp;8</a> proporciona una ilustración simple del problema de agrupamiento. Hemos trazado 150 observaciones con mediciones en dos variables, <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span>. Cada observación corresponde a uno de tres grupos distintos. Con fines ilustrativos, hemos trazado los miembros de cada grupo usando diferentes colores y símbolos. Sin embargo, en la práctica, las membresías de grupo son desconocidas, y el objetivo es determinar el grupo al que pertenece cada observación. En el panel izquierdo de <a href="#fig-clustering" class="quarto-xref">Figura&nbsp;8</a>, esta es una tarea relativamente fácil porque los grupos están bien separados. Por el contrario, el panel derecho ilustra un contexto más desafiante en el que hay cierta superposición entre los grupos. No se podría esperar que un método de agrupamiento asigne todos los puntos superpuestos a su grupo correcto (azul, verde o naranja).</p>
+<p>En los ejemplos mostrados en <a href="#fig-clustering" class="quarto-xref">Figura&nbsp;8</a>, solo hay dos variables, por lo que uno simplemente puede inspeccionar visualmente los diagramas de dispersión de las observaciones para identificar conglomerados. Sin embargo, en la práctica, a menudo encontramos conjuntos de datos que contienen muchas más de dos variables. En este caso, no podemos trazar fácilmente las observaciones. Por ejemplo, si hay <span class="math inline">\(p\)</span> variables en nuestro conjunto de datos, se pueden hacer <span class="math inline">\(p(p-1)/2\)</span> diagramas de dispersión distintos, y la inspección visual simplemente no es una forma viable de identificar conglomerados. Por esta razón, los métodos automatizados de agrupamiento son importantes. Discutimos el agrupamiento y otros enfoques de aprendizaje no supervisado en el Capítulo 12.</p>
+<p>Muchos problemas caen naturalmente en los paradigmas de aprendizaje supervisado o no supervisado. Sin embargo, a veces la cuestión de si un análisis debe considerarse supervisado o no supervisado es menos clara. Por ejemplo, supongamos que tenemos un conjunto de <span class="math inline">\(n\)</span> observaciones. Para <span class="math inline">\(m\)</span> de las observaciones, donde <span class="math inline">\(m &lt; n\)</span>, tenemos tanto mediciones de predictores como una respuesta. Para las <span class="math inline">\(n - m\)</span> observaciones restantes, tenemos mediciones de predictores pero ninguna medición de respuesta. Tal escenario puede surgir si los predictores pueden medirse relativamente baratos pero las respuestas correspondientes son mucho más caras de recolectar. Nos referimos a este contexto como un problema de aprendizaje semi-supervisado. En este contexto, deseamos usar un método de aprendizaje estadístico que pueda incorporar las <span class="math inline">\(m\)</span> observaciones para las cuales las mediciones de respuesta están disponibles, así como las <span class="math inline">\(n - m\)</span> observaciones para las cuales no lo están. Aunque este es un tema interesante, está más allá del alcance de este libro.</p>
+</section>
+<section id="regresión-vs.-problemas-de-clasificación" class="level3">
+<h3 class="anchored" data-anchor-id="regresión-vs.-problemas-de-clasificación">2.1.5 Regresión vs.&nbsp;Problemas de Clasificación</h3>
+<p>Las variables pueden caracterizarse como cuantitativas o cualitativas (también conocidas como categóricas). Las variables cuantitativas toman valores numéricos. Los ejemplos incluyen la edad, altura o ingresos de una persona, el valor de una casa y el precio de una acción. En contraste, las variables cualitativas toman valores en una de <span class="math inline">\(K\)</span> clases o categorías diferentes. Los ejemplos de variables cualitativas incluyen el estado civil de una persona (casado o no), la marca de producto comprada (marca A, B o C), si una persona no paga una deuda (sí o no), o un diagnóstico de cáncer (Leucemia Mielógena Aguda, Leucemia Linfoblástica Aguda, o Sin Leucemia). Tendemos a referirnos a los problemas con una respuesta cuantitativa como problemas de regresión, mientras que aquellos que involucran una respuesta cualitativa a menudo se denominan problemas de clasificación. Sin embargo, la distinción no siempre es tan nítida. La regresión lineal por mínimos cuadrados (Capítulo 3) se usa con una respuesta cuantitativa, mientras que la regresión logística (Capítulo 4) se usa típicamente con una respuesta cualitativa (de dos clases, o binaria). Por lo tanto, a pesar de su nombre, la regresión logística es un método de clasificación. Pero como estima probabilidades de clase, también puede considerarse un método de regresión. Algunos métodos estadísticos, como los <span class="math inline">\(K\)</span>-vecinos más cercanos (Capítulos 2 y 4) y boosting (Capítulo 8), pueden usarse en el caso de respuestas cuantitativas o cualitativas.</p>
+<p>Tendemos a seleccionar métodos de aprendizaje estadístico sobre la base de si la respuesta es cuantitativa o cualitativa; es decir, podríamos usar regresión lineal cuando es cuantitativa y regresión logística cuando es cualitativa. Sin embargo, si los predictores son cualitativos o cuantitativos generalmente se considera menos importante. La mayoría de los métodos de aprendizaje estadístico discutidos en este libro pueden aplicarse independientemente del tipo de variable predictora, siempre que los predictores cualitativos estén codificados adecuadamente antes de realizar el análisis. Esto se discute en el Capítulo 3.</p>
+</section>
+</section>
+<section id="evaluación-de-la-precisión-del-modelo" class="level2">
+<h2 class="anchored" data-anchor-id="evaluación-de-la-precisión-del-modelo">Evaluación de la Precisión del Modelo</h2>
+<p>Uno de los objetivos clave de este libro es presentar al lector una amplia gama de métodos de aprendizaje estadístico que se extienden mucho más allá del enfoque estándar de regresión lineal. ¿Por qué es necesario introducir tantos enfoques diferentes de aprendizaje estadístico, en lugar de un solo método mejor? No existe el almuerzo gratis en estadística: ningún método domina a todos los demás sobre todos los conjuntos de datos posibles. En un conjunto de datos particular, un método específico puede funcionar mejor, pero algún otro método puede funcionar mejor en un conjunto de datos similar pero diferente. Por lo tanto, es una tarea importante decidir para cualquier conjunto de datos dado qué método produce los mejores resultados. Seleccionar el mejor enfoque puede ser una de las partes más desafiantes de realizar aprendizaje estadístico en la práctica.</p>
+<p>En esta sección, discutimos algunos de los conceptos más importantes que surgen al seleccionar un procedimiento de aprendizaje estadístico para un conjunto de datos específico. A medida que el libro avanza, explicaremos cómo los conceptos presentados aquí pueden aplicarse en la práctica.</p>
+<section id="medición-de-la-calidad-del-ajuste" class="level3">
+<h3 class="anchored" data-anchor-id="medición-de-la-calidad-del-ajuste">2.2.1 Medición de la Calidad del Ajuste</h3>
+<p>Para evaluar el rendimiento de un método de aprendizaje estadístico en un conjunto de datos dado, necesitamos alguna forma de medir qué tan bien sus predicciones realmente coinciden con los datos observados. Es decir, necesitamos cuantificar en qué medida el valor de respuesta predicho para una observación dada está cerca del valor de respuesta verdadero para esa observación. En el contexto de regresión, la medida más comúnmente utilizada es el error cuadrático medio (MSE), dado por</p>
+<p><span class="math display">\[\text{MSE} = \frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{f}(x_i))^2, \tag{2.5}\]</span></p>
+<p>donde <span class="math inline">\(\hat{f}(x_i)\)</span> es la predicción que <span class="math inline">\(\hat{f}\)</span> da para la <span class="math inline">\(i\)</span>-ésima observación. El MSE será pequeño si las respuestas predichas están muy cerca de las respuestas verdaderas, y será grande si para algunas de las observaciones, las respuestas predichas y verdaderas difieren sustancialmente.</p>
+<p>El MSE en (2.5) se calcula usando los datos de entrenamiento que se usaron para ajustar el modelo, por lo que debería denominarse más precisamente MSE de entrenamiento. Pero en general, realmente no nos importa qué tan bien funciona el método en los datos de entrenamiento. Más bien, estamos interesados en la precisión de las predicciones que obtenemos cuando aplicamos nuestro método a datos de prueba no vistos anteriormente. ¿Por qué es esto lo que nos importa? Supongamos que estamos interesados en desarrollar un algoritmo para predecir el precio de una acción basado en rendimientos bursátiles anteriores. Podemos entrenar el método usando rendimientos bursátiles de los últimos 6 meses. Pero no nos importa realmente qué tan bien nuestro método predice el precio de las acciones de la semana pasada. Nos importa más cómo predecirá el precio de mañana o del próximo mes. De manera similar, supongamos que tenemos mediciones clínicas (por ejemplo, peso, presión arterial, altura, edad, historial familiar de enfermedades) para varios pacientes, así como información sobre si cada paciente tiene diabetes. Podemos usar estos pacientes para entrenar un método de aprendizaje estadístico para predecir el riesgo de diabetes basado en mediciones clínicas. En la práctica, queremos que este método prediga con precisión el riesgo de diabetes para pacientes futuros basado en sus mediciones clínicas. No estamos muy interesados en si el método predice con precisión el riesgo de diabetes para los pacientes utilizados para entrenar el modelo, ya que ya sabemos cuáles de esos pacientes tienen diabetes.</p>
+<p>Para expresarlo más matemáticamente, supongamos que ajustamos nuestro método de aprendizaje estadístico en nuestras observaciones de entrenamiento <span class="math inline">\(\{(x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\}\)</span>, y obtenemos la estimación <span class="math inline">\(\hat{f}\)</span>. Podemos entonces calcular <span class="math inline">\(\hat{f}(x_1), \hat{f}(x_2), \ldots, \hat{f}(x_n)\)</span>. Si estos son aproximadamente iguales a <span class="math inline">\(y_1, y_2, \ldots, y_n\)</span>, entonces el MSE de entrenamiento dado por (2.5) es pequeño. Sin embargo, realmente no estamos interesados en si <span class="math inline">\(\hat{f}(x_i) \approx y_i\)</span>; en cambio, queremos saber si <span class="math inline">\(\hat{f}(x_0)\)</span> es aproximadamente igual a <span class="math inline">\(y_0\)</span>, donde <span class="math inline">\((x_0, y_0)\)</span> es una observación de prueba no vista anteriormente y no utilizada para entrenar el método de aprendizaje estadístico. Queremos elegir el método que dé el MSE de prueba más bajo, en oposición al MSE de entrenamiento más bajo. En otras palabras, si tuviéramos un gran número de observaciones de prueba, podríamos calcular</p>
+<p><span class="math display">\[\operatorname{Ave}(y_0 - \hat{f}(x_0))^2, \tag{2.6}\]</span></p>
+<p>el error de predicción cuadrático promedio para estas observaciones de prueba <span class="math inline">\((x_0, y_0)\)</span>. Nos gustaría seleccionar el modelo para el cual esta cantidad sea lo más pequeña posible.</p>
+<p>¿Cómo podemos tratar de seleccionar un método que minimice el MSE de prueba? En algunos contextos, podemos tener un conjunto de datos de prueba disponible —es decir, podemos tener acceso a un conjunto de observaciones que no se usaron para entrenar el método de aprendizaje estadístico. Podemos entonces simplemente evaluar (2.6) en las observaciones de prueba, y seleccionar el método de aprendizaje para el cual el MSE de prueba sea más pequeño. Pero ¿qué pasa si no hay observaciones de prueba disponibles? En ese caso, uno podría imaginarse simplemente seleccionar un método de aprendizaje estadístico que minimice el MSE de entrenamiento (2.5). Esto parece que podría ser un enfoque sensato, ya que el MSE de entrenamiento y el MSE de prueba parecen estar estrechamente relacionados. Desafortunadamente, hay un problema fundamental con esta estrategia: no hay garantía de que el método con el MSE de entrenamiento más bajo también tenga el MSE de prueba más bajo. En términos generales, el problema es que muchos métodos estadísticos estiman coeficientes específicamente para minimizar el MSE del conjunto de entrenamiento. Para estos métodos, el MSE del conjunto de entrenamiento puede ser bastante pequeño, pero el MSE de prueba es a menudo mucho más grande.</p>
+<div id="fig-mse-simulation" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mse-simulation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter2/png/2_9.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mse-simulation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;9: Izquierda: Datos simulados de f, mostrados en negro. Se muestran tres estimaciones de f: la línea de regresión lineal (curva naranja), y dos ajustes de smoothing spline (curvas azul y verde). Derecha: MSE de entrenamiento (curva gris), MSE de prueba (curva roja), y el MSE de prueba mínimo posible sobre todos los métodos (línea discontinua). Los cuadrados representan los MSE de entrenamiento y prueba para los tres ajustes mostrados en el panel izquierdo.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-mse-simulation" class="quarto-xref">Figura&nbsp;9</a> ilustra este fenómeno en un ejemplo simple. En el panel izquierdo de <a href="#fig-mse-simulation" class="quarto-xref">Figura&nbsp;9</a>, hemos generado observaciones de (2.1) con la verdadera <span class="math inline">\(f\)</span> dada por la curva negra. Las curvas naranja, azul y verde ilustran tres posibles estimaciones para <span class="math inline">\(f\)</span> obtenidas usando métodos con niveles crecientes de flexibilidad. La línea naranja es el ajuste de regresión lineal, que es relativamente inflexible. Las curvas azul y verde se produjeron usando smoothing splines, discutidos en el Capítulo 7, con diferentes niveles de suavidad. Está claro que a medida que el nivel de flexibilidad aumenta, las curvas se ajustan a los datos observados más estrechamente. La curva verde es la más flexible y coincide muy bien con los datos; sin embargo, observamos que se ajusta a la verdadera <span class="math inline">\(f\)</span> (mostrada en negro) pobremente porque es demasiado ondulada. Al ajustar el nivel de flexibilidad del ajuste del smoothing spline, podemos producir muchos ajustes diferentes a estos datos.</p>
+<p>Ahora pasamos al panel derecho de <a href="#fig-mse-simulation" class="quarto-xref">Figura&nbsp;9</a>. La curva gris muestra el MSE de entrenamiento promedio en función de la flexibilidad, o más formalmente los grados de libertad, para varios smoothing splines. Los grados de libertad son una cantidad que resume la flexibilidad de una curva; se discute más completamente en el Capítulo 7. Los cuadrados naranja, azul y verde indican los MSE asociados con las curvas correspondientes en el panel izquierdo. Una curva más restringida y por lo tanto más suave tiene menos grados de libertad que una curva ondulada —nótese que en <a href="#fig-mse-simulation" class="quarto-xref">Figura&nbsp;9</a>, la regresión lineal está en el extremo más restrictivo, con dos grados de libertad. El MSE de entrenamiento disminuye monótonamente a medida que la flexibilidad aumenta. En este ejemplo, la verdadera <span class="math inline">\(f\)</span> es no lineal, por lo que el ajuste lineal naranja no es lo suficientemente flexible para estimar <span class="math inline">\(f\)</span> bien. La curva verde tiene el MSE de entrenamiento más bajo de los tres métodos, ya que corresponde al más flexible de los tres curvas ajustadas en el panel izquierdo.</p>
+<p>En este ejemplo, conocemos la verdadera función <span class="math inline">\(f\)</span>, por lo que también podemos calcular el MSE de prueba sobre un conjunto de prueba muy grande, en función de la flexibilidad. (Por supuesto, en general <span class="math inline">\(f\)</span> es desconocida, por lo que esto no será posible.) El MSE de prueba se muestra usando la curva roja en el panel derecho de <a href="#fig-mse-simulation" class="quarto-xref">Figura&nbsp;9</a>. Al igual que con el MSE de entrenamiento, el MSE de prueba inicialmente disminuye a medida que el nivel de flexibilidad aumenta. Sin embargo, en algún punto el MSE de prueba se estabiliza y luego comienza a aumentar nuevamente. En consecuencia, las curvas naranja y verde ambas tienen un MSE de prueba alto. La curva azul minimiza el MSE de prueba, lo que no debería ser sorprendente dado que visualmente parece estimar <span class="math inline">\(f\)</span> mejor en el panel izquierdo de <a href="#fig-mse-simulation" class="quarto-xref">Figura&nbsp;9</a>. La línea horizontal discontinua indica <span class="math inline">\(\operatorname{Var}(\epsilon)\)</span>, el error irreducible en (2.3), que corresponde al MSE de prueba más bajo alcanzable entre todos los métodos posibles. Por lo tanto, el smoothing spline representado por la curva azul está cerca del óptimo.</p>
+<p>En el panel derecho de <a href="#fig-mse-simulation" class="quarto-xref">Figura&nbsp;9</a>, a medida que la flexibilidad del método de aprendizaje estadístico aumenta, observamos una disminución monótona en el MSE de entrenamiento y una forma de U en el MSE de prueba. Esta es una propiedad fundamental del aprendizaje estadístico que se mantiene independientemente del conjunto de datos particular en cuestión y del método estadístico que se use. A medida que la flexibilidad del modelo aumenta, el MSE de entrenamiento disminuirá, pero el MSE de prueba puede no hacerlo. Cuando un método dado produce un MSE de entrenamiento pequeño pero un MSE de prueba grande, se dice que estamos sobreajustando los datos. Esto sucede porque nuestro procedimiento de aprendizaje estadístico está trabajando demasiado para encontrar patrones en los datos de entrenamiento, y puede estar capturando algunos patrones que son causados solo por el azar en lugar de por propiedades verdaderas de la función desconocida <span class="math inline">\(f\)</span>. Cuando sobreajustamos los datos de entrenamiento, el MSE de prueba será muy grande porque los supuestos patrones que el método encontró en los datos de entrenamiento simplemente no existen en los datos de prueba. Nótese que independientemente de si ha ocurrido o no sobreajuste, casi siempre esperamos que el MSE de entrenamiento sea menor que el MSE de prueba porque la mayoría de los métodos de aprendizaje estadístico buscan directa o indirectamente minimizar el MSE de entrenamiento. El sobreajuste se refiere específicamente al caso en el que un modelo menos flexible habría producido un MSE de prueba más pequeño.</p>
+<div id="fig-mse-linear-true" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mse-linear-true-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter2/png/2_10.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mse-linear-true-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;10: Los detalles son como en la Figura 2.9, usando una función f verdadera diferente que está mucho más cerca de ser lineal. En este contexto, la regresión lineal proporciona un ajuste muy bueno a los datos.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-mse-linear-true" class="quarto-xref">Figura&nbsp;10</a> proporciona otro ejemplo en el que la verdadera <span class="math inline">\(f\)</span> es aproximadamente lineal. Nuevamente observamos que el MSE de entrenamiento disminuye monótonamente a medida que la flexibilidad del modelo aumenta, y que hay una forma de U en el MSE de prueba. Sin embargo, debido a que la verdad está cerca de ser lineal, el MSE de prueba solo disminuye ligeramente antes de aumentar nuevamente, por lo que el ajuste de mínimos cuadrados naranja es sustancialmente mejor que la curva verde altamente flexible.</p>
+<div id="fig-mse-nonlinear-true" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mse-nonlinear-true-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter2/png/2_11.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mse-nonlinear-true-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;11: Los detalles son como en la Figura 2.9, usando una función f diferente que está lejos de ser lineal. En este contexto, la regresión lineal proporciona un ajuste muy pobre a los datos.
+</figcaption>
+</figure>
+</div>
+<p>Finalmente, <a href="#fig-mse-nonlinear-true" class="quarto-xref">Figura&nbsp;11</a> muestra un ejemplo en el que <span class="math inline">\(f\)</span> es altamente no lineal. Las curvas de MSE de entrenamiento y prueba aún exhiben los mismos patrones generales, pero ahora hay una disminución rápida en ambas curvas antes de que el MSE de prueba comience a aumentar lentamente.</p>
+<p>En la práctica, uno puede generalmente calcular el MSE de entrenamiento con relativa facilidad, pero estimar el MSE de prueba es considerablemente más difícil porque generalmente no hay datos de prueba disponibles. Como ilustran los tres ejemplos anteriores, el nivel de flexibilidad correspondiente al modelo con el MSE de prueba mínimo puede variar considerablemente entre conjuntos de datos. A lo largo de este libro, discutimos una variedad de enfoques que pueden usarse en la práctica para estimar este punto mínimo. Un método importante es la validación cruzada (Capítulo 5), que es un método para estimar el MSE de prueba usando los datos de entrenamiento.</p>
+</section>
+<section id="el-compromiso-sesgo-varianza" class="level3">
+<h3 class="anchored" data-anchor-id="el-compromiso-sesgo-varianza">2.2.2 El Compromiso Sesgo-Varianza</h3>
+<p>La forma de U observada en las curvas de MSE de prueba (Figuras 2.9–2.11) resulta ser el resultado de dos propiedades contrapuestas de los métodos de aprendizaje estadístico. Aunque la prueba matemática está más allá del alcance de este libro, es posible mostrar que el MSE de prueba esperado, para un valor dado <span class="math inline">\(x_0\)</span>, siempre puede descomponerse en la suma de tres cantidades fundamentales: la varianza de <span class="math inline">\(\hat{f}(x_0)\)</span>, el sesgo al cuadrado de <span class="math inline">\(\hat{f}(x_0)\)</span> y la varianza de los términos de error <span class="math inline">\(\epsilon\)</span>. Es decir,</p>
+<p><span class="math display">\[E\left[(y_0 - \hat{f}(x_0))^2\right] = \operatorname{Var}(\hat{f}(x_0)) + [\operatorname{Bias}(\hat{f}(x_0))]^2 + \operatorname{Var}(\epsilon). \tag{2.7}\]</span></p>
+<p>Aquí la notación <span class="math inline">\(E[(y_0 - \hat{f}(x_0))^2]\)</span> define el MSE de prueba esperado en <span class="math inline">\(x_0\)</span>, y se refiere al MSE de prueba promedio que obtendríamos si estimáramos repetidamente <span class="math inline">\(f\)</span> usando un gran número de conjuntos de entrenamiento, y probáramos cada uno en <span class="math inline">\(x_0\)</span>. El MSE de prueba esperado global puede calcularse promediando <span class="math inline">\(E[(y_0 - \hat{f}(x_0))^2]\)</span> sobre todos los valores posibles de <span class="math inline">\(x_0\)</span> en el conjunto de prueba.</p>
+<p>La ecuación (2.7) nos dice que para minimizar el error de prueba esperado, necesitamos seleccionar un método de aprendizaje estadístico que logre simultáneamente baja varianza y bajo sesgo. Nótese que la varianza es inherentemente una cantidad no negativa, y el sesgo al cuadrado también es no negativo. Por lo tanto, vemos que el MSE de prueba esperado nunca puede estar por debajo de <span class="math inline">\(\operatorname{Var}(\epsilon)\)</span>, el error irreducible de (2.3).</p>
+<p>¿Qué queremos decir con la varianza y el sesgo de un método de aprendizaje estadístico? La varianza se refiere a la cantidad en la que <span class="math inline">\(\hat{f}\)</span> cambiaría si la estimáramos usando un conjunto de datos de entrenamiento diferente. Dado que los datos de entrenamiento se usan para ajustar el método de aprendizaje estadístico, diferentes conjuntos de datos de entrenamiento resultarán en un <span class="math inline">\(\hat{f}\)</span> diferente. Pero idealmente, la estimación de <span class="math inline">\(f\)</span> no debería variar demasiado entre conjuntos de entrenamiento. Sin embargo, si un método tiene alta varianza, entonces pequeños cambios en los datos de entrenamiento pueden resultar en grandes cambios en <span class="math inline">\(\hat{f}\)</span>. En general, los métodos estadísticos más flexibles tienen mayor varianza. Considere las curvas verde y naranja en <a href="#fig-mse-simulation" class="quarto-xref">Figura&nbsp;9</a>. La curva verde flexible sigue las observaciones muy de cerca. Tiene alta varianza porque cambiar cualquiera de estos puntos de datos puede causar que la estimación <span class="math inline">\(\hat{f}\)</span> cambie considerablemente. En contraste, la línea de mínimos cuadrados naranja es relativamente inflexible y tiene baja varianza, porque mover cualquier observación individual probablemente causará solo un pequeño desplazamiento en la posición de la línea.</p>
+<p>Por otro lado, el sesgo se refiere al error que se introduce al aproximar un problema de la vida real, que puede ser extremadamente complicado, mediante un modelo mucho más simple. Por ejemplo, la regresión lineal asume que hay una relación lineal entre <span class="math inline">\(Y\)</span> y <span class="math inline">\(X_1, X_2, \ldots, X_p\)</span>. Es poco probable que cualquier problema de la vida real tenga realmente una relación lineal tan simple, por lo que realizar una regresión lineal sin duda resultará en algún sesgo en la estimación de <span class="math inline">\(f\)</span>. En <a href="#fig-mse-nonlinear-true" class="quarto-xref">Figura&nbsp;11</a>, la verdadera <span class="math inline">\(f\)</span> es sustancialmente no lineal, por lo que no importa cuántas observaciones de entrenamiento tengamos, no será posible producir una estimación precisa usando regresión lineal. En otras palabras, la regresión lineal resulta en un alto sesgo en este ejemplo. Sin embargo, en <a href="#fig-mse-linear-true" class="quarto-xref">Figura&nbsp;10</a> la verdadera <span class="math inline">\(f\)</span> está muy cerca de ser lineal, por lo que con suficientes datos, debería ser posible que la regresión lineal produzca una estimación precisa. Generalmente, los métodos más flexibles resultan en menos sesgo.</p>
+<p>Como regla general, a medida que usamos métodos más flexibles, la varianza aumentará y el sesgo disminuirá. La tasa relativa de cambio de estas dos cantidades determina si el MSE de prueba aumenta o disminuye. A medida que aumentamos la flexibilidad de una clase de métodos, el sesgo tiende a disminuir inicialmente más rápido de lo que aumenta la varianza. En consecuencia, el MSE de prueba esperado disminuye. Sin embargo, en algún punto, aumentar la flexibilidad tiene poco impacto en el sesgo pero comienza a aumentar significativamente la varianza. Cuando esto sucede, el MSE de prueba aumenta. Nótese que observamos este patrón de disminución del MSE de prueba seguido de un aumento del MSE de prueba en los paneles derechos de las Figuras 2.9–2.11.</p>
+<div id="fig-bias-variance" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bias-variance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter2/png/2_12.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bias-variance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;12: Sesgo al cuadrado (curva azul), varianza (curva naranja), Var(ϵ) (línea discontinua), y MSE de prueba (curva roja) para los tres conjuntos de datos en las Figuras 2.9–2.11. La línea vertical punteada indica el nivel de flexibilidad correspondiente al MSE de prueba más pequeño.
+</figcaption>
+</figure>
+</div>
+<p>Los tres gráficos en <a href="#fig-bias-variance" class="quarto-xref">Figura&nbsp;12</a> ilustran la Ecuación 2.7 para los ejemplos en las Figuras 2.9–2.11. En cada caso, la curva sólida azul representa el sesgo al cuadrado, para diferentes niveles de flexibilidad, mientras que la curva naranja corresponde a la varianza. La línea horizontal discontinua representa <span class="math inline">\(\operatorname{Var}(\epsilon)\)</span>, el error irreducible. Finalmente, la curva roja, correspondiente al MSE del conjunto de prueba, es la suma de estas tres cantidades. En los tres casos, la varianza aumenta y el sesgo disminuye a medida que la flexibilidad del método aumenta. Sin embargo, el nivel de flexibilidad correspondiente al MSE de prueba óptimo difiere considerablemente entre los tres conjuntos de datos, porque el sesgo al cuadrado y la varianza cambian a diferentes tasas en cada uno de los conjuntos de datos. En el panel izquierdo de <a href="#fig-bias-variance" class="quarto-xref">Figura&nbsp;12</a>, el sesgo inicialmente disminuye rápidamente, resultando en una disminución inicial aguda en el MSE de prueba esperado. Por otro lado, en el panel central de <a href="#fig-bias-variance" class="quarto-xref">Figura&nbsp;12</a>, la verdadera <span class="math inline">\(f\)</span> está cerca de ser lineal, por lo que solo hay una pequeña disminución en el sesgo a medida que la flexibilidad aumenta, y el MSE de prueba solo disminuye ligeramente antes de aumentar rápidamente a medida que la varianza aumenta. Finalmente, en el panel derecho de <a href="#fig-bias-variance" class="quarto-xref">Figura&nbsp;12</a>, a medida que la flexibilidad aumenta, hay una disminución dramática en el sesgo porque la verdadera <span class="math inline">\(f\)</span> es muy no lineal. También hay muy poco aumento en la varianza a medida que la flexibilidad aumenta. En consecuencia, el MSE de prueba disminuye sustancialmente antes de experimentar un pequeño aumento a medida que la flexibilidad del modelo aumenta.</p>
+<p>La relación entre sesgo, varianza y MSE del conjunto de prueba dada en la Ecuación 2.7 y mostrada en <a href="#fig-bias-variance" class="quarto-xref">Figura&nbsp;12</a> se conoce como el compromiso sesgo-varianza. Un buen rendimiento en el conjunto de prueba de un método de aprendizaje estadístico requiere baja varianza así como bajo sesgo al cuadrado. Esto se denomina un compromiso porque es fácil obtener un método con sesgo extremadamente bajo pero varianza alta (por ejemplo, dibujando una curva que pase por cada observación de entrenamiento individual) o un método con varianza muy baja pero sesgo alto (ajustando una línea horizontal a los datos). El desafío radica en encontrar un método para el cual tanto la varianza como el sesgo al cuadrado sean bajos. Este compromiso es uno de los temas recurrentes más importantes en este libro.</p>
+<p>En una situación de la vida real en la que <span class="math inline">\(f\)</span> no se observa, generalmente no es posible calcular explícitamente el MSE de prueba, el sesgo o la varianza para un método de aprendizaje estadístico. Sin embargo, uno siempre debe tener en cuenta el compromiso sesgo-varianza. En este libro exploramos métodos que son extremadamente flexibles y por lo tanto pueden esencialmente eliminar el sesgo. Sin embargo, esto no garantiza que superarán a un método mucho más simple como la regresión lineal. Para tomar un ejemplo extremo, supongamos que la verdadera <span class="math inline">\(f\)</span> es lineal. En esta situación, la regresión lineal no tendrá sesgo, lo que dificulta mucho que un método más flexible compita. En contraste, si la verdadera <span class="math inline">\(f\)</span> es altamente no lineal y tenemos un número amplio de observaciones de entrenamiento, entonces podemos hacerlo mejor usando un enfoque altamente flexible, como en <a href="#fig-mse-nonlinear-true" class="quarto-xref">Figura&nbsp;11</a>. En el Capítulo 5 discutimos la validación cruzada, que es una forma de estimar el MSE de prueba usando los datos de entrenamiento.</p>
+</section>
+<section id="el-contexto-de-clasificación" class="level3">
+<h3 class="anchored" data-anchor-id="el-contexto-de-clasificación">2.2.3 El Contexto de Clasificación</h3>
+<p>Hasta ahora, nuestra discusión sobre la precisión del modelo se ha centrado en el contexto de regresión. Pero muchos de los conceptos que hemos encontrado, como el compromiso sesgo-varianza, se transfieren al contexto de clasificación con solo algunas modificaciones debido al hecho de que <span class="math inline">\(y_i\)</span> ya no es cuantitativa. Supongamos que buscamos estimar <span class="math inline">\(f\)</span> sobre la base de observaciones de entrenamiento <span class="math inline">\(\{(x_1, y_1), \ldots, (x_n, y_n)\}\)</span>, donde ahora <span class="math inline">\(y_1, \ldots, y_n\)</span> son cualitativas. El enfoque más común para cuantificar la precisión de nuestra estimación <span class="math inline">\(\hat{f}\)</span> es la tasa de error de entrenamiento, la proporción de errores que se cometen si aplicamos nuestra estimación <span class="math inline">\(\hat{f}\)</span> a las observaciones de entrenamiento:</p>
+<p><span class="math display">\[\frac{1}{n}\sum_{i=1}^{n} I(y_i \neq \hat{y}_i). \tag{2.8}\]</span></p>
+<p>Aquí <span class="math inline">\(\hat{y}_i\)</span> es la etiqueta de clase predicha para la <span class="math inline">\(i\)</span>-ésima observación usando <span class="math inline">\(\hat{f}\)</span>. E <span class="math inline">\(I(y_i \neq \hat{y}_i)\)</span> es una variable indicadora que es igual a 1 si <span class="math inline">\(y_i \neq \hat{y}_i\)</span> y cero si <span class="math inline">\(y_i = \hat{y}_i\)</span>. Si <span class="math inline">\(I(y_i \neq \hat{y}_i) = 0\)</span>, entonces la <span class="math inline">\(i\)</span>-ésima observación fue clasificada correctamente por nuestro método de clasificación; de lo contrario, fue mal clasificada. Por lo tanto, la Ecuación 2.8 calcula la fracción de clasificaciones incorrectas.</p>
+<p>La Ecuación 2.8 se denomina tasa de error de entrenamiento porque se calcula sobre la base de los datos que se usaron para entrenar nuestro clasificador. Como en el contexto de regresión, estamos más interesados en las tasas de error que resultan de aplicar nuestro clasificador a observaciones de prueba que no se usaron en el entrenamiento. La tasa de error de prueba asociada con un conjunto de observaciones de prueba de la forma <span class="math inline">\((x_0, y_0)\)</span> está dada por</p>
+<p><span class="math display">\[\operatorname{Ave}(I(y_0 \neq \hat{y}_0)), \tag{2.9}\]</span></p>
+<p>donde <span class="math inline">\(\hat{y}_0\)</span> es la etiqueta de clase predicha que resulta de aplicar el clasificador a la observación de prueba con predictor <span class="math inline">\(x_0\)</span>. Un buen clasificador es aquel para el cual el error de prueba (2.9) es el más pequeño.</p>
+<section id="el-clasificador-de-bayes" class="level4">
+<h4 class="anchored" data-anchor-id="el-clasificador-de-bayes">El Clasificador de Bayes</h4>
+<p>Es posible demostrar (aunque la prueba está fuera del alcance de este libro) que la tasa de error de prueba dada en (2.9) se minimiza, en promedio, mediante un clasificador muy simple que asigna cada observación a la clase más probable, dados sus valores predictores. En otras palabras, deberíamos simplemente asignar una observación de prueba con vector de predictor <span class="math inline">\(x_0\)</span> a la clase <span class="math inline">\(j\)</span> para la cual</p>
+<p><span class="math display">\[\Pr(Y = j \mid X = x_0) \tag{2.10}\]</span></p>
+<p>es más grande. Nótese que (2.10) es una probabilidad condicional: es la probabilidad de que <span class="math inline">\(Y = j\)</span>, dado el vector de predictor observado <span class="math inline">\(x_0\)</span>. Este clasificador muy simple se llama el clasificador de Bayes. En un problema de dos clases donde solo hay dos valores de respuesta posibles, digamos clase 1 o clase 2, el clasificador de Bayes corresponde a predecir la clase uno si <span class="math inline">\(\Pr(Y = 1 \mid X = x_0) &gt; 0.5\)</span>, y la clase dos en caso contrario.</p>
+<div id="fig-bayes-classifier" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bayes-classifier-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter2/png/2_13.png" class="img-fluid figure-img" style="width:45.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bayes-classifier-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;13: Un conjunto de datos simulado que consiste en 100 observaciones en cada uno de dos grupos, indicados en azul y naranja. La línea discontinua púrpura representa la frontera de decisión de Bayes. La cuadrícula de fondo naranja indica la región en la que una observación de prueba será asignada a la clase naranja, y la cuadrícula de fondo azul indica la región en la que una observación de prueba será asignada a la clase azul.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-bayes-classifier" class="quarto-xref">Figura&nbsp;13</a> proporciona un ejemplo usando un conjunto de datos simulado en un espacio bidimensional que consiste en los predictores <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span>. Los círculos naranja y azul corresponden a observaciones de entrenamiento que pertenecen a dos clases diferentes. Para cada valor de <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span>, hay una probabilidad diferente de que la respuesta sea naranja o azul. Dado que estos son datos simulados, sabemos cómo se generaron los datos y podemos calcular las probabilidades condicionales para cada valor de <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span>. La región sombreada naranja refleja el conjunto de puntos para los cuales <span class="math inline">\(\Pr(Y = \text{naranja} \mid X)\)</span> es mayor del 50%, mientras que la región sombreada azul indica el conjunto de puntos para los cuales la probabilidad está por debajo del 50%. La línea discontinua púrpura representa los puntos donde la probabilidad es exactamente del 50%. Esto se llama la frontera de decisión de Bayes. La predicción del clasificador de Bayes está determinada por la frontera de decisión de Bayes; una observación que cae en el lado naranja de la frontera será asignada a la clase naranja, y similarmente una observación en el lado azul de la frontera será asignada a la clase azul.</p>
+<p>El clasificador de Bayes produce la tasa de error de prueba más baja posible, llamada la tasa de error de Bayes. Dado que el clasificador de Bayes siempre elegirá la clase para la cual (2.10) es más grande, la tasa de error será <span class="math inline">\(1 - \max_j \Pr(Y = j \mid X = x_0)\)</span> en <span class="math inline">\(X = x_0\)</span>. En general, la tasa de error de Bayes global está dada por</p>
+<p><span class="math display">\[1 - E\left[\max_j \Pr(Y = j \mid X)\right], \tag{2.11}\]</span></p>
+<p>donde la esperanza promedia la probabilidad sobre todos los valores posibles de <span class="math inline">\(X\)</span>. Para nuestros datos simulados, la tasa de error de Bayes es 0.133. Es mayor que cero, porque las clases se superponen en la población verdadera, lo que implica que <span class="math inline">\(\max_j \Pr(Y = j \mid X = x_0) &lt; 1\)</span> para algunos valores de <span class="math inline">\(x_0\)</span>. La tasa de error de Bayes es análoga al error irreducible, discutido anteriormente.</p>
+</section>
+<section id="k-vecinos-más-cercanos" class="level4">
+<h4 class="anchored" data-anchor-id="k-vecinos-más-cercanos"><span class="math inline">\(K\)</span>-Vecinos Más Cercanos</h4>
+<p>En teoría, siempre nos gustaría predecir respuestas cualitativas usando el clasificador de Bayes. Pero para datos reales, no conocemos la distribución condicional de <span class="math inline">\(Y\)</span> dado <span class="math inline">\(X\)</span>, y por lo tanto calcular el clasificador de Bayes es imposible. Por lo tanto, el clasificador de Bayes sirve como un estándar de oro inalcanzable contra el cual comparar otros métodos. Muchos enfoques intentan estimar la distribución condicional de <span class="math inline">\(Y\)</span> dado <span class="math inline">\(X\)</span>, y luego clasificar una observación dada a la clase con la probabilidad estimada más alta. Un método de este tipo es el clasificador de <span class="math inline">\(K\)</span>-vecinos más cercanos (KNN). Dado un entero positivo <span class="math inline">\(K\)</span> y una observación de prueba <span class="math inline">\(x_0\)</span>, el clasificador KNN primero identifica los <span class="math inline">\(K\)</span> puntos en los datos de entrenamiento que están más cerca de <span class="math inline">\(x_0\)</span>, representados por <span class="math inline">\(N_0\)</span>. Luego estima la probabilidad condicional para la clase <span class="math inline">\(j\)</span> como la fracción de puntos en <span class="math inline">\(N_0\)</span> cuyos valores de respuesta son iguales a <span class="math inline">\(j\)</span>:</p>
+<p><span class="math display">\[\Pr(Y = j \mid X = x_0) = \frac{1}{K}\sum_{i \in N_0} I(y_i = j). \tag{2.12}\]</span></p>
+<p>Finalmente, KNN clasifica la observación de prueba <span class="math inline">\(x_0\)</span> a la clase con la mayor probabilidad de (2.12).</p>
+<div id="fig-knn-illustration" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-knn-illustration-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter2/png/2_14.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-knn-illustration-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;14: El enfoque KNN, usando K = 3, se ilustra en una situación simple con seis observaciones azules y seis observaciones naranjas. Izquierda: una observación de prueba para la cual se desea una etiqueta de clase predicha se muestra como una cruz negra. Los tres puntos más cercanos a la observación de prueba se identifican, y se predice que la observación de prueba pertenece a la clase que ocurre con más frecuencia, en este caso azul. Derecha: La frontera de decisión KNN para este ejemplo se muestra en negro. La cuadrícula azul indica la región en la que una observación de prueba será asignada a la clase azul, y la cuadrícula naranja indica la región en la que será asignada a la clase naranja.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-knn-illustration" class="quarto-xref">Figura&nbsp;14</a> proporciona un ejemplo ilustrativo del enfoque KNN. En el panel izquierdo, hemos trazado un pequeño conjunto de datos de entrenamiento que consiste en seis observaciones azules y seis naranjas. Nuestro objetivo es hacer una predicción para el punto etiquetado por la cruz negra. Supongamos que elegimos <span class="math inline">\(K = 3\)</span>. Entonces KNN primero identificará las tres observaciones que están más cerca de la cruz. Esta vecindad se muestra como un círculo. Consiste en dos puntos azules y un punto naranja, resultando en probabilidades estimadas de <span class="math inline">\(2/3\)</span> para la clase azul y <span class="math inline">\(1/3\)</span> para la clase naranja. Por lo tanto, KNN predecirá que la cruz negra pertenece a la clase azul. En el panel derecho de <a href="#fig-knn-illustration" class="quarto-xref">Figura&nbsp;14</a> hemos aplicado el enfoque KNN con <span class="math inline">\(K = 3\)</span> en todos los valores posibles para <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span>, y hemos dibujado la frontera de decisión KNN correspondiente.</p>
+<p>A pesar de ser un enfoque muy simple, KNN a menudo puede producir clasificadores que están sorprendentemente cerca del clasificador de Bayes óptimo.</p>
+<div id="fig-knn-decision" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-knn-decision-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter2/png/2_15.png" class="img-fluid figure-img" style="width:45.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-knn-decision-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;15: La curva negra indica la frontera de decisión KNN en los datos de la Figura 2.13, usando K = 10. La frontera de decisión de Bayes se muestra como una línea discontinua púrpura. Las fronteras de decisión de KNN y Bayes son muy similares.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-knn-decision" class="quarto-xref">Figura&nbsp;15</a> muestra la frontera de decisión KNN, usando <span class="math inline">\(K = 10\)</span>, cuando se aplica al conjunto de datos simulado más grande de <a href="#fig-bayes-classifier" class="quarto-xref">Figura&nbsp;13</a>. Nótese que aunque la verdadera distribución no es conocida por el clasificador KNN, la frontera de decisión KNN está muy cerca de la del clasificador de Bayes. La tasa de error de prueba usando KNN es 0.1363, que está cerca de la tasa de error de Bayes de 0.1304.</p>
+<p>La elección de <span class="math inline">\(K\)</span> tiene un efecto drástico en el clasificador KNN obtenido.</p>
+<div id="fig-knn-comparison" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-knn-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter2/png/2_16.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-knn-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;16: Una comparación de las fronteras de decisión KNN (curvas sólidas negras) obtenidas usando K = 1 y K = 100 en los datos de la Figura 2.13. Con K = 1, la frontera de decisión es excesivamente flexible, mientras que con K = 100 no es suficientemente flexible. La frontera de decisión de Bayes se muestra como una línea discontinua púrpura.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-knn-comparison" class="quarto-xref">Figura&nbsp;16</a> muestra dos ajustes KNN a los datos simulados de <a href="#fig-bayes-classifier" class="quarto-xref">Figura&nbsp;13</a>, usando <span class="math inline">\(K = 1\)</span> y <span class="math inline">\(K = 100\)</span>. Cuando <span class="math inline">\(K = 1\)</span>, la frontera de decisión es excesivamente flexible y encuentra patrones en los datos que no corresponden a la frontera de decisión de Bayes. Esto corresponde a un clasificador que tiene bajo sesgo pero varianza muy alta. A medida que <span class="math inline">\(K\)</span> crece, el método se vuelve menos flexible y produce una frontera de decisión que está cerca de ser lineal. Esto corresponde a un clasificador de baja varianza pero alto sesgo. En este conjunto de datos simulado, ni <span class="math inline">\(K = 1\)</span> ni <span class="math inline">\(K = 100\)</span> dan buenas predicciones: tienen tasas de error de prueba de 0.1695 y 0.1925, respectivamente.</p>
+<p>Al igual que en el contexto de regresión, no hay una relación fuerte entre la tasa de error de entrenamiento y la tasa de error de prueba. Con <span class="math inline">\(K = 1\)</span>, la tasa de error de entrenamiento de KNN es 0, pero la tasa de error de prueba puede ser bastante alta. En general, a medida que usamos métodos de clasificación más flexibles, la tasa de error de entrenamiento disminuirá pero la tasa de error de prueba puede no hacerlo.</p>
+<div id="fig-knn-error" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-knn-error-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter2/png/2_17.png" class="img-fluid figure-img" style="width:45.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-knn-error-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;17: La tasa de error de entrenamiento de KNN (azul, 200 observaciones) y la tasa de error de prueba (naranja, 5,000 observaciones) en los datos de la Figura 2.13, a medida que el nivel de flexibilidad (evaluado usando 1/K en escala logarítmica) aumenta, o equivalentemente a medida que el número de vecinos K disminuye. La línea discontinua negra indica la tasa de error de Bayes. La irregularidad de las curvas se debe al tamaño pequeño del conjunto de datos de entrenamiento.
+</figcaption>
+</figure>
+</div>
+<p>En <a href="#fig-knn-error" class="quarto-xref">Figura&nbsp;17</a>, hemos trazado los errores de prueba y entrenamiento de KNN en función de <span class="math inline">\(1/K\)</span>. A medida que <span class="math inline">\(1/K\)</span> aumenta, el método se vuelve más flexible. Como en el contexto de regresión, la tasa de error de entrenamiento disminuye consistentemente a medida que la flexibilidad aumenta. Sin embargo, el error de prueba exhibe una forma de U característica, disminuyendo al principio (con un mínimo aproximadamente en <span class="math inline">\(K = 10\)</span>) antes de aumentar nuevamente cuando el método se vuelve excesivamente flexible y sobreajusta.</p>
+<p>Tanto en el contexto de regresión como en el de clasificación, elegir el nivel correcto de flexibilidad es crítico para el éxito de cualquier método de aprendizaje estadístico. El compromiso sesgo-varianza, y la forma de U resultante en el error de prueba, pueden hacer de esta una tarea difícil. En el Capítulo 5, volvemos a este tema y discutimos varios métodos para estimar las tasas de error de prueba y, por lo tanto, elegir el nivel óptimo de flexibilidad para un método de aprendizaje estadístico dado.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="laboratorio" class="level2">
+<h2 class="anchored" data-anchor-id="laboratorio">Laboratorio</h2>
+<p>Los laboratorios con el código completo de este capítulo están disponibles en el sitio oficial del libro: <a href="https://www.statlearning.com" target="_blank">statlearning.com</a>. También puedes acceder a los notebooks en el repositorio oficial de ISLP: <a href="https://github.com/intro-stat-learning/ISLP_labs" target="_blank">ISLP en GitHub</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/cffga\.github\.io\/proyectos\/isl-esp");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../chapters/01-introduccion/index.html" class="pagination-link" aria-label="1. Introducción">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">1. Introducción</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../chapters/03-regresion-lineal/index.html" class="pagination-link" aria-label="3. Regresión Lineal">
+        <span class="nav-page-text">3. Regresión Lineal</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

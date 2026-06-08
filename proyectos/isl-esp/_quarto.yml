@@ -1,0 +1,65 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "ISL — Introducción al Aprendizaje Estadístico"
+  description: "Traducción al español de An Introduction to Statistical Learning with Applications in Python"
+  site-url: "https://cffga.github.io/proyectos/isl-esp"
+  page-navigation: true
+  search: true
+
+  sidebar:
+    style: docked
+    contents:
+      - section: "El libro"
+        contents:
+          - href: index.qmd
+            text: Portada
+          - href: chapters/00-prefacio/index.qmd
+            text: Prefacio
+      - section: "Capítulos"
+        contents:
+          - href: chapters/01-introduccion/index.qmd
+            text: "1. Introducción"
+          - href: chapters/02-aprendizaje-estadistico/index.qmd
+            text: "2. Aprendizaje Estadístico"
+          - href: chapters/03-regresion-lineal/index.qmd
+            text: "3. Regresión Lineal"
+          - href: chapters/04-clasificacion/index.qmd
+            text: "4. Clasificación"
+          - href: chapters/05-metodos-remuestreo/index.qmd
+            text: "5. Métodos de Remuestreo"
+          - href: chapters/06-seleccion-modelos/index.qmd
+            text: "6. Selección de Modelos Lineales y Regularización"
+          - href: chapters/07-mas-alla-linealidad/index.qmd
+            text: "7. Más Allá de la Linealidad"
+          - href: chapters/08-arboles-decision/index.qmd
+            text: "8. Métodos Basados en Árboles"
+          - href: chapters/09-svm/index.qmd
+            text: "9. Máquinas de Vectores de Soporte"
+          - href: chapters/10-aprendizaje-profundo/index.qmd
+            text: "10. Aprendizaje Profundo"
+          - href: chapters/11-analisis-supervivencia/index.qmd
+            text: "11. Análisis de Supervivencia y Datos Censurados"
+          - href: chapters/12-aprendizaje-no-supervisado/index.qmd
+            text: "12. Aprendizaje No Supervisado"
+          - href: chapters/13-pruebas-multiples/index.qmd
+            text: "13. Pruebas Múltiples"
+
+format:
+  html:
+    lang: es
+    theme:
+      - cosmo
+      - custom.scss
+    toc: false
+    code-fold: false
+    code-tools: false
+
+execute:
+  echo: false
+  eval: true
+  warning: false
+
+

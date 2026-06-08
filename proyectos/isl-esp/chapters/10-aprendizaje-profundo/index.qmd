@@ -1,0 +1,163 @@
+---
+title: "10. Aprendizaje Profundo"
+---
+
+## Resumen
+
+El **aprendizaje profundo** (deep learning) se refiere a redes neuronales con múltiples capas ocultas. En este capítulo cubrimos los fundamentos de las redes neuronales artificiales, las redes convolucionales (CNN) para imágenes, las redes recurrentes (RNN) para secuencias, y tópicos avanzados como autoencoders, GANs y transformers.
+
+## Redes Neuronales Simples
+
+### Arquitectura de una Red Neuronal
+
+Una red neuronal consiste en una **capa de entrada**, una o más **capas ocultas** y una **capa de salida**. Cada unidad (neurona) en una capa oculta computa una combinación lineal de las salidas de la capa anterior, seguida de una función de activación no lineal.
+
+La @fig-10-1 muestra un diagrama esquemático de una red neuronal con una capa oculta.
+
+![Diagrama de una red neuronal con una capa oculta que contiene $K$ unidades. Cada flecha representa un peso a estimar.](../../Figures/Chapter10/png/10_1.png){#fig-10-1 width=60%}
+
+La @fig-10-2 muestra una neurona individual, ilustrando la combinación lineal y la activación.
+
+![Neurona individual: las entradas se ponderan y se suman, y luego se aplica una función de activación no lineal.](../../Figures/Chapter10/png/10_2.png){#fig-10-2 width=60%}
+
+### Funciones de Activación
+
+Las funciones de activación más comunes incluyen la **sigmoide**, la **tangente hiperbólica** y la **ReLU** (Rectified Linear Unit). La @fig-10-3a y @fig-10-3b muestran estas funciones y sus derivadas.
+
+![Funciones de activación comunes: sigmoide, tangente hiperbólica y ReLU.](../../Figures/Chapter10/png/10_3a.png){#fig-10-3a width=49%}
+
+![Derivadas de las funciones de activación. La ReLU tiene derivada constante para entradas positivas.](../../Figures/Chapter10/png/10_3b.png){#fig-10-3b width=49%}
+
+### El Problema XOR
+
+El problema **XOR** (o exclusiva) no es linealmente separable. La @fig-10-4 ilustra este problema clásico y cómo una red neuronal con una capa oculta puede resolverlo.
+
+![El problema XOR: los puntos no son linealmente separables, pero una red neuronal con una capa oculta puede clasificarlos correctamente.](../../Figures/Chapter10/png/10_4.png){#fig-10-4 width=60%}
+
+### Entrenamiento de Redes Neuronales
+
+Las redes se entrenan mediante **retropropagación** (backpropagation) del gradiente del error y **descenso de gradiente** (o variantes como Adam, SGD). Se requieren cuidados especiales para evitar el sobreajuste:
+
+- **Parada temprana** (early stopping)
+- **Regularización $L_2$** (weight decay)
+- **Dropout**: elimina aleatoriamente una fracción de neuronas durante el entrenamiento
+
+## Redes Convolucionales (CNN)
+
+Las **redes neuronales convolucionales** (Convolutional Neural Networks, CNN) están diseñadas para datos con estructura de cuadrícula, como imágenes. Utilizan **capas convolucionales** que aplican filtros (kernels) a la entrada para detectar patrones locales.
+
+La @fig-10-5 ilustra una operación de convolución en una imagen.
+
+![Operación de convolución: un filtro (kernel) se desliza sobre la imagen extrayendo características locales.](../../Figures/Chapter10/png/10_5.jpg){#fig-10-5 width=60%}
+
+La @fig-10-6 muestra la arquitectura típica de una CNN con capas convolucionales, de pooling y densas.
+
+![Arquitectura de una CNN: capas convolucionales seguidas de pooling y capas densas para la clasificación.](../../Figures/Chapter10/png/10_6.jpg){#fig-10-6 width=60%}
+
+La @fig-10-7 visualiza los filtros aprendidos por una CNN en las primeras capas, que detectan bordes y texturas simples.
+
+![Filtros aprendidos por las primeras capas de una CNN. Cada filtro detecta un patrón diferente (bordes, esquinas, texturas).](../../Figures/Chapter10/png/10_7.png){#fig-10-7 width=60%}
+
+La @fig-10-8 muestra el efecto de las capas de **pooling** (max-pooling y average-pooling), que reducen la dimensionalidad y aportan invarianza a pequeñas traslaciones.
+
+![Operación de max-pooling: cada región de la imagen se reduce a su valor máximo, reduciendo el tamaño del mapa de características.](../../Figures/Chapter10/png/10_8.png){#fig-10-8 width=60%}
+
+### Aumento de Datos
+
+El **aumento de datos** (data augmentation) genera nuevas muestras de entrenamiento mediante transformaciones aleatorias (rotaciones, desplazamientos, volteos). La @fig-10-9 muestra ejemplos de imágenes aumentadas.
+
+![Ejemplos de aumento de datos: rotaciones, desplazamientos, recortes y cambios de brillo aplicados a una imagen original.](../../Figures/Chapter10/png/10_9.jpg){#fig-10-9 width=60%}
+
+### Visualización de Filtros CNN
+
+Las @fig-10-10a a @fig-10-10f visualizan los filtros aprendidos por diferentes capas de una CNN entrenada en ImageNet, mostrando cómo las capas profundas aprenden características cada vez más abstractas.
+
+![Visualización de filtros de una CNN. Capas tempranas detectan bordes y colores.](../../Figures/Chapter10/png/10_10a.jpg){#fig-10-10a width=49%}
+
+![Capas intermedias detectan texturas y patrones.](../../Figures/Chapter10/png/10_10b.jpg){#fig-10-10b width=49%}
+
+![Capas más profundas detectan formas y partes de objetos.](../../Figures/Chapter10/png/10_10c.jpg){#fig-10-10c width=49%}
+
+![Capas profundas detectan objetos completos.](../../Figures/Chapter10/png/10_10d.jpg){#fig-10-10d width=49%}
+
+![Activación de diferentes neuronas en una capa convolucional.](../../Figures/Chapter10/png/10_10e.jpg){#fig-10-10e width=49%}
+
+![Mapas de activación para diferentes filtros en una CNN entrenada.](../../Figures/Chapter10/png/10_10f.jpg){#fig-10-10f width=49%}
+
+### Resultados de CNN
+
+La @fig-10-11 muestra la precisión de una CNN en el conjunto de datos CIFAR-10 a lo largo del entrenamiento, comparando diferentes arquitecturas.
+
+![Precisión de entrenamiento y prueba de una CNN en CIFAR-10 a lo largo de las épocas de entrenamiento.](../../Figures/Chapter10/png/10_11.png){#fig-10-11 width=60%}
+
+## Redes Recurrentes (RNN)
+
+Las **redes neuronales recurrentes** (Recurrent Neural Networks, RNN) procesan datos secuenciales manteniendo un **estado oculto** que se actualiza en cada paso temporal.
+
+La @fig-10-12 muestra la arquitectura básica de una RNN, donde la salida de cada paso depende de la entrada actual y del estado oculto del paso anterior.
+
+![Arquitectura de una RNN: el estado oculto se propaga a través del tiempo, permitiendo modelar dependencias secuenciales.](../../Figures/Chapter10/png/10_12.png){#fig-10-12 width=60%}
+
+### Redes LSTM
+
+Las **LSTM** (Long Short-Term Memory) son un tipo especial de RNN que introduce **compuertas** (gates) para controlar el flujo de información y mitigar el problema del desvanecimiento del gradiente. La @fig-10-13a y @fig-10-13b ilustran la arquitectura de una LSTM.
+
+![Arquitectura de una celda LSTM con sus compuertas de entrada, olvido y salida.](../../Figures/Chapter10/png/10_13a.png){#fig-10-13a width=49%}
+
+![Diagrama detallado del flujo de información en una LSTM.](../../Figures/Chapter10/png/10_13b.png){#fig-10-13b width=49%}
+
+## Autoencoders
+
+Un **autoencoder** es una red neuronal entrenada para reconstruir su entrada a través de un **cuello de botella** (bottleneck) que fuerza una representación comprimida.
+
+La @fig-10-14 muestra la arquitectura de un autoencoder con codificador y decodificador.
+
+![Arquitectura de un autoencoder: el codificador comprime la entrada y el decodificador la reconstruye.](../../Figures/Chapter10/png/10_14.png){#fig-10-14 width=60%}
+
+La @fig-10-15 compara las imágenes originales con las reconstruidas por un autoencoder entrenado en MNIST.
+
+![Originales (fila superior) vs reconstrucciones de un autoencoder (fila inferior) en MNIST.](../../Figures/Chapter10/png/10_15.png){#fig-10-15 width=60%}
+
+### Autoencoder Variacional (VAE)
+
+El **autoencoder variacional** (Variational Autoencoder, VAE) es un modelo generativo que aprende la distribución latente de los datos. La @fig-10-16 muestra muestras generadas por un VAE.
+
+![Muestras generadas por un autoencoder variacional entrenado en MNIST. Las transiciones suaves muestran que el VAE aprendió una representación latente continua.](../../Figures/Chapter10/png/10_16.png){#fig-10-16 width=60%}
+
+## Redes Generativas Antagónicas (GANs)
+
+Las **GANs** (Generative Adversarial Networks) constan de dos redes: un **generador** que crea muestras falsas y un **discriminador** que intenta distinguirlas de las reales.
+
+La @fig-10-17 muestra muestras generadas por una GAN entrenada en un conjunto de datos de imágenes faciales.
+
+![Muestras generadas por una GAN. Las imágenes sintéticas son difíciles de distinguir de las reales.](../../Figures/Chapter10/png/10_17.png){#fig-10-17 width=60%}
+
+## Comparación de Métodos
+
+La @fig-10-18 compara el rendimiento de diferentes arquitecturas de aprendizaje profundo (MLP, CNN, RNN, LSTM, etc.) en varios conjuntos de datos de referencia.
+
+![Comparación de precisión de diferentes arquitecturas de aprendizaje profundo en datasets estándar.](../../Figures/Chapter10/png/10_18.png){#fig-10-18 width=60%}
+
+## Aprendizaje por Transferencia
+
+El **aprendizaje por transferencia** (transfer learning) aprovecha modelos pre-entrenados en grandes conjuntos de datos y los ajusta (fine-tune) para una tarea específica.
+
+Las @fig-10-19a y @fig-10-19b muestran los resultados del aprendizaje por transferencia, comparando el entrenamiento desde cero con el ajuste de un modelo pre-entrenado.
+
+![Resultados de aprendizaje por transferencia: entrenar desde cero vs ajustar un modelo pre-entrenado.](../../Figures/Chapter10/png/10_19a.png){#fig-10-19a width=49%}
+
+![Comparación de curvas de aprendizaje para transfer learning en un conjunto de datos pequeño.](../../Figures/Chapter10/png/10_19b.png){#fig-10-19b width=49%}
+
+## Mecanismo de Atención y Transformers
+
+El **mecanismo de atención** permite que el modelo pondere dinámicamente la importancia de diferentes partes de la entrada. La @fig-10-20 ilustra el mecanismo de autoatención (self-attention).
+
+![Diagrama del mecanismo de autoatención: cada elemento de la secuencia pondera su relación con los demás.](../../Figures/Chapter10/png/10_20.png){#fig-10-20 width=60%}
+
+Los **transformers** son arquitecturas basadas únicamente en atención que han revolucionado el procesamiento del lenguaje natural y la visión artificial. La @fig-10-21 muestra la arquitectura del transformer original.
+
+![Arquitectura del transformer: codificador y decodificador basados en atención multi-cabeza y capas feed-forward.](../../Figures/Chapter10/png/10_21.png){#fig-10-21 width=60%}
+
+## Laboratorio
+
+Los laboratorios con el código completo de este capítulo están disponibles en el sitio oficial del libro: [statlearning.com](https://www.statlearning.com){target="_blank"}. También puedes acceder a los notebooks en el repositorio oficial de ISLP: [ISLP_labs en GitHub](https://github.com/intro-stat-learning/ISLP_labs){target="_blank"}.

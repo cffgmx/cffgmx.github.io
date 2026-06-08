@@ -1,0 +1,38 @@
+---
+title: "ISL — Introducción al Aprendizaje Estadístico"
+subtitle: "Traducción al español de *An Introduction to Statistical Learning with Applications in Python*"
+---
+
+::: {.lead}
+**Gareth James · Daniela Witten · Trevor Hastie · Robert Tibshirani · Jonathan Taylor**
+:::
+
+---
+
+Este sitio contiene la traducción al español del libro **An Introduction to Statistical Learning with Applications in Python (ISLP)**,
+obra de Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani y Jonathan Taylor, publicada por Springer.
+
+El libro original presenta una introducción accesible a las herramientas del aprendizaje estadístico,
+incluyendo regresión lineal, clasificación, remuestreo, métodos basados en árboles, máquinas de vectores
+de soporte, aprendizaje profundo, análisis de supervivencia, aprendizaje no supervisado y pruebas múltiples.
+
+Este proyecto comunitario, sin fines de lucro, busca hacer accesible el contenido del libro a lectores hispanohablantes. Todo el crédito corresponde a los autores originales.
+
+---
+
+## Acerca de esta traducción
+
+Esta traducción **solo cubre el texto explicativo** de cada capítulo. Los **laboratorios prácticos** (código en Python) y los **ejercicios** no han sido traducidos ni incluidos en este sitio.
+
+El libro original (ISLP) está disponible gratuitamente en PDF en el sitio oficial del libro, junto con materiales complementarios:
+
+- Sitio oficial: [statlearning.com](https://www.statlearning.com){target="_blank"}
+- Repositorio de laboratorios (Jupyter Notebooks): [ISLP_labs en GitHub](https://github.com/intro-stat-learning/ISLP_labs){target="_blank"}
+- Paquete Python ISLP: [ISLP en PyPI](https://pypi.org/project/ISLP/){target="_blank"}
+- Repositorio del libro original (ISLR en R): [ISLR en GitHub](https://github.com/stat-learning/ISLR){target="_blank"}
+
+Al final de cada capítulo encontrarás un enlace directo a los laboratorios correspondientes.
+
+---
+
+Si encuentras algún error, tienes sugerencias o deseas contribuir, puedes escribir a [cffg@protonmail.com](mailto:cffg@protonmail.com).

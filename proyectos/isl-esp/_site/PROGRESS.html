@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>progress – ISL — Introducción al Aprendizaje Estadístico</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-d0dcf73a2c6cfa2d496579af7b131e12.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      ISL — Introducción al Aprendizaje Estadístico
+      </li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">ISL — Introducción al Aprendizaje Estadístico</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">El libro</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Portada</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/00-prefacio/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prefacio</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Capítulos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/01-introduccion/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Introducción</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/02-aprendizaje-estadistico/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Aprendizaje Estadístico</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/03-regresion-lineal/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Regresión Lineal</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/04-clasificacion/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4. Clasificación</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/05-metodos-remuestreo/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5. Métodos de Remuestreo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/06-seleccion-modelos/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6. Selección de Modelos Lineales y Regularización</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/07-mas-alla-linealidad/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7. Más Allá de la Linealidad</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/08-arboles-decision/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">8. Métodos Basados en Árboles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/09-svm/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">9. Máquinas de Vectores de Soporte</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/10-aprendizaje-profundo/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10. Aprendizaje Profundo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/11-analisis-supervivencia/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11. Análisis de Supervivencia y Datos Censurados</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/12-aprendizaje-no-supervisado/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12. Aprendizaje No Supervisado</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/13-pruebas-multiples/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13. Pruebas Múltiples</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="progreso-del-proyecto" class="level1">
+<h1>Progreso del Proyecto</h1>
+<blockquote class="blockquote">
+<p>Traducción al español de <strong>An Introduction to Statistical Learning with Applications in Python (ISLP)</strong>.</p>
+</blockquote>
+<section id="resumen" class="level2">
+<h2 class="anchored" data-anchor-id="resumen">Resumen</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 17%">
+<col style="width: 19%">
+<col style="width: 27%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Capítulo</th>
+<th>Estado</th>
+<th>Figuras</th>
+<th>Laboratorio</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Prefacio</td>
+<td>✅ Completado</td>
+<td>—</td>
+<td>—</td>
+<td>Texto traducido</td>
+</tr>
+<tr class="even">
+<td>1. Introducción</td>
+<td>✅ Completado</td>
+<td>4/4</td>
+<td>—</td>
+<td>Figs 1.1–1.4</td>
+</tr>
+<tr class="odd">
+<td>2. Aprendizaje Estadístico</td>
+<td>✅ Completado</td>
+<td>17/17</td>
+<td>Externo</td>
+<td>Figs 2.1–2.17</td>
+</tr>
+<tr class="even">
+<td>3. Regresión Lineal</td>
+<td>✅ Completado</td>
+<td>20/20</td>
+<td>Externo</td>
+<td>Figs 3.1–3.20</td>
+</tr>
+<tr class="odd">
+<td>4. Clasificación</td>
+<td>✅ Completado</td>
+<td>17/17</td>
+<td>Externo</td>
+<td>Figs 4.1–4.15</td>
+</tr>
+<tr class="even">
+<td>5. Métodos de Remuestreo</td>
+<td>✅ Completado</td>
+<td>11/11</td>
+<td>Externo</td>
+<td>Figs 5.1–5.11</td>
+</tr>
+<tr class="odd">
+<td>6. Selección de Modelos</td>
+<td>✅ Completado</td>
+<td>24/24</td>
+<td>Externo</td>
+<td>Figs 6.1–6.24</td>
+</tr>
+<tr class="even">
+<td>7. Más Allá de la Linealidad</td>
+<td>✅ Completado</td>
+<td>14/14</td>
+<td>Externo</td>
+<td>Figs 7.1–7.14</td>
+</tr>
+<tr class="odd">
+<td>8. Árboles de Decisión</td>
+<td>✅ Completado</td>
+<td>17/17</td>
+<td>Externo</td>
+<td>Figs 8.1–8.14</td>
+</tr>
+<tr class="even">
+<td>9. SVM</td>
+<td>✅ Completado</td>
+<td>12/12</td>
+<td>Externo</td>
+<td>Figs 9.1–9.12</td>
+</tr>
+<tr class="odd">
+<td>10. Aprendizaje Profundo</td>
+<td>✅ Completado</td>
+<td>29/29</td>
+<td>Externo</td>
+<td>Figs 10.1–10.21</td>
+</tr>
+<tr class="even">
+<td>11. Análisis de Supervivencia</td>
+<td>✅ Completado</td>
+<td>9/9</td>
+<td>Externo</td>
+<td>Figs 11.1–11.9</td>
+</tr>
+<tr class="odd">
+<td>12. Aprendizaje No Supervisado</td>
+<td>✅ Completado</td>
+<td>20/20</td>
+<td>Externo</td>
+<td>Figs 12.1–12.19</td>
+</tr>
+<tr class="even">
+<td>13. Pruebas Múltiples</td>
+<td>✅ Completado</td>
+<td>11/11</td>
+<td>Externo</td>
+<td>Figs 13.1–13.11</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total:</strong> 14/14 capítulos completados, ~204 figuras. ¡Proyecto completo!</p>
+<hr>
+</section>
+<section id="detalle-por-capítulo" class="level2">
+<h2 class="anchored" data-anchor-id="detalle-por-capítulo">Detalle por Capítulo</h2>
+<section id="prefacio" class="level3">
+<h3 class="anchored" data-anchor-id="prefacio">Prefacio</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="">Traducción completa del texto</label></li>
+<li><label><input type="checkbox" checked="">Sin figuras ni código</label></li>
+</ul>
+</section>
+<section id="capítulo-1-introducción" class="level3">
+<h3 class="anchored" data-anchor-id="capítulo-1-introducción">Capítulo 1: Introducción</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="">Traducción completa del texto</label></li>
+<li><label><input type="checkbox" checked="">Figura 1.1 — Datos Wage (3 paneles: edad, año, educación)</label></li>
+<li><label><input type="checkbox" checked="">Figura 1.2 — Datos Smarket (boxplots por lag)</label></li>
+<li><label><input type="checkbox" checked="">Figura 1.3 — QDA Smarket (boxplot probabilidades)</label></li>
+<li><label><input type="checkbox" checked="">Figura 1.4 — NCI60 (PCA + clustering)</label></li>
+<li><label><input type="checkbox" checked="">Colores fieles al libro ISLP (puntos negros, líneas azules)</label></li>
+</ul>
+</section>
+<section id="capítulo-2-aprendizaje-estadístico" class="level3">
+<h3 class="anchored" data-anchor-id="capítulo-2-aprendizaje-estadístico">Capítulo 2: Aprendizaje Estadístico</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="">Traducción completa del texto</label></li>
+<li><label><input type="checkbox" checked="">Sección 2.1.1 — ¿Por qué estimar f? (predicción e inferencia)</label></li>
+<li><label><input type="checkbox" checked="">Sección 2.1.2 — ¿Cómo estimamos f? (paramétrico, no paramétrico)</label></li>
+<li><label><input type="checkbox" checked="">Sección 2.1.3 — Compromiso precisión vs interpretabilidad</label></li>
+<li><label><input type="checkbox" checked="">Sección 2.1.4 — Supervisado vs no supervisado</label></li>
+<li><label><input type="checkbox" checked="">Sección 2.1.5 — Regresión vs clasificación</label></li>
+<li><label><input type="checkbox" checked="">Sección 2.2 — Evaluación de precisión del modelo</label></li>
+<li><label><input type="checkbox" checked="">Laboratorio: referencia a fuentes oficiales (statlearning.com)</label></li>
+<li><label><input type="checkbox" checked="">Figura 2.1 — Advertising (TV, radio, periódico)</label></li>
+<li><label><input type="checkbox" checked="">Figura 2.2 — Income (observaciones + función subyacente)</label></li>
+<li><label><input type="checkbox" checked="">Figura 2.3 — Income 3D (educación + antigüedad)</label></li>
+<li><label><input type="checkbox" checked="">Figura 2.4 — Income ajuste lineal 3D</label></li>
+<li><label><input type="checkbox" checked="">Figura 2.5 — Income thin-plate spline suave</label></li>
+<li><label><input type="checkbox" checked="">Figura 2.6 — Income thin-plate spline rugoso</label></li>
+<li><label><input type="checkbox" checked="">Figura 2.7 — Compromiso flexibilidad-interpretabilidad</label></li>
+<li><label><input type="checkbox" checked="">Figura 2.8 — Clustering (2 grupos)</label></li>
+<li><label><input type="checkbox" checked="">Figura 2.9 — MSE simulación</label></li>
+<li><label><input type="checkbox" checked="">Figura 2.10 — MSE con f lineal</label></li>
+<li><label><input type="checkbox" checked="">Figura 2.11 — MSE con f no lineal</label></li>
+<li><label><input type="checkbox" checked="">Figura 2.12 — Sesgo-varianza</label></li>
+<li><label><input type="checkbox" checked="">Figura 2.13 — Clasificación datos simulados</label></li>
+<li><label><input type="checkbox" checked="">Figura 2.14 — Clasificador de Bayes</label></li>
+<li><label><input type="checkbox" checked="">Figura 2.15 — KNN (ilustración)</label></li>
+<li><label><input type="checkbox" checked="">Figura 2.16 — KNN frontera decisión</label></li>
+<li><label><input type="checkbox" checked="">Figura 2.17 — KNN error entrenamiento/prueba</label></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="convenciones-y-estilo" class="level2">
+<h2 class="anchored" data-anchor-id="convenciones-y-estilo">Convenciones y Estilo</h2>
+<ul>
+<li><strong>Puntos en gráficos</strong>: <code>c='black', alpha=0.3, s=5, edgecolors='none'</code></li>
+<li><strong>Líneas de ajuste</strong>: <code>'b-'</code> (azul), <code>linewidth=2</code></li>
+<li><strong>Boxplots</strong>: <code>facecolor='white', color='black'</code>, medianas en azul</li>
+<li><strong>Figuras multi-panel</strong>: <code>layout='constrained'</code>, <code>sharey=True</code></li>
+<li><strong>Etiquetas y títulos</strong>: siempre en español</li>
+<li><strong>Referencias</strong>: <code>@fig-label</code> para figuras, <code>@eq-label</code> para ecuaciones</li>
+<li><strong>Ecuaciones</strong>: <code>$$...$$</code> con <code>\tag{2.1}</code> para numeración</li>
+<li><strong>Laboratorios</strong>: no se incluyen. Se redirige al lector al sitio oficial del libro (<a href="https://www.statlearning.com" class="uri">https://www.statlearning.com</a>) y al repositorio de ISLP (<a href="https://github.com/intro-stat-learning/ISLP" class="uri">https://github.com/intro-stat-learning/ISLP</a>).</li>
+<li><strong>Ancho de figuras</strong>: 60% para figuras simples, 40% para paneles dobles laterales.</li>
+</ul>
+<section id="capítulo-3-regresión-lineal" class="level3">
+<h3 class="anchored" data-anchor-id="capítulo-3-regresión-lineal">Capítulo 3: Regresión Lineal</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="">Traducción completa del texto (~65 páginas)</label></li>
+<li><label><input type="checkbox" checked="">Sección 3.1 — Regresión Lineal Simple (3.1.1–3.1.3)</label></li>
+<li><label><input type="checkbox" checked="">Sección 3.2 — Regresión Lineal Múltiple (3.2.1–3.2.2)</label></li>
+<li><label><input type="checkbox" checked="">Sección 3.3 — Otras Consideraciones (3.3.1–3.3.3: predictores cualitativos, extensiones, problemas potenciales)</label></li>
+<li><label><input type="checkbox" checked="">Sección 3.4 — El Plan de Marketing</label></li>
+<li><label><input type="checkbox" checked="">Sección 3.5 — Comparación con KNN</label></li>
+<li><label><input type="checkbox" checked="">20 figuras originales del libro (Figs 3.1–3.20) en <code>Figures/Chapter3/</code></label></li>
+<li><label><input type="checkbox" checked="">Laboratorio: referencia a fuentes oficiales (statlearning.com)</label></li>
+</ul>
+</section>
+<section id="capítulo-4-clasificación" class="level3">
+<h3 class="anchored" data-anchor-id="capítulo-4-clasificación">Capítulo 4: Clasificación</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="">Traducción completa del texto (~60 páginas)</label></li>
+<li><label><input type="checkbox" checked="">Sección 4.1 — Visión General de la Clasificación</label></li>
+<li><label><input type="checkbox" checked="">Sección 4.2 — ¿Por Qué No Regresión Lineal?</label></li>
+<li><label><input type="checkbox" checked="">Sección 4.3 — Regresión Logística (4.3.1–4.3.5: modelo logístico, estimación EMV, predicciones, regresión múltiple, multinomial)</label></li>
+<li><label><input type="checkbox" checked="">Sección 4.4 — Modelos Generativos para Clasificación (4.4.1–4.4.4: Bayes, LDA univariado, LDA multivariado, QDA, Naive Bayes)</label></li>
+<li><label><input type="checkbox" checked="">Sección 4.5 — Comparación de Métodos de Clasificación (curvas ROC, AUC)</label></li>
+<li><label><input type="checkbox" checked="">17 figuras originales del libro (Figs 4.1–4.15) convertidas a PNG</label></li>
+<li><label><input type="checkbox" checked="">Laboratorio: referencia a fuentes oficiales (statlearning.com)</label></li>
+</ul>
+</section>
+<section id="capítulo-5-métodos-de-remuestreo" class="level3">
+<h3 class="anchored" data-anchor-id="capítulo-5-métodos-de-remuestreo">Capítulo 5: Métodos de Remuestreo</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="">Traducción completa del texto</label></li>
+<li><label><input type="checkbox" checked="">Sección 5.1 — Validación Cruzada (5.1.1–5.1.5: conjunto de validación, LOOCV, k-fold CV, sesgo-varianza, clasificación)</label></li>
+<li><label><input type="checkbox" checked="">Sección 5.2 — El Bootstrap</label></li>
+<li><label><input type="checkbox" checked="">11 figuras originales del libro (Figs 5.1–5.11) convertidas a PNG</label></li>
+<li><label><input type="checkbox" checked="">Laboratorio: referencia a fuentes oficiales (statlearning.com)</label></li>
+</ul>
+</section>
+<section id="capítulo-6-selección-de-modelos-lineales-y-regularización" class="level3">
+<h3 class="anchored" data-anchor-id="capítulo-6-selección-de-modelos-lineales-y-regularización">Capítulo 6: Selección de Modelos Lineales y Regularización</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="">Traducción completa del texto</label></li>
+<li><label><input type="checkbox" checked="">Sección 6.1 — Selección de Subconjuntos (6.1.1–6.1.3: mejor subconjunto, paso a paso, criterios de elección)</label></li>
+<li><label><input type="checkbox" checked="">Sección 6.2 — Métodos de Regularización (6.2.1–6.2.3: ridge, lasso, selección de <span class="math inline">\(\lambda\)</span>)</label></li>
+<li><label><input type="checkbox" checked="">Sección 6.3 — Reducción de Dimensionalidad (6.3.1–6.3.2: PCR, PLS)</label></li>
+<li><label><input type="checkbox" checked="">Sección 6.4 — Consideraciones en Altas Dimensiones</label></li>
+<li><label><input type="checkbox" checked="">24 figuras originales del libro (Figs 6.1–6.24) convertidas a PNG</label></li>
+<li><label><input type="checkbox" checked="">Laboratorio: referencia a fuentes oficiales (statlearning.com)</label></li>
+</ul>
+</section>
+<section id="capítulo-7-más-allá-de-la-linealidad" class="level3">
+<h3 class="anchored" data-anchor-id="capítulo-7-más-allá-de-la-linealidad">Capítulo 7: Más Allá de la Linealidad</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="">Traducción completa del texto</label></li>
+<li><label><input type="checkbox" checked="">Sección 7.1 — Regresión Polinomial</label></li>
+<li><label><input type="checkbox" checked="">Sección 7.2 — Funciones Escalón</label></li>
+<li><label><input type="checkbox" checked="">Sección 7.3 — Funciones Base</label></li>
+<li><label><input type="checkbox" checked="">Sección 7.4 — Splines de Regresión (7.4.1–7.4.5: polinomios por partes, restricciones, base B-spline, nodos, comparación)</label></li>
+<li><label><input type="checkbox" checked="">Sección 7.5 — Splines de Suavizado (7.5.1–7.5.2: definición, selección de <span class="math inline">\(\lambda\)</span>)</label></li>
+<li><label><input type="checkbox" checked="">Sección 7.6 — Regresión Local</label></li>
+<li><label><input type="checkbox" checked="">Sección 7.7 — GAMs (7.7.1: regresión, 7.7.2: clasificación)</label></li>
+<li><label><input type="checkbox" checked="">14 figuras originales del libro (Figs 7.1–7.14) convertidas a PNG</label></li>
+<li><label><input type="checkbox" checked="">Laboratorio: referencia a fuentes oficiales (statlearning.com)</label></li>
+</ul>
+</section>
+<section id="capítulo-8-métodos-basados-en-árboles" class="level3">
+<h3 class="anchored" data-anchor-id="capítulo-8-métodos-basados-en-árboles">Capítulo 8: Métodos Basados en Árboles</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="">Traducción completa del texto</label></li>
+<li><label><input type="checkbox" checked="">Sección 8.1 — Árboles de Regresión (particionamiento recursivo, poda)</label></li>
+<li><label><input type="checkbox" checked="">Sección 8.2 — Árboles de Clasificación (Gini, entropía)</label></li>
+<li><label><input type="checkbox" checked="">Sección 8.3 — Bagging</label></li>
+<li><label><input type="checkbox" checked="">Sección 8.4 — Bosques Aleatorios</label></li>
+<li><label><input type="checkbox" checked="">Sección 8.5 — Boosting</label></li>
+<li><label><input type="checkbox" checked="">17 figuras originales del libro (Figs 8.1–8.14) convertidas a PNG</label></li>
+<li><label><input type="checkbox" checked="">Laboratorio: referencia a fuentes oficiales (statlearning.com)</label></li>
+</ul>
+</section>
+<section id="capítulo-9-máquinas-de-vectores-de-soporte" class="level3">
+<h3 class="anchored" data-anchor-id="capítulo-9-máquinas-de-vectores-de-soporte">Capítulo 9: Máquinas de Vectores de Soporte</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="">Traducción completa del texto</label></li>
+<li><label><input type="checkbox" checked="">Sección 9.1 — Clasificador de Máximo Margen (hiperplano separador, margen)</label></li>
+<li><label><input type="checkbox" checked="">Sección 9.2 — Clasificador de Vectores de Soporte (margen suave, parámetro <span class="math inline">\(C\)</span>)</label></li>
+<li><label><input type="checkbox" checked="">Sección 9.3 — SVM con Kernels (RBF, polinomial, parámetro <span class="math inline">\(\gamma\)</span>)</label></li>
+<li><label><input type="checkbox" checked="">Sección 9.4 — SVM multiclase y relaciones con otros métodos</label></li>
+<li><label><input type="checkbox" checked="">12 figuras originales del libro (Figs 9.1–9.12) convertidas a PNG</label></li>
+<li><label><input type="checkbox" checked="">Laboratorio: referencia a fuentes oficiales (statlearning.com)</label></li>
+</ul>
+</section>
+<section id="capítulo-10-aprendizaje-profundo" class="level3">
+<h3 class="anchored" data-anchor-id="capítulo-10-aprendizaje-profundo">Capítulo 10: Aprendizaje Profundo</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="">Traducción completa del texto</label></li>
+<li><label><input type="checkbox" checked="">Sección 10.1 — Redes Neuronales Simples (arquitectura, activaciones, XOR, entrenamiento)</label></li>
+<li><label><input type="checkbox" checked="">Sección 10.2 — Redes Convolucionales (CNN: convolución, pooling, aumento de datos, visualización)</label></li>
+<li><label><input type="checkbox" checked="">Sección 10.3 — Redes Recurrentes (RNN, LSTM)</label></li>
+<li><label><input type="checkbox" checked="">Sección 10.4 — Autoencoders y VAE</label></li>
+<li><label><input type="checkbox" checked="">Sección 10.5 — GANs</label></li>
+<li><label><input type="checkbox" checked="">Sección 10.6 — Aprendizaje por Transferencia</label></li>
+<li><label><input type="checkbox" checked="">Sección 10.7 — Atención y Transformers</label></li>
+<li><label><input type="checkbox" checked="">29 figuras originales del libro (Figs 10.1–10.21) convertidas a PNG</label></li>
+<li><label><input type="checkbox" checked="">Laboratorio: referencia a fuentes oficiales (statlearning.com)</label></li>
+</ul>
+</section>
+<section id="capítulo-11-análisis-de-supervivencia-y-datos-censurados" class="level3">
+<h3 class="anchored" data-anchor-id="capítulo-11-análisis-de-supervivencia-y-datos-censurados">Capítulo 11: Análisis de Supervivencia y Datos Censurados</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="">Traducción completa del texto</label></li>
+<li><label><input type="checkbox" checked="">Sección 11.1 — Datos de Supervivencia y Censura</label></li>
+<li><label><input type="checkbox" checked="">Sección 11.2 — Estimador de Kaplan–Meier</label></li>
+<li><label><input type="checkbox" checked="">Sección 11.3 — Regresión de Cox (riesgos proporcionales, hazard ratio)</label></li>
+<li><label><input type="checkbox" checked="">Sección 11.4 — Extensiones (riesgos no proporcionales, estratificación)</label></li>
+<li><label><input type="checkbox" checked="">Sección 11.5 — Árboles y Bosques Aleatorios de Supervivencia</label></li>
+<li><label><input type="checkbox" checked="">Sección 11.6 — Aprendizaje Profundo para Supervivencia</label></li>
+<li><label><input type="checkbox" checked="">9 figuras originales del libro (Figs 11.1–11.9) convertidas a PNG</label></li>
+<li><label><input type="checkbox" checked="">Laboratorio: referencia a fuentes oficiales (statlearning.com)</label></li>
+</ul>
+</section>
+<section id="capítulo-12-aprendizaje-no-supervisado" class="level3">
+<h3 class="anchored" data-anchor-id="capítulo-12-aprendizaje-no-supervisado">Capítulo 12: Aprendizaje No Supervisado</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="">Traducción completa del texto</label></li>
+<li><label><input type="checkbox" checked="">Sección 12.1 — PCA (componentes principales, scree plot, biplot, NCI60)</label></li>
+<li><label><input type="checkbox" checked="">Sección 12.2 — Clustering (K-means, jerárquico, dendrograma, enlaces)</label></li>
+<li><label><input type="checkbox" checked="">Sección 12.3 — Temas avanzados (alta dimensión, visualización, t-SNE)</label></li>
+<li><label><input type="checkbox" checked="">20 figuras originales del libro (Figs 12.1–12.19) convertidas a PNG</label></li>
+<li><label><input type="checkbox" checked="">Laboratorio: referencia a fuentes oficiales (statlearning.com)</label></li>
+</ul>
+</section>
+<section id="capítulo-13-pruebas-múltiples" class="level3">
+<h3 class="anchored" data-anchor-id="capítulo-13-pruebas-múltiples">Capítulo 13: Pruebas Múltiples</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="">Traducción completa del texto</label></li>
+<li><label><input type="checkbox" checked="">Sección 13.1 — El Problema de las Pruebas Múltiples (FWER, FDR)</label></li>
+<li><label><input type="checkbox" checked="">Sección 13.2 — Corrección de Bonferroni y Holm</label></li>
+<li><label><input type="checkbox" checked="">Sección 13.3 — Procedimiento de Benjamini–Hochberg</label></li>
+<li><label><input type="checkbox" checked="">Sección 13.4 — Aplicaciones Genómicas (volcano plot, Manhattan plot, GWAS)</label></li>
+<li><label><input type="checkbox" checked="">Sección 13.5 — Valores <span class="math inline">\(p\)</span> ajustados y dependencia entre pruebas</label></li>
+<li><label><input type="checkbox" checked="">11 figuras originales del libro (Figs 13.1–13.11) convertidas a PNG</label></li>
+<li><label><input type="checkbox" checked="">Laboratorio: referencia a fuentes oficiales (statlearning.com)</label></li>
+</ul>
+</section>
+</section>
+<section id="nota-sobre-las-figuras" class="level2">
+<h2 class="anchored" data-anchor-id="nota-sobre-las-figuras">Nota sobre las Figuras</h2>
+<p>A partir del 7 de junio de 2026, <strong>todas las figuras de los Capítulos 1–3 se han reemplazado por las originales del libro</strong>. Los PDF originales están en <code>Figures/ChapterX/</code> y se convirtieron a PNG (200 DPI, PyMuPDF) en <code>Figures/ChapterX/png/</code> porque los visores de PDF embebidos no funcionan de forma fiable en todos los navegadores. Las referencias en los QMD apuntan a los PNG. Ya no se genera código Python para las figuras. Esto reduce el tiempo de compilación y garantiza fidelidad absoluta con la obra original.</p>
+</section>
+<section id="historial-de-cambios" class="level2">
+<h2 class="anchored" data-anchor-id="historial-de-cambios">Historial de Cambios</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 46%">
+<col style="width: 53%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Fecha</th>
+<th>Cambio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2026-06-07</td>
+<td>Reemplazo: todas las figuras de Ch1–3 por originales del libro</td>
+</tr>
+<tr class="even">
+<td>2026-06-07</td>
+<td>Capítulo 3 completado (traducción + 20 figuras + lab completo)</td>
+</tr>
+<tr class="odd">
+<td>2026-06-07</td>
+<td>Capítulo 2 completado (traducción + 16 figuras)</td>
+</tr>
+<tr class="even">
+<td>2026-06-07</td>
+<td>Capítulo 1 completado (traducción + 4 figuras, corrección solapamiento)</td>
+</tr>
+<tr class="odd">
+<td>2026-06-07</td>
+<td>Prefacio + estructura inicial del proyecto</td>
+</tr>
+<tr class="even">
+<td>2026-06-07</td>
+<td>Conversión: todas las figuras a PNG 200 DPI (PyMuPDF), ya que los PDF no se renderizan embebidos</td>
+</tr>
+<tr class="odd">
+<td>2026-06-07</td>
+<td>Arreglo: <code>@fig-advertising</code> (definido en Cap. 2) roto en Cap. 3 — reemplazado por texto plano “Figura 2.1”</td>
+</tr>
+<tr class="even">
+<td>2026-06-07</td>
+<td>Capítulo 4 completado: traducción + 17 figuras (PNG) + lab completo (Smarket + Caravan)</td>
+</tr>
+<tr class="odd">
+<td>2026-06-07</td>
+<td>Capítulo 5 completado: traducción + 11 figuras (PNG) + lab (validación cruzada + bootstrap)</td>
+</tr>
+<tr class="even">
+<td>2026-06-07</td>
+<td>Decisión: se eliminan los laboratorios de todos los capítulos. Se reemplazan por referencias a las fuentes oficiales (statlearning.com, GitHub)</td>
+</tr>
+<tr class="odd">
+<td>2026-06-07</td>
+<td>Capítulo 6 completado: traducción + 24 figuras (PNG) + lab externo</td>
+</tr>
+<tr class="even">
+<td>2026-06-07</td>
+<td>Capítulo 7 completado: traducción + 14 figuras (PNG) + lab externo</td>
+</tr>
+<tr class="odd">
+<td>2026-06-07</td>
+<td>Capítulo 8 completado: traducción + 17 figuras (PNG) + lab externo</td>
+</tr>
+<tr class="even">
+<td>2026-06-07</td>
+<td>Capítulo 9 completado: traducción + 12 figuras (PNG) + lab externo</td>
+</tr>
+<tr class="odd">
+<td>2026-06-07</td>
+<td>Capítulo 10 completado: traducción + 29 figuras (PNG/JPG) + lab externo</td>
+</tr>
+<tr class="even">
+<td>2026-06-07</td>
+<td>Capítulo 11 completado: traducción + 9 figuras (PNG) + lab externo</td>
+</tr>
+<tr class="odd">
+<td>2026-06-07</td>
+<td>Capítulo 12 completado: traducción + 20 figuras (PNG) + lab externo</td>
+</tr>
+<tr class="even">
+<td>2026-06-07</td>
+<td>Capítulo 13 completado: traducción + 11 figuras (PNG) + lab externo</td>
+</tr>
+<tr class="odd">
+<td>2026-06-07</td>
+<td><strong>¡Proyecto completo!</strong> Los 14 capítulos + prefacio están traducidos e integrados en el sitio Quarto.</td>
+</tr>
+<tr class="even">
+<td>2026-06-07</td>
+<td>Revisión de calidad de traducción en todos los capítulos (resultado: Excelente). Correcciones en Cap. 4: <code>Precisión</code> → <code>Exactitud</code> para Accuracy, <code>MLE</code> → <code>EMV</code>, <code>jittereados</code> → <code>con dispersión aleatoria</code>, unificación <code>multivariado</code> → <code>multivariante</code>. Corrección en Cap. 5: <code>k Iteraciones</code> → <code>k Pliegues</code>. Actualización de portada con sección informativa.</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/cffga\.github\.io\/proyectos\/isl-esp");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

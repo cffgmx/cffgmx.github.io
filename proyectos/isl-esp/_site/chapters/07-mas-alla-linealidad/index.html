@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7. Más Allá de la Linealidad – ISL — Introducción al Aprendizaje Estadístico</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../chapters/08-arboles-decision/index.html" rel="next">
+<link href="../../chapters/06-seleccion-modelos/index.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-d0dcf73a2c6cfa2d496579af7b131e12.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/01-introduccion/index.html">Capítulos</a></li><li class="breadcrumb-item"><a href="../../chapters/07-mas-alla-linealidad/index.html">7. Más Allá de la Linealidad</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">ISL — Introducción al Aprendizaje Estadístico</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">El libro</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Portada</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/00-prefacio/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prefacio</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Capítulos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/01-introduccion/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Introducción</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/02-aprendizaje-estadistico/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Aprendizaje Estadístico</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/03-regresion-lineal/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Regresión Lineal</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/04-clasificacion/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4. Clasificación</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/05-metodos-remuestreo/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5. Métodos de Remuestreo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/06-seleccion-modelos/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6. Selección de Modelos Lineales y Regularización</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/07-mas-alla-linealidad/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">7. Más Allá de la Linealidad</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/08-arboles-decision/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">8. Métodos Basados en Árboles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/09-svm/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">9. Máquinas de Vectores de Soporte</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/10-aprendizaje-profundo/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10. Aprendizaje Profundo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/11-analisis-supervivencia/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11. Análisis de Supervivencia y Datos Censurados</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/12-aprendizaje-no-supervisado/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12. Aprendizaje No Supervisado</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/13-pruebas-multiples/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13. Pruebas Múltiples</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/01-introduccion/index.html">Capítulos</a></li><li class="breadcrumb-item"><a href="../../chapters/07-mas-alla-linealidad/index.html">7. Más Allá de la Linealidad</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">7. Más Allá de la Linealidad</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="resumen" class="level2">
+<h2 class="anchored" data-anchor-id="resumen">Resumen</h2>
+<p>En este capítulo relajamos el supuesto de linealidad que ha sido central en los capítulos anteriores. Presentamos métodos que extienden el modelo lineal para capturar relaciones no lineales: <strong>regresión polinomial</strong>, <strong>funciones escalón</strong>, <strong>splines</strong>, <strong>splines de suavizado</strong>, <strong>regresión local</strong> y <strong>modelos aditivos generalizados</strong> (GAMs).</p>
+</section>
+<section id="regresión-polinomial" class="level2">
+<h2 class="anchored" data-anchor-id="regresión-polinomial">Regresión Polinomial</h2>
+<p>La <strong>regresión polinomial</strong> reemplaza el predictor <span class="math inline">\(X\)</span> por sus potencias:</p>
+<p><span class="math display">\[y_i = \beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \cdots + \beta_d x_i^d + \epsilon_i\]</span></p>
+<p>La <a href="#fig-7-1" class="quarto-xref">Figura&nbsp;1</a> muestra ajustes polinomiales de diferentes grados para la relación entre <em>mpg</em> y <em>horsepower</em> en los datos <em>Auto</em>.</p>
+<div id="fig-7-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-7-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter7/png/7_1.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-7-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1: Regresión polinomial de grados 1 a 5 para la relación entre mpg y horsepower en los datos Auto.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="funciones-escalón" class="level2">
+<h2 class="anchored" data-anchor-id="funciones-escalón">Funciones Escalón</h2>
+<p>Las <strong>funciones escalón</strong> (step functions) dividen el rango de <span class="math inline">\(X\)</span> en intervalos y ajustan una constante en cada uno. Esto es equivalente a crear variables dummy para cada intervalo:</p>
+<p><span class="math display">\[C_0(x) = I(x &lt; c_1), \quad C_1(x) = I(c_1 \le x &lt; c_2), \quad \ldots, \quad C_{K-1}(x) = I(c_{K-1} \le x)\]</span></p>
+<p>La <a href="#fig-7-2" class="quarto-xref">Figura&nbsp;2</a> ilustra el ajuste de funciones escalón a los datos <em>Wage</em>, donde se aplicaron cortes en la variable <em>año</em>.</p>
+<div id="fig-7-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-7-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter7/png/7_2.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-7-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2: Funciones escalón ajustadas a los datos Wage, con diferentes números de cortes.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="funciones-base" class="level2">
+<h2 class="anchored" data-anchor-id="funciones-base">Funciones Base</h2>
+<p>Tanto la regresión polinomial como las funciones escalón son casos particulares de <strong>funciones base</strong> (basis functions). En general, transformamos <span class="math inline">\(X\)</span> usando <span class="math inline">\(K\)</span> funciones <span class="math inline">\(b_1(X), b_2(X), \ldots, b_K(X)\)</span>:</p>
+<p><span class="math display">\[y_i = \beta_0 + \beta_1 b_1(x_i) + \beta_2 b_2(x_i) + \cdots + \beta_K b_K(x_i) + \epsilon_i\]</span></p>
+<p>Elegir funciones base adecuadas es clave para capturar la no linealidad de forma eficiente.</p>
+</section>
+<section id="splines-de-regresión" class="level2">
+<h2 class="anchored" data-anchor-id="splines-de-regresión">Splines de Regresión</h2>
+<section id="polinomios-por-partes" class="level3">
+<h3 class="anchored" data-anchor-id="polinomios-por-partes">Polinomios por Partes</h3>
+<p>Los <strong>polinomios por partes</strong> (piecewise polynomials) ajustan polinomios independientes en diferentes intervalos de <span class="math inline">\(X\)</span>. Sin embargo, pueden producir discontinuidades en los puntos de unión.</p>
+</section>
+<section id="restricciones-y-splines" class="level3">
+<h3 class="anchored" data-anchor-id="restricciones-y-splines">Restricciones y Splines</h3>
+<p>Un <strong>spline</strong> es un polinomio por partes con restricciones de continuidad y suavidad en los <strong>nodos</strong> (knots). Un spline cúbico impone continuidad de la función, la primera y segunda derivada en cada nodo. La <a href="#fig-7-3" class="quarto-xref">Figura&nbsp;3</a> muestra un spline cúbico con nodos en las edades de 50 y 60 años para los datos <em>Wage</em>.</p>
+<div id="fig-7-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-7-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter7/png/7_3.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-7-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3: Spline cúbico con nodos en edades 50 y 60 ajustado a los datos Wage. La línea roja es el ajuste suave.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="representación-con-base-de-splines" class="level3">
+<h3 class="anchored" data-anchor-id="representación-con-base-de-splines">Representación con Base de Splines</h3>
+<p>Los splines se representan convenientemente usando <strong>base B-spline</strong> o base de splines naturales. La <a href="#fig-7-4" class="quarto-xref">Figura&nbsp;4</a> muestra diferentes bases de splines para los datos Wage.</p>
+<div id="fig-7-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-7-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter7/png/7_4.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-7-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;4: Diferentes bases de splines ajustadas a los datos Wage. Los splines naturales tienen restricciones lineales en los extremos.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="elección-del-número-y-ubicación-de-los-nodos" class="level3">
+<h3 class="anchored" data-anchor-id="elección-del-número-y-ubicación-de-los-nodos">Elección del Número y Ubicación de los Nodos</h3>
+<p>La ubicación de los nodos puede basarse en cuantiles de <span class="math inline">\(X\)</span>. La <a href="#fig-7-5" class="quarto-xref">Figura&nbsp;5</a> compara splines con diferente número de grados de libertad (nodos).</p>
+<div id="fig-7-5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-7-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter7/png/7_5.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-7-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5: Splines con diferentes grados de libertad para los datos Wage. Más grados de libertad producen un ajuste más flexible.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="comparación-con-regresión-polinomial" class="level3">
+<h3 class="anchored" data-anchor-id="comparación-con-regresión-polinomial">Comparación con Regresión Polinomial</h3>
+<p>La <a href="#fig-7-6" class="quarto-xref">Figura&nbsp;6</a> compara splines cúbicos con regresión polinomial en los datos <em>Wage</em>, mostrando que los splines son más flexibles en regiones con variación y más estables en los extremos.</p>
+<div id="fig-7-6" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-7-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter7/png/7_6.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-7-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;6: Comparación de splines cúbicos vs regresión polinomial para los datos Wage. Los splines ofrecen un mejor equilibrio entre ajuste y estabilidad.
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="splines-de-suavizado" class="level2">
+<h2 class="anchored" data-anchor-id="splines-de-suavizado">Splines de Suavizado</h2>
+<p>Los <strong>splines de suavizado</strong> (smoothing splines) surgen de minimizar una RSS penalizada:</p>
+<p><span class="math display">\[\sum_{i=1}^{n} (y_i - g(x_i))^2 + \lambda \int g''(t)^2 dt\]</span></p>
+<p>El parámetro <span class="math inline">\(\lambda\)</span> controla el balance entre ajuste y suavidad. La <a href="#fig-7-7" class="quarto-xref">Figura&nbsp;7</a> ilustra splines de suavizado con diferentes valores de <span class="math inline">\(\lambda\)</span> para los datos <em>Auto</em>.</p>
+<div id="fig-7-7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-7-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter7/png/7_7.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-7-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;7: Splines de suavizado para mpg vs horsepower con diferentes valores del parámetro de suavizado <span class="math inline">\(\lambda\)</span>.
+</figcaption>
+</figure>
+</div>
+<p>La <a href="#fig-7-8" class="quarto-xref">Figura&nbsp;8</a> compara splines de suavizado con splines de regresión, mostrando cómo ambos se relacionan.</p>
+<div id="fig-7-8" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-7-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter7/png/7_8.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-7-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;8: Comparación de splines de suavizado y splines de regresión. Ambos métodos producen ajustes similares cuando se eligen adecuadamente los parámetros.
+</figcaption>
+</figure>
+</div>
+<section id="selección-del-parámetro-de-suavizado" class="level4">
+<h4 class="anchored" data-anchor-id="selección-del-parámetro-de-suavizado">Selección del Parámetro de Suavizado</h4>
+<p>El parámetro <span class="math inline">\(\lambda\)</span> se selecciona mediante validación cruzada. La <a href="#fig-7-9" class="quarto-xref">Figura&nbsp;9</a> muestra el error de validación cruzada en función de los grados de libertad efectivos.</p>
+<div id="fig-7-9" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-7-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter7/png/7_9.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-7-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;9: Error de validación cruzada para splines de suavizado en función de los grados de libertad efectivos en los datos Auto.
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="regresión-local" class="level2">
+<h2 class="anchored" data-anchor-id="regresión-local">Regresión Local</h2>
+<p>La <strong>regresión local</strong> ajusta un modelo separado en cada punto de evaluación <span class="math inline">\(x_0\)</span>, usando solo las observaciones cercanas ponderadas por una función kernel. La <a href="#fig-7-10" class="quarto-xref">Figura&nbsp;10</a> ilustra la regresión local con diferentes anchos de ventana en los datos <em>Auto</em>.</p>
+<div id="fig-7-10" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-7-10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter7/png/7_10.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-7-10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;10: Regresión local para mpg vs horsepower con diferentes anchos de ventana (span).
+</figcaption>
+</figure>
+</div>
+<p>La <a href="#fig-7-11" class="quarto-xref">Figura&nbsp;11</a> muestra la regresión local en datos simulados, comparando diferentes kernels y anchos de ventana.</p>
+<div id="fig-7-11" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-7-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter7/png/7_11.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-7-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;11: Regresión local en datos simulados con diferentes kernels y anchos de ventana.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="modelos-aditivos-generalizados-gams" class="level2">
+<h2 class="anchored" data-anchor-id="modelos-aditivos-generalizados-gams">Modelos Aditivos Generalizados (GAMs)</h2>
+<p>Los <strong>modelos aditivos generalizados</strong> (Generalized Additive Models, GAMs) extienden los modelos lineales permitiendo que cada predictor tenga una función no lineal:</p>
+<p><span class="math display">\[y_i = \beta_0 + f_1(x_{i1}) + f_2(x_{i2}) + \cdots + f_p(x_{ip}) + \epsilon_i\]</span></p>
+<p>Cada <span class="math inline">\(f_j\)</span> puede ser un spline, una regresión polinomial, o cualquier otra función suave. La aditividad del modelo mantiene la interpretabilidad.</p>
+<section id="gams-para-regresión" class="level3">
+<h3 class="anchored" data-anchor-id="gams-para-regresión">GAMs para Regresión</h3>
+<p>La <a href="#fig-7-12" class="quarto-xref">Figura&nbsp;12</a> muestra un GAM ajustado a los datos <em>Wage</em> con splines de suavizado para <em>año</em> y <em>edad</em>, y términos lineales para otras variables.</p>
+<div id="fig-7-12" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-7-12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter7/png/7_12.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-7-12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;12: GAM para los datos Wage. Cada panel muestra la contribución de una variable al logaritmo del salario.
+</figcaption>
+</figure>
+</div>
+<p>La <a href="#fig-7-13" class="quarto-xref">Figura&nbsp;13</a> extiende el GAM con términos de interacción y términos cualitativos para los datos Wage.</p>
+<div id="fig-7-13" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-7-13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter7/png/7_13.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-7-13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;13: GAM extendido para los datos Wage, incluyendo términos de interacción entre predictores.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="gams-para-clasificación" class="level3">
+<h3 class="anchored" data-anchor-id="gams-para-clasificación">GAMs para Clasificación</h3>
+<p>Los GAMs también pueden utilizarse para clasificación. La <a href="#fig-7-14" class="quarto-xref">Figura&nbsp;14</a> muestra un GAM para clasificación binaria aplicado a datos simulados, donde se modela el logit de la probabilidad.</p>
+<div id="fig-7-14" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-7-14-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../Figures/Chapter7/png/7_14.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-7-14-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;14: GAM para clasificación. Cada panel muestra el efecto no lineal de un predictor sobre el logit de la probabilidad de pertenecer a la clase positiva.
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="laboratorio" class="level2">
+<h2 class="anchored" data-anchor-id="laboratorio">Laboratorio</h2>
+<p>Los laboratorios con el código completo de este capítulo están disponibles en el sitio oficial del libro: <a href="https://www.statlearning.com" target="_blank">statlearning.com</a>. También puedes acceder a los notebooks en el repositorio oficial de ISLP: <a href="https://github.com/intro-stat-learning/ISLP_labs" target="_blank">ISLP_labs en GitHub</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/cffga\.github\.io\/proyectos\/isl-esp");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../chapters/06-seleccion-modelos/index.html" class="pagination-link" aria-label="6. Selección de Modelos Lineales y Regularización">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">6. Selección de Modelos Lineales y Regularización</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../chapters/08-arboles-decision/index.html" class="pagination-link" aria-label="8. Métodos Basados en Árboles">
+        <span class="nav-page-text">8. Métodos Basados en Árboles</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
