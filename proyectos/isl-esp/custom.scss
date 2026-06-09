@@ -60,6 +60,12 @@ pre code {
   display: none !important;
 }
 
+/* Quarto centra el contenido de .quarto-figure-center > figure > div */
+/* Lo desactivamos para tablas para que las leyendas queden alineadas a la izquierda */
+[id^="tbl-"] .quarto-figure-center > figure > div {
+  text-align: left !important;
+}
+
 /* Botón flotante de cambio de tema */
 #theme-toggle-btn:hover {
   transform: scale(1.1) !important;
