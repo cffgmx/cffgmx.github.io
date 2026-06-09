@@ -1,39 +1,7 @@
-// scripts/site.js — Inicialización del sitio (tooltip preview + tema claro/oscuro)
+// scripts/site.js — Inicialización del sitio (tema claro/oscuro)
 
 (function() {
   'use strict';
-
-  // ── Tooltip preview para referencias a figuras ──
-
-  var baseUrl = '';
-  var meta = document.querySelector('meta[name="quarto:site-url"]');
-  if (meta) {
-    baseUrl = meta.getAttribute('content');
-    if (!baseUrl.endsWith('/')) baseUrl += '/';
-  } else {
-    var parts = window.location.pathname.split('/');
-    var depth = (window.location.pathname.match(/chapters\//g) || []).length;
-    baseUrl = window.location.origin + parts.slice(0, -(2 * depth + 1) || 1).join('/') + '/';
-  }
-  var jsonUrl = baseUrl + 'figures-map.json';
-  fetch(jsonUrl)
-    .then(function(r) { return r.json(); })
-    .then(function(map) {
-      document.querySelectorAll('a.quarto-xref').forEach(function(a) {
-        var href = a.getAttribute('href');
-        if (!href) return;
-        var m = href.match(/#(fig-[\w-]+)/);
-        if (!m) return;
-        var key = m[1];
-        if (!map[key]) return;
-        var fullUrl = baseUrl + map[key];
-        a.setAttribute('data-preview', '');
-        a.style.setProperty('--preview-img', 'url(' + fullUrl + ')');
-      });
-    })
-    .catch(function(err) {
-      console.warn('preview: no se pudo cargar figures-map.json', err);
-    });
 
   // ── Cambio de tema claro/oscuro ──
 

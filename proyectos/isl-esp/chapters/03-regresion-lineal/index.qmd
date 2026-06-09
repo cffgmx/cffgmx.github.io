@@ -218,7 +218,7 @@ que mide el número de desviaciones estándar a las que $\hat{\beta}_1$ está de
 | Intercepto  |   7.0325    |    0.4578      |    15.36      | $< 0.0001$ |
 | TV          |   0.0475    |    0.0027      |    17.67      | $< 0.0001$ |
 
-: Tabla 3.1: Para los datos Advertising, coeficientes del modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre el presupuesto de publicidad en TV. Un aumento de $1{,}000$ en el presupuesto de publicidad en TV está asociado con un aumento en las ventas de alrededor de 50 unidades. (Recordemos que la variable sales está en miles de unidades, y la variable TV está en miles de dólares.)
+<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Tabla&nbsp;3.1: Para los datos Advertising, coeficientes del modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre el presupuesto de publicidad en TV. Un aumento de $1{,}000$ en el presupuesto de publicidad en TV está asociado con un aumento en las ventas de alrededor de 50 unidades. (Recordemos que la variable sales está en miles de unidades, y la variable TV está en miles de dólares.)
 
 </div>
 
@@ -236,7 +236,7 @@ Una vez que hemos rechazado la hipótesis nula <a href="#eq-3-12" class="quarto-
 | $R^2$                        | 0.612 |
 | Estadístico $F$              | 312.1 |
 
-: Tabla 3.2: Para los datos Advertising, más información sobre el modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre el presupuesto de publicidad en TV.
+<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Tabla&nbsp;3.2: Para los datos Advertising, más información sobre el modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre el presupuesto de publicidad en TV.
 
 </div>
 
@@ -371,7 +371,7 @@ Los valores $\hat{\beta}_0, \hat{\beta}_1, \ldots, \hat{\beta}_p$ que minimizan 
 | radio       |    0.189    |    0.0086      |    21.89      | $< 0.0001$ |
 | newspaper   |   $-0.001$  |    0.0059      |    $-0.18$    |  0.8599   |
 
-: Tabla 3.4: Para los datos Advertising, estimaciones de los coeficientes de mínimos cuadrados de la regresión lineal múltiple del número de unidades vendidas sobre los presupuestos de publicidad en TV, radio y newspaper.
+<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Tabla&nbsp;3.4: Para los datos Advertising, estimaciones de los coeficientes de mínimos cuadrados de la regresión lineal múltiple del número de unidades vendidas sobre los presupuestos de publicidad en TV, radio y newspaper.
 
 </div>
 
@@ -386,9 +386,9 @@ La <a href="#tbl-3-4" class="quarto-xref">Tabla&nbsp;3.4</a> muestra las estimac
 | TV        | 1.0000 | 0.0548 |  0.0567   | 0.7822 |
 | radio     |        | 1.0000 |  0.3541   | 0.5762 |
 | newspaper |        |        |  1.0000   | 0.2283 |
-| sales     |        |        |           | 1.0000 |
+| sales     |        |           |           | 1.0000 |
 
-: Tabla 3.5: Matriz de correlación para TV, radio, newspaper y sales para los datos Advertising.
+<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Tabla&nbsp;3.5: Matriz de correlación para TV, radio, newspaper y sales para los datos Advertising.
 
 </div>
 
@@ -443,7 +443,7 @@ Por lo tanto, cuando no hay relación entre la variable respuesta y los predicto
 | $R^2$                        | 0.897 |
 | Estadístico $F$              | 570   |
 
-: Tabla 3.6: Más información sobre el modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre los presupuestos de publicidad en TV, newspaper y radio en los datos Advertising. Otra información sobre este modelo se mostró en la <a href="#tbl-3-4" class="quarto-xref">Tabla&nbsp;3.4</a>.
+<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Tabla&nbsp;3.6: Más información sobre el modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre los presupuestos de publicidad en TV, newspaper y radio en los datos Advertising. Otra información sobre este modelo se mostró en la <a href="#tbl-3-4" class="quarto-xref">Tabla&nbsp;3.4</a>.
 
 </div>
 
@@ -581,7 +581,7 @@ Ahora $\beta_0$ puede interpretarse como el `balance` promedio de la tarjeta de 
 | Intercepto  |   509.80    |     33.13      |    15.389     | $< 0.0001$ |
 | own[Yes]    |    19.73    |     46.05      |     0.429     |  0.6690   |
 
-: Tabla 3.7: Estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de balance sobre own en el conjunto de datos Credit. El modelo lineal se da en <a href="#eq-3-27" class="quarto-xref">(3.27)</a>. Es decir, ownership se codifica como una variable dummy, como en <a href="#eq-3-26" class="quarto-xref">(3.26)</a>.
+<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Tabla&nbsp;3.7: Estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de balance sobre own en el conjunto de datos Credit. El modelo lineal se da en <a href="#eq-3-27" class="quarto-xref">(3.27)</a>. Es decir, ownership se codifica como una variable dummy, como en <a href="#eq-3-26" class="quarto-xref">(3.26)</a>.
 
 </div>
 
@@ -650,7 +650,7 @@ Ahora $\beta_0$ puede interpretarse como el `balance` promedio de la tarjeta de 
 | region[South]  |   $-12.50$  |     56.68      |    $-0.221$   |  0.8260   |
 | region[West]   |   $-18.69$  |     65.02      |    $-0.287$   |  0.7740   |
 
-: Tabla 3.8: Estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de balance sobre region en el conjunto de datos Credit. El modelo lineal se da en <a href="#eq-3-30" class="quarto-xref">(3.30)</a>. Es decir, region se codifica mediante dos variables dummy <a href="#eq-3-28" class="quarto-xref">(3.28)</a> y <a href="#eq-3-29" class="quarto-xref">(3.29)</a>.
+<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Tabla&nbsp;3.8: Estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de balance sobre region en el conjunto de datos Credit. El modelo lineal se da en <a href="#eq-3-30" class="quarto-xref">(3.30)</a>. Es decir, region se codifica mediante dos variables dummy <a href="#eq-3-28" class="quarto-xref">(3.28)</a> y <a href="#eq-3-29" class="quarto-xref">(3.29)</a>.
 
 </div>
 
@@ -727,7 +727,7 @@ Podemos interpretar $\beta_3$ como el aumento en la efectividad de la publicidad
 | radio       |   0.0289    |     0.009      |     3.24      |  0.0014   |
 | TV×radio    |   0.0011    |     0.000      |    20.73      | $< 0.0001$ |
 
-: Tabla 3.9: Para los datos Advertising, estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de sales sobre TV y radio, con un término de interacción, como en <a href="#eq-3-33" class="quarto-xref">(3.33)</a>.
+<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Tabla&nbsp;3.9: Para los datos Advertising, estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de sales sobre TV y radio, con un término de interacción, como en <a href="#eq-3-33" class="quarto-xref">(3.33)</a>.
 
 </div>
 
@@ -805,7 +805,7 @@ puede proporcionar un mejor ajuste. La <a href="#eq-3-36" class="quarto-xref">Ec
 | horsepower     |   $-0.4662$ |     0.0311     |    $-15.0$    | $< 0.0001$ |
 | horsepower$^2$ |    0.0012   |     0.0001     |     10.1      | $< 0.0001$ |
 
-: Tabla 3.10: Para el conjunto de datos Auto, estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de mpg sobre horsepower y horsepower<sup>2</sup>.
+<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Tabla&nbsp;3.10: Para el conjunto de datos Auto, estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de mpg sobre horsepower y horsepower<sup>2</sup>.
 
 </div>
 

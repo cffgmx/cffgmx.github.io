@@ -55,7 +55,10 @@ pre code {
   display: none !important;
 }
 
-/* Tooltip hover: tippy.js de Quarto ya maneja el preview automáticamente */
+/* Suprimir figcaption automático en tablas (usamos <p class="figure-caption"> manual) */
+[id^="tbl-"] .quarto-float-caption-top {
+  display: none !important;
+}
 
 /* Botón flotante de cambio de tema */
 #theme-toggle-btn:hover {
