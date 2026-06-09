@@ -41,13 +41,14 @@ Se puede interpretar "$\approx$" como "se modela aproximadamente como". A veces 
 
 Por ejemplo, $X$ puede representar la publicidad en `TV` e $Y$ puede representar las ventas (`sales`). Entonces podemos regresar `sales` sobre `TV` ajustando el modelo
 
-<div id="eq-3-2">
 $$
 \text{sales} \approx \beta_0 + \beta_1 \times \text{TV}.$$
 
 En la Ecuación 3.1, $\beta_0$ y $\beta_1$ son dos constantes desconocidas que representan los términos de *intercepto* (*intercept*) y *pendiente* (*slope*) en el modelo lineal. En conjunto, $\beta_0$ y $\beta_1$ se conocen como los *coeficientes* (*coefficients*) o *parámetros* (*parameters*) del modelo. Una vez que hemos utilizado nuestros datos de entrenamiento para producir estimaciones $\hat{\beta}_0$ y $\hat{\beta}_1$ para los coeficientes del modelo, podemos predecir ventas futuras con base en un valor particular de publicidad en `TV` calculando
 
-$$\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x, \qquad (3.2)
+<div id="eq-3-2">
+$$
+\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x, \qquad (3.2)
 $$
 </div>
 
@@ -57,11 +58,10 @@ donde $\hat{y}$ indica una predicción de $Y$ con base en $X = x$. Aquí utiliza
 
 En la práctica, $\beta_0$ y $\beta_1$ son desconocidos. Por lo tanto, antes de poder usar <a href="#eq-3-1" class="quarto-xref">(3.1)</a> para hacer predicciones, debemos usar datos para estimar los coeficientes. Sea
 
-<div id="eq-3-3">
 $$
 (x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)$$
 
-lo que representa $n$ pares de observaciones, cada uno de los cuales consiste en una medición de $X$ y una medición de $Y$. En el ejemplo de `Advertising`, este conjunto de datos consiste en el presupuesto de publicidad en `TV` y las ventas del producto en $n = 200$ mercados diferentes. (Recordemos que los datos se muestran en la Figura 2.1.) Nuestro objetivo es obtener estimaciones de los coeficientes $\hat{\beta}_0$ y $\hat{\beta}_1$ tales que el modelo lineal (3.1) se ajuste bien a los datos disponibles —es decir, de modo que $y_i \approx \hat{\beta}_0 + \hat{\beta}_1 x_i$ para $i = 1, \ldots, n$. En otras palabras, queremos encontrar un intercepto $\hat{\beta}_0$ y una pendiente $\hat{\beta}_1$ tales que la línea resultante esté lo más cerca posible de los $n = 200$ puntos de datos. Existen varias formas de medir la cercanía. Sin embargo, con mucho, el enfoque más común consiste en minimizar el criterio de *mínimos cuadrados* (*least squares*), y adoptamos ese enfoque en este capítulo. En el Capítulo 6 se considerarán enfoques alternativos.
+lo que representa $n$ pares de observaciones, cada uno de los cuales consiste en una medición de $X$ y una medición de $Y$. En el ejemplo de `Advertising`, este conjunto de datos consiste en el presupuesto de publicidad en `TV` y las ventas del producto en $n = 200$ mercados diferentes. (Recordemos que los datos se muestran en la Figura 2.1.) Nuestro objetivo es obtener estimaciones de los coeficientes $\hat{\beta}_0$ y $\hat{\beta}_1$ tales que el modelo lineal <a href="#eq-3-1" class="quarto-xref">(3.1)</a> se ajuste bien a los datos disponibles —es decir, de modo que $y_i \approx \hat{\beta}_0 + \hat{\beta}_1 x_i$ para $i = 1, \ldots, n$. En otras palabras, queremos encontrar un intercepto $\hat{\beta}_0$ y una pendiente $\hat{\beta}_1$ tales que la línea resultante esté lo más cerca posible de los $n = 200$ puntos de datos. Existen varias formas de medir la cercanía. Sin embargo, con mucho, el enfoque más común consiste en minimizar el criterio de *mínimos cuadrados* (*least squares*), y adoptamos ese enfoque en este capítulo. En el Capítulo 6 se considerarán enfoques alternativos.
 
 Sea $\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_i$ la predicción para $Y$ basada en el $i$-ésimo valor de $X$. Entonces $e_i = y_i - \hat{y}_i$ representa el $i$-ésimo *residuo* (*residual*) —esta es la diferencia entre el $i$-ésimo valor de respuesta observado y el $i$-ésimo valor de respuesta que es predicho por nuestro modelo lineal. Definimos la *suma de cuadrados de los residuos* (*residual sum of squares*, RSS) como
 
@@ -69,7 +69,9 @@ $$\text{RSS} = e_1^2 + e_2^2 + \cdots + e_n^2,$$
 
 o equivalentemente como
 
-$$\text{RSS} = (y_1 - \hat{\beta}_0 - \hat{\beta}_1 x_1)^2 + (y_2 - \hat{\beta}_0 - \hat{\beta}_1 x_2)^2 + \cdots + (y_n - \hat{\beta}_0 - \hat{\beta}_1 x_n)^2. \qquad (3.3)
+<div id="eq-3-3">
+$$
+\text{RSS} = (y_1 - \hat{\beta}_0 - \hat{\beta}_1 x_1)^2 + (y_2 - \hat{\beta}_0 - \hat{\beta}_1 x_2)^2 + \cdots + (y_n - \hat{\beta}_0 - \hat{\beta}_1 x_n)^2. \qquad (3.3)
 $$
 </div>
 
@@ -81,11 +83,10 @@ $$
 $$
 </div>
 
-<div id="eq-3-5">
 $$
 \hat{\beta}_0 = \bar{y} - \hat{\beta}_1 \bar{x},$$
 
-donde $\bar{y} \equiv \frac{1}{n} \sum_{i=1}^{n} y_i$ y $\bar{x} \equiv \frac{1}{n} \sum_{i=1}^{n} x_i$ son las medias muestrales. En otras palabras, (3.4) define las estimaciones de los coeficientes de mínimos cuadrados para la regresión lineal simple.
+donde $\bar{y} \equiv \frac{1}{n} \sum_{i=1}^{n} y_i$ y $\bar{x} \equiv \frac{1}{n} \sum_{i=1}^{n} x_i$ son las medias muestrales. En otras palabras, <a href="#eq-3-4" class="quarto-xref">(3.4)</a> define las estimaciones de los coeficientes de mínimos cuadrados para la regresión lineal simple.
 
 <div id="fig-3-1" style="text-align:center; margin:1.5em 0;">
 <img src="../../Figures/Chapter3/png/3_1.png" class="img-fluid figure-img" style="width:65.0%" alt="">
@@ -104,7 +105,9 @@ La <a href="#fig-3-1" class="quarto-xref">Figura&nbsp;3.1</a> muestra el ajuste 
 
 Recordemos de (2.1) que asumimos que la verdadera relación entre $X$ e $Y$ toma la forma $Y = f(X) + \epsilon$ para alguna función desconocida $f$, donde $\epsilon$ es un término de error aleatorio con media cero. Si $f$ va a ser aproximada por una función lineal, entonces podemos escribir esta relación como
 
-$$Y = \beta_0 + \beta_1 X + \epsilon. \qquad (3.5)
+<div id="eq-3-5">
+$$
+Y = \beta_0 + \beta_1 X + \epsilon. \qquad (3.5)
 $$
 </div>
 
@@ -191,7 +194,6 @@ $$
 
 Matemáticamente, esto corresponde a contrastar
 
-<div id="eq-3-14">
 $$
 H_0: \beta_1 = 0$$
 
@@ -201,7 +203,9 @@ $$H_a: \beta_1 \neq 0,$$
 
 ya que si $\beta_1 = 0$ entonces el modelo (3.5) se reduce a $Y = \beta_0 + \epsilon$, y $X$ no está asociado con $Y$. Para contrastar la hipótesis nula, necesitamos determinar si $\hat{\beta}_1$, nuestra estimación para $\beta_1$, está suficientemente lejos de cero como para poder confiar en que $\beta_1$ es distinto de cero. ¿Qué tan lejos es suficientemente lejos? Esto, por supuesto, depende de la precisión de $\hat{\beta}_1$ —es decir, depende de $\text{SE}(\hat{\beta}_1)$. Si $\text{SE}(\hat{\beta}_1)$ es pequeño, entonces incluso valores relativamente pequeños de $\hat{\beta}_1$ pueden proporcionar evidencia sólida de que $\beta_1 \neq 0$, y por lo tanto de que existe una relación entre $X$ e $Y$. En contraste, si $\text{SE}(\hat{\beta}_1)$ es grande, entonces $\hat{\beta}_1$ debe ser grande en valor absoluto para que podamos rechazar la hipótesis nula. En la práctica, calculamos un *estadístico t* (*t-statistic*), dado por
 
-$$t = \frac{\hat{\beta}_1 - 0}{\text{SE}(\hat{\beta}_1)}, \qquad (3.14)
+<div id="eq-3-14">
+$$
+t = \frac{\hat{\beta}_1 - 0}{\text{SE}(\hat{\beta}_1)}, \qquad (3.14)
 $$
 </div>
 
@@ -395,7 +399,6 @@ Ahora abordamos cada una de estas preguntas por turno.
 
 Recordemos que en el contexto de la regresión lineal simple, para determinar si existe una relación entre la variable respuesta y el predictor simplemente podemos verificar si $\beta_1 = 0$. En el contexto de la regresión múltiple con $p$ predictores, necesitamos preguntar si todos los coeficientes de regresión son cero, es decir, si $\beta_1 = \beta_2 = \cdots = \beta_p = 0$. Como en el contexto de la regresión lineal simple, utilizamos una prueba de hipótesis para responder esta pregunta. Contrastamos la hipótesis nula,
 
-<div id="eq-3-23">
 $$
 H_0: \beta_1 = \beta_2 = \cdots = \beta_p = 0$$
 
@@ -405,13 +408,14 @@ $$H_a: \text{al menos un } \beta_j \text{ es distinto de cero.}$$
 
 Esta prueba de hipótesis se realiza calculando el *estadístico F* (*F-statistic*),
 
-$$F = \frac{(\text{TSS} - \text{RSS})/p}{\text{RSS}/(n - p - 1)}, \qquad (3.23)
+<div id="eq-3-23">
+$$
+F = \frac{(\text{TSS} - \text{RSS})/p}{\text{RSS}/(n - p - 1)}, \qquad (3.23)
 $$
 </div>
 
 donde, al igual que con la regresión lineal simple, $\text{TSS} = \sum (y_i - \bar{y})^2$ y $\text{RSS} = \sum (y_i - \hat{y}_i)^2$. Si las suposiciones del modelo lineal son correctas, se puede demostrar que
 
-<div id="eq-3-24">
 $$
 E\{\text{RSS}/(n - p - 1)\} = \sigma^2$$
 
@@ -433,13 +437,15 @@ Por lo tanto, cuando no hay relación entre la variable respuesta y los predicto
 
 El *estadístico F* para el modelo de regresión lineal múltiple obtenido al regresar `sales` sobre `radio`, `TV` y `newspaper` se muestra en la <a href="#tbl-3-6" class="quarto-xref">Tabla&nbsp;3.6</a>. En este ejemplo, el *estadístico F* es 570. Dado que esto es mucho mayor que 1, proporciona evidencia contundente en contra de la hipótesis nula $H_0$. En otras palabras, el gran *estadístico F* sugiere que al menos uno de los medios publicitarios debe estar relacionado con las ventas. Sin embargo, ¿qué pasaría si el *estadístico F* hubiera estado más cerca de 1? ¿Qué tan grande necesita ser el *estadístico F* antes de que podamos rechazar $H_0$ y concluir que existe una relación? Resulta que la respuesta depende de los valores de $n$ y $p$. Cuando $n$ es grande, un *estadístico F* que es solo un poco mayor que 1 aún podría proporcionar evidencia en contra de $H_0$. En contraste, se necesita un *estadístico F* mayor para rechazar $H_0$ si $n$ es pequeño. Cuando $H_0$ es verdadera y los errores $\epsilon_i$ tienen una distribución normal, el *estadístico F* sigue una distribución $F$.^[Incluso si los errores no están distribuidos normalmente, el estadístico F sigue aproximadamente una distribución F siempre que el tamaño muestral $n$ sea grande.] Para cualquier valor dado de $n$ y $p$, cualquier paquete de software estadístico puede usarse para calcular el *valor p* asociado con el *estadístico F* usando esta distribución. Con base en este *valor p*, podemos determinar si rechazar o no $H_0$. Para los datos `Advertising`, el *valor p* asociado con el *estadístico F* en la <a href="#tbl-3-6" class="quarto-xref">Tabla&nbsp;3.6</a> es esencialmente cero, por lo que tenemos evidencia extremadamente fuerte de que al menos uno de los medios está asociado con un aumento en las ventas.
 
-En (3.23) estamos contrastando $H_0$ de que todos los coeficientes son cero. A veces queremos contrastar que un subconjunto particular de $q$ de los coeficientes es cero. Esto corresponde a una hipótesis nula
+En <a href="#eq-3-23" class="quarto-xref">(3.23)</a> estamos contrastando $H_0$ de que todos los coeficientes son cero. A veces queremos contrastar que un subconjunto particular de $q$ de los coeficientes es cero. Esto corresponde a una hipótesis nula
 
 $$H_0: \beta_{p-q+1} = \beta_{p-q+2} = \cdots = \beta_p = 0,$$
 
 donde por conveniencia hemos colocado las variables elegidas para omisión al final de la lista. En este caso ajustamos un segundo modelo que utiliza todas las variables excepto esas últimas $q$. Supongamos que la suma de cuadrados de los residuos para ese modelo es $\text{RSS}_0$. Entonces el *estadístico F* apropiado es
 
-$$F = \frac{(\text{RSS}_0 - \text{RSS})/q}{\text{RSS}/(n - p - 1)}. \qquad (3.24)
+<div id="eq-3-24">
+$$
+F = \frac{(\text{RSS}_0 - \text{RSS})/q}{\text{RSS}/(n - p - 1)}. \qquad (3.24)
 $$
 </div>
 
@@ -502,7 +508,6 @@ Una vez que hemos ajustado el modelo de regresión múltiple, es sencillo aplica
 
 1. Las estimaciones de los coeficientes $\hat{\beta}_0, \hat{\beta}_1, \ldots, \hat{\beta}_p$ son estimaciones para $\beta_0, \beta_1, \ldots, \beta_p$. Es decir, el plano de mínimos cuadrados
 
-   <div id="eq-3-26">
 $$
 \hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X_1 + \cdots + \hat{\beta}_p X_p$$
 
@@ -514,7 +519,7 @@ $$
 
 2. Por supuesto, en la práctica asumir un modelo lineal para $f(X)$ es casi siempre una aproximación de la realidad, por lo que hay una fuente adicional de error potencialmente reducible que llamamos *sesgo del modelo* (*model bias*). Así que cuando usamos un modelo lineal, de hecho estamos estimando la mejor aproximación lineal a la superficie verdadera. Sin embargo, aquí ignoraremos esta discrepancia y operaremos como si el modelo lineal fuera correcto.
 
-3. Incluso si conociéramos $f(X)$ —es decir, incluso si conociéramos los valores verdaderos de $\beta_0, \beta_1, \ldots, \beta_p$— el valor de la variable respuesta no puede predecirse perfectamente debido al error aleatorio $\epsilon$ en el modelo (3.20). En el Capítulo 2, nos referimos a esto como el *error irreducible* (*irreducible error*). ¿Cuánto variará $Y$ de $\hat{Y}$? Usamos *intervalos de predicción* (*prediction intervals*) para responder esta pregunta. Los *intervalos de predicción* son siempre más amplios que los *intervalos de confianza*, porque incorporan tanto el error en la estimación de $f(X)$ (el *error reducible*) como la incertidumbre sobre cuánto diferirá un punto individual del plano de regresión poblacional (el *error irreducible*).
+3. Incluso si conociéramos $f(X)$ —es decir, incluso si conociéramos los valores verdaderos de $\beta_0, \beta_1, \ldots, \beta_p$— el valor de la variable respuesta no puede predecirse perfectamente debido al error aleatorio $\epsilon$ en el modelo <a href="#eq-3-20" class="quarto-xref">(3.20)</a>. En el Capítulo 2, nos referimos a esto como el *error irreducible* (*irreducible error*). ¿Cuánto variará $Y$ de $\hat{Y}$? Usamos *intervalos de predicción* (*prediction intervals*) para responder esta pregunta. Los *intervalos de predicción* son siempre más amplios que los *intervalos de confianza*, porque incorporan tanto el error en la estimación de $f(X)$ (el *error reducible*) como la incertidumbre sobre cuánto diferirá un punto individual del plano de regresión poblacional (el *error irreducible*).
 
 Usamos un *intervalo de confianza* para cuantificar la incertidumbre alrededor de las ventas promedio sobre un gran número de ciudades. Por ejemplo, dado que se gastan $100{,}000$ en publicidad en `TV` y $20{,}000$ en publicidad en `radio` en cada ciudad, el intervalo de confianza del 95% es $[10{,}985, 11{,}528]$. Interpretamos esto como que el 95% de los intervalos de esta forma contendrán el verdadero valor de $f(X)$.^[En otras palabras, si recolectamos un gran número de conjuntos de datos como el conjunto de datos Advertising, y construimos un intervalo de confianza para las ventas promedio con base en cada conjunto de datos (dados $100{,}000$ en TV y $20{,}000$ en publicidad radial), entonces el 95% de estos intervalos de confianza contendrán el verdadero valor de las ventas promedio.] Por otro lado, un *intervalo de predicción* puede usarse para cuantificar la incertidumbre alrededor de las ventas para una ciudad particular. Dado que se gastan $100{,}000$ en publicidad en `TV` y $20{,}000$ en publicidad en `radio` en esa ciudad, el intervalo de predicción del 95% es $[7{,}930, 14{,}580]$. Interpretamos esto como que el 95% de los intervalos de esta forma contendrán el verdadero valor de $Y$ para esta ciudad. Nótese que ambos intervalos están centrados en 11{,}256, pero que el intervalo de predicción es sustancialmente más amplio que el intervalo de confianza, reflejando la mayor incertidumbre sobre las ventas para una ciudad dada en comparación con las ventas promedio sobre muchas ubicaciones.
 
@@ -535,7 +540,9 @@ Por ejemplo, el conjunto de datos `Credit` mostrado en la <a href="#fig-3-6" cla
 
 Supongamos que deseamos investigar las diferencias en el saldo de la tarjeta de crédito entre aquellos que poseen una casa y aquellos que no, ignorando las otras variables por el momento. Si un predictor cualitativo (también conocido como *factor* (*factor*)) solo tiene dos *niveles* (*levels*), o valores posibles, entonces incorporarlo en un modelo de regresión es muy simple. Simplemente creamos una variable *indicadora* o *dummy* (*dummy variable*) que toma dos posibles valores numéricos.^[En la comunidad de aprendizaje automático, la creación de variables dummy para manejar predictores cualitativos se conoce como "codificación one-hot".] Por ejemplo, con base en la variable `own` (propiedad), podemos crear una nueva variable que tome la forma
 
-$$x_i = \begin{cases}
+<div id="eq-3-26">
+$$
+x_i = \begin{cases}
 1 & \text{si la i-ésima persona posee una casa}\\
 0 & \text{si la i-ésima persona no posee una casa},
 \end{cases} \qquad (3.26)
@@ -568,7 +575,6 @@ La <a href="#tbl-3-7" class="quarto-xref">Tabla&nbsp;3.7</a> muestra las estimac
 
 La decisión de codificar a los propietarios como 1 y a los no propietarios como 0 en <a href="#eq-3-27" class="quarto-xref">(3.27)</a> es arbitraria, y no tiene efecto en el ajuste de la regresión, pero sí altera la interpretación de los coeficientes. Si hubiéramos codificado a los no propietarios como 1 y a los propietarios como 0, entonces las estimaciones para $\beta_0$ y $\beta_1$ habrían sido 529.53 y $-19.73$, respectivamente, llevando una vez más a una predicción de deuda de tarjeta de crédito de $529.53 - 19.73 = 509.80$ para los no propietarios y una predicción de $529.53$ para los propietarios. Alternativamente, en lugar de un esquema de codificación 0/1, podríamos crear una *variable dummy*
 
-<div id="eq-3-28">
 $$
 x_i = \begin{cases}
 1 & \text{si la i-ésima persona posee una casa}\\
@@ -588,7 +594,9 @@ Ahora $\beta_0$ puede interpretarse como el `balance` promedio general de la tar
 
 Cuando un predictor cualitativo tiene más de dos niveles, una sola *variable dummy* no puede representar todos los valores posibles. En esta situación, podemos crear variables dummy adicionales. Por ejemplo, para la variable `region` creamos dos variables dummy. La primera podría ser
 
-$$x_{i1} = \begin{cases}
+<div id="eq-3-28">
+$$
+x_{i1} = \begin{cases}
 1 & \text{si la i-ésima persona es del Sur}\\
 0 & \text{si la i-ésima persona no es del Sur},
 \end{cases} \qquad (3.28)
