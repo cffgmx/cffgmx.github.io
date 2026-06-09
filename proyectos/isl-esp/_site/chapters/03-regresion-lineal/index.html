@@ -599,7 +599,6 @@ R^2 = \frac{\text{TSS} - \text{RSS}}{\text{TSS}} = 1 - \frac{\text{RSS}}{\text{T
 </table>
 <p><strong>Regresión simple de sales sobre newspaper</strong></p>
 <table class="caption-top table">
-<caption>Tabla 3.3: Más modelos de regresión lineal simple para los datos Advertising. Coeficientes del modelo de regresión lineal simple para el número de unidades vendidas sobre el presupuesto de publicidad en radio (arriba) y en newspaper (abajo). Un aumento de <span class="math inline">\(1{,}000\)</span> en el gasto en publicidad radial está asociado con un aumento promedio en las ventas de alrededor de 203 unidades, mientras que el mismo aumento en el gasto en publicidad en periódicos está asociado con un aumento promedio en las ventas de alrededor de 55 unidades. (Nótese que la variable sales está en miles de unidades, y las variables radio y newspaper están en miles de dólares.)</caption>
 <colgroup>
 <col style="width: 19%">
 <col style="width: 19%">
@@ -633,6 +632,9 @@ R^2 = \frac{\text{TSS} - \text{RSS}}{\text{TSS}} = 1 - \frac{\text{RSS}}{\text{T
 </tr>
 </tbody>
 </table>
+<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+Tabla&nbsp;3.3: Más modelos de regresión lineal simple para los datos Advertising. Coeficientes del modelo de regresión lineal simple para el número de unidades vendidas sobre el presupuesto de publicidad en radio (arriba) y en newspaper (abajo). Un aumento de <span class="math inline">\(1{,}000\)</span> en el gasto en publicidad radial está asociado con un aumento promedio en las ventas de alrededor de 203 unidades, mientras que el mismo aumento en el gasto en publicidad en periódicos está asociado con un aumento promedio en las ventas de alrededor de 55 unidades. (Nótese que la variable sales está en miles de unidades, y las variables radio y newspaper están en miles de dólares.)
+</p>
 </section>
 </section>
 <section id="regresión-lineal-múltiple" class="level2">
@@ -810,7 +812,7 @@ E\{\text{RSS}/(n - p - 1)\} = \sigma^2\]</span></p>
 <p>Por lo tanto, cuando no hay relación entre la variable respuesta y los predictores, se esperaría que el <em>estadístico F</em> tome un valor cercano a 1. Por otro lado, si <span class="math inline">\(H_a\)</span> es verdadera, entonces <span class="math inline">\(E\{(\text{TSS} - \text{RSS})/p\} &gt; \sigma^2\)</span>, por lo que esperamos que <span class="math inline">\(F\)</span> sea mayor que 1.</p>
 <p><a id="tbl-3-6"></a></p>
 <table class="caption-top table">
-<caption>Tabla 3.6: Más información sobre el modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre los presupuestos de publicidad en TV, newspaper y radio en los datos Advertising. Otra información sobre este modelo se mostró en la Tabla 3.4.</caption>
+<caption>Tabla 3.6: Más información sobre el modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre los presupuestos de publicidad en TV, newspaper y radio en los datos Advertising. Otra información sobre este modelo se mostró en la <a href="#tbl-3-4" class="quarto-xref">Tabla&nbsp;3.4</a>.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Cantidad</th>
@@ -1582,7 +1584,7 @@ Figura&nbsp;20
 <li id="fn1"><p>La suposición de linealidad es a menudo un modelo de trabajo útil. Sin embargo, a pesar de lo que muchos libros de texto puedan decirnos, rara vez creemos que la verdadera relación sea lineal.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Esta fórmula es válida siempre que las <span class="math inline">\(n\)</span> observaciones no estén correlacionadas.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Aproximadamente por varias razones. La <a href="#eq-3-10" class="quarto-xref">Ecuación&nbsp;3.10</a> depende de la suposición de que los errores son gaussianos. Además, el factor de 2 delante del término <span class="math inline">\(\text{SE}(\hat{\beta}_1)\)</span> variará ligeramente dependiendo del número de observaciones <span class="math inline">\(n\)</span> en la regresión lineal. Para ser precisos, en lugar del número 2, <a href="#eq-3-10" class="quarto-xref">(3.10)</a> debería contener el cuantil del 97.5% de una distribución <span class="math inline">\(t\)</span> con <span class="math inline">\(n-2\)</span> grados de libertad. Más adelante en este capítulo se proporcionarán detalles sobre cómo calcular el intervalo de confianza del 95% de manera precisa en R.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>En la Tabla 3.1, un valor p pequeño para el intercepto indica que podemos rechazar la hipótesis nula de que <span class="math inline">\(\beta_0 = 0\)</span>, y un valor p pequeño para TV indica que podemos rechazar la hipótesis nula de que <span class="math inline">\(\beta_1 = 0\)</span>. Rechazar esta última hipótesis nula nos permite concluir que existe una relación entre TV y sales. Rechazar la primera nos permite concluir que en ausencia de gasto en TV, las ventas son distintas de cero.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>En la <a href="#tbl-3-1" class="quarto-xref">Tabla&nbsp;3.1</a>, un valor p pequeño para el intercepto indica que podemos rechazar la hipótesis nula de que <span class="math inline">\(\beta_0 = 0\)</span>, y un valor p pequeño para TV indica que podemos rechazar la hipótesis nula de que <span class="math inline">\(\beta_1 = 0\)</span>. Rechazar esta última hipótesis nula nos permite concluir que existe una relación entre TV y sales. Rechazar la primera nos permite concluir que en ausencia de gasto en TV, las ventas son distintas de cero.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>Nótese que, de hecho, el lado derecho de <a href="#eq-3-18" class="quarto-xref">(3.18)</a> es la correlación muestral; por lo tanto, sería más correcto escribir <span class="math inline">\(\widehat{\text{Cor}}(X, Y)\)</span>; sin embargo, omitimos el “acento circunflejo” para facilitar la notación.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p>Incluso si los errores no están distribuidos normalmente, el estadístico F sigue aproximadamente una distribución F siempre que el tamaño muestral <span class="math inline">\(n\)</span> sea grande.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7"><p>El cuadrado de cada estadístico <span class="math inline">\(t\)</span> es el estadístico <span class="math inline">\(F\)</span> correspondiente.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
