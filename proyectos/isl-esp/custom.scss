@@ -55,47 +55,7 @@ pre code {
   display: none !important;
 }
 
-/* Tooltip hover para referencias a figuras */
-a.quarto-xref[data-preview] {
-  position: relative;
-  text-decoration: underline;
-  text-decoration-style: dotted;
-  text-underline-offset: 2px;
-}
-
-a.quarto-xref[data-preview]:hover::after {
-  content: '';
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(560px, 80vw);
-  aspect-ratio: 4 / 3;
-  background: var(--preview-img) center/contain no-repeat;
-  background-color: #fff;
-  border: 2px solid #d0d0d0;
-  border-radius: 6px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  z-index: 9999;
-  pointer-events: none;
-}
-
-a.quarto-xref[data-preview-tbl]:hover::after {
-  content: '';
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(640px, 85vw);
-  background: var(--preview-img) center/contain no-repeat;
-  background-color: #fff;
-  border: 2px solid #d0d0d0;
-  border-radius: 6px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  z-index: 9999;
-  pointer-events: none;
-  padding: 8px;
-}
+/* Tooltip hover: tippy.js de Quarto ya maneja el preview automáticamente */
 
 /* Botón flotante de cambio de tema */
 #theme-toggle-btn:hover {
@@ -184,14 +144,6 @@ a.quarto-xref[data-preview-tbl]:hover::after {
   .card, div.cell, .cell-output {
     background-color: #1e1e3a !important;
     border-color: #2a2a4e !important;
-  }
-
-  /* Tooltip de preview de figuras */
-  a.quarto-xref[data-preview]:hover::after,
-  a.quarto-xref[data-preview-tbl]:hover::after {
-    background-color: #1e1e3a !important;
-    border-color: #444;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
   }
 
   /* Input de búsqueda */
