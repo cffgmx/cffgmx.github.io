@@ -352,7 +352,7 @@ Y \approx \beta_0 + \beta_1 X. \qquad (3.1)
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-3-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../../Figures/Chapter3/png/3_1.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 Figura&nbsp;3.1: Para los datos Advertising, el ajuste de mínimos cuadrados para la regresión de sales sobre TV. El ajuste se encuentra minimizando la suma de cuadrados de los residuos. Cada segmento de línea gris representa un residuo. En este caso, un ajuste lineal captura la esencia de la relación, aunque sobreestima la tendencia en la parte izquierda del gráfico.
 </p>
 </div>
@@ -366,7 +366,7 @@ Figura&nbsp;1
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-3-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../../Figures/Chapter3/png/3_2a.png" class="img-fluid figure-img" style="width:48.0%" alt=""> <img src="../../Figures/Chapter3/png/3_2b.png" class="img-fluid figure-img" style="width:48.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 Figura&nbsp;3.2: Gráficos de contorno y tridimensional de la RSS sobre los datos Advertising, usando sales como variable respuesta y TV como predictor. Los puntos rojos corresponden a las estimaciones de mínimos cuadrados <span class="math inline">\(\hat{\beta}_0\)</span> y <span class="math inline">\(\hat{\beta}_1\)</span>, dados por <a href="#eq-3-4" class="quarto-xref">(3.4)</a>.
 </p>
 </div>
@@ -396,7 +396,7 @@ Y = 2 + 3X + \epsilon, \qquad (3.6)
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-3-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../../Figures/Chapter3/png/3_3.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 Figura&nbsp;3.3: Un conjunto de datos simulado. <em>Izquierda:</em> La línea roja representa la verdadera relación, <span class="math inline">\(f(X) = 2 + 3X\)</span>, que se conoce como la línea de regresión poblacional. La línea azul es la línea de mínimos cuadrados; es la estimación de mínimos cuadrados para <span class="math inline">\(f(X)\)</span> basada en los datos observados, mostrados en negro. <em>Derecha:</em> La línea de regresión poblacional se muestra nuevamente en rojo, y la línea de mínimos cuadrados en azul oscuro. En azul claro, se muestran diez líneas de mínimos cuadrados, cada una calculada con base en un conjunto aleatorio separado de observaciones. Cada línea de mínimos cuadrados es diferente, pero en promedio, las líneas de mínimos cuadrados están bastante cerca de la línea de regresión poblacional.
 </p>
 </div>
@@ -503,7 +503,7 @@ Tabla&nbsp;1
 </tr>
 </tbody>
 </table>
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 </p><p>Tabla&nbsp;3.1: Para los datos Advertising, coeficientes del modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre el presupuesto de publicidad en TV. Un aumento de <span class="math inline">\(1{,}000\)</span> en el presupuesto de publicidad en TV está asociado con un aumento en las ventas de alrededor de 50 unidades. (Recordemos que la variable sales está en miles de unidades, y la variable TV está en miles de dólares.)</p>
 </div>
 <p>La <a href="#tbl-3-1" class="quarto-xref">Tabla&nbsp;3.1</a> proporciona detalles del modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre el presupuesto de publicidad en <code>TV</code> para los datos <code>Advertising</code>. Nótese que los coeficientes para <span class="math inline">\(\hat{\beta}_0\)</span> y <span class="math inline">\(\hat{\beta}_1\)</span> son muy grandes en relación con sus errores estándar, por lo que los estadísticos <span class="math inline">\(t\)</span> también son grandes; las probabilidades de ver tales valores si <span class="math inline">\(H_0\)</span> es verdadera son virtualmente cero. Por lo tanto, podemos concluir que <span class="math inline">\(\beta_0 \neq 0\)</span> y <span class="math inline">\(\beta_1 \neq 0\)</span>.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
@@ -538,7 +538,7 @@ Tabla&nbsp;1
 </tr>
 </tbody>
 </table>
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 </p><p>Tabla&nbsp;3.2: Para los datos Advertising, más información sobre el modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre el presupuesto de publicidad en TV.</p>
 </div>
 <p>La <a href="#tbl-3-2" class="quarto-xref">Tabla&nbsp;3.2</a> muestra el RSE, el estadístico <span class="math inline">\(R^2\)</span> y el <em>estadístico F</em> (<em>F-statistic</em>) (que se describirá en la Sección 3.2.2) para la regresión lineal del número de unidades vendidas sobre el presupuesto de publicidad en <code>TV</code>.</p>
@@ -650,7 +650,7 @@ R^2 = \frac{\text{TSS} - \text{RSS}}{\text{TSS}} = 1 - \frac{\text{RSS}}{\text{T
 </tr>
 </tbody>
 </table>
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 </p><p>Tabla&nbsp;3.3: Más modelos de regresión lineal simple para los datos Advertising. Coeficientes del modelo de regresión lineal simple para el número de unidades vendidas sobre el presupuesto de publicidad en radio (arriba) y en newspaper (abajo). Un aumento de <span class="math inline">\(1{,}000\)</span> en el gasto en publicidad radial está asociado con un aumento promedio en las ventas de alrededor de 203 unidades, mientras que el mismo aumento en el gasto en publicidad en periódicos está asociado con un aumento promedio en las ventas de alrededor de 55 unidades. (Nótese que la variable sales está en miles de unidades, y las variables radio y newspaper están en miles de dólares.)</p>
 </div>
 <section id="regresión-lineal-múltiple" class="level2">
@@ -692,7 +692,7 @@ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p + \epsilon, \qqua
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-3-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../../Figures/Chapter3/png/3_4.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 Figura&nbsp;3.4: En un entorno tridimensional, con dos predictores y una variable respuesta, la línea de regresión de mínimos cuadrados se convierte en un plano. El plano se elige para minimizar la suma de las distancias verticales al cuadrado entre cada observación (mostrada en rojo) y el plano.
 </p>
 </div>
@@ -755,7 +755,7 @@ Figura&nbsp;3.4: En un entorno tridimensional, con dos predictores y una variabl
 </tr>
 </tbody>
 </table>
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 </p><p>Tabla&nbsp;3.4: Para los datos Advertising, estimaciones de los coeficientes de mínimos cuadrados de la regresión lineal múltiple del número de unidades vendidas sobre los presupuestos de publicidad en TV, radio y newspaper.</p>
 </div>
 <p>La <a href="#tbl-3-4" class="quarto-xref">Tabla&nbsp;3.4</a> muestra las estimaciones de los coeficientes de regresión múltiple cuando los presupuestos de publicidad en <code>TV</code>, <code>radio</code> y <code>newspaper</code> se utilizan para predecir las ventas del producto usando los datos <code>Advertising</code>. Interpretamos estos resultados de la siguiente manera: para una cantidad dada de publicidad en <code>TV</code> y <code>newspaper</code>, gastar <span class="math inline">\(1{,}000\)</span> adicionales en publicidad radial está asociado con aproximadamente 189 unidades adicionales de ventas. Comparando estas estimaciones de coeficientes con las mostradas en las <a href="#tbl-3-1" class="quarto-xref">Tablas&nbsp;3.1</a> y <a href="#tbl-3-3" class="quarto-xref">3.3</a>, notamos que las estimaciones de los coeficientes de regresión múltiple para <code>TV</code> y <code>radio</code> son bastante similares a las estimaciones de los coeficientes de regresión lineal simple. Sin embargo, mientras que la estimación del coeficiente de regresión para <code>newspaper</code> en la <a href="#tbl-3-3" class="quarto-xref">Tabla&nbsp;3.3</a> era significativamente distinta de cero, la estimación del coeficiente para <code>newspaper</code> en el modelo de regresión múltiple es cercana a cero, y el <em>valor p</em> correspondiente ya no es significativo, con un valor alrededor de 0.86. Esto ilustra que los coeficientes de regresión simple y múltiple pueden ser bastante diferentes. Esta diferencia se debe al hecho de que en el caso de la regresión simple, el término de pendiente representa el aumento promedio en las ventas del producto asociado con un aumento de <span class="math inline">\(1{,}000\)</span> en publicidad en <code>newspaper</code>, ignorando otros predictores como <code>TV</code> y <code>radio</code>. En contraste, en el contexto de la regresión múltiple, el coeficiente para <code>newspaper</code> representa el aumento promedio en las ventas del producto asociado con aumentar el gasto en <code>newspaper</code> en <span class="math inline">\(1{,}000\)</span> <em>manteniendo</em> <code>TV</code> y <code>radio</code> <em>fijos</em>.</p>
@@ -807,7 +807,7 @@ Figura&nbsp;3.4: En un entorno tridimensional, con dos predictores y una variabl
 </tr>
 </tbody>
 </table>
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 </p><p>Tabla&nbsp;3.5: Matriz de correlación para TV, radio, newspaper y sales para los datos Advertising.</p>
 </div>
 <p>Este resultado ligeramente contraintuitivo es muy común en muchas situaciones de la vida real. Consideremos un ejemplo absurdo para ilustrar el punto. Ejecutar una regresión de ataques de tiburón versus ventas de helados para datos recopilados en una comunidad costera durante un período de tiempo mostraría una relación positiva, similar a la observada entre <code>sales</code> y <code>newspaper</code>. Por supuesto, nadie ha sugerido (aún) que los helados deberían prohibirse en las playas para reducir los ataques de tiburón. En realidad, las temperaturas más altas hacen que más personas visiten la playa, lo que a su vez resulta en más ventas de helados y más ataques de tiburón. Una regresión múltiple de los ataques de tiburón sobre las ventas de helados y la temperatura revela que, como la intuición sugiere, las ventas de helados ya no son un predictor significativo después de ajustar por la temperatura.</p>
@@ -867,7 +867,7 @@ E\{\text{RSS}/(n - p - 1)\} = \sigma^2\]</span></p>
 </tr>
 </tbody>
 </table>
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 </p><p>Tabla&nbsp;3.6: Más información sobre el modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre los presupuestos de publicidad en TV, newspaper y radio en los datos Advertising. Otra información sobre este modelo se mostró en la <a href="#tbl-3-4" class="quarto-xref">Tabla&nbsp;3.4</a>.</p>
 </div>
 <p>El <em>estadístico F</em> para el modelo de regresión lineal múltiple obtenido al regresar <code>sales</code> sobre <code>radio</code>, <code>TV</code> y <code>newspaper</code> se muestra en la <a href="#tbl-3-6" class="quarto-xref">Tabla&nbsp;3.6</a>. En este ejemplo, el <em>estadístico F</em> es 570. Dado que esto es mucho mayor que 1, proporciona evidencia contundente en contra de la hipótesis nula <span class="math inline">\(H_0\)</span>. En otras palabras, el gran <em>estadístico F</em> sugiere que al menos uno de los medios publicitarios debe estar relacionado con las ventas. Sin embargo, ¿qué pasaría si el <em>estadístico F</em> hubiera estado más cerca de 1? ¿Qué tan grande necesita ser el <em>estadístico F</em> antes de que podamos rechazar <span class="math inline">\(H_0\)</span> y concluir que existe una relación? Resulta que la respuesta depende de los valores de <span class="math inline">\(n\)</span> y <span class="math inline">\(p\)</span>. Cuando <span class="math inline">\(n\)</span> es grande, un <em>estadístico F</em> que es solo un poco mayor que 1 aún podría proporcionar evidencia en contra de <span class="math inline">\(H_0\)</span>. En contraste, se necesita un <em>estadístico F</em> mayor para rechazar <span class="math inline">\(H_0\)</span> si <span class="math inline">\(n\)</span> es pequeño. Cuando <span class="math inline">\(H_0\)</span> es verdadera y los errores <span class="math inline">\(\epsilon_i\)</span> tienen una distribución normal, el <em>estadístico F</em> sigue una distribución <span class="math inline">\(F\)</span>.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> Para cualquier valor dado de <span class="math inline">\(n\)</span> y <span class="math inline">\(p\)</span>, cualquier paquete de software estadístico puede usarse para calcular el <em>valor p</em> asociado con el <em>estadístico F</em> usando esta distribución. Con base en este <em>valor p</em>, podemos determinar si rechazar o no <span class="math inline">\(H_0\)</span>. Para los datos <code>Advertising</code>, el <em>valor p</em> asociado con el <em>estadístico F</em> en la <a href="#tbl-3-6" class="quarto-xref">Tabla&nbsp;3.6</a> es esencialmente cero, por lo que tenemos evidencia extremadamente fuerte de que al menos uno de los medios está asociado con un aumento en las ventas.</p>
@@ -911,7 +911,7 @@ F = \frac{(\text{RSS}_0 - \text{RSS})/q}{\text{RSS}/(n - p - 1)}. \qquad (3.24)
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-3-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../../Figures/Chapter3/png/3_5.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 Figura&nbsp;3.5: Para los datos Advertising, un ajuste de regresión lineal a sales usando TV y radio como predictores. Del patrón de los residuos, podemos ver que hay una pronunciada relación no lineal en los datos. Los residuos positivos (aquellos visibles sobre la superficie), tienden a situarse a lo largo de la línea de 45 grados, donde los presupuestos de TV y Radio se dividen equitativamente. Los residuos negativos (la mayoría no visibles), tienden a situarse lejos de esta línea, donde los presupuestos están más desequilibrados.
 </p>
 </div>
@@ -945,7 +945,7 @@ Figura&nbsp;3.5: Para los datos Advertising, un ajuste de regresión lineal a sa
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-3-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../../Figures/Chapter3/png/3_6.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 Figura&nbsp;3.6: El conjunto de datos Credit contiene información sobre balance, age, cards, education, income, limit y rating para una serie de clientes potenciales.
 </p>
 </div>
@@ -1014,7 +1014,7 @@ y_i = \beta_0 + \beta_1 x_i + \epsilon_i = \begin{cases}
 </tr>
 </tbody>
 </table>
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 </p><p>Tabla&nbsp;3.7: Estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de balance sobre own en el conjunto de datos Credit. El modelo lineal se da en <a href="#eq-3-27" class="quarto-xref">(3.27)</a>. Es decir, ownership se codifica como una variable dummy, como en <a href="#eq-3-26" class="quarto-xref">(3.26)</a>.</p>
 </div>
 <p>La <a href="#tbl-3-7" class="quarto-xref">Tabla&nbsp;3.7</a> muestra las estimaciones de los coeficientes y otra información asociada con el modelo <a href="#eq-3-27" class="quarto-xref">(3.27)</a>. La deuda promedio de tarjeta de crédito para los no propietarios se estima en <span class="math inline">\(509.80\)</span>, mientras que se estima que los propietarios tienen <span class="math inline">\(19.73\)</span> en deuda adicional para un total de <span class="math inline">\(509.80 + 19.73 = 529.53\)</span>. Sin embargo, notamos que el <em>valor p</em> para la <em>variable dummy</em> es muy alto. Esto indica que no hay evidencia estadística de una diferencia en el <code>balance</code> promedio de la tarjeta de crédito basada en la propiedad de la vivienda.</p>
@@ -1107,7 +1107,7 @@ y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \epsilon_i = \begin{cases}
 </tr>
 </tbody>
 </table>
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 </p><p>Tabla&nbsp;3.8: Estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de balance sobre region en el conjunto de datos Credit. El modelo lineal se da en <a href="#eq-3-30" class="quarto-xref">(3.30)</a>. Es decir, region se codifica mediante dos variables dummy <a href="#eq-3-28" class="quarto-xref">(3.28)</a> y <a href="#eq-3-29" class="quarto-xref">(3.29)</a>.</p>
 </div>
 <p>De la <a href="#tbl-3-8" class="quarto-xref">Tabla&nbsp;3.8</a>, vemos que el <code>balance</code> estimado para la línea base, Este, es <span class="math inline">\(531.00\)</span>. Se estima que aquellos en el Sur tendrán <span class="math inline">\(18.69\)</span> menos de deuda que aquellos en el Este, y que aquellos en el Oeste tendrán <span class="math inline">\(12.50\)</span> menos de deuda que aquellos en el Este. Sin embargo, los <em>valores p</em> asociados con las estimaciones de los coeficientes para las dos variables dummy son muy grandes, lo que sugiere que no hay evidencia estadística de una diferencia real en el <code>balance</code> promedio de la tarjeta de crédito entre el Sur y el Este o entre el Oeste y el Este.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> Una vez más, el nivel seleccionado como categoría de referencia es arbitrario, y las predicciones finales para cada grupo serán las mismas independientemente de esta elección. Sin embargo, los coeficientes y sus <em>valores p</em> sí dependen de la elección de la codificación de variables dummy. En lugar de confiar en los coeficientes individuales, podemos usar una prueba <span class="math inline">\(F\)</span> para contrastar <span class="math inline">\(H_0: \beta_1 = \beta_2 = 0\)</span>; esto no depende de la codificación. Esta prueba <span class="math inline">\(F\)</span> tiene un <em>valor p</em> de 0.96, indicando que no podemos rechazar la hipótesis nula de que no hay relación entre <code>balance</code> y <code>region</code>.</p>
@@ -1207,7 +1207,7 @@ Y &amp;= \beta_0 + (\beta_1 + \beta_3 X_2) X_1 + \beta_2 X_2 + \epsilon \\
 </tr>
 </tbody>
 </table>
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 </p><p>Tabla&nbsp;3.9: Para los datos Advertising, estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de sales sobre TV y radio, con un término de interacción, como en <a href="#eq-3-33" class="quarto-xref">(3.33)</a>.</p>
 </div>
 <p>Los resultados en la <a href="#tbl-3-9" class="quarto-xref">Tabla&nbsp;3.9</a> sugieren fuertemente que el modelo que incluye el término de interacción es superior al modelo que contiene solo <em>efectos principales</em> (<em>main effects</em>). El <em>valor p</em> para el término de interacción, TV×radio, es extremadamente bajo, indicando que hay fuerte evidencia para <span class="math inline">\(H_a: \beta_3 \neq 0\)</span>. En otras palabras, está claro que la verdadera relación no es aditiva. El <span class="math inline">\(R^2\)</span> para el modelo <a href="#eq-3-33" class="quarto-xref">(3.33)</a> es 96.8%, comparado con solo 89.7% para el modelo que predice <code>sales</code> usando <code>TV</code> y <code>radio</code> sin un término de interacción. Esto significa que <span class="math inline">\((96.8 - 89.7)/(100 - 89.7) = 69\%\)</span> de la variabilidad en las ventas que permanece después de ajustar el modelo aditivo ha sido explicada por el término de interacción. Las estimaciones de los coeficientes en la <a href="#tbl-3-9" class="quarto-xref">Tabla&nbsp;3.9</a> sugieren que un aumento en la publicidad en <code>TV</code> de <span class="math inline">\(1{,}000\)</span> está asociado con un aumento en las ventas de <span class="math inline">\((\hat{\beta}_1 + \hat{\beta}_3 \times \text{radio}) \times 1{,}000 = 19 + 1.1 \times \text{radio}\)</span> unidades. Y un aumento en la publicidad en <code>radio</code> de <span class="math inline">\(1{,}000\)</span> estará asociado con un aumento en las ventas de <span class="math inline">\((\hat{\beta}_2 + \hat{\beta}_3 \times \text{TV}) \times 1{,}000 = 29 + 1.1 \times \text{TV}\)</span> unidades.</p>
@@ -1232,7 +1232,7 @@ Y &amp;= \beta_0 + (\beta_1 + \beta_3 X_2) X_1 + \beta_2 X_2 + \epsilon \\
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-3-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../../Figures/Chapter3/png/3_7.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 Figura&nbsp;3.7: Para los datos Credit, se muestran las líneas de mínimos cuadrados para la predicción de balance a partir de income para estudiantes y no estudiantes. <em>Izquierda:</em> Se ajustó el modelo <a href="#eq-3-34" class="quarto-xref">(3.34)</a>. No hay interacción entre income y student. <em>Derecha:</em> Se ajustó el modelo <a href="#eq-3-35" class="quarto-xref">(3.35)</a>. Hay un término de interacción entre income y student.
 </p>
 </div>
@@ -1270,7 +1270,7 @@ Figura&nbsp;3.7: Para los datos Credit, se muestran las líneas de mínimos cuad
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-3-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../../Figures/Chapter3/png/3_8.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 Figura&nbsp;3.8: El conjunto de datos Auto. Para varios automóviles, se muestran mpg y horsepower. El ajuste de regresión lineal se muestra en naranja. El ajuste de regresión lineal para un modelo que incluye horsepower<sup>2</sup> se muestra como una curva azul. El ajuste de regresión lineal para un modelo que incluye todos los polinomios de horsepower hasta el quinto grado se muestra en verde.
 </p>
 </div>
@@ -1326,7 +1326,7 @@ Figura&nbsp;3.8: El conjunto de datos Auto. Para varios automóviles, se muestra
 </tr>
 </tbody>
 </table>
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 </p><p>Tabla&nbsp;3.10: Para el conjunto de datos Auto, estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de mpg sobre horsepower y horsepower<sup>2</sup>.</p>
 </div>
 <p>Si incluir <code>horsepower</code><span class="math inline">\(^2\)</span> condujo a una mejora tan grande en el modelo, ¿por qué no incluir <code>horsepower</code><span class="math inline">\(^3\)</span>, <code>horsepower</code><span class="math inline">\(^4\)</span>, o incluso <code>horsepower</code><span class="math inline">\(^5\)</span>? La curva verde en la <a href="#fig-3-8" class="quarto-xref">Figura&nbsp;3.8</a> muestra el ajuste que resulta de incluir todos los polinomios hasta el quinto grado en el modelo <a href="#eq-3-36" class="quarto-xref">(3.36)</a>. El ajuste resultante parece innecesariamente ondulado —es decir, no está claro que incluir los términos adicionales realmente haya conducido a un mejor ajuste a los datos.</p>
@@ -1350,7 +1350,7 @@ Figura&nbsp;3.8: El conjunto de datos Auto. Para varios automóviles, se muestra
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-3-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../../Figures/Chapter3/png/3_9.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 Figura&nbsp;3.9: Gráficos de residuos versus valores predichos (o ajustados) para el conjunto de datos Auto. En cada gráfico, la línea roja es un ajuste suave a los residuos, destinado a facilitar la identificación de una tendencia. <em>Izquierda:</em> Una regresión lineal de mpg sobre horsepower. Un fuerte patrón en los residuos indica no linealidad en los datos. <em>Derecha:</em> Una regresión lineal de mpg sobre horsepower y horsepower<sup>2</sup>. Hay poco patrón en los residuos.
 </p>
 </div>
@@ -1369,7 +1369,7 @@ Figura&nbsp;3.9: Gráficos de residuos versus valores predichos (o ajustados) pa
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-3-10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../../Figures/Chapter3/png/3_10.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 Figura&nbsp;3.10: Gráficos de residuos de conjuntos de datos de series de tiempo simulados generados con diferentes niveles de correlación <span class="math inline">\(\rho\)</span> entre términos de error para puntos de tiempo adyacentes.
 </p>
 </div>
@@ -1387,7 +1387,7 @@ Figura&nbsp;3.10: Gráficos de residuos de conjuntos de datos de series de tiemp
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-3-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../../Figures/Chapter3/png/3_11.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 Figura&nbsp;3.11: Gráficos de residuos. En cada gráfico, la línea roja es un ajuste suave a los residuos, destinado a facilitar la identificación de una tendencia. Las líneas azules siguen los cuantiles exteriores de los residuos y enfatizan los patrones. <em>Izquierda:</em> La forma de embudo indica heterocedasticidad. <em>Derecha:</em> La variable respuesta ha sido transformada mediante logaritmo, y ahora no hay evidencia de heterocedasticidad.
 </p>
 </div>
@@ -1403,7 +1403,7 @@ Figura&nbsp;3.11: Gráficos de residuos. En cada gráfico, la línea roja es un 
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-3-12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../../Figures/Chapter3/png/3_12.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 Figura&nbsp;3.12: <em>Izquierda:</em> La línea de regresión de mínimos cuadrados se muestra en rojo, y la línea de regresión después de eliminar el valor atípico se muestra en azul. <em>Centro:</em> El gráfico de residuos identifica claramente el valor atípico. <em>Derecha:</em> El valor atípico tiene un residuo studentizado de 6; típicamente esperamos valores entre <span class="math inline">\(-3\)</span> y 3.
 </p>
 </div>
@@ -1421,7 +1421,7 @@ Figura&nbsp;3.12: <em>Izquierda:</em> La línea de regresión de mínimos cuadra
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-3-13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../../Figures/Chapter3/png/3_13.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 Figura&nbsp;3.13: <em>Izquierda:</em> La observación 41 es un punto de alto apalancamiento, mientras que la 20 no lo es. La línea roja es el ajuste a todos los datos, y la línea azul es el ajuste con la observación 41 eliminada. <em>Centro:</em> La observación roja no es inusual en términos de su valor de X1 ni de su valor de X2, pero aún cae fuera del grueso de los datos, y por lo tanto tiene alto apalancamiento. <em>Derecha:</em> La observación 41 tiene un alto apalancamiento y un alto residuo.
 </p>
 </div>
@@ -1445,7 +1445,7 @@ h_i = \frac{1}{n} + \frac{(x_i - \bar{x})^2}{\sum_{i' =1}^{n} (x_{i'} - \bar{x})
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-3-14-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../../Figures/Chapter3/png/3_14.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 Figura&nbsp;3.14: Diagramas de dispersión de las observaciones del conjunto de datos Credit. <em>Izquierda:</em> Un gráfico de age versus limit. Estas dos variables no son colineales. <em>Derecha:</em> Un gráfico de rating versus limit. Existe una alta colinealidad.
 </p>
 </div>
@@ -1460,7 +1460,7 @@ Figura&nbsp;3.14: Diagramas de dispersión de las observaciones del conjunto de 
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-3-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../../Figures/Chapter3/png/3_15.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 Figura&nbsp;3.15: Gráficos de contorno para los valores de RSS en función de los parámetros <span class="math inline">\(\beta\)</span> para varias regresiones que involucran el conjunto de datos Credit. En cada gráfico, los puntos negros representan los valores de los coeficientes correspondientes al mínimo de RSS. <em>Izquierda:</em> Un gráfico de contorno de RSS para la regresión de balance sobre age y limit. El valor mínimo está bien definido. <em>Derecha:</em> Un gráfico de contorno de RSS para la regresión de balance sobre rating y limit. Debido a la colinealidad, existen muchos pares <span class="math inline">\((\beta_{\text{Limit}}, \beta_{\text{Rating}})\)</span> con un valor similar de RSS.
 </p>
 </div>
@@ -1560,7 +1560,7 @@ Figura&nbsp;3.15: Gráficos de contorno para los valores de RSS en función de l
 </tr>
 </tbody>
 </table>
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 Tabla&nbsp;3.11: Se muestran los resultados para dos modelos de regresión múltiple que involucran el conjunto de datos Credit. El Modelo 1 es una regresión de balance sobre age y limit, y el Modelo 2 una regresión de balance sobre rating y limit. El error estándar de <span class="math inline">\(\hat{\beta}_{\text{limit}}\)</span> aumenta 12 veces en la segunda regresión, debido a la colinealidad.
 </p>
 </div>
@@ -1597,7 +1597,7 @@ Tabla&nbsp;3.11: Se muestran los resultados para dos modelos de regresión múlt
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-3-16-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../../Figures/Chapter3/png/3_16.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 Figura&nbsp;3.16: Gráficos de <span class="math inline">\(\hat{f}(X)\)</span> usando regresión KNN en un conjunto de datos bidimensional con 64 observaciones (puntos naranjas). <em>Izquierda:</em> <span class="math inline">\(K = 1\)</span> resulta en un ajuste de función escalonada rugosa. <em>Derecha:</em> <span class="math inline">\(K = 9\)</span> produce un ajuste mucho más suave.
 </p>
 </div>
@@ -1612,7 +1612,7 @@ Figura&nbsp;3.16: Gráficos de <span class="math inline">\(\hat{f}(X)\)</span> u
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-3-17-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../../Figures/Chapter3/png/3_17.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 Figura&nbsp;3.17: Gráficos de <span class="math inline">\(\hat{f}(X)\)</span> usando regresión KNN en un conjunto de datos unidimensional con 50 observaciones. La verdadera relación está dada por la línea negra sólida. <em>Izquierda:</em> La curva azul corresponde a <span class="math inline">\(K = 1\)</span> e interpola (es decir, pasa directamente a través de) los datos de entrenamiento. <em>Derecha:</em> La curva azul corresponde a <span class="math inline">\(K = 9\)</span>, y representa un ajuste más suave.
 </p>
 </div>
@@ -1625,7 +1625,7 @@ Figura&nbsp;3.17: Gráficos de <span class="math inline">\(\hat{f}(X)\)</span> u
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-3-18-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../../Figures/Chapter3/png/3_18.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 Figura&nbsp;3.18: El mismo conjunto de datos mostrado en la Figura&nbsp;3.17 se investiga más a fondo. <em>Izquierda:</em> La línea azul discontinua es el ajuste de mínimos cuadrados a los datos. Dado que <span class="math inline">\(f(X)\)</span> es de hecho lineal (mostrada como la línea negra), la línea de regresión de mínimos cuadrados proporciona una muy buena estimación de <span class="math inline">\(f(X)\)</span>. <em>Derecha:</em> La línea horizontal discontinua representa el MSE del conjunto de prueba de mínimos cuadrados, mientras que la línea verde sólida corresponde al MSE para KNN en función de <span class="math inline">\(1/K\)</span> (en escala logarítmica). La regresión lineal logra un MSE de prueba más bajo que la regresión KNN, ya que <span class="math inline">\(f(X)\)</span> es de hecho lineal. Para la regresión KNN, los mejores resultados ocurren con un valor muy grande de <span class="math inline">\(K\)</span>, correspondiente a un valor pequeño de <span class="math inline">\(1/K\)</span>.
 </p>
 </div>
@@ -1639,7 +1639,7 @@ Figura&nbsp;3.18: El mismo conjunto de datos mostrado en la Figura&nbsp;3.17 se 
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-3-19-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../../Figures/Chapter3/png/3_19.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 Figura&nbsp;3.19: <em>Arriba Izquierda:</em> En un contexto con una relación ligeramente no lineal entre <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span> (línea negra sólida), se muestran los ajustes KNN con <span class="math inline">\(K = 1\)</span> (azul) y <span class="math inline">\(K = 9\)</span> (rojo). <em>Arriba Derecha:</em> Para los datos ligeramente no lineales, se muestran el MSE del conjunto de prueba para la regresión de mínimos cuadrados (línea negra horizontal) y KNN con varios valores de <span class="math inline">\(1/K\)</span> (verde). <em>Abajo Izquierda</em> y <em>Abajo Derecha:</em> Como en el panel superior, pero con una relación fuertemente no lineal entre <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>.
 </p>
 </div>
@@ -1653,7 +1653,7 @@ Figura&nbsp;3.19: <em>Arriba Izquierda:</em> En un contexto con una relación li
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-3-20-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../../Figures/Chapter3/png/3_20.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">
+<p class="figure-caption" style="margin-top:0.5em;">
 Figura&nbsp;3.20: MSE de prueba para la regresión lineal (líneas negras discontinuas) y KNN (curvas verdes) a medida que el número de variables <span class="math inline">\(p\)</span> aumenta. La función verdadera es no lineal en la primera variable, como en el panel inferior de la Figura&nbsp;3.19, y no depende de las variables adicionales. El desempeño de la regresión lineal se deteriora lentamente en presencia de estas variables de ruido adicionales, mientras que el desempeño de KNN se degrada mucho más rápidamente a medida que <span class="math inline">\(p\)</span> aumenta.
 </p>
 </div>

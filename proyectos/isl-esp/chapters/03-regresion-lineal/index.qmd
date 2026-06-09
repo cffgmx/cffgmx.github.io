@@ -90,7 +90,7 @@ donde $\bar{y} \equiv \frac{1}{n} \sum_{i=1}^{n} y_i$ y $\bar{x} \equiv \frac{1}
 
 <div id="fig-3-1" style="text-align:center; margin:1.5em 0;">
 <img src="../../Figures/Chapter3/png/3_1.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Figura&nbsp;3.1: Para los datos Advertising, el ajuste de mínimos cuadrados para la regresión de sales sobre TV. El ajuste se encuentra minimizando la suma de cuadrados de los residuos. Cada segmento de línea gris representa un residuo. En este caso, un ajuste lineal captura la esencia de la relación, aunque sobreestima la tendencia en la parte izquierda del gráfico.</p>
+<p class="figure-caption" style="margin-top:0.5em;">Figura&nbsp;3.1: Para los datos Advertising, el ajuste de mínimos cuadrados para la regresión de sales sobre TV. El ajuste se encuentra minimizando la suma de cuadrados de los residuos. Cada segmento de línea gris representa un residuo. En este caso, un ajuste lineal captura la esencia de la relación, aunque sobreestima la tendencia en la parte izquierda del gráfico.</p>
 </div>
 
 La <a href="#fig-3-1" class="quarto-xref">Figura&nbsp;3.1</a> muestra el ajuste de regresión lineal simple a los datos `Advertising`, donde $\hat{\beta}_0 = 7.03$ y $\hat{\beta}_1 = 0.0475$. En otras palabras, según esta aproximación, $1{,}000$ adicionales gastados en publicidad en `TV` están asociados con la venta de aproximadamente 47.5 unidades adicionales del producto. En la <a href="#fig-3-2" class="quarto-xref">Figura&nbsp;3.2</a>, hemos calculado la RSS para varios valores de $\beta_0$ y $\beta_1$, usando los datos `Advertising` con `sales` como variable respuesta y `TV` como predictor. En cada gráfico, el punto rojo representa el par de estimaciones de mínimos cuadrados $(\hat{\beta}_0, \hat{\beta}_1)$ dado por <a href="#eq-3-4" class="quarto-xref">(3.4)</a>. Estos valores claramente minimizan la RSS.
@@ -98,7 +98,7 @@ La <a href="#fig-3-1" class="quarto-xref">Figura&nbsp;3.1</a> muestra el ajuste 
 <div id="fig-3-2" style="text-align:center; margin:1.5em 0;">
 <img src="../../Figures/Chapter3/png/3_2a.png" class="img-fluid figure-img" style="width:48.0%" alt="">
 <img src="../../Figures/Chapter3/png/3_2b.png" class="img-fluid figure-img" style="width:48.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Figura&nbsp;3.2: Gráficos de contorno y tridimensional de la RSS sobre los datos Advertising, usando sales como variable respuesta y TV como predictor. Los puntos rojos corresponden a las estimaciones de mínimos cuadrados $\hat{\beta}_0$ y $\hat{\beta}_1$, dados por <a href="#eq-3-4" class="quarto-xref">(3.4)</a>.</p>
+<p class="figure-caption" style="margin-top:0.5em;">Figura&nbsp;3.2: Gráficos de contorno y tridimensional de la RSS sobre los datos Advertising, usando sales como variable respuesta y TV como predictor. Los puntos rojos corresponden a las estimaciones de mínimos cuadrados $\hat{\beta}_0$ y $\hat{\beta}_1$, dados por <a href="#eq-3-4" class="quarto-xref">(3.4)</a>.</p>
 </div>
 
 ### 3.1.2 Evaluación de la Precisión de las Estimaciones de los Coeficientes
@@ -125,7 +125,7 @@ donde $\epsilon$ se generó a partir de una distribución normal con media cero.
 
 <div id="fig-3-3" style="text-align:center; margin:1.5em 0;">
 <img src="../../Figures/Chapter3/png/3_3.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Figura&nbsp;3.3: Un conjunto de datos simulado. <em>Izquierda:</em> La línea roja representa la verdadera relación, $f(X) = 2 + 3X$, que se conoce como la línea de regresión poblacional. La línea azul es la línea de mínimos cuadrados; es la estimación de mínimos cuadrados para $f(X)$ basada en los datos observados, mostrados en negro. <em>Derecha:</em> La línea de regresión poblacional se muestra nuevamente en rojo, y la línea de mínimos cuadrados en azul oscuro. En azul claro, se muestran diez líneas de mínimos cuadrados, cada una calculada con base en un conjunto aleatorio separado de observaciones. Cada línea de mínimos cuadrados es diferente, pero en promedio, las líneas de mínimos cuadrados están bastante cerca de la línea de regresión poblacional.</p>
+<p class="figure-caption" style="margin-top:0.5em;">Figura&nbsp;3.3: Un conjunto de datos simulado. <em>Izquierda:</em> La línea roja representa la verdadera relación, $f(X) = 2 + 3X$, que se conoce como la línea de regresión poblacional. La línea azul es la línea de mínimos cuadrados; es la estimación de mínimos cuadrados para $f(X)$ basada en los datos observados, mostrados en negro. <em>Derecha:</em> La línea de regresión poblacional se muestra nuevamente en rojo, y la línea de mínimos cuadrados en azul oscuro. En azul claro, se muestran diez líneas de mínimos cuadrados, cada una calculada con base en un conjunto aleatorio separado de observaciones. Cada línea de mínimos cuadrados es diferente, pero en promedio, las líneas de mínimos cuadrados están bastante cerca de la línea de regresión poblacional.</p>
 </div>
 
 A primera vista, la diferencia entre la línea de regresión poblacional y la línea de mínimos cuadrados puede parecer sutil y confusa. Solo tenemos un conjunto de datos, así que ¿qué significa que dos líneas diferentes describan la relación entre el predictor y la variable respuesta? Fundamentalmente, el concepto de estas dos líneas es una extensión natural del enfoque estadístico estándar de usar información de una muestra para estimar características de una población grande. Por ejemplo, supongamos que estamos interesados en conocer la media poblacional $\mu$ de alguna variable aleatoria $Y$. Desafortunadamente, $\mu$ es desconocida, pero tenemos acceso a $n$ observaciones de $Y$, $y_1, \ldots, y_n$, que podemos usar para estimar $\mu$. Una estimación razonable es $\hat{\mu} = \bar{y}$, donde $\bar{y} = \frac{1}{n} \sum_{i=1}^{n} y_i$ es la media muestral. La media muestral y la media poblacional son diferentes, pero en general la media muestral proporcionará una buena estimación de la media poblacional. De la misma manera, los coeficientes desconocidos $\beta_0$ y $\beta_1$ en la regresión lineal definen la línea de regresión poblacional. Buscamos estimar estos coeficientes desconocidos usando $\hat{\beta}_0$ y $\hat{\beta}_1$ dados en <a href="#eq-3-4" class="quarto-xref">(3.4)</a>. Estas estimaciones de los coeficientes definen la línea de mínimos cuadrados.
@@ -218,7 +218,7 @@ que mide el número de desviaciones estándar a las que $\hat{\beta}_1$ está de
 | Intercepto  |   7.0325    |    0.4578      |    15.36      | $< 0.0001$ |
 | TV          |   0.0475    |    0.0027      |    17.67      | $< 0.0001$ |
 
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Tabla&nbsp;3.1: Para los datos Advertising, coeficientes del modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre el presupuesto de publicidad en TV. Un aumento de $1{,}000$ en el presupuesto de publicidad en TV está asociado con un aumento en las ventas de alrededor de 50 unidades. (Recordemos que la variable sales está en miles de unidades, y la variable TV está en miles de dólares.)
+<p class="figure-caption" style="margin-top:0.5em;">Tabla&nbsp;3.1: Para los datos Advertising, coeficientes del modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre el presupuesto de publicidad en TV. Un aumento de $1{,}000$ en el presupuesto de publicidad en TV está asociado con un aumento en las ventas de alrededor de 50 unidades. (Recordemos que la variable sales está en miles de unidades, y la variable TV está en miles de dólares.)
 
 </div>
 
@@ -236,7 +236,7 @@ Una vez que hemos rechazado la hipótesis nula <a href="#eq-3-12" class="quarto-
 | $R^2$                        | 0.612 |
 | Estadístico $F$              | 312.1 |
 
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Tabla&nbsp;3.2: Para los datos Advertising, más información sobre el modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre el presupuesto de publicidad en TV.
+<p class="figure-caption" style="margin-top:0.5em;">Tabla&nbsp;3.2: Para los datos Advertising, más información sobre el modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre el presupuesto de publicidad en TV.
 
 </div>
 
@@ -306,7 +306,7 @@ es también una medida de la relación lineal entre $X$ e $Y$.^[Nótese que, de 
 | Intercepto  |   12.351    |    0.621       |    19.88      | $< 0.0001$ |
 | newspaper   |   0.055     |    0.017       |     3.30      |  0.00115  |
 
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Tabla&nbsp;3.3: Más modelos de regresión lineal simple para los datos Advertising. Coeficientes del modelo de regresión lineal simple para el número de unidades vendidas sobre el presupuesto de publicidad en radio (arriba) y en newspaper (abajo). Un aumento de $1{,}000$ en el gasto en publicidad radial está asociado con un aumento promedio en las ventas de alrededor de 203 unidades, mientras que el mismo aumento en el gasto en publicidad en periódicos está asociado con un aumento promedio en las ventas de alrededor de 55 unidades. (Nótese que la variable sales está en miles de unidades, y las variables radio y newspaper están en miles de dólares.)
+<p class="figure-caption" style="margin-top:0.5em;">Tabla&nbsp;3.3: Más modelos de regresión lineal simple para los datos Advertising. Coeficientes del modelo de regresión lineal simple para el número de unidades vendidas sobre el presupuesto de publicidad en radio (arriba) y en newspaper (abajo). Un aumento de $1{,}000$ en el gasto en publicidad radial está asociado con un aumento promedio en las ventas de alrededor de 203 unidades, mientras que el mismo aumento en el gasto en publicidad en periódicos está asociado con un aumento promedio en las ventas de alrededor de 55 unidades. (Nótese que la variable sales está en miles de unidades, y las variables radio y newspaper están en miles de dólares.)
 
 </div>
 
@@ -359,7 +359,7 @@ Los valores $\hat{\beta}_0, \hat{\beta}_1, \ldots, \hat{\beta}_p$ que minimizan 
 
 <div id="fig-3-4" style="text-align:center; margin:1.5em 0;">
 <img src="../../Figures/Chapter3/png/3_4.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Figura&nbsp;3.4: En un entorno tridimensional, con dos predictores y una variable respuesta, la línea de regresión de mínimos cuadrados se convierte en un plano. El plano se elige para minimizar la suma de las distancias verticales al cuadrado entre cada observación (mostrada en rojo) y el plano.</p>
+<p class="figure-caption" style="margin-top:0.5em;">Figura&nbsp;3.4: En un entorno tridimensional, con dos predictores y una variable respuesta, la línea de regresión de mínimos cuadrados se convierte en un plano. El plano se elige para minimizar la suma de las distancias verticales al cuadrado entre cada observación (mostrada en rojo) y el plano.</p>
 </div>
 
 <div id="tbl-3-4">
@@ -371,7 +371,7 @@ Los valores $\hat{\beta}_0, \hat{\beta}_1, \ldots, \hat{\beta}_p$ que minimizan 
 | radio       |    0.189    |    0.0086      |    21.89      | $< 0.0001$ |
 | newspaper   |   $-0.001$  |    0.0059      |    $-0.18$    |  0.8599   |
 
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Tabla&nbsp;3.4: Para los datos Advertising, estimaciones de los coeficientes de mínimos cuadrados de la regresión lineal múltiple del número de unidades vendidas sobre los presupuestos de publicidad en TV, radio y newspaper.
+<p class="figure-caption" style="margin-top:0.5em;">Tabla&nbsp;3.4: Para los datos Advertising, estimaciones de los coeficientes de mínimos cuadrados de la regresión lineal múltiple del número de unidades vendidas sobre los presupuestos de publicidad en TV, radio y newspaper.
 
 </div>
 
@@ -388,7 +388,7 @@ La <a href="#tbl-3-4" class="quarto-xref">Tabla&nbsp;3.4</a> muestra las estimac
 | newspaper |        |        |  1.0000   | 0.2283 |
 | sales     |        |           |           | 1.0000 |
 
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Tabla&nbsp;3.5: Matriz de correlación para TV, radio, newspaper y sales para los datos Advertising.
+<p class="figure-caption" style="margin-top:0.5em;">Tabla&nbsp;3.5: Matriz de correlación para TV, radio, newspaper y sales para los datos Advertising.
 
 </div>
 
@@ -443,7 +443,7 @@ Por lo tanto, cuando no hay relación entre la variable respuesta y los predicto
 | $R^2$                        | 0.897 |
 | Estadístico $F$              | 570   |
 
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Tabla&nbsp;3.6: Más información sobre el modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre los presupuestos de publicidad en TV, newspaper y radio en los datos Advertising. Otra información sobre este modelo se mostró en la <a href="#tbl-3-4" class="quarto-xref">Tabla&nbsp;3.4</a>.
+<p class="figure-caption" style="margin-top:0.5em;">Tabla&nbsp;3.6: Más información sobre el modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre los presupuestos de publicidad en TV, newspaper y radio en los datos Advertising. Otra información sobre este modelo se mostró en la <a href="#tbl-3-4" class="quarto-xref">Tabla&nbsp;3.4</a>.
 
 </div>
 
@@ -511,7 +511,7 @@ Además de observar las estadísticas RSE y $R^2$ que acabamos de discutir, pued
 
 <div id="fig-3-5" style="text-align:center; margin:1.5em 0;">
 <img src="../../Figures/Chapter3/png/3_5.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Figura&nbsp;3.5: Para los datos Advertising, un ajuste de regresión lineal a sales usando TV y radio como predictores. Del patrón de los residuos, podemos ver que hay una pronunciada relación no lineal en los datos. Los residuos positivos (aquellos visibles sobre la superficie), tienden a situarse a lo largo de la línea de 45 grados, donde los presupuestos de TV y Radio se dividen equitativamente. Los residuos negativos (la mayoría no visibles), tienden a situarse lejos de esta línea, donde los presupuestos están más desequilibrados.</p>
+<p class="figure-caption" style="margin-top:0.5em;">Figura&nbsp;3.5: Para los datos Advertising, un ajuste de regresión lineal a sales usando TV y radio como predictores. Del patrón de los residuos, podemos ver que hay una pronunciada relación no lineal en los datos. Los residuos positivos (aquellos visibles sobre la superficie), tienden a situarse a lo largo de la línea de 45 grados, donde los presupuestos de TV y Radio se dividen equitativamente. Los residuos negativos (la mayoría no visibles), tienden a situarse lejos de esta línea, donde los presupuestos están más desequilibrados.</p>
 </div>
 
 **Cuatro: Predicciones**
@@ -545,7 +545,7 @@ Por ejemplo, el conjunto de datos `Credit` mostrado en la <a href="#fig-3-6" cla
 
 <div id="fig-3-6" style="text-align:center; margin:1.5em 0;">
 <img src="../../Figures/Chapter3/png/3_6.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Figura&nbsp;3.6: El conjunto de datos Credit contiene información sobre balance, age, cards, education, income, limit y rating para una serie de clientes potenciales.</p>
+<p class="figure-caption" style="margin-top:0.5em;">Figura&nbsp;3.6: El conjunto de datos Credit contiene información sobre balance, age, cards, education, income, limit y rating para una serie de clientes potenciales.</p>
 </div>
 
 **Predictores con Solo Dos Niveles**
@@ -581,7 +581,7 @@ Ahora $\beta_0$ puede interpretarse como el `balance` promedio de la tarjeta de 
 | Intercepto  |   509.80    |     33.13      |    15.389     | $< 0.0001$ |
 | own[Yes]    |    19.73    |     46.05      |     0.429     |  0.6690   |
 
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Tabla&nbsp;3.7: Estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de balance sobre own en el conjunto de datos Credit. El modelo lineal se da en <a href="#eq-3-27" class="quarto-xref">(3.27)</a>. Es decir, ownership se codifica como una variable dummy, como en <a href="#eq-3-26" class="quarto-xref">(3.26)</a>.
+<p class="figure-caption" style="margin-top:0.5em;">Tabla&nbsp;3.7: Estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de balance sobre own en el conjunto de datos Credit. El modelo lineal se da en <a href="#eq-3-27" class="quarto-xref">(3.27)</a>. Es decir, ownership se codifica como una variable dummy, como en <a href="#eq-3-26" class="quarto-xref">(3.26)</a>.
 
 </div>
 
@@ -650,7 +650,7 @@ Ahora $\beta_0$ puede interpretarse como el `balance` promedio de la tarjeta de 
 | region[South]  |   $-12.50$  |     56.68      |    $-0.221$   |  0.8260   |
 | region[West]   |   $-18.69$  |     65.02      |    $-0.287$   |  0.7740   |
 
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Tabla&nbsp;3.8: Estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de balance sobre region en el conjunto de datos Credit. El modelo lineal se da en <a href="#eq-3-30" class="quarto-xref">(3.30)</a>. Es decir, region se codifica mediante dos variables dummy <a href="#eq-3-28" class="quarto-xref">(3.28)</a> y <a href="#eq-3-29" class="quarto-xref">(3.29)</a>.
+<p class="figure-caption" style="margin-top:0.5em;">Tabla&nbsp;3.8: Estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de balance sobre region en el conjunto de datos Credit. El modelo lineal se da en <a href="#eq-3-30" class="quarto-xref">(3.30)</a>. Es decir, region se codifica mediante dos variables dummy <a href="#eq-3-28" class="quarto-xref">(3.28)</a> y <a href="#eq-3-29" class="quarto-xref">(3.29)</a>.
 
 </div>
 
@@ -727,7 +727,7 @@ Podemos interpretar $\beta_3$ como el aumento en la efectividad de la publicidad
 | radio       |   0.0289    |     0.009      |     3.24      |  0.0014   |
 | TV×radio    |   0.0011    |     0.000      |    20.73      | $< 0.0001$ |
 
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Tabla&nbsp;3.9: Para los datos Advertising, estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de sales sobre TV y radio, con un término de interacción, como en <a href="#eq-3-33" class="quarto-xref">(3.33)</a>.
+<p class="figure-caption" style="margin-top:0.5em;">Tabla&nbsp;3.9: Para los datos Advertising, estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de sales sobre TV y radio, con un término de interacción, como en <a href="#eq-3-33" class="quarto-xref">(3.33)</a>.
 
 </div>
 
@@ -756,7 +756,7 @@ Nótese que esto equivale a ajustar dos líneas paralelas a los datos, una para 
 
 <div id="fig-3-7" style="text-align:center; margin:1.5em 0;">
 <img src="../../Figures/Chapter3/png/3_7.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Figura&nbsp;3.7: Para los datos Credit, se muestran las líneas de mínimos cuadrados para la predicción de balance a partir de income para estudiantes y no estudiantes. <em>Izquierda:</em> Se ajustó el modelo <a href="#eq-3-34" class="quarto-xref">(3.34)</a>. No hay interacción entre income y student. <em>Derecha:</em> Se ajustó el modelo <a href="#eq-3-35" class="quarto-xref">(3.35)</a>. Hay un término de interacción entre income y student.</p>
+<p class="figure-caption" style="margin-top:0.5em;">Figura&nbsp;3.7: Para los datos Credit, se muestran las líneas de mínimos cuadrados para la predicción de balance a partir de income para estudiantes y no estudiantes. <em>Izquierda:</em> Se ajustó el modelo <a href="#eq-3-34" class="quarto-xref">(3.34)</a>. No hay interacción entre income y student. <em>Derecha:</em> Se ajustó el modelo <a href="#eq-3-35" class="quarto-xref">(3.35)</a>. Hay un término de interacción entre income y student.</p>
 </div>
 
 Esta limitación puede abordarse agregando una variable de interacción, creada multiplicando `income` por la variable dummy para `student`. Nuestro modelo ahora se convierte en
@@ -794,7 +794,7 @@ puede proporcionar un mejor ajuste. La <a href="#eq-3-36" class="quarto-xref">Ec
 
 <div id="fig-3-8" style="text-align:center; margin:1.5em 0;">
 <img src="../../Figures/Chapter3/png/3_8.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Figura&nbsp;3.8: El conjunto de datos Auto. Para varios automóviles, se muestran mpg y horsepower. El ajuste de regresión lineal se muestra en naranja. El ajuste de regresión lineal para un modelo que incluye horsepower<sup>2</sup> se muestra como una curva azul. El ajuste de regresión lineal para un modelo que incluye todos los polinomios de horsepower hasta el quinto grado se muestra en verde.</p>
+<p class="figure-caption" style="margin-top:0.5em;">Figura&nbsp;3.8: El conjunto de datos Auto. Para varios automóviles, se muestran mpg y horsepower. El ajuste de regresión lineal se muestra en naranja. El ajuste de regresión lineal para un modelo que incluye horsepower<sup>2</sup> se muestra como una curva azul. El ajuste de regresión lineal para un modelo que incluye todos los polinomios de horsepower hasta el quinto grado se muestra en verde.</p>
 </div>
 
 <div id="tbl-3-10">
@@ -805,7 +805,7 @@ puede proporcionar un mejor ajuste. La <a href="#eq-3-36" class="quarto-xref">Ec
 | horsepower     |   $-0.4662$ |     0.0311     |    $-15.0$    | $< 0.0001$ |
 | horsepower$^2$ |    0.0012   |     0.0001     |     10.1      | $< 0.0001$ |
 
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Tabla&nbsp;3.10: Para el conjunto de datos Auto, estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de mpg sobre horsepower y horsepower<sup>2</sup>.
+<p class="figure-caption" style="margin-top:0.5em;">Tabla&nbsp;3.10: Para el conjunto de datos Auto, estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de mpg sobre horsepower y horsepower<sup>2</sup>.
 
 </div>
 
@@ -834,7 +834,7 @@ Los *gráficos de residuos* (*residual plots*) son una herramienta gráfica úti
 
 <div id="fig-3-9" style="text-align:center; margin:1.5em 0;">
 <img src="../../Figures/Chapter3/png/3_9.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Figura&nbsp;3.9: Gráficos de residuos versus valores predichos (o ajustados) para el conjunto de datos Auto. En cada gráfico, la línea roja es un ajuste suave a los residuos, destinado a facilitar la identificación de una tendencia. <em>Izquierda:</em> Una regresión lineal de mpg sobre horsepower. Un fuerte patrón en los residuos indica no linealidad en los datos. <em>Derecha:</em> Una regresión lineal de mpg sobre horsepower y horsepower<sup>2</sup>. Hay poco patrón en los residuos.</p>
+<p class="figure-caption" style="margin-top:0.5em;">Figura&nbsp;3.9: Gráficos de residuos versus valores predichos (o ajustados) para el conjunto de datos Auto. En cada gráfico, la línea roja es un ajuste suave a los residuos, destinado a facilitar la identificación de una tendencia. <em>Izquierda:</em> Una regresión lineal de mpg sobre horsepower. Un fuerte patrón en los residuos indica no linealidad en los datos. <em>Derecha:</em> Una regresión lineal de mpg sobre horsepower y horsepower<sup>2</sup>. Hay poco patrón en los residuos.</p>
 </div>
 
 El panel izquierdo de la <a href="#fig-3-9" class="quarto-xref">Figura&nbsp;3.9</a> muestra un gráfico de residuos de la regresión lineal de `mpg` sobre `horsepower` en el conjunto de datos `Auto` que se ilustró en la <a href="#fig-3-8" class="quarto-xref">Figura&nbsp;3.8</a>. La línea roja es un ajuste suave a los residuos, que se muestra para facilitar la identificación de cualquier tendencia. Los residuos exhiben una clara forma de U, lo que proporciona una fuerte indicación de no linealidad en los datos. En contraste, el panel derecho de la <a href="#fig-3-9" class="quarto-xref">Figura&nbsp;3.9</a> muestra el gráfico de residuos que resulta del modelo <a href="#eq-3-36" class="quarto-xref">(3.36)</a>, que contiene un término cuadrático. Parece haber poco patrón en los residuos, lo que sugiere que el término cuadrático mejora el ajuste a los datos.
@@ -851,7 +851,7 @@ Como ejemplo extremo, supongamos que accidentalmente duplicamos nuestros datos, 
 
 <div id="fig-3-10" style="text-align:center; margin:1.5em 0;">
 <img src="../../Figures/Chapter3/png/3_10.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Figura&nbsp;3.10: Gráficos de residuos de conjuntos de datos de series de tiempo simulados generados con diferentes niveles de correlación $\rho$ entre términos de error para puntos de tiempo adyacentes.</p>
+<p class="figure-caption" style="margin-top:0.5em;">Figura&nbsp;3.10: Gráficos de residuos de conjuntos de datos de series de tiempo simulados generados con diferentes niveles de correlación $\rho$ entre términos de error para puntos de tiempo adyacentes.</p>
 </div>
 
 La <a href="#fig-3-10" class="quarto-xref">Figura&nbsp;3.10</a> proporciona una ilustración. En el panel superior, vemos los residuos de un ajuste de regresión lineal a datos generados con errores no correlacionados. No hay evidencia de una tendencia relacionada con el tiempo en los residuos. En contraste, los residuos en el panel inferior provienen de un conjunto de datos en el que los errores adyacentes tenían una correlación de 0.9. Ahora hay un patrón claro en los residuos —los residuos adyacentes tienden a tomar valores similares. Finalmente, el panel central ilustra un caso más moderado en el que los residuos tenían una correlación de 0.5. Todavía hay evidencia de seguimiento, pero el patrón es menos claro.
@@ -866,7 +866,7 @@ Desafortunadamente, a menudo ocurre que las varianzas de los términos de error 
 
 <div id="fig-3-11" style="text-align:center; margin:1.5em 0;">
 <img src="../../Figures/Chapter3/png/3_11.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Figura&nbsp;3.11: Gráficos de residuos. En cada gráfico, la línea roja es un ajuste suave a los residuos, destinado a facilitar la identificación de una tendencia. Las líneas azules siguen los cuantiles exteriores de los residuos y enfatizan los patrones. <em>Izquierda:</em> La forma de embudo indica heterocedasticidad. <em>Derecha:</em> La variable respuesta ha sido transformada mediante logaritmo, y ahora no hay evidencia de heterocedasticidad.</p>
+<p class="figure-caption" style="margin-top:0.5em;">Figura&nbsp;3.11: Gráficos de residuos. En cada gráfico, la línea roja es un ajuste suave a los residuos, destinado a facilitar la identificación de una tendencia. Las líneas azules siguen los cuantiles exteriores de los residuos y enfatizan los patrones. <em>Izquierda:</em> La forma de embudo indica heterocedasticidad. <em>Derecha:</em> La variable respuesta ha sido transformada mediante logaritmo, y ahora no hay evidencia de heterocedasticidad.</p>
 </div>
 
 A veces tenemos una buena idea de la varianza de cada respuesta. Por ejemplo, la $i$-ésima respuesta podría ser un promedio de $n_i$ observaciones crudas. Si cada una de estas observaciones crudas no está correlacionada con varianza $\sigma^2$, entonces su promedio tiene varianza $\sigma_i^2 = \sigma^2 / n_i$. En este caso, un remedio simple es ajustar nuestro modelo mediante *mínimos cuadrados ponderados* (*weighted least squares*), con pesos proporcionales a las varianzas inversas —es decir, $w_i = n_i$ en este caso. La mayoría del software de regresión lineal permite ponderaciones por observación.
@@ -877,7 +877,7 @@ Un *valor atípico* (*outlier*) es un punto para el cual $y_i$ está lejos del v
 
 <div id="fig-3-12" style="text-align:center; margin:1.5em 0;">
 <img src="../../Figures/Chapter3/png/3_12.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Figura&nbsp;3.12: <em>Izquierda:</em> La línea de regresión de mínimos cuadrados se muestra en rojo, y la línea de regresión después de eliminar el valor atípico se muestra en azul. <em>Centro:</em> El gráfico de residuos identifica claramente el valor atípico. <em>Derecha:</em> El valor atípico tiene un residuo studentizado de 6; típicamente esperamos valores entre $-3$ y 3.</p>
+<p class="figure-caption" style="margin-top:0.5em;">Figura&nbsp;3.12: <em>Izquierda:</em> La línea de regresión de mínimos cuadrados se muestra en rojo, y la línea de regresión después de eliminar el valor atípico se muestra en azul. <em>Centro:</em> El gráfico de residuos identifica claramente el valor atípico. <em>Derecha:</em> El valor atípico tiene un residuo studentizado de 6; típicamente esperamos valores entre $-3$ y 3.</p>
 </div>
 
 El punto rojo (observación 20) en el panel izquierdo de la <a href="#fig-3-12" class="quarto-xref">Figura&nbsp;3.12</a> ilustra un valor atípico típico. La línea roja sólida es el ajuste de regresión de mínimos cuadrados, mientras que la línea azul discontinua es el ajuste de mínimos cuadrados después de eliminar el valor atípico. En este caso, eliminar el valor atípico tiene poco efecto en la línea de mínimos cuadrados: conduce a casi ningún cambio en la pendiente, y una reducción minúscula en el intercepto. Es típico que un valor atípico que no tiene un valor inusual del predictor tenga poco efecto en el ajuste de mínimos cuadrados. Sin embargo, incluso si un valor atípico no tiene mucho efecto en el ajuste de mínimos cuadrados, puede causar otros problemas. Por ejemplo, en este ejemplo, el RSE es 1.09 cuando el valor atípico está incluido en la regresión, pero es solo 0.77 cuando el valor atípico es eliminado. Dado que el RSE se usa para calcular todos los intervalos de confianza y *valores p*, un aumento tan dramático causado por un solo punto de datos puede tener implicaciones para la interpretación del ajuste. De manera similar, la inclusión del valor atípico hace que el $R^2$ disminuya de 0.892 a 0.805.
@@ -892,7 +892,7 @@ Acabamos de ver que los valores atípicos son observaciones para las cuales la r
 
 <div id="fig-3-13" style="text-align:center; margin:1.5em 0;">
 <img src="../../Figures/Chapter3/png/3_13.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Figura&nbsp;3.13: <em>Izquierda:</em> La observación 41 es un punto de alto apalancamiento, mientras que la 20 no lo es. La línea roja es el ajuste a todos los datos, y la línea azul es el ajuste con la observación 41 eliminada. <em>Centro:</em> La observación roja no es inusual en términos de su valor de X1 ni de su valor de X2, pero aún cae fuera del grueso de los datos, y por lo tanto tiene alto apalancamiento. <em>Derecha:</em> La observación 41 tiene un alto apalancamiento y un alto residuo.</p>
+<p class="figure-caption" style="margin-top:0.5em;">Figura&nbsp;3.13: <em>Izquierda:</em> La observación 41 es un punto de alto apalancamiento, mientras que la 20 no lo es. La línea roja es el ajuste a todos los datos, y la línea azul es el ajuste con la observación 41 eliminada. <em>Centro:</em> La observación roja no es inusual en términos de su valor de X1 ni de su valor de X2, pero aún cae fuera del grueso de los datos, y por lo tanto tiene alto apalancamiento. <em>Derecha:</em> La observación 41 tiene un alto apalancamiento y un alto residuo.</p>
 </div>
 
 En una regresión lineal simple, las observaciones de alto apalancamiento son bastante fáciles de identificar, ya que simplemente podemos buscar observaciones para las cuales el valor del predictor está fuera del rango normal de las observaciones. Pero en una regresión lineal múltiple con muchos predictores, es posible tener una observación que esté bien dentro del rango de los valores de cada predictor individual, pero que sea inusual en términos del conjunto completo de predictores. Un ejemplo se muestra en el panel central de la <a href="#fig-3-13" class="quarto-xref">Figura&nbsp;3.13</a>, para un conjunto de datos con dos predictores, $X_1$ y $X_2$. La mayoría de los valores de los predictores de las observaciones caen dentro de la elipse azul discontinua, pero la observación roja está bien fuera de este rango. Pero ni su valor para $X_1$ ni su valor para $X_2$ es inusual. Así que si examinamos solo $X_1$ o solo $X_2$, no notaremos este punto de alto apalancamiento. Este problema es más pronunciado en contextos de regresión múltiple con más de dos predictores, porque entonces no hay una forma simple de graficar todas las dimensiones de los datos simultáneamente.
@@ -915,7 +915,7 @@ La *colinealidad* (*collinearity*) se refiere a la situación en la que dos o m�
 
 <div id="fig-3-14" style="text-align:center; margin:1.5em 0;">
 <img src="../../Figures/Chapter3/png/3_14.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Figura&nbsp;3.14: Diagramas de dispersión de las observaciones del conjunto de datos Credit. <em>Izquierda:</em> Un gráfico de age versus limit. Estas dos variables no son colineales. <em>Derecha:</em> Un gráfico de rating versus limit. Existe una alta colinealidad.</p>
+<p class="figure-caption" style="margin-top:0.5em;">Figura&nbsp;3.14: Diagramas de dispersión de las observaciones del conjunto de datos Credit. <em>Izquierda:</em> Un gráfico de age versus limit. Estas dos variables no son colineales. <em>Derecha:</em> Un gráfico de rating versus limit. Existe una alta colinealidad.</p>
 </div>
 
 La <a href="#fig-3-15" class="quarto-xref">Figura&nbsp;3.15</a> ilustra algunas de las dificultades que pueden resultar de la colinealidad. El panel izquierdo de la <a href="#fig-3-15" class="quarto-xref">Figura&nbsp;3.15</a> es un gráfico de contorno de la RSS <a href="#eq-3-22" class="quarto-xref">(3.22)</a> asociada con diferentes estimaciones posibles de los coeficientes para la regresión de `balance` sobre `limit` y `age`. Cada elipse representa un conjunto de coeficientes que corresponden a la misma RSS, y las elipses más cercanas al centro toman los valores más bajos de RSS. Los puntos negros y las líneas discontinuas asociadas representan las estimaciones de los coeficientes que resultan en la RSS más pequeña posible —en otras palabras, estas son las estimaciones de mínimos cuadrados. Los ejes para `limit` y `age` han sido escalados de modo que el gráfico incluya estimaciones posibles de los coeficientes que están hasta cuatro errores estándar a cada lado de las estimaciones de mínimos cuadrados. Así, el gráfico incluye todos los valores plausibles para los coeficientes. Por ejemplo, vemos que el verdadero coeficiente de `limit` está casi ciertamente en algún lugar entre 0.15 y 0.20.
@@ -924,7 +924,7 @@ En contraste, el panel derecho de la <a href="#fig-3-15" class="quarto-xref">Fig
 
 <div id="fig-3-15" style="text-align:center; margin:1.5em 0;">
 <img src="../../Figures/Chapter3/png/3_15.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Figura&nbsp;3.15: Gráficos de contorno para los valores de RSS en función de los parámetros $\beta$ para varias regresiones que involucran el conjunto de datos Credit. En cada gráfico, los puntos negros representan los valores de los coeficientes correspondientes al mínimo de RSS. <em>Izquierda:</em> Un gráfico de contorno de RSS para la regresión de balance sobre age y limit. El valor mínimo está bien definido. <em>Derecha:</em> Un gráfico de contorno de RSS para la regresión de balance sobre rating y limit. Debido a la colinealidad, existen muchos pares $(\beta_{\text{Limit}}, \beta_{\text{Rating}})$ con un valor similar de RSS.</p>
+<p class="figure-caption" style="margin-top:0.5em;">Figura&nbsp;3.15: Gráficos de contorno para los valores de RSS en función de los parámetros $\beta$ para varias regresiones que involucran el conjunto de datos Credit. En cada gráfico, los puntos negros representan los valores de los coeficientes correspondientes al mínimo de RSS. <em>Izquierda:</em> Un gráfico de contorno de RSS para la regresión de balance sobre age y limit. El valor mínimo está bien definido. <em>Derecha:</em> Un gráfico de contorno de RSS para la regresión de balance sobre rating y limit. Debido a la colinealidad, existen muchos pares $(\beta_{\text{Limit}}, \beta_{\text{Rating}})$ con un valor similar de RSS.</p>
 </div>
 
 Dado que la colinealidad reduce la precisión de las estimaciones de los coeficientes de regresión, hace que el error estándar para $\hat{\beta}_j$ aumente. Recordemos que el estadístico $t$ para cada predictor se calcula dividiendo $\hat{\beta}_j$ por su error estándar. En consecuencia, la colinealidad resulta en una disminución del estadístico $t$. Como resultado, en presencia de colinealidad, podemos no rechazar $H_0: \beta_j = 0$. Esto significa que la *potencia* (*power*) de la prueba de hipótesis —la probabilidad de detectar correctamente un coeficiente distinto de cero— se reduce por la colinealidad.
@@ -947,7 +947,7 @@ Dado que la colinealidad reduce la precisión de las estimaciones de los coefici
 | rating      |    2.202    |      0.952     |     2.312     |  0.0213   |
 | limit       |    0.025    |      0.064     |     0.384     |  0.7012   |
 
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Tabla&nbsp;3.11: Se muestran los resultados para dos modelos de regresión múltiple que involucran el conjunto de datos Credit. El Modelo 1 es una regresión de balance sobre age y limit, y el Modelo 2 una regresión de balance sobre rating y limit. El error estándar de $\hat{\beta}_{\text{limit}}$ aumenta 12 veces en la segunda regresión, debido a la colinealidad.</p>
+<p class="figure-caption" style="margin-top:0.5em;">Tabla&nbsp;3.11: Se muestran los resultados para dos modelos de regresión múltiple que involucran el conjunto de datos Credit. El Modelo 1 es una regresión de balance sobre age y limit, y el Modelo 2 una regresión de balance sobre rating y limit. El error estándar de $\hat{\beta}_{\text{limit}}$ aumenta 12 veces en la segunda regresión, debido a la colinealidad.</p>
 
 </div>
 
@@ -995,7 +995,7 @@ $$\hat{f}(x_0) = \frac{1}{K} \sum_{x_i \in \mathcal{N}_0} y_i.$$
 
 <div id="fig-3-16" style="text-align:center; margin:1.5em 0;">
 <img src="../../Figures/Chapter3/png/3_16.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Figura&nbsp;3.16: Gráficos de $\hat{f}(X)$ usando regresión KNN en un conjunto de datos bidimensional con 64 observaciones (puntos naranjas). <em>Izquierda:</em> $K = 1$ resulta en un ajuste de función escalonada rugosa. <em>Derecha:</em> $K = 9$ produce un ajuste mucho más suave.</p>
+<p class="figure-caption" style="margin-top:0.5em;">Figura&nbsp;3.16: Gráficos de $\hat{f}(X)$ usando regresión KNN en un conjunto de datos bidimensional con 64 observaciones (puntos naranjas). <em>Izquierda:</em> $K = 1$ resulta en un ajuste de función escalonada rugosa. <em>Derecha:</em> $K = 9$ produce un ajuste mucho más suave.</p>
 </div>
 
 La <a href="#fig-3-16" class="quarto-xref">Figura&nbsp;3.16</a> ilustra dos ajustes KNN en un conjunto de datos con $p = 2$ predictores. El ajuste con $K = 1$ se muestra en el panel izquierdo, mientras que el panel derecho corresponde a $K = 9$. Vemos que cuando $K = 1$, el ajuste KNN interpola perfectamente las observaciones de entrenamiento, y en consecuencia toma la forma de una función escalonada. Cuando $K = 9$, el ajuste KNN sigue siendo una función escalonada, pero promediar sobre nueve observaciones resulta en regiones mucho más pequeñas de predicción constante, y en consecuencia un ajuste más suave. En general, el valor óptimo para $K$ dependerá del *compromiso sesgo-varianza* (*bias-variance tradeoff*), que introdujimos en el Capítulo 2. Un valor pequeño de $K$ proporciona el ajuste más flexible, que tendrá bajo sesgo pero alta varianza. Esta varianza se debe al hecho de que la predicción en una región dada depende enteramente de una sola observación. En contraste, valores más grandes de $K$ proporcionan un ajuste más suave y menos variable; la predicción en una región es un promedio de varios puntos, por lo que cambiar una observación tiene un efecto menor. Sin embargo, el suavizado puede causar sesgo al enmascarar parte de la estructura en $f(X)$. En el Capítulo 5, introducimos varios enfoques para estimar las tasas de error de prueba. Estos métodos pueden usarse para identificar el valor óptimo de $K$ en la regresión KNN.
@@ -1004,26 +1004,26 @@ La <a href="#fig-3-16" class="quarto-xref">Figura&nbsp;3.16</a> ilustra dos ajus
 
 <div id="fig-3-17" style="text-align:center; margin:1.5em 0;">
 <img src="../../Figures/Chapter3/png/3_17.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Figura&nbsp;3.17: Gráficos de $\hat{f}(X)$ usando regresión KNN en un conjunto de datos unidimensional con 50 observaciones. La verdadera relación está dada por la línea negra sólida. <em>Izquierda:</em> La curva azul corresponde a $K = 1$ e interpola (es decir, pasa directamente a través de) los datos de entrenamiento. <em>Derecha:</em> La curva azul corresponde a $K = 9$, y representa un ajuste más suave.</p>
+<p class="figure-caption" style="margin-top:0.5em;">Figura&nbsp;3.17: Gráficos de $\hat{f}(X)$ usando regresión KNN en un conjunto de datos unidimensional con 50 observaciones. La verdadera relación está dada por la línea negra sólida. <em>Izquierda:</em> La curva azul corresponde a $K = 1$ e interpola (es decir, pasa directamente a través de) los datos de entrenamiento. <em>Derecha:</em> La curva azul corresponde a $K = 9$, y representa un ajuste más suave.</p>
 </div>
 
 <div id="fig-3-18" style="text-align:center; margin:1.5em 0;">
 <img src="../../Figures/Chapter3/png/3_18.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Figura&nbsp;3.18: El mismo conjunto de datos mostrado en la Figura&nbsp;3.17 se investiga más a fondo. <em>Izquierda:</em> La línea azul discontinua es el ajuste de mínimos cuadrados a los datos. Dado que $f(X)$ es de hecho lineal (mostrada como la línea negra), la línea de regresión de mínimos cuadrados proporciona una muy buena estimación de $f(X)$. <em>Derecha:</em> La línea horizontal discontinua representa el MSE del conjunto de prueba de mínimos cuadrados, mientras que la línea verde sólida corresponde al MSE para KNN en función de $1/K$ (en escala logarítmica). La regresión lineal logra un MSE de prueba más bajo que la regresión KNN, ya que $f(X)$ es de hecho lineal. Para la regresión KNN, los mejores resultados ocurren con un valor muy grande de $K$, correspondiente a un valor pequeño de $1/K$.</p>
+<p class="figure-caption" style="margin-top:0.5em;">Figura&nbsp;3.18: El mismo conjunto de datos mostrado en la Figura&nbsp;3.17 se investiga más a fondo. <em>Izquierda:</em> La línea azul discontinua es el ajuste de mínimos cuadrados a los datos. Dado que $f(X)$ es de hecho lineal (mostrada como la línea negra), la línea de regresión de mínimos cuadrados proporciona una muy buena estimación de $f(X)$. <em>Derecha:</em> La línea horizontal discontinua representa el MSE del conjunto de prueba de mínimos cuadrados, mientras que la línea verde sólida corresponde al MSE para KNN en función de $1/K$ (en escala logarítmica). La regresión lineal logra un MSE de prueba más bajo que la regresión KNN, ya que $f(X)$ es de hecho lineal. Para la regresión KNN, los mejores resultados ocurren con un valor muy grande de $K$, correspondiente a un valor pequeño de $1/K$.</p>
 </div>
 
 En la práctica, la verdadera relación entre $X$ e $Y$ rara vez es exactamente lineal. La <a href="#fig-3-19" class="quarto-xref">Figura&nbsp;3.19</a> examina los desempeños relativos de la regresión de mínimos cuadrados y KNN bajo niveles crecientes de no linealidad en la relación entre $X$ e $Y$. En la fila superior, la verdadera relación es casi lineal. En este caso vemos que el MSE de prueba para la regresión lineal sigue siendo superior al de KNN para valores bajos de $K$. Sin embargo, para $K \geq 4$, KNN supera a la regresión lineal. La segunda fila ilustra una desviación más sustancial de la linealidad. En esta situación, KNN supera sustancialmente a la regresión lineal para todos los valores de $K$. Nótese que a medida que aumenta el grado de no linealidad, hay poco cambio en el MSE del conjunto de prueba para el método no paramétrico KNN, pero hay un gran aumento en el MSE del conjunto de prueba de la regresión lineal.
 
 <div id="fig-3-19" style="text-align:center; margin:1.5em 0;">
 <img src="../../Figures/Chapter3/png/3_19.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Figura&nbsp;3.19: <em>Arriba Izquierda:</em> En un contexto con una relación ligeramente no lineal entre $X$ e $Y$ (línea negra sólida), se muestran los ajustes KNN con $K = 1$ (azul) y $K = 9$ (rojo). <em>Arriba Derecha:</em> Para los datos ligeramente no lineales, se muestran el MSE del conjunto de prueba para la regresión de mínimos cuadrados (línea negra horizontal) y KNN con varios valores de $1/K$ (verde). <em>Abajo Izquierda</em> y <em>Abajo Derecha:</em> Como en el panel superior, pero con una relación fuertemente no lineal entre $X$ e $Y$.</p>
+<p class="figure-caption" style="margin-top:0.5em;">Figura&nbsp;3.19: <em>Arriba Izquierda:</em> En un contexto con una relación ligeramente no lineal entre $X$ e $Y$ (línea negra sólida), se muestran los ajustes KNN con $K = 1$ (azul) y $K = 9$ (rojo). <em>Arriba Derecha:</em> Para los datos ligeramente no lineales, se muestran el MSE del conjunto de prueba para la regresión de mínimos cuadrados (línea negra horizontal) y KNN con varios valores de $1/K$ (verde). <em>Abajo Izquierda</em> y <em>Abajo Derecha:</em> Como en el panel superior, pero con una relación fuertemente no lineal entre $X$ e $Y$.</p>
 </div>
 
 Las Figuras 3.18 y 3.19 muestran situaciones en las que KNN se desempeña ligeramente peor que la regresión lineal cuando la relación es lineal, pero mucho mejor que la regresión lineal para situaciones no lineales. En una situación de la vida real en la que la verdadera relación es desconocida, uno podría sospechar que KNN debería favorecerse sobre la regresión lineal porque en el peor de los casos será ligeramente inferior a la regresión lineal si la verdadera relación es lineal, y puede dar resultados sustancialmente mejores si la verdadera relación es no lineal. Pero en realidad, incluso cuando la verdadera relación es altamente no lineal, KNN aún puede proporcionar resultados inferiores a la regresión lineal. En particular, tanto las Figuras 3.18 como 3.19 ilustran contextos con $p = 1$ predictor. Pero en dimensiones más altas, KNN a menudo se desempeña peor que la regresión lineal.
 
 <div id="fig-3-20" style="text-align:center; margin:1.5em 0;">
 <img src="../../Figures/Chapter3/png/3_20.png" class="img-fluid figure-img" style="width:65.0%" alt="">
-<p class="figure-caption" style="margin-top:0.5em; text-align:center;">Figura&nbsp;3.20: MSE de prueba para la regresión lineal (líneas negras discontinuas) y KNN (curvas verdes) a medida que el número de variables $p$ aumenta. La función verdadera es no lineal en la primera variable, como en el panel inferior de la Figura&nbsp;3.19, y no depende de las variables adicionales. El desempeño de la regresión lineal se deteriora lentamente en presencia de estas variables de ruido adicionales, mientras que el desempeño de KNN se degrada mucho más rápidamente a medida que $p$ aumenta.</p>
+<p class="figure-caption" style="margin-top:0.5em;">Figura&nbsp;3.20: MSE de prueba para la regresión lineal (líneas negras discontinuas) y KNN (curvas verdes) a medida que el número de variables $p$ aumenta. La función verdadera es no lineal en la primera variable, como en el panel inferior de la Figura&nbsp;3.19, y no depende de las variables adicionales. El desempeño de la regresión lineal se deteriora lentamente en presencia de estas variables de ruido adicionales, mientras que el desempeño de KNN se degrada mucho más rápidamente a medida que $p$ aumenta.</p>
 </div>
 
 La <a href="#fig-3-20" class="quarto-xref">Figura&nbsp;3.20</a> considera la misma situación fuertemente no lineal que en la segunda fila de la <a href="#fig-3-19" class="quarto-xref">Figura&nbsp;3.19</a>, excepto que hemos agregado predictores de ruido adicionales que no están asociados con la variable respuesta. Cuando $p = 1$ o $p = 2$, KNN supera a la regresión lineal. Pero para $p = 3$ los resultados son mixtos, y para $p \geq 4$ la regresión lineal es superior a KNN. De hecho, el aumento en la dimensión solo ha causado un pequeño deterioro en el MSE del conjunto de prueba de la regresión lineal, pero ha causado más de un aumento de diez veces en el MSE para KNN. Esta disminución en el desempeño a medida que la dimensión aumenta es un problema común para KNN, y resulta del hecho de que en dimensiones más altas hay efectivamente una reducción en el tamaño de la muestra. En este conjunto de datos hay 50 observaciones de entrenamiento; cuando $p = 1$, esto proporciona suficiente información para estimar $f(X)$ con precisión. Sin embargo, distribuir 50 observaciones sobre $p = 20$ dimensiones resulta en un fenómeno en el que una observación dada no tiene vecinos cercanos —esta es la llamada *maldición de la dimensionalidad* (*curse of dimensionality*). Es decir, las $K$ observaciones que están más cercanas a una observación de prueba dada $x_0$ pueden estar muy lejos de $x_0$ en el espacio $p$-dimensional cuando $p$ es grande, lo que lleva a una muy mala predicción de $f(x_0)$ y por lo tanto un mal ajuste KNN. Como regla general, los métodos paramétricos tenderán a superar a los enfoques no paramétricos cuando hay un número pequeño de observaciones por predictor.
