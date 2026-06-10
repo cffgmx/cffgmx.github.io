@@ -5,9 +5,9 @@ author: "Carlos Flores"
 
 ## Prólogo
 
-Este curso no busca acumular definiciones ni técnicas, sino acompañar el desarrollo de una idea hasta que sus propias tensiones internas vuelven inevitable la aparición de nuevos conceptos  Python no se presenta como un lenguaje que deba aprenderse mediante listas de instrucciones cada elemento surge como respuesta a una limitación previa, y la intención es que el lector no solo entienda cómo se usa algo, sino que perciba por qué su existencia resulta necesaria
+Este curso no busca acumular definiciones ni técnicas. Busca acompañar el desarrollo de una idea hasta que sus propias tensiones internas vuelven inevitable la aparición de nuevos conceptos. Python no se presenta como un lenguaje que deba aprenderse mediante listas de instrucciones. Cada elemento surge como respuesta a una limitación previa, y la intención es que el lector no solo entienda cómo se usa algo, sino que perciba por qué su existencia resulta necesaria.
 
-El curso solo alcanza su propósito *si se lee en orden y de manera completa*  Las ideas se introducen y reaparecen más adelante bajo una nueva luz abordarlo como temas independientes rompe la lógica interna que lo sostiene
+El curso solo alcanza su propósito *si se lee en orden y de manera completa*. Las ideas se introducen y reaparecen más adelante bajo una nueva luz. Abordarlo como temas independientes rompe la lógica interna que lo sostiene.
 
 ## Lecciones
 
