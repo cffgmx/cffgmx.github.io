@@ -12,7 +12,7 @@ Lo que falta es una forma de definir, una sola vez, qué es un estudiante: qué 
 
 En la lección anterior vimos que cada objeto tiene un tipo: `type([1, 2])` es `list`, `type("hola")` es `str`. Ese tipo determina qué datos contiene el objeto y qué métodos tiene. Definir una clase es, exactamente, crear un tipo nuevo.
 
-La analogía matemática es útil. Una clase es como la definición de una función: describe una regla general, una plantilla. Un objeto concreto creado a partir de la clase —lo que se llama una *instancia*— es como evaluar esa función en un valor concreto. La clase `Estudiante` describe qué es un estudiante en general; la instancia que representa a Ana es un caso particular de esa descripción.
+La analogía matemática es útil. Una clase es como la definición de una función: describe una regla general, una plantilla. Un objeto concreto creado a partir de la clase (lo que se llama una *instancia*) es como evaluar esa función en un valor concreto. La clase `Estudiante` describe qué es un estudiante en general; la instancia que representa a Ana es un caso particular de esa descripción.
 
 Una clase se define con la palabra clave `class`, seguida del nombre y dos puntos. Por convención, los nombres de clase empiezan con mayúscula, lo que los distingue a simple vista de las variables y funciones:
 
@@ -44,9 +44,9 @@ class Estudiante:
 
 Hay dos elementos nuevos que conviene explicar con calma.
 
-El primero es `self`. Cuando creamos una instancia con `Estudiante("Ana", "Matemáticas", 9.2)`, Python crea un objeto vacío y se lo pasa a `__init__` como primer argumento. Ese objeto es `self`: una referencia al objeto que se está construyendo. La lección sobre objetos explicó que un método recibe su objeto como primer argumento implícito; en `__init__` ese argumento aparece explícito, y por convención universal se llama `self`. No es una palabra reservada de Python —podría llamarse de otro modo—, pero todo el mundo usa `self`, y apartarse de esa convención solo genera confusión.
+El primero es `self`. Cuando creamos una instancia con `Estudiante("Ana", "Matemáticas", 9.2)`, Python crea un objeto vacío y se lo pasa a `__init__` como primer argumento. Ese objeto es `self`: una referencia al objeto que se está construyendo. La lección sobre objetos explicó que un método recibe su objeto como primer argumento implícito; en `__init__` ese argumento aparece explícito, y por convención universal se llama `self`. No es una palabra reservada de Python  (podría llamarse de otro modo) , pero todo el mundo usa `self`, y apartarse de esa convención solo genera confusión.
 
-El segundo es la asignación `self.nombre = nombre`. El lado izquierdo, `self.nombre`, crea un *atributo* dentro del objeto: un dato que queda guardado en la instancia y vive mientras ella viva. El lado derecho, `nombre`, es el parámetro que recibió `__init__`. La línea dice "guarda dentro de este objeto, bajo el nombre `nombre`, el valor que me pasaron". Los tres atributos —`nombre`, `carrera`, `calificacion`— quedan así grabados en cada instancia.
+El segundo es la asignación `self.nombre = nombre`. El lado izquierdo, `self.nombre`, crea un *atributo* dentro del objeto: un dato que queda guardado en la instancia y vive mientras ella viva. El lado derecho, `nombre`, es el parámetro que recibió `__init__`. La línea dice "guarda dentro de este objeto, bajo el nombre `nombre`, el valor que me pasaron". Los tres atributos (`nombre`, `carrera`, `calificacion`) quedan así grabados en cada instancia.
 
 Conviene notar que los parámetros de `__init__` (a la derecha) y los atributos (a la izquierda del punto) pueden llamarse igual o distinto; son cosas diferentes que coinciden en el nombre por claridad. `self.nombre` es el atributo permanente del objeto; `nombre` a secas es el parámetro temporal que desaparece cuando `__init__` termina, exactamente como las variables locales de cualquier función que vimos en la lección sobre funciones.
 
@@ -165,6 +165,6 @@ Cada `Lectura` es un objeto independiente con sus propios atributos, pero todas 
 
 ## Lo que sigue
 
-Una clase nos permite agrupar datos bajo un tipo con estructura garantizada. Pero por ahora nuestras clases son contenedores pasivos: guardan información, y nada más. Cuando queremos hacer algo con un estudiante —clasificar su calificación, comprobar si aprobó— seguimos recurriendo a funciones externas, como la función `clasificar()` que arrastramos desde la lección sobre estructuras de control.
+Una clase nos permite agrupar datos bajo un tipo con estructura garantizada. Pero por ahora nuestras clases son contenedores pasivos: guardan información, y nada más. Cuando queremos hacer algo con un estudiante (clasificar su calificación, comprobar si aprobó) seguimos recurriendo a funciones externas, como la función `clasificar()` que arrastramos desde la lección sobre estructuras de control.
 
 Eso deja la operación separada del dato sobre el que actúa, cuando en realidad pertenecen juntos: clasificar es algo que un estudiante sabe hacer consigo mismo. La verdadera potencia de las clases aparece cuando los objetos no solo guardan datos, sino que llevan consigo las operaciones que tienen sentido sobre ellos, igual que una lista lleva su `append()` y una cadena su `split()`. Esas operaciones propias son los *métodos*, y construirlos para nuestras propias clases es el tema de la siguiente lección.

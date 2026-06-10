@@ -4,13 +4,13 @@ author: "Carlos Flores"
 format: html
 ---
 
-Todo el código que hemos escrito hasta ahora ha operado en condiciones ideales: las listas siempre tenían elementos, los diccionarios siempre tenían las claves que pedíamos, las funciones siempre recibían el tipo de dato correcto. Eso es conveniente para aprender, pero no refleja la realidad. En cuanto un programa interactúa con el mundo exterior —lee un archivo, procesa datos que alguien más generó, recibe entrada del usuario— las condiciones dejan de ser perfectas. Python responde a esas situaciones lanzando una *excepción*: una señal de que ocurrió algo que el flujo normal no puede manejar.
+Todo el código que hemos escrito hasta ahora ha operado en condiciones ideales: las listas siempre tenían elementos, los diccionarios siempre tenían las claves que pedíamos, las funciones siempre recibían el tipo de dato correcto. Eso es conveniente para aprender, pero no refleja la realidad. En cuanto un programa interactúa con el mundo exterior (lee un archivo, procesa datos que alguien más generó, recibe entrada del usuario) las condiciones dejan de ser perfectas. Python responde a esas situaciones lanzando una *excepción*: una señal de que ocurrió algo que el flujo normal no puede manejar.
 
 Hasta ahora la única estrategia disponible para anticipar problemas ha sido la cláusula de guarda: verificar condiciones con `if` antes de hacer un cálculo y devolver `None` cuando algo no está bien. Eso funciona cuando controlamos los datos de entrada. Cuando no los controlamos, necesitamos una herramienta distinta.
 
 ## Qué es una excepción
 
-Una excepción no es un error del lenguaje: es un mecanismo deliberado. Cuando Python encuentra una situación que no puede resolver —dividir entre cero, acceder a un índice que no existe, operar sobre un tipo incorrecto— construye un objeto que describe el problema y lo *lanza*. Si ese objeto no es capturado por ningún bloque de manejo, el programa se detiene y muestra el *traceback*: el rastro de llamadas que llevó hasta el error.
+Una excepción no es un error del lenguaje: es un mecanismo deliberado. Cuando Python encuentra una situación que no puede resolver (dividir entre cero, acceder a un índice que no existe, operar sobre un tipo incorrecto) construye un objeto que describe el problema y lo *lanza*. Si ese objeto no es capturado por ningún bloque de manejo, el programa se detiene y muestra el *traceback*: el rastro de llamadas que llevó hasta el error.
 
 El alumno ya ha visto tracebacks varias veces a lo largo de la serie, aunque sin que se explicaran formalmente. Antes de aprender a manejar excepciones, conviene aprender a leer ese mensaje, porque contiene toda la información necesaria para entender qué ocurrió.
 
@@ -139,7 +139,7 @@ print(acceder_seguro([1, 2, 3], 10))   # IndexError → None
 
 ### Por qué no capturar todo indiscriminadamente
 
-Una tentación frecuente es escribir `except Exception` o simplemente `except:` para capturar cualquier excepción posible. Eso es casi siempre una mala idea: silencia errores que deberían ser visibles, hace que el código falle de formas misteriosas y dificulta el diagnóstico. Si un `NameError` indica que hay un error de programación —un nombre mal escrito— lo último que conviene es capturarlo y continuar como si nada.
+Una tentación frecuente es escribir `except Exception` o simplemente `except:` para capturar cualquier excepción posible. Eso es casi siempre una mala idea: silencia errores que deberían ser visibles, hace que el código falle de formas misteriosas y dificulta el diagnóstico. Si un `NameError` indica que hay un error de programación (un nombre mal escrito) lo último que conviene es capturarlo y continuar como si nada.
 
 La regla es capturar solo las excepciones que se sabe cómo manejar. Si una excepción puede ocurrir pero no se sabe qué hacer con ella, lo correcto es dejarla propagar: el traceback que produce es más útil que un silencio que oculta el problema.
 
@@ -180,7 +180,7 @@ Sin la cláusula `else`, habría que colocar el `print` y el `return` dentro del
 
 ## La cláusula `finally`
 
-La cláusula `finally` se ejecuta siempre, haya ocurrido una excepción o no, haya sido capturada o no. Su propósito es garantizar que ciertas operaciones de limpieza ocurran sin importar cómo termine el bloque. El caso más natural es liberar un recurso —cerrar un archivo, cerrar una conexión— que debe cerrarse independientemente de si la operación tuvo éxito.
+La cláusula `finally` se ejecuta siempre, haya ocurrido una excepción o no, haya sido capturada o no. Su propósito es garantizar que ciertas operaciones de limpieza ocurran sin importar cómo termine el bloque. El caso más natural es liberar un recurso (cerrar un archivo, cerrar una conexión) que debe cerrarse independientemente de si la operación tuvo éxito.
 
 ```{python}
 def leer_primera_linea(ruta):
@@ -274,11 +274,11 @@ calcular_velocidad_segura(-10, 2)
 calcular_velocidad_segura(100, 0)
 ```
 
-La distinción entre `return None` y `raise` es conceptual: `None` comunica "no hay resultado", mientras que `raise` comunica "los datos son incorrectos y continuar sería un error". Cuando la ausencia de resultado es una posibilidad normal y esperada —una búsqueda que no encuentra nada, un cálculo indefinido pero legítimo— `None` es apropiado. Cuando los datos violan una precondición de la función —algo que nunca debería ocurrir si el código que llama es correcto— `raise` es más preciso.
+La distinción entre `return None` y `raise` es conceptual: `None` comunica "no hay resultado", mientras que `raise` comunica "los datos son incorrectos y continuar sería un error". Cuando la ausencia de resultado es una posibilidad normal y esperada (una búsqueda que no encuentra nada, un cálculo indefinido pero legítimo) `None` es apropiado. Cuando los datos violan una precondición de la función (algo que nunca debería ocurrir si el código que llama es correcto) `raise` es más preciso.
 
 ### `raise` sin argumento
 
-Dentro de un bloque `except`, `raise` sin argumento relanza la excepción que se capturó, propagándola hacia arriba. Esto es útil cuando se quiere hacer algo con la excepción —registrarla, limpiar recursos— sin silenciarla:
+Dentro de un bloque `except`, `raise` sin argumento relanza la excepción que se capturó, propagándola hacia arriba. Esto es útil cuando se quiere hacer algo con la excepción (registrarla, limpiar recursos) sin silenciarla:
 
 ```{python}
 def procesar(valor):
@@ -292,13 +292,13 @@ def procesar(valor):
 
 ## Cuándo usar excepciones y cuándo cláusulas de guarda
 
-Ahora que existen dos mecanismos para manejar situaciones anómalas —las cláusulas de guarda con `if` y `return None` de la lección 5, y el bloque `try / except` con `raise`— conviene tener claro cuándo usar cada uno.
+Ahora que existen dos mecanismos para manejar situaciones anómalas (las cláusulas de guarda con `if` y `return None` de la lección 5, y el bloque `try / except` con `raise`) conviene tener claro cuándo usar cada uno.
 
 Las cláusulas de guarda son apropiadas cuando la condición se puede verificar de forma barata antes de hacer el cálculo: comprobar si una lista está vacía, si un valor es negativo, si una clave existe. Son explícitas y no dependen de que ocurra un error para activarse.
 
 El bloque `try / except` es apropiado cuando la operación puede fallar por razones que no se pueden verificar de antemano o que serían costosas de verificar: abrir un archivo, convertir una cadena a número, acceder a un recurso externo. En esos casos es más natural intentar la operación y capturar el error si ocurre que verificar todas las condiciones posibles antes de intentarla.
 
-Una regla práctica de la comunidad Python es preferir el estilo "pedir perdón en lugar de pedir permiso": intentar la operación y manejar la excepción si falla, en lugar de verificar todas las condiciones posibles antes de intentarla. Ese estilo produce código más conciso y maneja automáticamente condiciones de carrera —situaciones donde la condición cambia entre la verificación y la operación— que las cláusulas de guarda no pueden prevenir.
+Una regla práctica de la comunidad Python es preferir el estilo "pedir perdón en lugar de pedir permiso": intentar la operación y manejar la excepción si falla, en lugar de verificar todas las condiciones posibles antes de intentarla. Ese estilo produce código más conciso y maneja automáticamente condiciones de carrera (situaciones donde la condición cambia entre la verificación y la operación) que las cláusulas de guarda no pueden prevenir.
 
 ## Ejemplo integrador
 
@@ -369,4 +369,4 @@ Vale la pena señalar que `texto.strip()` usa una notación que todavía no hemo
 
 ## Lo que sigue
 
-Con el manejo de errores, el código sabe reaccionar cuando algo sale mal. Pero hay una notación que la serie ha venido usando de forma pragmática sin explicar del todo: `texto.strip()` acaba de aparecer en el ejemplo integrador, y expresiones similares aparecieron en lecciones anteriores. Esa notación de punto —`objeto.operación()`— no es arbitraria. Tiene una explicación precisa que parte de una idea central: en Python, todo valor es un objeto, y un objeto lleva consigo tanto sus datos como las operaciones que pueden hacerse con él. La siguiente lección introduce esa idea de forma sistemática y, de paso, salda todas las operaciones sobre listas, cadenas y diccionarios que la serie ha tenido que diferir desde la lección 4.
+Con el manejo de errores, el código sabe reaccionar cuando algo sale mal. Pero hay una notación que la serie ha venido usando de forma pragmática sin explicar del todo: `texto.strip()` acaba de aparecer en el ejemplo integrador, y expresiones similares aparecieron en lecciones anteriores. Esa notación de punto (`objeto.operación()`) no es arbitraria. Tiene una explicación precisa que parte de una idea central: en Python, todo valor es un objeto, y un objeto lleva consigo tanto sus datos como las operaciones que pueden hacerse con él. La siguiente lección introduce esa idea de forma sistemática y, de paso, salda todas las operaciones sobre listas, cadenas y diccionarios que la serie ha tenido que diferir desde la lección 4.

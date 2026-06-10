@@ -4,7 +4,7 @@ author: "Carlos Flores"
 format: html
 ---
 
-Todo el código que hemos escrito a lo largo de la serie trabaja con datos que existen únicamente mientras el programa se ejecuta: una lista de calificaciones definida en el código, un grupo de estudiantes construido a mano. Cuando el programa termina, esos datos desaparecen. Eso sirve para aprender, pero no refleja cómo se trabaja en la práctica, donde los datos llegan desde fuera —un archivo generado por un instrumento, una hoja de cálculo exportada, un registro acumulado durante meses— y los resultados deben guardarse en algún lugar que persista.
+Todo el código que hemos escrito a lo largo de la serie trabaja con datos que existen únicamente mientras el programa se ejecuta: una lista de calificaciones definida en el código, un grupo de estudiantes construido a mano. Cuando el programa termina, esos datos desaparecen. Eso sirve para aprender, pero no refleja cómo se trabaja en la práctica, donde los datos llegan desde fuera (un archivo generado por un instrumento, una hoja de cálculo exportada, un registro acumulado durante meses) y los resultados deben guardarse en algún lugar que persista.
 
 Esta lección cierra esa brecha. Aprenderemos a leer datos desde un archivo y a escribir resultados en uno, dando a nuestros programas la capacidad de comunicarse con el mundo exterior. Llegamos a este punto con todo lo necesario ya en nuestro repertorio: los métodos de cadena para procesar texto, el manejo de errores para los fallos inevitables, los módulos para los formatos estructurados. Nada de lo que aparece aquí queda pendiente de explicación.
 
@@ -49,7 +49,7 @@ Estas líneas ya usan todo lo que la lección desarrollará en detalle. Las expl
 
 ## Abrir y cerrar un archivo: `open()` y `with`
 
-La función `open()` recibe la ruta de un archivo y devuelve un objeto que representa la conexión con ese archivo en disco. Como todo objeto, tiene métodos —para leer, para escribir— que invocamos con la notación de punto que conocemos desde la lección sobre objetos. Pero esa conexión debe cerrarse cuando se termina de usar: si no, los datos escritos pueden no guardarse y el sistema retiene el recurso innecesariamente.
+La función `open()` recibe la ruta de un archivo y devuelve un objeto que representa la conexión con ese archivo en disco. Como todo objeto, tiene métodos (para leer, para escribir) que invocamos con la notación de punto que conocemos desde la lección sobre objetos. Pero esa conexión debe cerrarse cuando se termina de usar: si no, los datos escritos pueden no guardarse y el sistema retiene el recurso innecesariamente.
 
 Cerrar el archivo a mano es fácil de olvidar, sobre todo si ocurre un error en medio. En la lección sobre errores vimos que la cláusula `finally` garantizaba la ejecución de código pase lo que pase, y mencionamos que habría una forma más elegante de cerrar archivos. Esa forma es el bloque `with`:
 
@@ -294,7 +294,7 @@ if contenido is not None:
 leer_si_existe("no_existe.txt")
 ```
 
-Verificar con `os.path.exists()` antes de abrir es una cláusula de guarda, como las de la lección sobre estructuras de control. La alternativa —intentar abrir y capturar el `FileNotFoundError`— es igualmente válida; vimos esa preferencia por "intentar y manejar el error" en la lección sobre errores. Cuál usar depende de si la ausencia del archivo es un caso esperado o verdaderamente excepcional.
+Verificar con `os.path.exists()` antes de abrir es una cláusula de guarda, como las de la lección sobre estructuras de control. La alternativa (intentar abrir y capturar el `FileNotFoundError`) es igualmente válida; vimos esa preferencia por "intentar y manejar el error" en la lección sobre errores. Cuál usar depende de si la ausencia del archivo es un caso esperado o verdaderamente excepcional.
 
 ## Ejemplo integrador
 
@@ -383,4 +383,4 @@ Este programa es un compendio de la serie completa. Lee datos de un archivo con 
 
 Con esta lección termina la construcción de Python como lenguaje. Hemos recorrido un camino completo: empezamos haciendo aritmética como con una calculadora, y terminamos leyendo datos de archivos, organizándolos en objetos de tipos que nosotros diseñamos, y apoyándonos en bibliotecas de código ya hecho. Cada concepto apareció porque el anterior se quedaba corto, y cada uno se construyó sobre los que vinieron antes.
 
-Lo que sigue ya no es aprender más Python, sino usarlo. Las herramientas de la ciencia de datos —NumPy para cálculo numérico, pandas para manejar tablas de datos, Matplotlib para visualizar— se construyen enteramente sobre los cimientos que esta serie ha colocado. Cuando se importe `numpy`, será con el `import` de la lección sobre módulos; cuando se acceda a un método de un arreglo, será con la notación de punto de la lección sobre objetos; cuando se filtre una tabla, será con la lógica de las comprensiones y condiciones que practicamos sin descanso. No habrá que aprender un lenguaje nuevo, sino un vocabulario nuevo dentro del mismo lenguaje. Y para eso, ya estás listo.
+Lo que sigue ya no es aprender más Python, sino usarlo. Las herramientas de la ciencia de datos (NumPy para cálculo numérico, pandas para manejar tablas de datos, Matplotlib para visualizar) se construyen enteramente sobre los cimientos que esta serie ha colocado. Cuando se importe `numpy`, será con el `import` de la lección sobre módulos; cuando se acceda a un método de un arreglo, será con la notación de punto de la lección sobre objetos; cuando se filtre una tabla, será con la lógica de las comprensiones y condiciones que practicamos sin descanso. No habrá que aprender un lenguaje nuevo, sino un vocabulario nuevo dentro del mismo lenguaje. Y para eso, ya estás listo.

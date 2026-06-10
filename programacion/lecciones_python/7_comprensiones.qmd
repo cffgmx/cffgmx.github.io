@@ -51,7 +51,7 @@ for variable in colección:
 resultado = [expresión for variable in colección]
 ```
 
-Lo que antes ocupaba tres líneas ahora ocupa una, y la intención —"construir una lista aplicando esta transformación a cada elemento"— queda expresada de forma más directa.
+Lo que antes ocupaba tres líneas ahora ocupa una, y la intención ("construir una lista aplicando esta transformación a cada elemento") queda expresada de forma más directa.
 
 ## Comprensiones con filtro
 
@@ -167,7 +167,7 @@ niveles = [clasificar(cal) for cal in calificaciones]
 print(niveles)
 ```
 
-Lo que antes requería un `for` con dos líneas en el cuerpo —llamar a `clasificar` y guardar el resultado— ahora queda en una sola expresión. La función se aplica a cada elemento exactamente igual que en el bucle, pero sin el andamiaje de la acumulación.
+Lo que antes requería un `for` con dos líneas en el cuerpo (llamar a `clasificar` y guardar el resultado) ahora queda en una sola expresión. La función se aplica a cada elemento exactamente igual que en el bucle, pero sin el andamiaje de la acumulación.
 
 También es posible combinar la llamada a una función con un filtro. Por ejemplo, obtener la clasificación solo de los alumnos que pertenecen a una carrera concreta:
 

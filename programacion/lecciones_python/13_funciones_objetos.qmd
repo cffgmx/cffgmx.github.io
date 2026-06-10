@@ -6,7 +6,7 @@ format: html
 
 A lo largo de las últimas lecciones hemos tratado casi todo en Python como un objeto: los números, las cadenas, las listas, los diccionarios, y finalmente los tipos que nosotros mismos definimos con clases. Queda un caso que hemos usado constantemente sin examinarlo bajo esa luz: las funciones. En esta lección veremos que las funciones también son objetos, en el mismo sentido técnico que una lista o una instancia de una clase. Y esa idea, que parece menor, abre una forma de programar que aparece por todas partes en las herramientas de ciencia de datos.
 
-Que una función sea un objeto significa que puede tratarse como cualquier otro valor: asignarse a una variable, guardarse en una lista, y —lo más importante— pasarse como argumento a otra función. Esta última posibilidad es la que da nombre a las *funciones de orden superior*, y la que motiva una sintaxis nueva, la *expresión lambda*, para escribir funciones pequeñas sobre la marcha.
+Que una función sea un objeto significa que puede tratarse como cualquier otro valor: asignarse a una variable, guardarse en una lista, y (lo más importante) pasarse como argumento a otra función. Esta última posibilidad es la que da nombre a las *funciones de orden superior*, y la que motiva una sintaxis nueva, la *expresión lambda*, para escribir funciones pequeñas sobre la marcha.
 
 ## Las funciones son objetos
 
@@ -75,7 +75,7 @@ for e in ordenados:
     print(f"{e['nombre']}: {e['calificacion']}")
 ```
 
-`sorted()` llama a `obtener_calificacion` por nosotros, una vez por cada elemento, y usa el resultado para ordenar. Nótese que pasamos `key=obtener_calificacion` sin paréntesis: le entregamos el objeto función para que `sorted()` la llame cuando lo necesite, no el resultado de llamarla. Esta distinción —pasar la función frente a llamarla— es exactamente la misma que vimos al asignar `evaluar = clasificar`.
+`sorted()` llama a `obtener_calificacion` por nosotros, una vez por cada elemento, y usa el resultado para ordenar. Nótese que pasamos `key=obtener_calificacion` sin paréntesis: le entregamos el objeto función para que `sorted()` la llame cuando lo necesite, no el resultado de llamarla. Esta distinción (pasar la función frente a llamarla) es exactamente la misma que vimos al asignar `evaluar = clasificar`.
 
 ## Expresiones `lambda`
 
@@ -171,7 +171,7 @@ print(aprueba_posgrado(7.5))       # False: 7.5 < 8.0
 
 `crear_aprobador` define una función interna `aprueba` y la devuelve. Lo notable es que la función devuelta recuerda el valor de `umbral` que tenía cuando se creó: `aprueba_licenciatura` recuerda `6.0`, y `aprueba_posgrado` recuerda `8.0`, aunque `crear_aprobador` ya terminó de ejecutarse en ambos casos. Esa capacidad de una función de recordar el entorno en que fue creada se llama *clausura*.
 
-La clausura conecta de forma natural con lo que vimos en la lección sobre herencia. Allí, distintos tipos de estudiante aprobaban con umbrales distintos mediante sobrescritura de métodos. Aquí logramos algo parecido sin clases: generamos funciones especializadas a partir de una plantilla común. Son dos formas de evitar la duplicación —una con objetos, otra con funciones—, y conocer ambas amplía el repertorio para elegir la más adecuada según el problema.
+La clausura conecta de forma natural con lo que vimos en la lección sobre herencia. Allí, distintos tipos de estudiante aprobaban con umbrales distintos mediante sobrescritura de métodos. Aquí logramos algo parecido sin clases: generamos funciones especializadas a partir de una plantilla común. Son dos formas de evitar la duplicación (una con objetos, otra con funciones), y conocer ambas amplía el repertorio para elegir la más adecuada según el problema.
 
 ## Ejemplo integrador
 

@@ -4,7 +4,7 @@ author: "Carlos Flores"
 format: html
 ---
 
-A lo largo de toda la serie ha aparecido una notación que nunca se explicó del todo. En la lección sobre errores escribimos `texto.strip()` para limpiar una cadena; antes, en varias ocasiones, se mencionó que agregar elementos a una lista o recorrer las claves de un diccionario "requería métodos que veríamos más adelante". Ese punto y esos paréntesis —la forma `objeto.operación()`— no son una convención arbitraria de Python. Tienen una explicación precisa, y entenderla cambia la manera de ver todo lo que hemos hecho hasta ahora.
+A lo largo de toda la serie ha aparecido una notación que nunca se explicó del todo. En la lección sobre errores escribimos `texto.strip()` para limpiar una cadena; antes, en varias ocasiones, se mencionó que agregar elementos a una lista o recorrer las claves de un diccionario "requería métodos que veríamos más adelante". Ese punto y esos paréntesis (la forma `objeto.operación()`) no son una convención arbitraria de Python. Tienen una explicación precisa, y entenderla cambia la manera de ver todo lo que hemos hecho hasta ahora.
 
 La explicación parte de una idea que la lección anterior dejó enunciada: en Python, todo valor es un *objeto*. Un número es un objeto, una cadena es un objeto, una lista es un objeto. Y un objeto no es solo un dato: es un dato que lleva consigo las operaciones que pueden hacerse con él. La notación de punto es la forma de invocar esas operaciones.
 
@@ -21,7 +21,7 @@ print(type([1, 2, 3]))
 print(type({"a": 1}))
 ```
 
-Cada uno de estos tipos —`float`, `str`, `list`, `dict`— define qué datos puede contener el objeto y qué operaciones puede realizar. Esas operaciones asociadas a un objeto se llaman *métodos*.
+Cada uno de estos tipos (`float`, `str`, `list`, `dict`) define qué datos puede contener el objeto y qué operaciones puede realizar. Esas operaciones asociadas a un objeto se llaman *métodos*.
 
 ## La notación de punto
 
@@ -38,7 +38,7 @@ Para descubrir qué métodos tiene un objeto, la función `dir()` los lista. Com
 print(dir(list))
 ```
 
-La salida incluye muchos nombres rodeados de guiones bajos, como `__len__` o `__add__`: son métodos especiales internos de Python, que dejamos para más adelante. Los demás —`append`, `sort`, `count` y compañía— son las operaciones que cualquier lista sabe realizar, y las que veremos a continuación.
+La salida incluye muchos nombres rodeados de guiones bajos, como `__len__` o `__add__`: son métodos especiales internos de Python, que dejamos para más adelante. Los demás (`append`, `sort`, `count` y compañía) son las operaciones que cualquier lista sabe realizar, y las que veremos a continuación.
 
 ## Métodos de las listas
 
@@ -54,7 +54,7 @@ print(temperaturas)
 
 Conviene detenerse en una diferencia importante. En la lección sobre bucles construíamos listas con `lista = lista + [elemento]`, lo que crea una lista nueva en cada paso. `append()` no crea nada nuevo: modifica directamente la lista sobre la que actúa. Por eso `temperaturas.append(21.3)` no se asigna a ninguna variable; el cambio ocurre dentro del objeto `temperaturas`. Escribir `temperaturas = temperaturas.append(21.3)` sería un error silencioso, porque `append()` no devuelve la lista modificada, sino `None`.
 
-Esta distinción —entre métodos que modifican el objeto y métodos que devuelven un valor nuevo— recorrerá toda la lección. Conviene tenerla presente desde el principio.
+Esta distinción (entre métodos que modifican el objeto y métodos que devuelven un valor nuevo) recorrerá toda la lección. Conviene tenerla presente desde el principio.
 
 El método `insert()` agrega un elemento en una posición específica, desplazando los demás:
 
@@ -198,7 +198,7 @@ materias.discard("Álgebra")
 print(materias)
 ```
 
-Las operaciones de conjuntos que vimos con operadores en la lección sobre estructuras de datos —unión, intersección, diferencia— también tienen su forma como método. `grupo_a | grupo_b` puede escribirse `grupo_a.union(grupo_b)`, y de forma análoga `intersection()` y `difference()`:
+Las operaciones de conjuntos que vimos con operadores en la lección sobre estructuras de datos (unión, intersección, diferencia) también tienen su forma como método. `grupo_a | grupo_b` puede escribirse `grupo_a.union(grupo_b)`, y de forma análoga `intersection()` y `difference()`:
 
 ```{python}
 manana = {"Ana", "Luis", "María"}
@@ -280,6 +280,6 @@ El ejemplo usa `split()` para separar los campos, `strip()` para limpiar los esp
 
 ## Lo que sigue
 
-Hemos visto que los tipos de Python —listas, cadenas, diccionarios, conjuntos— son objetos que combinan datos con las operaciones que pueden realizarse sobre ellos. Pero hasta ahora solo hemos usado los tipos que el lenguaje trae de fábrica. La pregunta natural es si podemos construir nuestros propios tipos: objetos hechos a la medida de un problema, que agrupen los datos que nos interesan y las operaciones que tienen sentido sobre ellos.
+Hemos visto que los tipos de Python (listas, cadenas, diccionarios, conjuntos) son objetos que combinan datos con las operaciones que pueden realizarse sobre ellos. Pero hasta ahora solo hemos usado los tipos que el lenguaje trae de fábrica. La pregunta natural es si podemos construir nuestros propios tipos: objetos hechos a la medida de un problema, que agrupen los datos que nos interesan y las operaciones que tienen sentido sobre ellos.
 
 A lo largo de la serie hemos representado a un estudiante como un diccionario con claves `nombre`, `carrera` y `calificacion`. Funciona, pero nada impide escribir mal una clave, olvidar un campo o mezclar tipos distintos. Lo que necesitamos es una forma de definir, de una vez por todas, qué es un estudiante: qué datos lo componen y qué se puede hacer con él. Eso es precisamente lo que permiten las *clases*, y es el tema de la siguiente lección.

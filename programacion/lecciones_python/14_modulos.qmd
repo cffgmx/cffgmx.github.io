@@ -4,7 +4,7 @@ author: "Carlos Flores"
 format: html
 ---
 
-Todo el código que hemos escrito hasta ahora se sostiene sobre dos fuentes: las funciones que Python trae incorporadas —`len`, `sum`, `sorted`, `print`— y las que nosotros mismos definimos. Cada vez que necesitábamos algo, o ya existía como función built-in, o lo construíamos desde cero. Pero hay un tercer recurso, mucho más amplio que los dos anteriores, que aún no hemos tocado.
+Todo el código que hemos escrito hasta ahora se sostiene sobre dos fuentes: las funciones que Python trae incorporadas (`len`, `sum`, `sorted`, `print`) y las que nosotros mismos definimos. Cada vez que necesitábamos algo, o ya existía como función built-in, o lo construíamos desde cero. Pero hay un tercer recurso, mucho más amplio que los dos anteriores, que aún no hemos tocado.
 
 Raíces cuadradas, logaritmos, el número $\pi$, generación de números aleatorios, cálculo de la desviación estándar: son operaciones que millones de programas necesitan, y que alguien ya escribió, probó y dejó disponibles. Reimplementarlas sería absurdo y propenso a errores. Python organiza todo ese código ya hecho en *módulos*, y acceder a ellos es cuestión de una sola instrucción. Esta lección muestra cómo.
 
@@ -210,4 +210,4 @@ El ejemplo combina tres módulos con todo lo que sabemos del lenguaje. `random.g
 
 Con los módulos, podemos apoyarnos en el trabajo ya hecho por otros en lugar de partir siempre de cero. Es la última pieza del lenguaje que nos faltaba antes de poder trabajar con datos reales.
 
-Y los datos reales viven fuera del programa: en archivos. Hasta ahora todos nuestros datos —las temperaturas, las calificaciones, los grupos de estudiantes— los escribimos directamente en el código. Eso sirve para aprender, pero no para trabajar: los datos de verdad llegan en archivos de texto, hojas de cálculo exportadas, registros generados por instrumentos. La última lección de esta etapa muestra cómo leer datos desde un archivo y cómo guardar resultados en uno, dando al fin a nuestros programas la capacidad de comunicarse con el mundo exterior.
+Y los datos reales viven fuera del programa: en archivos. Hasta ahora todos nuestros datos (las temperaturas, las calificaciones, los grupos de estudiantes) los escribimos directamente en el código. Eso sirve para aprender, pero no para trabajar: los datos de verdad llegan en archivos de texto, hojas de cálculo exportadas, registros generados por instrumentos. La última lección de esta etapa muestra cómo leer datos desde un archivo y cómo guardar resultados en uno, dando al fin a nuestros programas la capacidad de comunicarse con el mundo exterior.

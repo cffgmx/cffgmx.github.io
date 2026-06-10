@@ -4,7 +4,7 @@ author: "Carlos Flores"
 format: html
 ---
 
-La lección anterior terminó con un problema concreto. La universidad distingue entre estudiantes de licenciatura y de posgrado. Ambos comparten casi todo —nombre, carrera, calificación, la forma de clasificarse— pero el de posgrado tiene además un director de tesis y una regla de aprobación más estricta. Con lo que sabemos, la única salida sería escribir una clase nueva y copiar en ella todo lo que ya está en `Estudiante`, cambiando solo lo que difiere.
+La lección anterior terminó con un problema concreto. La universidad distingue entre estudiantes de licenciatura y de posgrado. Ambos comparten casi todo (nombre, carrera, calificación, la forma de clasificarse) pero el de posgrado tiene además un director de tesis y una regla de aprobación más estricta. Con lo que sabemos, la única salida sería escribir una clase nueva y copiar en ella todo lo que ya está en `Estudiante`, cambiando solo lo que difiere.
 
 Copiar código es siempre una señal de alarma. Si mañana cambia la forma de clasificar una calificación, habría que corregirla en dos lugares y recordar que ambos existen; tarde o temprano uno queda desactualizado. Lo que necesitamos es expresar la relación real entre estas clases: un estudiante de posgrado *es* un estudiante, con algunas cosas añadidas. Esa relación se llama *herencia*, y es el mecanismo que evita la duplicación.
 
@@ -54,7 +54,7 @@ Sin escribir una sola línea de lógica, `EstudiantePosgrado` tiene constructor,
 
 Una clase hija que solo hereda no aporta nada. Lo interesante es que añada lo suyo. El estudiante de posgrado tiene un director de tesis, un atributo que el estudiante común no tiene. Para incorporarlo, la hija necesita su propio `__init__`.
 
-Aquí aparece una tensión. Si la hija define `__init__`, reemplaza al de la padre, y perderíamos la inicialización de `nombre`, `carrera` y `calificacion`. No queremos reescribir esa inicialización —eso sería volver a copiar—; queremos reutilizar la de la padre y solo añadir lo nuevo. Para eso existe `super()`, que da acceso a la clase padre desde la hija:
+Aquí aparece una tensión. Si la hija define `__init__`, reemplaza al de la padre, y perderíamos la inicialización de `nombre`, `carrera` y `calificacion`. No queremos reescribir esa inicialización (eso sería volver a copiar); queremos reutilizar la de la padre y solo añadir lo nuevo. Para eso existe `super()`, que da acceso a la clase padre desde la hija:
 
 ```{python}
 class EstudiantePosgrado(Estudiante):
@@ -149,7 +149,7 @@ print(isinstance(luis, EstudiantePosgrado))    # False: un Estudiante no es de p
 
 ## Composición: tener en lugar de ser
 
-La herencia expresa una relación de tipo "es un": un estudiante de posgrado *es* un estudiante. Pero no toda relación entre clases es de esa forma. Un grupo *no es* un estudiante; un grupo *tiene* estudiantes. Esa relación —"tiene un"— se expresa de otra manera, llamada *composición*: una clase contiene instancias de otra como atributos.
+La herencia expresa una relación de tipo "es un": un estudiante de posgrado *es* un estudiante. Pero no toda relación entre clases es de esa forma. Un grupo *no es* un estudiante; un grupo *tiene* estudiantes. Esa relación ("tiene un") se expresa de otra manera, llamada *composición*: una clase contiene instancias de otra como atributos.
 
 De hecho, ya usamos composición sin nombrarla. La clase `Grupo` de la lección anterior contenía una lista de estudiantes:
 
@@ -180,7 +180,7 @@ print(f"Promedio del grupo: {grupo.promedio():.2f}")
 
 `Grupo` no hereda de `Estudiante`: lo contiene. El atributo `self.estudiantes` guarda una lista de instancias de `Estudiante`, y los métodos de `Grupo` operan sobre ellas. Esta es la relación correcta, porque un grupo no es un tipo de estudiante; es una agrupación de estudiantes.
 
-La distinción entre herencia y composición se resume en una pregunta. Si la relación entre dos clases se describe naturalmente con "es un", corresponde herencia: un estudiante de posgrado es un estudiante, un círculo es una figura. Si se describe con "tiene un", corresponde composición: un grupo tiene estudiantes, un coche tiene un motor. Confundir las dos —hacer que `Grupo` herede de `Estudiante`, por ejemplo— produce jerarquías que no tienen sentido y que se complican a medida que el programa crece.
+La distinción entre herencia y composición se resume en una pregunta. Si la relación entre dos clases se describe naturalmente con "es un", corresponde herencia: un estudiante de posgrado es un estudiante, un círculo es una figura. Si se describe con "tiene un", corresponde composición: un grupo tiene estudiantes, un coche tiene un motor. Confundir las dos (hacer que `Grupo` herede de `Estudiante`, por ejemplo) produce jerarquías que no tienen sentido y que se complican a medida que el programa crece.
 
 ## Por qué esto importa para lo que viene
 
@@ -250,4 +250,4 @@ El detalle clave está en el método `aprobados()` de `Grupo`. Recorre `self.int
 
 Con esta lección cerramos la construcción de tipos propios: sabemos definir clases, dotarlas de datos y comportamiento, relacionarlas por herencia y combinarlas por composición. Es un conjunto completo de herramientas para organizar código alrededor de los objetos de un problema.
 
-Hasta ahora, sin embargo, hemos trabajado siempre con lo que Python trae de fábrica y con lo que nosotros mismos escribimos. Cada función la hemos definido desde cero. Pero gran parte de lo que un programa necesita —raíces cuadradas, números aleatorios, promedios y desviaciones, manejo de fechas— ya está escrito por otros, probado y disponible. Acceder a ese trabajo previo, en lugar de reinventarlo, es lo que permite el sistema de *módulos* de Python. La siguiente lección muestra cómo importar y usar esa enorme biblioteca de código ya hecho.
+Hasta ahora, sin embargo, hemos trabajado siempre con lo que Python trae de fábrica y con lo que nosotros mismos escribimos. Cada función la hemos definido desde cero. Pero gran parte de lo que un programa necesita (raíces cuadradas, números aleatorios, promedios y desviaciones, manejo de fechas) ya está escrito por otros, probado y disponible. Acceder a ese trabajo previo, en lugar de reinventarlo, es lo que permite el sistema de *módulos* de Python. La siguiente lección muestra cómo importar y usar esa enorme biblioteca de código ya hecho.
