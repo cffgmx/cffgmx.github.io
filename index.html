@@ -339,7 +339,7 @@
         <div class="entry-desc">Tesis de licenciatura en matemáticas sobre cohomología.</div>
       </li>
       <li>
-        <div class="entry-title" data-md="piezas-sueltas/cohomology_learning.md">Periods, Obstructions, and Duality — A Cohomological Reading of the Geometry of Model Spaces</div>
+        <div class="entry-title" data-pdf-note="piezas-sueltas/cohomology_learning.pdf" data-note="This is an exploratory essay, not a peer-reviewed paper. It aims to be speculative in its extrapolations but rigorous in its foundations. I do not claim to have solved any open problem, I claim only that this way of looking at things is coherent and may be useful.">Periods, Obstructions, and Duality — A Cohomological Reading of the Geometry of Model Spaces</div>
         <div class="entry-meta">Geometría de la información · Ensayo</div>
         <div class="entry-desc">Propone una lectura de la inferencia estadística a través de la cohomología de de Rham del espacio de parámetros: curvatura de Fisher, clases características, monodromía del estimador y dualidad de Poincaré entre cociclos de pérdida y ciclos de datos.</div>
       </li>
@@ -570,6 +570,25 @@
     }
   }
 
+  function loadPdfWithNote(path, note) {
+    if (!ignoreHash) {
+      ignoreHash = true;
+      location.hash = '/' + path;
+      ignoreHash = false;
+    }
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-viewer').classList.add('active');
+    document.querySelectorAll('nav ul li a').forEach(a => a.classList.remove('active'));
+    const content = document.getElementById('article-content');
+    content.innerHTML =
+      '<div style="margin-bottom:2rem;padding:1.5rem;background:#e8e8e6;border:1px solid var(--rule);border-radius:4px;">' +
+      '<p style="margin:0;font-style:italic;">' + note + '</p>' +
+      '</div>' +
+      '<p><button id="viewer-pdf-btn" style="background:#1a1a1a;color:#f5f5f3;border:none;padding:0.6rem 1.4rem;font-family:\'DM Mono\',monospace;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:2px;">Ver PDF</button></p>';
+    document.getElementById('viewer-pdf-btn').onclick = function() { loadPdf(path); };
+    window.scrollTo(0, 0);
+  }
+
   function loadArticle(path) {
     const content = document.getElementById('article-content');
 
@@ -647,6 +666,12 @@
     while (el && el !== document) {
       const path = el.getAttribute && (el.getAttribute('data-md') || el.getAttribute('data-pdf'));
       if (path) { loadFile(path); break; }
+      const pdfNote = el.getAttribute && el.getAttribute('data-pdf-note');
+      if (pdfNote) {
+        const note = el.getAttribute('data-note') || '';
+        loadPdfWithNote(pdfNote, note);
+        break;
+      }
       el = el.parentElement;
     }
   });
@@ -661,8 +686,16 @@
     if (hash.startsWith('/')) {
       const path = hash.slice(1);
       const el = document.querySelector('[data-md="' + path + '"]') ||
-                  document.querySelector('[data-pdf="' + path + '"]');
-      if (el) loadFile(path);
+                  document.querySelector('[data-pdf="' + path + '"]') ||
+                  document.querySelector('[data-pdf-note="' + path + '"]');
+      if (el) {
+        const pdfNote = el.getAttribute('data-pdf-note');
+        if (pdfNote) {
+          loadPdfWithNote(pdfNote, el.getAttribute('data-note') || '');
+        } else {
+          loadFile(path);
+        }
+      }
       return;
     }
     const link = document.querySelector('nav ul li a[href="#' + hash + '"]');
