@@ -2,16 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>Regresión Lineal – ISL — Introducción al Aprendizaje Estadístico</title>
 <style>
-/* Default styles provided by pandoc.
-** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -36,16 +33,15 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../chapters/04-clasificacion/index.html" rel="next">
 <link href="../../chapters/02-aprendizaje-estadistico/index.html" rel="prev">
 <link href="../../favicon.png" rel="icon" type="image/png">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-60d377fe6900cd239ff3993f5926f011.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-4f5b1b66c3361d29a114f26414f8eb5d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-bc840c0bc744c19c040ac279dfb508e6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-8bc56bd75332d2ff235ce90f65bf5167.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -60,7 +56,7 @@ ul.task-list li input[type="checkbox"] {
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "No se han encontrado resultados",
+    "search-no-results-text": "Sin resultados",
     "search-matching-documents-text": "documentos encontrados",
     "search-copy-link-title": "Copiar el enlace en la búsqueda",
     "search-hide-matches-text": "Ocultar resultados adicionales",
@@ -80,7 +76,7 @@ ul.task-list li input[type="checkbox"] {
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -93,7 +89,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+      if (mathElements[i].tagName == "SPAN") {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -111,7 +107,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-sidebar docked fullcontent quarto-light">
+<body class="nav-sidebar docked fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -279,7 +275,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Fecha de publicación</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">8 de junio de 2026</p>
+      <p class="date">16 de junio de 2026</p>
     </div>
   </div>
   
@@ -463,9 +459,13 @@ t = \frac{\hat{\beta}_1 - 0}{\text{SE}(\hat{\beta}_1)}, \qquad (3.14)
 \]</span></p>
 </div>
 <p>que mide el número de desviaciones estándar a las que <span class="math inline">\(\hat{\beta}_1\)</span> está de 0. Si realmente no existe relación entre <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>, entonces esperamos que <a href="#eq-3-14" class="quarto-xref">(3.14)</a> tenga una distribución <span class="math inline">\(t\)</span> con <span class="math inline">\(n - 2\)</span> grados de libertad. La distribución <span class="math inline">\(t\)</span> tiene forma de campana y para valores de <span class="math inline">\(n\)</span> mayores que aproximadamente 30 es bastante similar a la distribución normal estándar. En consecuencia, es sencillo calcular la probabilidad de observar cualquier número igual a <span class="math inline">\(|t|\)</span> o mayor en valor absoluto, asumiendo <span class="math inline">\(\beta_1 = 0\)</span>. Llamamos a esta probabilidad el <em>valor p</em> (<em>p-value</em>). A grandes rasgos, interpretamos el <em>valor p</em> de la siguiente manera: un <em>valor p</em> pequeño indica que es poco probable observar una asociación tan sustancial entre el predictor y la variable respuesta debido al azar, en ausencia de cualquier asociación real entre el predictor y la variable respuesta. Por lo tanto, si vemos un <em>valor p</em> pequeño, entonces podemos inferir que existe una asociación entre el predictor y la variable respuesta. Rechazamos la hipótesis nula —es decir, declaramos que existe una relación entre <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>— si el <em>valor p</em> es suficientemente pequeño. Los puntos de corte típicos para el <em>valor p</em> para rechazar la hipótesis nula son 5% o 1%, aunque este tema se explorará con mucho mayor detalle en el Capítulo 13. Cuando <span class="math inline">\(n = 30\)</span>, estos corresponden a estadísticos <span class="math inline">\(t\)</span> <a href="#eq-3-14" class="quarto-xref">(3.14)</a> de alrededor de 2 y 2.75, respectivamente.</p>
-<p><a id="tbl-3-1"></a></p>
+<div id="tbl-3-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;1: Tabla 3.1: Para los datos Advertising, coeficientes del modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre el presupuesto de publicidad en TV. Un aumento de <span class="math inline">\(1{,}000\)</span> en el presupuesto de publicidad en TV está asociado con un aumento en las ventas de alrededor de 50 unidades. (Recordemos que la variable sales está en miles de unidades, y la variable TV está en miles de dólares.)
+</figcaption>
+<div aria-describedby="tbl-3-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<caption>Tabla 3.1: Para los datos Advertising, coeficientes del modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre el presupuesto de publicidad en TV. Un aumento de <span class="math inline">\(1{,}000\)</span> en el presupuesto de publicidad en TV está asociado con un aumento en las ventas de alrededor de 50 unidades. (Recordemos que la variable sales está en miles de unidades, y la variable TV está en miles de dólares.)</caption>
 <colgroup>
 <col style="width: 19%">
 <col style="width: 19%">
@@ -499,14 +499,21 @@ t = \frac{\hat{\beta}_1 - 0}{\text{SE}(\hat{\beta}_1)}, \qquad (3.14)
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 <p>La <a href="#tbl-3-1" class="quarto-xref">Tabla&nbsp;3.1</a> proporciona detalles del modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre el presupuesto de publicidad en <code>TV</code> para los datos <code>Advertising</code>. Nótese que los coeficientes para <span class="math inline">\(\hat{\beta}_0\)</span> y <span class="math inline">\(\hat{\beta}_1\)</span> son muy grandes en relación con sus errores estándar, por lo que los estadísticos <span class="math inline">\(t\)</span> también son grandes; las probabilidades de ver tales valores si <span class="math inline">\(H_0\)</span> es verdadera son virtualmente cero. Por lo tanto, podemos concluir que <span class="math inline">\(\beta_0 \neq 0\)</span> y <span class="math inline">\(\beta_1 \neq 0\)</span>.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 </section>
 <section id="evaluación-de-la-precisión-del-modelo" class="level3">
-<h3 class="anchored" data-anchor-id="evaluación-de-la-precisión-del-modelo">3.1.3 Evaluación de la Precisión del Modelo</h3>
+<h3 class="anchored">3.1.3 Evaluación de la Precisión del Modelo</h3>
 <p>Una vez que hemos rechazado la hipótesis nula <a href="#eq-3-12" class="quarto-xref">(3.12)</a> a favor de la hipótesis alternativa <a href="#eq-3-13" class="quarto-xref">(3.13)</a>, es natural querer cuantificar el grado en que el modelo se ajusta a los datos. La calidad de un ajuste de regresión lineal se evalúa típicamente usando dos cantidades relacionadas: el <em>error estándar residual</em> (<em>residual standard error</em>, RSE) y el estadístico <span class="math inline">\(R^2\)</span>.</p>
-<p><a id="tbl-3-2"></a></p>
+<div id="tbl-3-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;2: Tabla 3.2: Para los datos Advertising, más información sobre el modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre el presupuesto de publicidad en TV.
+</figcaption>
+<div aria-describedby="tbl-3-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<caption>Tabla 3.2: Para los datos Advertising, más información sobre el modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre el presupuesto de publicidad en TV.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Cantidad</th>
@@ -528,6 +535,9 @@ t = \frac{\hat{\beta}_1 - 0}{\text{SE}(\hat{\beta}_1)}, \qquad (3.14)
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 <p>La <a href="#tbl-3-2" class="quarto-xref">Tabla&nbsp;3.2</a> muestra el RSE, el estadístico <span class="math inline">\(R^2\)</span> y el <em>estadístico F</em> (<em>F-statistic</em>) (que se describirá en la Sección 3.2.2) para la regresión lineal del número de unidades vendidas sobre el presupuesto de publicidad en <code>TV</code>.</p>
 <p><strong>Error Estándar Residual</strong></p>
 <p>Recordemos del modelo <a href="#eq-3-5" class="quarto-xref">(3.5)</a> que asociado con cada observación hay un término de error <span class="math inline">\(\epsilon\)</span>. Debido a la presencia de estos términos de error, incluso si conociéramos la verdadera línea de regresión (es decir, incluso si <span class="math inline">\(\beta_0\)</span> y <span class="math inline">\(\beta_1\)</span> fueran conocidos), no podríamos predecir perfectamente <span class="math inline">\(Y\)</span> a partir de <span class="math inline">\(X\)</span>. El RSE es una estimación de la desviación estándar de <span class="math inline">\(\epsilon\)</span>. A grandes rasgos, es la cantidad promedio en que la variable respuesta se desviará de la verdadera línea de regresión. Se calcula usando la fórmula</p>
@@ -561,7 +571,7 @@ R^2 = \frac{\text{TSS} - \text{RSS}}{\text{TSS}} = 1 - \frac{\text{RSS}}{\text{T
 \]</span></p>
 </div>
 <p>es también una medida de la relación lineal entre <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> Esto sugiere que podríamos usar <span class="math inline">\(r = \text{Cor}(X, Y)\)</span> en lugar de <span class="math inline">\(R^2\)</span> para evaluar el ajuste del modelo lineal. De hecho, se puede demostrar que en el contexto de la regresión lineal simple, <span class="math inline">\(R^2 = r^2\)</span>. En otras palabras, la correlación al cuadrado y el estadístico <span class="math inline">\(R^2\)</span> son idénticos. Sin embargo, en la siguiente sección discutiremos el problema de la <em>regresión lineal múltiple</em>, en el cual usamos varios predictores simultáneamente para predecir la variable respuesta. El concepto de correlación entre los predictores y la variable respuesta no se extiende automáticamente a este contexto, ya que la correlación cuantifica la asociación entre un solo par de variables en lugar de entre un número mayor de variables. Veremos que <span class="math inline">\(R^2\)</span> cumple este papel.</p>
-<p><a id="tbl-3-3"></a></p>
+<div id="tbl-3-3" class="anchored">
 <p><strong>Regresión simple de sales sobre radio</strong></p>
 <table class="caption-top table">
 <colgroup>
@@ -634,8 +644,7 @@ R^2 = \frac{\text{TSS} - \text{RSS}}{\text{TSS}} = 1 - \frac{\text{RSS}}{\text{T
 </table>
 <p class="figure-caption" style="margin-top:0.5em; text-align:center;">
 </p><p>Tabla&nbsp;3.3: Más modelos de regresión lineal simple para los datos Advertising. Coeficientes del modelo de regresión lineal simple para el número de unidades vendidas sobre el presupuesto de publicidad en radio (arriba) y en newspaper (abajo). Un aumento de <span class="math inline">\(1{,}000\)</span> en el gasto en publicidad radial está asociado con un aumento promedio en las ventas de alrededor de 203 unidades, mientras que el mismo aumento en el gasto en publicidad en periódicos está asociado con un aumento promedio en las ventas de alrededor de 55 unidades. (Nótese que la variable sales está en miles de unidades, y las variables radio y newspaper están en miles de dólares.)</p>
-</section>
-</section>
+</div>
 <section id="regresión-lineal-múltiple" class="level2">
 <h2 class="anchored" data-anchor-id="regresión-lineal-múltiple">3.2 Regresión Lineal Múltiple</h2>
 <p>La regresión lineal simple es un enfoque útil para predecir una variable respuesta con base en una única variable predictora. Sin embargo, en la práctica a menudo tenemos más de un predictor. Por ejemplo, en los datos <code>Advertising</code>, hemos examinado la relación entre <code>sales</code> y la publicidad en <code>TV</code>. También tenemos datos sobre la cantidad de dinero gastado en publicidad en <code>radio</code> y en <code>newspaper</code> (periódico), y podríamos querer saber si alguno de estos dos medios está asociado con las ventas. ¿Cómo podemos extender nuestro análisis de los datos <code>Advertising</code> para dar cabida a estos dos predictores adicionales?</p>
@@ -684,9 +693,13 @@ Figura&nbsp;4
 </figcaption>
 </figure>
 </div>
-<p><a id="tbl-3-4"></a></p>
+<div id="tbl-3-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;3: Tabla 3.4: Para los datos Advertising, estimaciones de los coeficientes de mínimos cuadrados de la regresión lineal múltiple del número de unidades vendidas sobre los presupuestos de publicidad en TV, radio y newspaper.
+</figcaption>
+<div aria-describedby="tbl-3-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<caption>Tabla 3.4: Para los datos Advertising, estimaciones de los coeficientes de mínimos cuadrados de la regresión lineal múltiple del número de unidades vendidas sobre los presupuestos de publicidad en TV, radio y newspaper.</caption>
 <colgroup>
 <col style="width: 19%">
 <col style="width: 19%">
@@ -734,11 +747,18 @@ Figura&nbsp;4
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 <p>La <a href="#tbl-3-4" class="quarto-xref">Tabla&nbsp;3.4</a> muestra las estimaciones de los coeficientes de regresión múltiple cuando los presupuestos de publicidad en <code>TV</code>, <code>radio</code> y <code>newspaper</code> se utilizan para predecir las ventas del producto usando los datos <code>Advertising</code>. Interpretamos estos resultados de la siguiente manera: para una cantidad dada de publicidad en <code>TV</code> y <code>newspaper</code>, gastar <span class="math inline">\(1{,}000\)</span> adicionales en publicidad radial está asociado con aproximadamente 189 unidades adicionales de ventas. Comparando estas estimaciones de coeficientes con las mostradas en las <a href="#tbl-3-1" class="quarto-xref">Tablas&nbsp;3.1</a> y <a href="#tbl-3-3" class="quarto-xref">3.3</a>, notamos que las estimaciones de los coeficientes de regresión múltiple para <code>TV</code> y <code>radio</code> son bastante similares a las estimaciones de los coeficientes de regresión lineal simple. Sin embargo, mientras que la estimación del coeficiente de regresión para <code>newspaper</code> en la <a href="#tbl-3-3" class="quarto-xref">Tabla&nbsp;3.3</a> era significativamente distinta de cero, la estimación del coeficiente para <code>newspaper</code> en el modelo de regresión múltiple es cercana a cero, y el <em>valor p</em> correspondiente ya no es significativo, con un valor alrededor de 0.86. Esto ilustra que los coeficientes de regresión simple y múltiple pueden ser bastante diferentes. Esta diferencia se debe al hecho de que en el caso de la regresión simple, el término de pendiente representa el aumento promedio en las ventas del producto asociado con un aumento de <span class="math inline">\(1{,}000\)</span> en publicidad en <code>newspaper</code>, ignorando otros predictores como <code>TV</code> y <code>radio</code>. En contraste, en el contexto de la regresión múltiple, el coeficiente para <code>newspaper</code> representa el aumento promedio en las ventas del producto asociado con aumentar el gasto en <code>newspaper</code> en <span class="math inline">\(1{,}000\)</span> <em>manteniendo</em> <code>TV</code> y <code>radio</code> <em>fijos</em>.</p>
 <p>¿Tiene sentido que la regresión múltiple no sugiera una relación entre <code>sales</code> y <code>newspaper</code> mientras que la regresión lineal simple implica lo contrario? De hecho, sí tiene sentido. Consideremos la matriz de correlación para las tres variables predictoras y la variable respuesta, mostrada en la <a href="#tbl-3-5" class="quarto-xref">Tabla&nbsp;3.5</a>. Nótese que la correlación entre <code>radio</code> y <code>newspaper</code> es 0.35. Esto indica que los mercados con alta publicidad en <code>newspaper</code> tienden a tener también alta publicidad en <code>radio</code>. Ahora supongamos que la regresión múltiple es correcta y que la publicidad en <code>newspaper</code> no está asociada con <code>sales</code>, pero la publicidad en <code>radio</code> sí está asociada con <code>sales</code>. Entonces, en los mercados donde gastamos más en <code>radio</code> nuestras ventas tenderán a ser mayores, y como muestra nuestra matriz de correlación, también tendemos a gastar más en publicidad en <code>newspaper</code> en esos mismos mercados. Por lo tanto, en una regresión lineal simple que solo examina <code>sales</code> versus <code>newspaper</code>, observaremos que valores más altos de <code>newspaper</code> tienden a estar asociados con valores más altos de <code>sales</code>, aunque la publicidad en <code>newspaper</code> no esté directamente asociada con las ventas. Así que la publicidad en <code>newspaper</code> es un <em>sustituto</em> de la publicidad en <code>radio</code>; <code>newspaper</code> recibe el “crédito” por la asociación entre <code>radio</code> y <code>sales</code>.</p>
-<p><a id="tbl-3-5"></a></p>
+<div id="tbl-3-5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;4: Tabla 3.5: Matriz de correlación para TV, radio, newspaper y sales para los datos Advertising.
+</figcaption>
+<div aria-describedby="tbl-3-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<caption>Tabla 3.5: Matriz de correlación para TV, radio, newspaper y sales para los datos Advertising.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
@@ -779,6 +799,9 @@ Figura&nbsp;4
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 <p>Este resultado ligeramente contraintuitivo es muy común en muchas situaciones de la vida real. Consideremos un ejemplo absurdo para ilustrar el punto. Ejecutar una regresión de ataques de tiburón versus ventas de helados para datos recopilados en una comunidad costera durante un período de tiempo mostraría una relación positiva, similar a la observada entre <code>sales</code> y <code>newspaper</code>. Por supuesto, nadie ha sugerido (aún) que los helados deberían prohibirse en las playas para reducir los ataques de tiburón. En realidad, las temperaturas más altas hacen que más personas visiten la playa, lo que a su vez resulta en más ventas de helados y más ataques de tiburón. Una regresión múltiple de los ataques de tiburón sobre las ventas de helados y la temperatura revela que, como la intuición sugiere, las ventas de helados ya no son un predictor significativo después de ajustar por la temperatura.</p>
 </section>
 <section id="algunas-preguntas-importantes" class="level3">
@@ -809,9 +832,13 @@ E\{\text{RSS}/(n - p - 1)\} = \sigma^2\]</span></p>
 <p>y que, siempre que <span class="math inline">\(H_0\)</span> sea verdadera,</p>
 <p><span class="math display">\[E\{(\text{TSS} - \text{RSS})/p\} = \sigma^2.\]</span></p>
 <p>Por lo tanto, cuando no hay relación entre la variable respuesta y los predictores, se esperaría que el <em>estadístico F</em> tome un valor cercano a 1. Por otro lado, si <span class="math inline">\(H_a\)</span> es verdadera, entonces <span class="math inline">\(E\{(\text{TSS} - \text{RSS})/p\} &gt; \sigma^2\)</span>, por lo que esperamos que <span class="math inline">\(F\)</span> sea mayor que 1.</p>
-<p><a id="tbl-3-6"></a></p>
+<div id="tbl-3-6" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;5: Tabla 3.6: Más información sobre el modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre los presupuestos de publicidad en TV, newspaper y radio en los datos Advertising. Otra información sobre este modelo se mostró en la <a href="#tbl-3-4" class="quarto-xref">Tabla&nbsp;3.4</a>.
+</figcaption>
+<div aria-describedby="tbl-3-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<caption>Tabla 3.6: Más información sobre el modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre los presupuestos de publicidad en TV, newspaper y radio en los datos Advertising. Otra información sobre este modelo se mostró en la <a href="#tbl-3-4" class="quarto-xref">Tabla&nbsp;3.4</a>.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Cantidad</th>
@@ -833,6 +860,9 @@ E\{\text{RSS}/(n - p - 1)\} = \sigma^2\]</span></p>
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 <p>El <em>estadístico F</em> para el modelo de regresión lineal múltiple obtenido al regresar <code>sales</code> sobre <code>radio</code>, <code>TV</code> y <code>newspaper</code> se muestra en la <a href="#tbl-3-6" class="quarto-xref">Tabla&nbsp;3.6</a>. En este ejemplo, el <em>estadístico F</em> es 570. Dado que esto es mucho mayor que 1, proporciona evidencia contundente en contra de la hipótesis nula <span class="math inline">\(H_0\)</span>. En otras palabras, el gran <em>estadístico F</em> sugiere que al menos uno de los medios publicitarios debe estar relacionado con las ventas. Sin embargo, ¿qué pasaría si el <em>estadístico F</em> hubiera estado más cerca de 1? ¿Qué tan grande necesita ser el <em>estadístico F</em> antes de que podamos rechazar <span class="math inline">\(H_0\)</span> y concluir que existe una relación? Resulta que la respuesta depende de los valores de <span class="math inline">\(n\)</span> y <span class="math inline">\(p\)</span>. Cuando <span class="math inline">\(n\)</span> es grande, un <em>estadístico F</em> que es solo un poco mayor que 1 aún podría proporcionar evidencia en contra de <span class="math inline">\(H_0\)</span>. En contraste, se necesita un <em>estadístico F</em> mayor para rechazar <span class="math inline">\(H_0\)</span> si <span class="math inline">\(n\)</span> es pequeño. Cuando <span class="math inline">\(H_0\)</span> es verdadera y los errores <span class="math inline">\(\epsilon_i\)</span> tienen una distribución normal, el <em>estadístico F</em> sigue una distribución <span class="math inline">\(F\)</span>.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> Para cualquier valor dado de <span class="math inline">\(n\)</span> y <span class="math inline">\(p\)</span>, cualquier paquete de software estadístico puede usarse para calcular el <em>valor p</em> asociado con el <em>estadístico F</em> usando esta distribución. Con base en este <em>valor p</em>, podemos determinar si rechazar o no <span class="math inline">\(H_0\)</span>. Para los datos <code>Advertising</code>, el <em>valor p</em> asociado con el <em>estadístico F</em> en la <a href="#tbl-3-6" class="quarto-xref">Tabla&nbsp;3.6</a> es esencialmente cero, por lo que tenemos evidencia extremadamente fuerte de que al menos uno de los medios está asociado con un aumento en las ventas.</p>
 <p>En <a href="#eq-3-23" class="quarto-xref">(3.23)</a> estamos contrastando <span class="math inline">\(H_0\)</span> de que todos los coeficientes son cero. A veces queremos contrastar que un subconjunto particular de <span class="math inline">\(q\)</span> de los coeficientes es cero. Esto corresponde a una hipótesis nula</p>
 <p><span class="math display">\[H_0: \beta_{p-q+1} = \beta_{p-q+2} = \cdots = \beta_p = 0,\]</span></p>
@@ -939,9 +969,13 @@ y_i = \beta_0 + \beta_1 x_i + \epsilon_i = \begin{cases}
 \]</span></p>
 </div>
 <p>Ahora <span class="math inline">\(\beta_0\)</span> puede interpretarse como el <code>balance</code> promedio de la tarjeta de crédito entre aquellos que no poseen casa, <span class="math inline">\(\beta_0 + \beta_1\)</span> como el <code>balance</code> promedio de la tarjeta de crédito entre aquellos que sí poseen su casa, y <span class="math inline">\(\beta_1\)</span> como la diferencia promedio en el <code>balance</code> de la tarjeta de crédito entre propietarios y no propietarios.</p>
-<p><a id="tbl-3-7"></a></p>
+<div id="tbl-3-7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;6: Tabla 3.7: Estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de balance sobre own en el conjunto de datos Credit. El modelo lineal se da en <a href="#eq-3-27" class="quarto-xref">(3.27)</a>. Es decir, ownership se codifica como una variable dummy, como en <a href="#eq-3-26" class="quarto-xref">(3.26)</a>.
+</figcaption>
+<div aria-describedby="tbl-3-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<caption>Tabla 3.7: Estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de balance sobre own en el conjunto de datos Credit. El modelo lineal se da en <a href="#eq-3-27" class="quarto-xref">(3.27)</a>. Es decir, ownership se codifica como una variable dummy, como en <a href="#eq-3-26" class="quarto-xref">(3.26)</a>.</caption>
 <colgroup>
 <col style="width: 19%">
 <col style="width: 19%">
@@ -975,6 +1009,9 @@ y_i = \beta_0 + \beta_1 x_i + \epsilon_i = \begin{cases}
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 <p>La <a href="#tbl-3-7" class="quarto-xref">Tabla&nbsp;3.7</a> muestra las estimaciones de los coeficientes y otra información asociada con el modelo <a href="#eq-3-27" class="quarto-xref">(3.27)</a>. La deuda promedio de tarjeta de crédito para los no propietarios se estima en <span class="math inline">\(509.80\)</span>, mientras que se estima que los propietarios tienen <span class="math inline">\(19.73\)</span> en deuda adicional para un total de <span class="math inline">\(509.80 + 19.73 = 529.53\)</span>. Sin embargo, notamos que el <em>valor p</em> para la <em>variable dummy</em> es muy alto. Esto indica que no hay evidencia estadística de una diferencia en el <code>balance</code> promedio de la tarjeta de crédito basada en la propiedad de la vivienda.</p>
 <p>La decisión de codificar a los propietarios como 1 y a los no propietarios como 0 en <a href="#eq-3-27" class="quarto-xref">(3.27)</a> es arbitraria, y no tiene efecto en el ajuste de la regresión, pero sí altera la interpretación de los coeficientes. Si hubiéramos codificado a los no propietarios como 1 y a los propietarios como 0, entonces las estimaciones para <span class="math inline">\(\beta_0\)</span> y <span class="math inline">\(\beta_1\)</span> habrían sido 529.53 y <span class="math inline">\(-19.73\)</span>, respectivamente, llevando una vez más a una predicción de deuda de tarjeta de crédito de <span class="math inline">\(529.53 - 19.73 = 509.80\)</span> para los no propietarios y una predicción de <span class="math inline">\(529.53\)</span> para los propietarios. Alternativamente, en lugar de un esquema de codificación 0/1, podríamos crear una <em>variable dummy</em></p>
 <p><span class="math display">\[
@@ -1018,9 +1055,13 @@ y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \epsilon_i = \begin{cases}
 \]</span></p>
 </div>
 <p>Ahora <span class="math inline">\(\beta_0\)</span> puede interpretarse como el <code>balance</code> promedio de la tarjeta de crédito para individuos del Este, <span class="math inline">\(\beta_1\)</span> puede interpretarse como la diferencia en el <code>balance</code> promedio entre personas del Sur versus el Este, y <span class="math inline">\(\beta_2\)</span> puede interpretarse como la diferencia en el <code>balance</code> promedio entre aquellos del Oeste versus el Este. Siempre habrá una variable dummy menos que el número de niveles. El nivel sin variable dummy —Este en este ejemplo— se conoce como la <em>categoría de referencia</em> o <em>línea base</em> (<em>baseline</em>).</p>
-<p><a id="tbl-3-8"></a></p>
+<div id="tbl-3-8" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;7: Tabla 3.8: Estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de balance sobre region en el conjunto de datos Credit. El modelo lineal se da en <a href="#eq-3-30" class="quarto-xref">(3.30)</a>. Es decir, region se codifica mediante dos variables dummy <a href="#eq-3-28" class="quarto-xref">(3.28)</a> y <a href="#eq-3-29" class="quarto-xref">(3.29)</a>.
+</figcaption>
+<div aria-describedby="tbl-3-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<caption>Tabla 3.8: Estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de balance sobre region en el conjunto de datos Credit. El modelo lineal se da en <a href="#eq-3-30" class="quarto-xref">(3.30)</a>. Es decir, region se codifica mediante dos variables dummy <a href="#eq-3-28" class="quarto-xref">(3.28)</a> y <a href="#eq-3-29" class="quarto-xref">(3.29)</a>.</caption>
 <colgroup>
 <col style="width: 22%">
 <col style="width: 18%">
@@ -1061,6 +1102,9 @@ y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \epsilon_i = \begin{cases}
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 <p>De la <a href="#tbl-3-8" class="quarto-xref">Tabla&nbsp;3.8</a>, vemos que el <code>balance</code> estimado para la línea base, Este, es <span class="math inline">\(531.00\)</span>. Se estima que aquellos en el Sur tendrán <span class="math inline">\(18.69\)</span> menos de deuda que aquellos en el Este, y que aquellos en el Oeste tendrán <span class="math inline">\(12.50\)</span> menos de deuda que aquellos en el Este. Sin embargo, los <em>valores p</em> asociados con las estimaciones de los coeficientes para las dos variables dummy son muy grandes, lo que sugiere que no hay evidencia estadística de una diferencia real en el <code>balance</code> promedio de la tarjeta de crédito entre el Sur y el Este o entre el Oeste y el Este.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> Una vez más, el nivel seleccionado como categoría de referencia es arbitrario, y las predicciones finales para cada grupo serán las mismas independientemente de esta elección. Sin embargo, los coeficientes y sus <em>valores p</em> sí dependen de la elección de la codificación de variables dummy. En lugar de confiar en los coeficientes individuales, podemos usar una prueba <span class="math inline">\(F\)</span> para contrastar <span class="math inline">\(H_0: \beta_1 = \beta_2 = 0\)</span>; esto no depende de la codificación. Esta prueba <span class="math inline">\(F\)</span> tiene un <em>valor p</em> de 0.96, indicando que no podemos rechazar la hipótesis nula de que no hay relación entre <code>balance</code> y <code>region</code>.</p>
 <p>Usar este enfoque de variables dummy no presenta dificultades al incorporar tanto predictores cuantitativos como cualitativos. Por ejemplo, para regresar <code>balance</code> sobre una variable cuantitativa como <code>income</code> (ingreso) y una variable cualitativa como <code>student</code> (estudiante), simplemente debemos crear una variable dummy para <code>student</code> y luego ajustar un modelo de regresión múltiple usando <code>income</code> y la variable dummy como predictores para el <code>balance</code> de la tarjeta de crédito.</p>
 <p>Existen muchas formas diferentes de codificar variables cualitativas además del enfoque de variables dummy tomado aquí. Todos estos enfoques conducen a ajustes de modelo equivalentes, pero los coeficientes son diferentes y tienen diferentes interpretaciones, y están diseñados para medir <em>contrastes</em> (<em>contrasts</em>) particulares. Este tema está más allá del alcance de este libro.</p>
@@ -1072,11 +1116,12 @@ y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \epsilon_i = \begin{cases}
 <p>En nuestro análisis previo de los datos <code>Advertising</code>, concluimos que tanto <code>TV</code> como <code>radio</code> parecen estar asociados con <code>sales</code>. Los modelos lineales que formaron la base de esta conclusión asumían que el efecto sobre las ventas de aumentar un medio publicitario es independiente de la cantidad gastada en los otros medios. Por ejemplo, el modelo lineal <a href="#eq-3-20" class="quarto-xref">(3.20)</a> establece que el aumento promedio en <code>sales</code> asociado con un aumento de una unidad en <code>TV</code> es siempre <span class="math inline">\(\beta_1\)</span>, independientemente de la cantidad gastada en <code>radio</code>.</p>
 <p>Sin embargo, este modelo simple puede ser incorrecto. Supongamos que gastar dinero en publicidad radial realmente aumenta la efectividad de la publicidad televisiva, de modo que el término de pendiente para <code>TV</code> debería aumentar a medida que <code>radio</code> aumenta. En esta situación, dado un presupuesto fijo de <span class="math inline">\(100{,}000\)</span>, gastar la mitad en <code>radio</code> y la mitad en <code>TV</code> puede aumentar las ventas más que asignar la cantidad total a <code>TV</code> o a <code>radio</code> individualmente. En marketing, esto se conoce como un <em>efecto de sinergia</em>, y en estadística se denomina <em>efecto de interacción</em> (<em>interaction effect</em>). La <a href="#fig-3-5" class="quarto-xref">Figura&nbsp;3.5</a> sugiere que tal efecto puede estar presente en los datos <code>Advertising</code>. Nótese que cuando los niveles de <code>TV</code> o <code>radio</code> son bajos, las ventas reales son menores de lo predicho por el modelo lineal. Pero cuando la publicidad se divide entre los dos medios, el modelo tiende a subestimar las ventas.</p>
 <p>Consideremos el modelo de regresión lineal estándar con dos variables,</p>
-<div id="eq-3-31">
 <p><span class="math display">\[
 Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \epsilon.\]</span></p>
 <p>Según este modelo, un aumento de una unidad en <span class="math inline">\(X_1\)</span> está asociado con un aumento promedio en <span class="math inline">\(Y\)</span> de <span class="math inline">\(\beta_1\)</span> unidades. Nótese que la presencia de <span class="math inline">\(X_2\)</span> no altera esta afirmación —es decir, independientemente del valor de <span class="math inline">\(X_2\)</span>, un aumento de una unidad en <span class="math inline">\(X_1\)</span> está asociado con un aumento de <span class="math inline">\(\beta_1\)</span> unidades en <span class="math inline">\(Y\)</span>. Una forma de extender este modelo es incluir un tercer predictor, llamado <em>término de interacción</em> (<em>interaction term</em>), que se construye calculando el producto de <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span>. Esto resulta en el modelo</p>
-<p><span class="math display">\[Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_1 X_2 + \epsilon. \qquad (3.31)
+<div id="eq-3-31">
+<p><span class="math display">\[
+Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_1 X_2 + \epsilon. \qquad (3.31)
 \]</span></p>
 </div>
 <p>¿Cómo la inclusión de este término de interacción relaja la suposición de aditividad? Nótese que <a href="#eq-3-31" class="quarto-xref">(3.31)</a> puede reescribirse como</p>
@@ -1090,7 +1135,6 @@ Y &amp;= \beta_0 + (\beta_1 + \beta_3 X_2) X_1 + \beta_2 X_2 + \epsilon \\
 </div>
 <p>donde <span class="math inline">\(\tilde{\beta}_1 = \beta_1 + \beta_3 X_2\)</span>. Dado que <span class="math inline">\(\tilde{\beta}_1\)</span> es ahora una función de <span class="math inline">\(X_2\)</span>, la asociación entre <span class="math inline">\(X_1\)</span> e <span class="math inline">\(Y\)</span> ya no es constante: un cambio en el valor de <span class="math inline">\(X_2\)</span> cambiará la asociación entre <span class="math inline">\(X_1\)</span> e <span class="math inline">\(Y\)</span>. Un argumento similar muestra que un cambio en el valor de <span class="math inline">\(X_1\)</span> cambia la asociación entre <span class="math inline">\(X_2\)</span> e <span class="math inline">\(Y\)</span>.</p>
 <p>Por ejemplo, supongamos que estamos interesados en estudiar la productividad de una fábrica. Deseamos predecir el número de unidades producidas con base en el número de líneas de producción y el número total de trabajadores. Parece probable que el efecto de aumentar el número de líneas de producción dependa del número de trabajadores, ya que si no hay trabajadores disponibles para operar las líneas, entonces aumentar el número de líneas no incrementará la producción. Esto sugiere que sería apropiado incluir un <em>término de interacción</em> entre líneas y trabajadores en un modelo lineal para predecir unidades. Supongamos que cuando ajustamos el modelo, obtenemos</p>
-<div id="eq-3-33">
 <p><span class="math display">\[
 \begin{aligned}
 \text{units} &amp;\approx 1.2 + 3.4 \times \text{lines} + 0.22 \times \text{workers} + 1.4 \times (\text{lines} \times \text{workers})\\
@@ -1098,16 +1142,22 @@ Y &amp;= \beta_0 + (\beta_1 + \beta_3 X_2) X_1 + \beta_2 X_2 + \epsilon \\
 \end{aligned}\]</span></p>
 <p>En otras palabras, agregar una línea adicional aumentará el número de unidades producidas en <span class="math inline">\(3.4 + 1.4 \times \text{workers}\)</span>. Por lo tanto, cuantos más trabajadores tengamos, más fuerte será el efecto de las líneas.</p>
 <p>Ahora volvemos al ejemplo de <code>Advertising</code>. Un modelo lineal que usa <code>radio</code>, <code>TV</code> y una interacción entre los dos para predecir <code>sales</code> toma la forma</p>
-<p><span class="math display">\[\begin{aligned}
+<div id="eq-3-33">
+<p><span class="math display">\[
+\begin{aligned}
 \text{sales} &amp;= \beta_0 + \beta_1 \times \text{TV} + \beta_2 \times \text{radio} + \beta_3 \times (\text{radio} \times \text{TV}) + \epsilon \\
              &amp;= \beta_0 + (\beta_1 + \beta_3 \times \text{radio}) \times \text{TV} + \beta_2 \times \text{radio} + \epsilon. \qquad (3.33)
 \end{aligned}
 \]</span></p>
 </div>
 <p>Podemos interpretar <span class="math inline">\(\beta_3\)</span> como el aumento en la efectividad de la publicidad en <code>TV</code> asociado con un aumento de una unidad en la publicidad en <code>radio</code> (o viceversa). Los coeficientes que resultan de ajustar el modelo <a href="#eq-3-33" class="quarto-xref">(3.33)</a> se dan en la <a href="#tbl-3-9" class="quarto-xref">Tabla&nbsp;3.9</a>.</p>
-<p><a id="tbl-3-9"></a></p>
+<div id="tbl-3-9" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;8: Tabla 3.9: Para los datos Advertising, estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de sales sobre TV y radio, con un término de interacción, como en <a href="#eq-3-33" class="quarto-xref">(3.33)</a>.
+</figcaption>
+<div aria-describedby="tbl-3-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<caption>Tabla 3.9: Para los datos Advertising, estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de sales sobre TV y radio, con un término de interacción, como en <a href="#eq-3-33" class="quarto-xref">(3.33)</a>.</caption>
 <colgroup>
 <col style="width: 19%">
 <col style="width: 19%">
@@ -1155,6 +1205,9 @@ Y &amp;= \beta_0 + (\beta_1 + \beta_3 X_2) X_1 + \beta_2 X_2 + \epsilon \\
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 <p>Los resultados en la <a href="#tbl-3-9" class="quarto-xref">Tabla&nbsp;3.9</a> sugieren fuertemente que el modelo que incluye el término de interacción es superior al modelo que contiene solo <em>efectos principales</em> (<em>main effects</em>). El <em>valor p</em> para el término de interacción, TV×radio, es extremadamente bajo, indicando que hay fuerte evidencia para <span class="math inline">\(H_a: \beta_3 \neq 0\)</span>. En otras palabras, está claro que la verdadera relación no es aditiva. El <span class="math inline">\(R^2\)</span> para el modelo <a href="#eq-3-33" class="quarto-xref">(3.33)</a> es 96.8%, comparado con solo 89.7% para el modelo que predice <code>sales</code> usando <code>TV</code> y <code>radio</code> sin un término de interacción. Esto significa que <span class="math inline">\((96.8 - 89.7)/(100 - 89.7) = 69\%\)</span> de la variabilidad en las ventas que permanece después de ajustar el modelo aditivo ha sido explicada por el término de interacción. Las estimaciones de los coeficientes en la <a href="#tbl-3-9" class="quarto-xref">Tabla&nbsp;3.9</a> sugieren que un aumento en la publicidad en <code>TV</code> de <span class="math inline">\(1{,}000\)</span> está asociado con un aumento en las ventas de <span class="math inline">\((\hat{\beta}_1 + \hat{\beta}_3 \times \text{radio}) \times 1{,}000 = 19 + 1.1 \times \text{radio}\)</span> unidades. Y un aumento en la publicidad en <code>radio</code> de <span class="math inline">\(1{,}000\)</span> estará asociado con un aumento en las ventas de <span class="math inline">\((\hat{\beta}_2 + \hat{\beta}_3 \times \text{TV}) \times 1{,}000 = 29 + 1.1 \times \text{TV}\)</span> unidades.</p>
 <p>En este ejemplo, los <em>valores p</em> asociados con <code>TV</code>, <code>radio</code> y el término de interacción son todos estadísticamente significativos (<a href="#tbl-3-9" class="quarto-xref">Tabla&nbsp;3.9</a>), por lo que es obvio que las tres variables deben incluirse en el modelo. Sin embargo, a veces ocurre que un término de interacción tiene un <em>valor p</em> muy pequeño, pero los <em>efectos principales</em> asociados (en este caso, <code>TV</code> y <code>radio</code>) no. El <em>principio jerárquico</em> (<em>hierarchical principle</em>) establece que si incluimos una interacción en un modelo, también debemos incluir los <em>efectos principales</em>, incluso si los <em>valores p</em> asociados con sus coeficientes no son significativos. En otras palabras, si la interacción entre <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span> parece importante, entonces debemos incluir tanto <span class="math inline">\(X_1\)</span> como <span class="math inline">\(X_2\)</span> en el modelo incluso si las estimaciones de sus coeficientes tienen <em>valores p</em> grandes. La razón de ser de este principio es que si <span class="math inline">\(X_1 \times X_2\)</span> está relacionado con la variable respuesta, entonces que los coeficientes de <span class="math inline">\(X_1\)</span> o <span class="math inline">\(X_2\)</span> sean exactamente cero es de poco interés. Además, <span class="math inline">\(X_1 \times X_2\)</span> típicamente está correlacionado con <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span>, por lo que omitirlos tiende a alterar el significado de la interacción.</p>
 <p>En el ejemplo anterior, consideramos una interacción entre <code>TV</code> y <code>radio</code>, ambas variables cuantitativas. Sin embargo, el concepto de interacciones se aplica igualmente bien a variables cualitativas, o a una combinación de variables cuantitativas y cualitativas. De hecho, una interacción entre una variable cualitativa y una variable cuantitativa tiene una interpretación particularmente elegante. Consideremos el conjunto de datos <code>Credit</code> de la Sección 3.3.1, y supongamos que deseamos predecir <code>balance</code> usando las variables <code>income</code> (cuantitativa) y <code>student</code> (cualitativa). En ausencia de un término de interacción, el modelo toma la forma</p>
@@ -1224,9 +1277,13 @@ Figura&nbsp;8
 </figcaption>
 </figure>
 </div>
-<p><a id="tbl-3-10"></a></p>
+<div id="tbl-3-10" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;9: Tabla 3.10: Para el conjunto de datos Auto, estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de mpg sobre horsepower y horsepower<sup>2</sup>.
+</figcaption>
+<div aria-describedby="tbl-3-10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<caption>Tabla 3.10: Para el conjunto de datos Auto, estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de mpg sobre horsepower y horsepower<sup>2</sup>.</caption>
 <colgroup>
 <col style="width: 22%">
 <col style="width: 18%">
@@ -1267,6 +1324,9 @@ Figura&nbsp;8
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 <p>Si incluir <code>horsepower</code><span class="math inline">\(^2\)</span> condujo a una mejora tan grande en el modelo, ¿por qué no incluir <code>horsepower</code><span class="math inline">\(^3\)</span>, <code>horsepower</code><span class="math inline">\(^4\)</span>, o incluso <code>horsepower</code><span class="math inline">\(^5\)</span>? La curva verde en la <a href="#fig-3-8" class="quarto-xref">Figura&nbsp;3.8</a> muestra el ajuste que resulta de incluir todos los polinomios hasta el quinto grado en el modelo <a href="#eq-3-36" class="quarto-xref">(3.36)</a>. El ajuste resultante parece innecesariamente ondulado —es decir, no está claro que incluir los términos adicionales realmente haya conducido a un mejor ajuste a los datos.</p>
 <p>El enfoque que acabamos de describir para extender el modelo lineal para dar cabida a relaciones no lineales se conoce como <em>regresión polinomial</em>, ya que hemos incluido funciones polinomiales de los predictores en el modelo de regresión. Exploramos más a fondo este enfoque y otras extensiones no lineales del modelo lineal en el Capítulo 7.</p>
 </section>
@@ -1409,7 +1469,7 @@ Figura&nbsp;15
 </figure>
 </div>
 <p>Dado que la colinealidad reduce la precisión de las estimaciones de los coeficientes de regresión, hace que el error estándar para <span class="math inline">\(\hat{\beta}_j\)</span> aumente. Recordemos que el estadístico <span class="math inline">\(t\)</span> para cada predictor se calcula dividiendo <span class="math inline">\(\hat{\beta}_j\)</span> por su error estándar. En consecuencia, la colinealidad resulta en una disminución del estadístico <span class="math inline">\(t\)</span>. Como resultado, en presencia de colinealidad, podemos no rechazar <span class="math inline">\(H_0: \beta_j = 0\)</span>. Esto significa que la <em>potencia</em> (<em>power</em>) de la prueba de hipótesis —la probabilidad de detectar correctamente un coeficiente distinto de cero— se reduce por la colinealidad.</p>
-<p><a id="tbl-3-11"></a></p>
+<div id="tbl-3-11" class="anchored">
 <p><strong>Modelo 1: regresión de <code>balance</code> sobre <code>age</code> y <code>limit</code></strong></p>
 <table class="caption-top table">
 <colgroup>
@@ -1497,6 +1557,7 @@ Figura&nbsp;15
 <p class="figure-caption" style="margin-top:0.5em; text-align:center;">
 Tabla&nbsp;3.11: Se muestran los resultados para dos modelos de regresión múltiple que involucran el conjunto de datos Credit. El Modelo 1 es una regresión de balance sobre age y limit, y el Modelo 2 una regresión de balance sobre rating y limit. El error estándar de <span class="math inline">\(\hat{\beta}_{\text{limit}}\)</span> aumenta 12 veces en la segunda regresión, debido a la colinealidad.
 </p>
+</div>
 <p>La <a href="#tbl-3-11" class="quarto-xref">Tabla&nbsp;3.11</a> compara las estimaciones de los coeficientes obtenidas de dos modelos de regresión múltiple separados. El primero es una regresión de <code>balance</code> sobre <code>age</code> y <code>limit</code>, y el segundo es una regresión de <code>balance</code> sobre <code>rating</code> y <code>limit</code>. En la primera regresión, tanto <code>age</code> como <code>limit</code> son altamente significativos con <em>valores p</em> muy pequeños. En la segunda, la colinealidad entre <code>limit</code> y <code>rating</code> ha causado que el error estándar para la estimación del coeficiente de <code>limit</code> aumente por un factor de 12 y que el <em>valor p</em> aumente a 0.701. En otras palabras, la importancia de la variable <code>limit</code> ha sido enmascarada debido a la presencia de colinealidad. Para evitar tal situación, es deseable identificar y abordar problemas potenciales de colinealidad mientras se ajusta el modelo.</p>
 <p>Una forma simple de detectar colinealidad es observar la matriz de correlación de los predictores. Un elemento de esta matriz que es grande en valor absoluto indica un par de variables altamente correlacionadas, y por lo tanto un problema de colinealidad en los datos. Desafortunadamente, no todos los problemas de colinealidad pueden detectarse mediante la inspección de la matriz de correlación: es posible que exista colinealidad entre tres o más variables incluso si ningún par de variables tiene una correlación particularmente alta. Llamamos a esta situación <em>multicolinealidad</em> (<em>multicollinearity</em>). En lugar de inspeccionar la matriz de correlación, una mejor manera de evaluar la <em>multicolinealidad</em> es calcular el <em>factor de inflación de la varianza</em> (<em>variance inflation factor</em>, VIF). El VIF es la razón entre la varianza de <span class="math inline">\(\hat{\beta}_j\)</span> al ajustar el modelo completo dividida por la varianza de <span class="math inline">\(\hat{\beta}_j\)</span> si se ajusta por sí solo. El valor más pequeño posible para el VIF es 1, lo que indica la ausencia completa de colinealidad. Típicamente en la práctica hay una pequeña cantidad de colinealidad entre los predictores. Como regla general, un valor de VIF que excede 5 o 10 indica una cantidad problemática de colinealidad. El VIF para cada variable puede calcularse usando la fórmula</p>
 <p><span class="math display">\[\text{VIF}(\hat{\beta}_j) = \frac{1}{1 - R^2_{X_j|X_{-j}}},\]</span></p>
@@ -1580,7 +1641,7 @@ Figura&nbsp;19
 </figcaption>
 </figure>
 </div>
-<p>Las Figuras 3.18 y 3.19 muestran situaciones en las que KNN se desempeña ligeramente peor que la regresión lineal cuando la relación es lineal, pero mucho mejor que la regresión lineal para situaciones no lineales. En una situación de la vida real en la que la verdadera relación es desconocida, uno podría sospechar que KNN debería favorecerse sobre la regresión lineal porque en el peor de los casos será ligeramente inferior a la regresión lineal si la verdadera relación es lineal, y puede dar resultados sustancialmente mejores si la verdadera relación es no lineal. Pero en realidad, incluso cuando la verdadera relación es altamente no lineal, KNN aún puede proporcionar resultados inferiores a la regresión lineal. En particular, tanto las Figuras 3.18 como 3.19 ilustran contextos con <span class="math inline">\(p = 1\)</span> predictor. Pero en dimensiones más altas, KNN a menudo se desempeña peor que la regresión lineal.</p>
+<p>Las <a href="#fig-3-18" class="quarto-xref">Figuras&nbsp;3.18</a> y <a href="#fig-3-19" class="quarto-xref">3.19</a> muestran situaciones en las que KNN se desempeña ligeramente peor que la regresión lineal cuando la relación es lineal, pero mucho mejor que la regresión lineal para situaciones no lineales. En una situación de la vida real en la que la verdadera relación es desconocida, uno podría sospechar que KNN debería favorecerse sobre la regresión lineal porque en el peor de los casos será ligeramente inferior a la regresión lineal si la verdadera relación es lineal, y puede dar resultados sustancialmente mejores si la verdadera relación es no lineal. Pero en realidad, incluso cuando la verdadera relación es altamente no lineal, KNN aún puede proporcionar resultados inferiores a la regresión lineal. En particular, tanto las <a href="#fig-3-18" class="quarto-xref">Figuras&nbsp;3.18</a> como <a href="#fig-3-19" class="quarto-xref">3.19</a> ilustran contextos con <span class="math inline">\(p = 1\)</span> predictor. Pero en dimensiones más altas, KNN a menudo se desempeña peor que la regresión lineal.</p>
 <div id="fig-3-20" class="quarto-float quarto-figure quarto-figure-center anchored" style="text-align:center; margin:1.5em 0;">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-3-20-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1599,9 +1660,7 @@ Figura&nbsp;20
 
 
 </section>
-
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Notas</h2>
+</section></section><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Notas</h2>
 
 <ol>
 <li id="fn1"><p>La suposición de linealidad es a menudo un modelo de trabajo útil. Sin embargo, a pesar de lo que muchos libros de texto puedan decirnos, rara vez creemos que la verdadera relación sea lineal.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -1617,245 +1676,243 @@ Figura&nbsp;20
 <li id="fn11"><p>Técnicamente <span class="math inline">\(\beta_0\)</span> es la mitad de la suma de la deuda promedio para propietarios y la deuda promedio para no propietarios. Por lo tanto, <span class="math inline">\(\beta_0\)</span> es exactamente igual al promedio general solo si los dos grupos tienen igual número de miembros.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn12"><p>En teoría aún podría existir una diferencia entre Sur y Oeste, aunque los datos aquí no sugieren ninguna diferencia.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</section></div></main> <!-- /main -->
+</section></div></main></div>
+
+
+
+
+ <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-  window.document.addEventListener("DOMContentLoaded", function (event) {
-    const icon = "";
-    const anchorJS = new window.AnchorJS();
-    anchorJS.options = {
-      placement: 'right',
-      icon: icon
-    };
-    anchorJS.add('.anchored');
-    const isCodeAnnotation = (el) => {
-      for (const clz of el.classList) {
-        if (clz.startsWith('code-annotation-')) {                     
-          return true;
-        }
-      }
-      return false;
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
     }
-    const onCopySuccess = function(e) {
-      // button target
-      const button = e.trigger;
-      // don't keep focus
-      button.blur();
-      // flash "checked"
-      button.classList.add('code-copy-button-checked');
-      var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copiado");
-      let tooltip;
-      if (window.bootstrap) {
-        button.setAttribute("data-bs-toggle", "tooltip");
-        button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copiado");
-        tooltip = new bootstrap.Tooltip(button, 
-          { trigger: "manual", 
-            customClass: "code-copy-button-tooltip",
-            offset: [0, -8]});
-        tooltip.show();    
-      }
-      setTimeout(function() {
-        if (tooltip) {
-          tooltip.hide();
-          button.removeAttribute("data-bs-title");
-          button.removeAttribute("data-bs-toggle");
-          button.removeAttribute("data-bs-placement");
-        }
-        button.setAttribute("title", currentTitle);
-        button.classList.remove('code-copy-button-checked');
-      }, 1000);
-      // clear code selection
-      e.clearSelection();
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
     }
-    const getTextToCopy = function(trigger) {
-      const outerScaffold = trigger.parentElement.cloneNode(true);
-      const codeEl = outerScaffold.querySelector('code');
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
         }
       }
       return codeEl.innerText;
-    }
-    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-      text: getTextToCopy
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
     });
-    clipboard.on('success', onCopySuccess);
-    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-        text: getTextToCopy,
-        container: window.document.getElementById('quarto-embedded-source-code-modal')
-      });
-      clipboardModal.on('success', onCopySuccess);
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/cffga\.github\.io\/proyectos\/isl-esp");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
-      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/cffga\.github\.io\/proyectos\/isl-esp");
-      var isInternal = (href) => {
-          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-      }
-      // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-      for (var i=0; i<links.length; i++) {
-        const link = links[i];
-        if (!isInternal(link.href)) {
-          // undo the damage that might have been done by quarto-nav.js in the case of
-          // links that we want to consider external
-          if (link.dataset.originalHref !== undefined) {
-            link.href = link.dataset.originalHref;
-          }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
         }
       }
-    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-      const config = {
-        allowHTML: true,
-        maxWidth: 500,
-        delay: 100,
-        arrow: false,
-        appendTo: function(el) {
-            return el.parentElement;
-        },
-        interactive: true,
-        interactiveBorder: 10,
-        theme: 'quarto',
-        placement: 'bottom-start',
-      };
-      if (contentFn) {
-        config.content = contentFn;
-      }
-      if (onTriggerFn) {
-        config.onTrigger = onTriggerFn;
-      }
-      if (onUntriggerFn) {
-        config.onUntrigger = onUntriggerFn;
-      }
-      window.tippy(el, config); 
     }
-    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-    for (var i=0; i<noterefs.length; i++) {
-      const ref = noterefs[i];
-      tippyHover(ref, function() {
-        // use id or data attribute instead here
-        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-        try { href = new URL(href).hash; } catch {}
-        const id = href.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note) {
-          return note.innerHTML;
-        } else {
-          return "";
-        }
-      });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
     }
-    const xrefs = window.document.querySelectorAll('a.quarto-xref');
-    const processXRef = (id, note) => {
-      // Strip column container classes
-      const stripColumnClz = (el) => {
-        el.classList.remove("page-full", "page-columns");
-        if (el.children) {
-          for (const child of el.children) {
-            stripColumnClz(child);
-          }
-        }
-      }
-      stripColumnClz(note)
-      if (id === null || id.startsWith('sec-')) {
-        // Special case sections, only their first couple elements
-        const container = document.createElement("div");
-        if (note.children && note.children.length > 2) {
-          container.appendChild(note.children[0].cloneNode(true));
-          for (let i = 1; i < note.children.length; i++) {
-            const child = note.children[i];
-            if (child.tagName === "P" && child.innerText === "") {
-              continue;
-            } else {
-              container.appendChild(child.cloneNode(true));
-              break;
-            }
-          }
-          if (window.Quarto?.typesetMath) {
-            window.Quarto.typesetMath(container);
-          }
-          return container.innerHTML
-        } else {
-          if (window.Quarto?.typesetMath) {
-            window.Quarto.typesetMath(note);
-          }
-          return note.innerHTML;
-        }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
       } else {
-        // Remove any anchor links if they are present
-        const anchorLink = note.querySelector('a.anchorjs-link');
-        if (anchorLink) {
-          anchorLink.remove();
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
         }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        if (note.classList.contains("callout")) {
-          return note.outerHTML;
-        } else {
-          return note.innerHTML;
-        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
       }
     }
-    for (var i=0; i<xrefs.length; i++) {
-      const xref = xrefs[i];
-      tippyHover(xref, undefined, function(instance) {
-        instance.disable();
-        let url = xref.getAttribute('href');
-        let hash = undefined; 
-        if (url.startsWith('#')) {
-          hash = url;
-        } else {
-          try { hash = new URL(url).hash; } catch {}
-        }
-        if (hash) {
-          const id = hash.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note !== null) {
-            try {
-              const html = processXRef(id, note.cloneNode(true));
-              instance.setContent(html);
-            } finally {
-              instance.enable();
-              instance.show();
-            }
-          } else {
-            // See if we can fetch this
-            fetch(url.split('#')[0])
-            .then(res => res.text())
-            .then(html => {
-              const parser = new DOMParser();
-              const htmlDoc = parser.parseFromString(html, "text/html");
-              const note = htmlDoc.getElementById(id);
-              if (note !== null) {
-                const html = processXRef(id, note);
-                instance.setContent(html);
-              } 
-            }).finally(() => {
-              instance.enable();
-              instance.show();
-            });
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
           }
         } else {
-          // See if we can fetch a full url (with no hash to target)
-          // This is a special case and we should probably do some content thinning / targeting
-          fetch(url)
+          // See if we can fetch this
+          fetch(url.split('#')[0])
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.querySelector('main.content');
+            const note = htmlDoc.getElementById(id);
             if (note !== null) {
-              // This should only happen for chapter cross references
-              // (since there is no id in the URL)
-              // remove the first header
-              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-                note.children[0].remove();
-              }
-              const html = processXRef(null, note);
+              const html = processXRef(id, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1863,161 +1920,185 @@ Figura&nbsp;20
             instance.show();
           });
         }
-      }, function(instance) {
-      });
-    }
-        let selectedAnnoteEl;
-        const selectorForAnnotation = ( cell, annotation) => {
-          let cellAttr = 'data-code-cell="' + cell + '"';
-          let lineAttr = 'data-code-annotation="' +  annotation + '"';
-          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-          return selector;
-        }
-        const selectCodeLines = (annoteEl) => {
-          const doc = window.document;
-          const targetCell = annoteEl.getAttribute("data-target-cell");
-          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-          const lineIds = lines.map((line) => {
-            return targetCell + "-" + line;
-          })
-          let top = null;
-          let height = null;
-          let parent = null;
-          if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
-            }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
-            }
-            selectedAnnoteEl = annoteEl;
-          }
-        };
-        const unselectCodeLines = () => {
-          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-          elementsIds.forEach((elId) => {
-            const div = window.document.getElementById(elId);
-            if (div) {
-              div.remove();
-            }
-          });
-          selectedAnnoteEl = undefined;
-        };
-          // Handle positioning of the toggle
-      window.addEventListener(
-        "resize",
-        throttle(() => {
-          elRect = undefined;
-          if (selectedAnnoteEl) {
-            selectCodeLines(selectedAnnoteEl);
-          }
-        }, 10)
-      );
-      function throttle(fn, ms) {
-      let throttle = false;
-      let timer;
-        return (...args) => {
-          if(!throttle) { // first call gets through
-              fn.apply(this, args);
-              throttle = true;
-          } else { // all the others get throttled
-              if(timer) clearTimeout(timer); // cancel #2
-              timer = setTimeout(() => {
-                fn.apply(this, args);
-                timer = throttle = false;
-              }, ms);
-          }
-        };
-      }
-        // Attach click handler to the DT
-        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-        for (const annoteDlNode of annoteDls) {
-          annoteDlNode.addEventListener('click', (event) => {
-            const clickedEl = event.target;
-            if (clickedEl !== selectedAnnoteEl) {
-              unselectCodeLines();
-              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-              if (activeEl) {
-                activeEl.classList.remove('code-annotation-active');
-              }
-              selectCodeLines(clickedEl);
-              clickedEl.classList.add('code-annotation-active');
-            } else {
-              // Unselect the line
-              unselectCodeLines();
-              clickedEl.classList.remove('code-annotation-active');
-            }
-          });
-        }
-    const findCites = (el) => {
-      const parentEl = el.parentElement;
-      if (parentEl) {
-        const cites = parentEl.dataset.cites;
-        if (cites) {
-          return {
-            el,
-            cites: cites.split(' ')
-          };
-        } else {
-          return findCites(el.parentElement)
-        }
       } else {
-        return undefined;
-      }
-    };
-    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-    for (var i=0; i<bibliorefs.length; i++) {
-      const ref = bibliorefs[i];
-      const citeInfo = findCites(ref);
-      if (citeInfo) {
-        tippyHover(citeInfo.el, function() {
-          var popup = window.document.createElement('div');
-          citeInfo.cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
             }
-            popup.appendChild(citeDiv);
-          });
-          return popup.innerHTML;
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
         });
       }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
     }
-  });
-  </script>
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../../chapters/02-aprendizaje-estadistico/index.html" class="pagination-link" aria-label="2. Aprendizaje Estadístico">
@@ -2030,7 +2111,7 @@ Figura&nbsp;20
       </a>
   </div>
 </nav>
-</div> <!-- /content -->
+ <!-- /content -->
 <div style="position:fixed;bottom:24px;right:24px;z-index:9999">
   <button id="theme-toggle-btn" style="width:44px;height:44px;border-radius:50%;border:1px solid var(--bs-border-color,#dee2e6);background:var(--bs-body-bg,#fff);color:var(--bs-body-color,#1a1a1a);font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.15);padding:0;opacity:.85;transition:transform .2s,box-shadow .2s,opacity .2s" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.85'" aria-label="Cambiar tema" title="Cambiar tema claro/oscuro" onclick="var c=document.documentElement.getAttribute('data-bs-theme')||'light';var n=c==='dark'?'light':'dark';document.documentElement.setAttribute('data-bs-theme',n);try{localStorage.setItem('isl-theme',n)}catch(e){}document.getElementById('theme-toggle-btn').textContent=n==='dark'?'☀️':'🌙'">🌙</button>
 </div>

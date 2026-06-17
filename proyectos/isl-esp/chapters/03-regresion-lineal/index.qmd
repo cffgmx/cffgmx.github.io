@@ -211,7 +211,7 @@ $$
 
 que mide el número de desviaciones estándar a las que $\hat{\beta}_1$ está de 0. Si realmente no existe relación entre $X$ e $Y$, entonces esperamos que <a href="#eq-3-14" class="quarto-xref">(3.14)</a> tenga una distribución $t$ con $n - 2$ grados de libertad. La distribución $t$ tiene forma de campana y para valores de $n$ mayores que aproximadamente 30 es bastante similar a la distribución normal estándar. En consecuencia, es sencillo calcular la probabilidad de observar cualquier número igual a $|t|$ o mayor en valor absoluto, asumiendo $\beta_1 = 0$. Llamamos a esta probabilidad el *valor p* (*p-value*). A grandes rasgos, interpretamos el *valor p* de la siguiente manera: un *valor p* pequeño indica que es poco probable observar una asociación tan sustancial entre el predictor y la variable respuesta debido al azar, en ausencia de cualquier asociación real entre el predictor y la variable respuesta. Por lo tanto, si vemos un *valor p* pequeño, entonces podemos inferir que existe una asociación entre el predictor y la variable respuesta. Rechazamos la hipótesis nula —es decir, declaramos que existe una relación entre $X$ e $Y$— si el *valor p* es suficientemente pequeño. Los puntos de corte típicos para el *valor p* para rechazar la hipótesis nula son 5% o 1%, aunque este tema se explorará con mucho mayor detalle en el Capítulo 13. Cuando $n = 30$, estos corresponden a estadísticos $t$ <a href="#eq-3-14" class="quarto-xref">(3.14)</a> de alrededor de 2 y 2.75, respectivamente.
 
-<a id="tbl-3-1"></a>
+<div id="tbl-3-1">
 
 |             | Coeficiente | Error estándar | Estadístico t | Valor p   |
 |:------------|:-----------:|:--------------:|:-------------:|:---------:|
@@ -220,13 +220,14 @@ que mide el número de desviaciones estándar a las que $\hat{\beta}_1$ está de
 
 : Tabla 3.1: Para los datos Advertising, coeficientes del modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre el presupuesto de publicidad en TV. Un aumento de $1{,}000$ en el presupuesto de publicidad en TV está asociado con un aumento en las ventas de alrededor de 50 unidades. (Recordemos que la variable sales está en miles de unidades, y la variable TV está en miles de dólares.)
 
+</div>
 La <a href="#tbl-3-1" class="quarto-xref">Tabla&nbsp;3.1</a> proporciona detalles del modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre el presupuesto de publicidad en `TV` para los datos `Advertising`. Nótese que los coeficientes para $\hat{\beta}_0$ y $\hat{\beta}_1$ son muy grandes en relación con sus errores estándar, por lo que los estadísticos $t$ también son grandes; las probabilidades de ver tales valores si $H_0$ es verdadera son virtualmente cero. Por lo tanto, podemos concluir que $\beta_0 \neq 0$ y $\beta_1 \neq 0$.^[En la <a href="#tbl-3-1" class="quarto-xref">Tabla&nbsp;3.1</a>, un valor p pequeño para el intercepto indica que podemos rechazar la hipótesis nula de que $\beta_0 = 0$, y un valor p pequeño para TV indica que podemos rechazar la hipótesis nula de que $\beta_1 = 0$. Rechazar esta última hipótesis nula nos permite concluir que existe una relación entre TV y sales. Rechazar la primera nos permite concluir que en ausencia de gasto en TV, las ventas son distintas de cero.]
 
 ### 3.1.3 Evaluación de la Precisión del Modelo
 
 Una vez que hemos rechazado la hipótesis nula <a href="#eq-3-12" class="quarto-xref">(3.12)</a> a favor de la hipótesis alternativa <a href="#eq-3-13" class="quarto-xref">(3.13)</a>, es natural querer cuantificar el grado en que el modelo se ajusta a los datos. La calidad de un ajuste de regresión lineal se evalúa típicamente usando dos cantidades relacionadas: el *error estándar residual* (*residual standard error*, RSE) y el estadístico $R^2$.
 
-<a id="tbl-3-2"></a>
+<div id="tbl-3-2">
 
 | Cantidad                     | Valor |
 |:-----------------------------|:-----:|
@@ -236,6 +237,7 @@ Una vez que hemos rechazado la hipótesis nula <a href="#eq-3-12" class="quarto-
 
 : Tabla 3.2: Para los datos Advertising, más información sobre el modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre el presupuesto de publicidad en TV.
 
+</div>
 La <a href="#tbl-3-2" class="quarto-xref">Tabla&nbsp;3.2</a> muestra el RSE, el estadístico $R^2$ y el *estadístico F* (*F-statistic*) (que se describirá en la Sección 3.2.2) para la regresión lineal del número de unidades vendidas sobre el presupuesto de publicidad en `TV`.
 
 **Error Estándar Residual**
@@ -286,7 +288,7 @@ $$
 
 es también una medida de la relación lineal entre $X$ e $Y$.^[Nótese que, de hecho, el lado derecho de <a href="#eq-3-18" class="quarto-xref">(3.18)</a> es la correlación muestral; por lo tanto, sería más correcto escribir $\widehat{\text{Cor}}(X, Y)$; sin embargo, omitimos el "acento circunflejo" para facilitar la notación.] Esto sugiere que podríamos usar $r = \text{Cor}(X, Y)$ en lugar de $R^2$ para evaluar el ajuste del modelo lineal. De hecho, se puede demostrar que en el contexto de la regresión lineal simple, $R^2 = r^2$. En otras palabras, la correlación al cuadrado y el estadístico $R^2$ son idénticos. Sin embargo, en la siguiente sección discutiremos el problema de la *regresión lineal múltiple*, en el cual usamos varios predictores simultáneamente para predecir la variable respuesta. El concepto de correlación entre los predictores y la variable respuesta no se extiende automáticamente a este contexto, ya que la correlación cuantifica la asociación entre un solo par de variables en lugar de entre un número mayor de variables. Veremos que $R^2$ cumple este papel.
 
-<a id="tbl-3-3"></a>
+<div id="tbl-3-3">
 
 **Regresión simple de sales sobre radio**
 
@@ -303,6 +305,8 @@ es también una medida de la relación lineal entre $X$ e $Y$.^[Nótese que, de 
 | newspaper   |   0.055     |    0.017       |     3.30      |  0.00115  |
 
 <p class="figure-caption" style="margin-top:0.5em; text-align:center;">Tabla&nbsp;3.3: Más modelos de regresión lineal simple para los datos Advertising. Coeficientes del modelo de regresión lineal simple para el número de unidades vendidas sobre el presupuesto de publicidad en radio (arriba) y en newspaper (abajo). Un aumento de $1{,}000$ en el gasto en publicidad radial está asociado con un aumento promedio en las ventas de alrededor de 203 unidades, mientras que el mismo aumento en el gasto en publicidad en periódicos está asociado con un aumento promedio en las ventas de alrededor de 55 unidades. (Nótese que la variable sales está en miles de unidades, y las variables radio y newspaper están en miles de dólares.)
+
+</div>
 
 ## 3.2 Regresión Lineal Múltiple
 
@@ -356,7 +360,7 @@ Los valores $\hat{\beta}_0, \hat{\beta}_1, \ldots, \hat{\beta}_p$ que minimizan 
 <p class="figure-caption" style="margin-top:0.5em;">Figura&nbsp;3.4: En un entorno tridimensional, con dos predictores y una variable respuesta, la línea de regresión de mínimos cuadrados se convierte en un plano. El plano se elige para minimizar la suma de las distancias verticales al cuadrado entre cada observación (mostrada en rojo) y el plano.</p>
 </div>
 
-<a id="tbl-3-4"></a>
+<div id="tbl-3-4">
 
 |             | Coeficiente | Error estándar | Estadístico t | Valor p   |
 |:------------|:-----------:|:--------------:|:-------------:|:---------:|
@@ -367,11 +371,12 @@ Los valores $\hat{\beta}_0, \hat{\beta}_1, \ldots, \hat{\beta}_p$ que minimizan 
 
 : Tabla 3.4: Para los datos Advertising, estimaciones de los coeficientes de mínimos cuadrados de la regresión lineal múltiple del número de unidades vendidas sobre los presupuestos de publicidad en TV, radio y newspaper.
 
+</div>
 La <a href="#tbl-3-4" class="quarto-xref">Tabla&nbsp;3.4</a> muestra las estimaciones de los coeficientes de regresión múltiple cuando los presupuestos de publicidad en `TV`, `radio` y `newspaper` se utilizan para predecir las ventas del producto usando los datos `Advertising`. Interpretamos estos resultados de la siguiente manera: para una cantidad dada de publicidad en `TV` y `newspaper`, gastar $1{,}000$ adicionales en publicidad radial está asociado con aproximadamente 189 unidades adicionales de ventas. Comparando estas estimaciones de coeficientes con las mostradas en las <a href="#tbl-3-1" class="quarto-xref">Tablas&nbsp;3.1</a> y <a href="#tbl-3-3" class="quarto-xref">3.3</a>, notamos que las estimaciones de los coeficientes de regresión múltiple para `TV` y `radio` son bastante similares a las estimaciones de los coeficientes de regresión lineal simple. Sin embargo, mientras que la estimación del coeficiente de regresión para `newspaper` en la <a href="#tbl-3-3" class="quarto-xref">Tabla&nbsp;3.3</a> era significativamente distinta de cero, la estimación del coeficiente para `newspaper` en el modelo de regresión múltiple es cercana a cero, y el *valor p* correspondiente ya no es significativo, con un valor alrededor de 0.86. Esto ilustra que los coeficientes de regresión simple y múltiple pueden ser bastante diferentes. Esta diferencia se debe al hecho de que en el caso de la regresión simple, el término de pendiente representa el aumento promedio en las ventas del producto asociado con un aumento de $1{,}000$ en publicidad en `newspaper`, ignorando otros predictores como `TV` y `radio`. En contraste, en el contexto de la regresión múltiple, el coeficiente para `newspaper` representa el aumento promedio en las ventas del producto asociado con aumentar el gasto en `newspaper` en $1{,}000$ *manteniendo* `TV` y `radio` *fijos*.
 
 ¿Tiene sentido que la regresión múltiple no sugiera una relación entre `sales` y `newspaper` mientras que la regresión lineal simple implica lo contrario? De hecho, sí tiene sentido. Consideremos la matriz de correlación para las tres variables predictoras y la variable respuesta, mostrada en la <a href="#tbl-3-5" class="quarto-xref">Tabla&nbsp;3.5</a>. Nótese que la correlación entre `radio` y `newspaper` es 0.35. Esto indica que los mercados con alta publicidad en `newspaper` tienden a tener también alta publicidad en `radio`. Ahora supongamos que la regresión múltiple es correcta y que la publicidad en `newspaper` no está asociada con `sales`, pero la publicidad en `radio` sí está asociada con `sales`. Entonces, en los mercados donde gastamos más en `radio` nuestras ventas tenderán a ser mayores, y como muestra nuestra matriz de correlación, también tendemos a gastar más en publicidad en `newspaper` en esos mismos mercados. Por lo tanto, en una regresión lineal simple que solo examina `sales` versus `newspaper`, observaremos que valores más altos de `newspaper` tienden a estar asociados con valores más altos de `sales`, aunque la publicidad en `newspaper` no esté directamente asociada con las ventas. Así que la publicidad en `newspaper` es un *sustituto* de la publicidad en `radio`; `newspaper` recibe el "crédito" por la asociación entre `radio` y `sales`.
 
-<a id="tbl-3-5"></a>
+<div id="tbl-3-5">
 
 |           |  TV    | radio  | newspaper | sales  |
 |:----------|:------:|:------:|:---------:|:------:|
@@ -382,6 +387,7 @@ La <a href="#tbl-3-4" class="quarto-xref">Tabla&nbsp;3.4</a> muestra las estimac
 
 : Tabla 3.5: Matriz de correlación para TV, radio, newspaper y sales para los datos Advertising.
 
+</div>
 Este resultado ligeramente contraintuitivo es muy común en muchas situaciones de la vida real. Consideremos un ejemplo absurdo para ilustrar el punto. Ejecutar una regresión de ataques de tiburón versus ventas de helados para datos recopilados en una comunidad costera durante un período de tiempo mostraría una relación positiva, similar a la observada entre `sales` y `newspaper`. Por supuesto, nadie ha sugerido (aún) que los helados deberían prohibirse en las playas para reducir los ataques de tiburón. En realidad, las temperaturas más altas hacen que más personas visiten la playa, lo que a su vez resulta en más ventas de helados y más ataques de tiburón. Una regresión múltiple de los ataques de tiburón sobre las ventas de helados y la temperatura revela que, como la intuición sugiere, las ventas de helados ya no son un predictor significativo después de ajustar por la temperatura.
 
 ### 3.2.2 Algunas Preguntas Importantes
@@ -425,7 +431,7 @@ $$E\{(\text{TSS} - \text{RSS})/p\} = \sigma^2.$$
 
 Por lo tanto, cuando no hay relación entre la variable respuesta y los predictores, se esperaría que el *estadístico F* tome un valor cercano a 1. Por otro lado, si $H_a$ es verdadera, entonces $E\{(\text{TSS} - \text{RSS})/p\} > \sigma^2$, por lo que esperamos que $F$ sea mayor que 1.
 
-<a id="tbl-3-6"></a>
+<div id="tbl-3-6">
 
 | Cantidad                     | Valor |
 |:-----------------------------|:-----:|
@@ -435,6 +441,7 @@ Por lo tanto, cuando no hay relación entre la variable respuesta y los predicto
 
 : Tabla 3.6: Más información sobre el modelo de mínimos cuadrados para la regresión del número de unidades vendidas sobre los presupuestos de publicidad en TV, newspaper y radio en los datos Advertising. Otra información sobre este modelo se mostró en la <a href="#tbl-3-4" class="quarto-xref">Tabla&nbsp;3.4</a>.
 
+</div>
 El *estadístico F* para el modelo de regresión lineal múltiple obtenido al regresar `sales` sobre `radio`, `TV` y `newspaper` se muestra en la <a href="#tbl-3-6" class="quarto-xref">Tabla&nbsp;3.6</a>. En este ejemplo, el *estadístico F* es 570. Dado que esto es mucho mayor que 1, proporciona evidencia contundente en contra de la hipótesis nula $H_0$. En otras palabras, el gran *estadístico F* sugiere que al menos uno de los medios publicitarios debe estar relacionado con las ventas. Sin embargo, ¿qué pasaría si el *estadístico F* hubiera estado más cerca de 1? ¿Qué tan grande necesita ser el *estadístico F* antes de que podamos rechazar $H_0$ y concluir que existe una relación? Resulta que la respuesta depende de los valores de $n$ y $p$. Cuando $n$ es grande, un *estadístico F* que es solo un poco mayor que 1 aún podría proporcionar evidencia en contra de $H_0$. En contraste, se necesita un *estadístico F* mayor para rechazar $H_0$ si $n$ es pequeño. Cuando $H_0$ es verdadera y los errores $\epsilon_i$ tienen una distribución normal, el *estadístico F* sigue una distribución $F$.^[Incluso si los errores no están distribuidos normalmente, el estadístico F sigue aproximadamente una distribución F siempre que el tamaño muestral $n$ sea grande.] Para cualquier valor dado de $n$ y $p$, cualquier paquete de software estadístico puede usarse para calcular el *valor p* asociado con el *estadístico F* usando esta distribución. Con base en este *valor p*, podemos determinar si rechazar o no $H_0$. Para los datos `Advertising`, el *valor p* asociado con el *estadístico F* en la <a href="#tbl-3-6" class="quarto-xref">Tabla&nbsp;3.6</a> es esencialmente cero, por lo que tenemos evidencia extremadamente fuerte de que al menos uno de los medios está asociado con un aumento en las ventas.
 
 En <a href="#eq-3-23" class="quarto-xref">(3.23)</a> estamos contrastando $H_0$ de que todos los coeficientes son cero. A veces queremos contrastar que un subconjunto particular de $q$ de los coeficientes es cero. Esto corresponde a una hipótesis nula
@@ -562,7 +569,7 @@ $$
 
 Ahora $\beta_0$ puede interpretarse como el `balance` promedio de la tarjeta de crédito entre aquellos que no poseen casa, $\beta_0 + \beta_1$ como el `balance` promedio de la tarjeta de crédito entre aquellos que sí poseen su casa, y $\beta_1$ como la diferencia promedio en el `balance` de la tarjeta de crédito entre propietarios y no propietarios.
 
-<a id="tbl-3-7"></a>
+<div id="tbl-3-7">
 
 |             | Coeficiente | Error estándar | Estadístico t | Valor p   |
 |:------------|:-----------:|:--------------:|:-------------:|:---------:|
@@ -571,6 +578,7 @@ Ahora $\beta_0$ puede interpretarse como el `balance` promedio de la tarjeta de 
 
 : Tabla 3.7: Estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de balance sobre own en el conjunto de datos Credit. El modelo lineal se da en <a href="#eq-3-27" class="quarto-xref">(3.27)</a>. Es decir, ownership se codifica como una variable dummy, como en <a href="#eq-3-26" class="quarto-xref">(3.26)</a>.
 
+</div>
 La <a href="#tbl-3-7" class="quarto-xref">Tabla&nbsp;3.7</a> muestra las estimaciones de los coeficientes y otra información asociada con el modelo <a href="#eq-3-27" class="quarto-xref">(3.27)</a>. La deuda promedio de tarjeta de crédito para los no propietarios se estima en $509.80$, mientras que se estima que los propietarios tienen $19.73$ en deuda adicional para un total de $509.80 + 19.73 = 529.53$. Sin embargo, notamos que el *valor p* para la *variable dummy* es muy alto. Esto indica que no hay evidencia estadística de una diferencia en el `balance` promedio de la tarjeta de crédito basada en la propiedad de la vivienda.
 
 La decisión de codificar a los propietarios como 1 y a los no propietarios como 0 en <a href="#eq-3-27" class="quarto-xref">(3.27)</a> es arbitraria, y no tiene efecto en el ajuste de la regresión, pero sí altera la interpretación de los coeficientes. Si hubiéramos codificado a los no propietarios como 1 y a los propietarios como 0, entonces las estimaciones para $\beta_0$ y $\beta_1$ habrían sido 529.53 y $-19.73$, respectivamente, llevando una vez más a una predicción de deuda de tarjeta de crédito de $529.53 - 19.73 = 509.80$ para los no propietarios y una predicción de $529.53$ para los propietarios. Alternativamente, en lugar de un esquema de codificación 0/1, podríamos crear una *variable dummy*
@@ -628,7 +636,7 @@ $$
 
 Ahora $\beta_0$ puede interpretarse como el `balance` promedio de la tarjeta de crédito para individuos del Este, $\beta_1$ puede interpretarse como la diferencia en el `balance` promedio entre personas del Sur versus el Este, y $\beta_2$ puede interpretarse como la diferencia en el `balance` promedio entre aquellos del Oeste versus el Este. Siempre habrá una variable dummy menos que el número de niveles. El nivel sin variable dummy —Este en este ejemplo— se conoce como la *categoría de referencia* o *línea base* (*baseline*).
 
-<a id="tbl-3-8"></a>
+<div id="tbl-3-8">
 
 |                | Coeficiente | Error estándar | Estadístico t | Valor p   |
 |:---------------|:-----------:|:--------------:|:-------------:|:---------:|
@@ -638,6 +646,7 @@ Ahora $\beta_0$ puede interpretarse como el `balance` promedio de la tarjeta de 
 
 : Tabla 3.8: Estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de balance sobre region en el conjunto de datos Credit. El modelo lineal se da en <a href="#eq-3-30" class="quarto-xref">(3.30)</a>. Es decir, region se codifica mediante dos variables dummy <a href="#eq-3-28" class="quarto-xref">(3.28)</a> y <a href="#eq-3-29" class="quarto-xref">(3.29)</a>.
 
+</div>
 De la <a href="#tbl-3-8" class="quarto-xref">Tabla&nbsp;3.8</a>, vemos que el `balance` estimado para la línea base, Este, es $531.00$. Se estima que aquellos en el Sur tendrán $18.69$ menos de deuda que aquellos en el Este, y que aquellos en el Oeste tendrán $12.50$ menos de deuda que aquellos en el Este. Sin embargo, los *valores p* asociados con las estimaciones de los coeficientes para las dos variables dummy son muy grandes, lo que sugiere que no hay evidencia estadística de una diferencia real en el `balance` promedio de la tarjeta de crédito entre el Sur y el Este o entre el Oeste y el Este.^[En teoría aún podría existir una diferencia entre Sur y Oeste, aunque los datos aquí no sugieren ninguna diferencia.] Una vez más, el nivel seleccionado como categoría de referencia es arbitrario, y las predicciones finales para cada grupo serán las mismas independientemente de esta elección. Sin embargo, los coeficientes y sus *valores p* sí dependen de la elección de la codificación de variables dummy. En lugar de confiar en los coeficientes individuales, podemos usar una prueba $F$ para contrastar $H_0: \beta_1 = \beta_2 = 0$; esto no depende de la codificación. Esta prueba $F$ tiene un *valor p* de 0.96, indicando que no podemos rechazar la hipótesis nula de que no hay relación entre `balance` y `region`.
 
 Usar este enfoque de variables dummy no presenta dificultades al incorporar tanto predictores cuantitativos como cualitativos. Por ejemplo, para regresar `balance` sobre una variable cuantitativa como `income` (ingreso) y una variable cualitativa como `student` (estudiante), simplemente debemos crear una variable dummy para `student` y luego ajustar un modelo de regresión múltiple usando `income` y la variable dummy como predictores para el `balance` de la tarjeta de crédito.
@@ -657,13 +666,14 @@ Sin embargo, este modelo simple puede ser incorrecto. Supongamos que gastar dine
 
 Consideremos el modelo de regresión lineal estándar con dos variables,
 
-<div id="eq-3-31">
 $$
 Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \epsilon.$$
 
 Según este modelo, un aumento de una unidad en $X_1$ está asociado con un aumento promedio en $Y$ de $\beta_1$ unidades. Nótese que la presencia de $X_2$ no altera esta afirmación —es decir, independientemente del valor de $X_2$, un aumento de una unidad en $X_1$ está asociado con un aumento de $\beta_1$ unidades en $Y$. Una forma de extender este modelo es incluir un tercer predictor, llamado *término de interacción* (*interaction term*), que se construye calculando el producto de $X_1$ y $X_2$. Esto resulta en el modelo
 
-$$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_1 X_2 + \epsilon. \qquad (3.31)
+<div id="eq-3-31">
+$$
+Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_1 X_2 + \epsilon. \qquad (3.31)
 $$
 </div>
 
@@ -682,7 +692,6 @@ donde $\tilde{\beta}_1 = \beta_1 + \beta_3 X_2$. Dado que $\tilde{\beta}_1$ es a
 
 Por ejemplo, supongamos que estamos interesados en estudiar la productividad de una fábrica. Deseamos predecir el número de unidades producidas con base en el número de líneas de producción y el número total de trabajadores. Parece probable que el efecto de aumentar el número de líneas de producción dependa del número de trabajadores, ya que si no hay trabajadores disponibles para operar las líneas, entonces aumentar el número de líneas no incrementará la producción. Esto sugiere que sería apropiado incluir un *término de interacción* entre líneas y trabajadores en un modelo lineal para predecir unidades. Supongamos que cuando ajustamos el modelo, obtenemos
 
-<div id="eq-3-33">
 $$
 \begin{aligned}
 \text{units} &\approx 1.2 + 3.4 \times \text{lines} + 0.22 \times \text{workers} + 1.4 \times (\text{lines} \times \text{workers})\\
@@ -693,7 +702,9 @@ En otras palabras, agregar una línea adicional aumentará el número de unidade
 
 Ahora volvemos al ejemplo de `Advertising`. Un modelo lineal que usa `radio`, `TV` y una interacción entre los dos para predecir `sales` toma la forma
 
-$$\begin{aligned}
+<div id="eq-3-33">
+$$
+\begin{aligned}
 \text{sales} &= \beta_0 + \beta_1 \times \text{TV} + \beta_2 \times \text{radio} + \beta_3 \times (\text{radio} \times \text{TV}) + \epsilon \\
              &= \beta_0 + (\beta_1 + \beta_3 \times \text{radio}) \times \text{TV} + \beta_2 \times \text{radio} + \epsilon. \qquad (3.33)
 \end{aligned}
@@ -702,7 +713,7 @@ $$
 
 Podemos interpretar $\beta_3$ como el aumento en la efectividad de la publicidad en `TV` asociado con un aumento de una unidad en la publicidad en `radio` (o viceversa). Los coeficientes que resultan de ajustar el modelo <a href="#eq-3-33" class="quarto-xref">(3.33)</a> se dan en la <a href="#tbl-3-9" class="quarto-xref">Tabla&nbsp;3.9</a>.
 
-<a id="tbl-3-9"></a>
+<div id="tbl-3-9">
 
 |             | Coeficiente | Error estándar | Estadístico t | Valor p   |
 |:------------|:-----------:|:--------------:|:-------------:|:---------:|
@@ -713,6 +724,7 @@ Podemos interpretar $\beta_3$ como el aumento en la efectividad de la publicidad
 
 : Tabla 3.9: Para los datos Advertising, estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de sales sobre TV y radio, con un término de interacción, como en <a href="#eq-3-33" class="quarto-xref">(3.33)</a>.
 
+</div>
 Los resultados en la <a href="#tbl-3-9" class="quarto-xref">Tabla&nbsp;3.9</a> sugieren fuertemente que el modelo que incluye el término de interacción es superior al modelo que contiene solo *efectos principales* (*main effects*). El *valor p* para el término de interacción, TV×radio, es extremadamente bajo, indicando que hay fuerte evidencia para $H_a: \beta_3 \neq 0$. En otras palabras, está claro que la verdadera relación no es aditiva. El $R^2$ para el modelo <a href="#eq-3-33" class="quarto-xref">(3.33)</a> es 96.8%, comparado con solo 89.7% para el modelo que predice `sales` usando `TV` y `radio` sin un término de interacción. Esto significa que $(96.8 - 89.7)/(100 - 89.7) = 69\%$ de la variabilidad en las ventas que permanece después de ajustar el modelo aditivo ha sido explicada por el término de interacción. Las estimaciones de los coeficientes en la <a href="#tbl-3-9" class="quarto-xref">Tabla&nbsp;3.9</a> sugieren que un aumento en la publicidad en `TV` de $1{,}000$ está asociado con un aumento en las ventas de $(\hat{\beta}_1 + \hat{\beta}_3 \times \text{radio}) \times 1{,}000 = 19 + 1.1 \times \text{radio}$ unidades. Y un aumento en la publicidad en `radio` de $1{,}000$ estará asociado con un aumento en las ventas de $(\hat{\beta}_2 + \hat{\beta}_3 \times \text{TV}) \times 1{,}000 = 29 + 1.1 \times \text{TV}$ unidades.
 
 En este ejemplo, los *valores p* asociados con `TV`, `radio` y el término de interacción son todos estadísticamente significativos (<a href="#tbl-3-9" class="quarto-xref">Tabla&nbsp;3.9</a>), por lo que es obvio que las tres variables deben incluirse en el modelo. Sin embargo, a veces ocurre que un término de interacción tiene un *valor p* muy pequeño, pero los *efectos principales* asociados (en este caso, `TV` y `radio`) no. El *principio jerárquico* (*hierarchical principle*) establece que si incluimos una interacción en un modelo, también debemos incluir los *efectos principales*, incluso si los *valores p* asociados con sus coeficientes no son significativos. En otras palabras, si la interacción entre $X_1$ y $X_2$ parece importante, entonces debemos incluir tanto $X_1$ como $X_2$ en el modelo incluso si las estimaciones de sus coeficientes tienen *valores p* grandes. La razón de ser de este principio es que si $X_1 \times X_2$ está relacionado con la variable respuesta, entonces que los coeficientes de $X_1$ o $X_2$ sean exactamente cero es de poco interés. Además, $X_1 \times X_2$ típicamente está correlacionado con $X_1$ y $X_2$, por lo que omitirlos tiende a alterar el significado de la interacción.
@@ -779,7 +791,7 @@ puede proporcionar un mejor ajuste. La <a href="#eq-3-36" class="quarto-xref">Ec
 <p class="figure-caption" style="margin-top:0.5em;">Figura&nbsp;3.8: El conjunto de datos Auto. Para varios automóviles, se muestran mpg y horsepower. El ajuste de regresión lineal se muestra en naranja. El ajuste de regresión lineal para un modelo que incluye horsepower<sup>2</sup> se muestra como una curva azul. El ajuste de regresión lineal para un modelo que incluye todos los polinomios de horsepower hasta el quinto grado se muestra en verde.</p>
 </div>
 
-<a id="tbl-3-10"></a>
+<div id="tbl-3-10">
 
 |                | Coeficiente | Error estándar | Estadístico t | Valor p   |
 |:---------------|:-----------:|:--------------:|:-------------:|:---------:|
@@ -789,6 +801,7 @@ puede proporcionar un mejor ajuste. La <a href="#eq-3-36" class="quarto-xref">Ec
 
 : Tabla 3.10: Para el conjunto de datos Auto, estimaciones de los coeficientes de mínimos cuadrados asociadas con la regresión de mpg sobre horsepower y horsepower<sup>2</sup>.
 
+</div>
 Si incluir `horsepower`$^2$ condujo a una mejora tan grande en el modelo, ¿por qué no incluir `horsepower`$^3$, `horsepower`$^4$, o incluso `horsepower`$^5$? La curva verde en la <a href="#fig-3-8" class="quarto-xref">Figura&nbsp;3.8</a> muestra el ajuste que resulta de incluir todos los polinomios hasta el quinto grado en el modelo <a href="#eq-3-36" class="quarto-xref">(3.36)</a>. El ajuste resultante parece innecesariamente ondulado —es decir, no está claro que incluir los términos adicionales realmente haya conducido a un mejor ajuste a los datos.
 
 El enfoque que acabamos de describir para extender el modelo lineal para dar cabida a relaciones no lineales se conoce como *regresión polinomial*, ya que hemos incluido funciones polinomiales de los predictores en el modelo de regresión. Exploramos más a fondo este enfoque y otras extensiones no lineales del modelo lineal en el Capítulo 7.
@@ -909,7 +922,7 @@ En contraste, el panel derecho de la <a href="#fig-3-15" class="quarto-xref">Fig
 
 Dado que la colinealidad reduce la precisión de las estimaciones de los coeficientes de regresión, hace que el error estándar para $\hat{\beta}_j$ aumente. Recordemos que el estadístico $t$ para cada predictor se calcula dividiendo $\hat{\beta}_j$ por su error estándar. En consecuencia, la colinealidad resulta en una disminución del estadístico $t$. Como resultado, en presencia de colinealidad, podemos no rechazar $H_0: \beta_j = 0$. Esto significa que la *potencia* (*power*) de la prueba de hipótesis —la probabilidad de detectar correctamente un coeficiente distinto de cero— se reduce por la colinealidad.
 
-<a id="tbl-3-11"></a>
+<div id="tbl-3-11">
 
 **Modelo 1: regresión de `balance` sobre `age` y `limit`**
 
@@ -929,6 +942,7 @@ Dado que la colinealidad reduce la precisión de las estimaciones de los coefici
 
 <p class="figure-caption" style="margin-top:0.5em; text-align:center;">Tabla&nbsp;3.11: Se muestran los resultados para dos modelos de regresión múltiple que involucran el conjunto de datos Credit. El Modelo 1 es una regresión de balance sobre age y limit, y el Modelo 2 una regresión de balance sobre rating y limit. El error estándar de $\hat{\beta}_{\text{limit}}$ aumenta 12 veces en la segunda regresión, debido a la colinealidad.</p>
 
+</div>
 La <a href="#tbl-3-11" class="quarto-xref">Tabla&nbsp;3.11</a> compara las estimaciones de los coeficientes obtenidas de dos modelos de regresión múltiple separados. El primero es una regresión de `balance` sobre `age` y `limit`, y el segundo es una regresión de `balance` sobre `rating` y `limit`. En la primera regresión, tanto `age` como `limit` son altamente significativos con *valores p* muy pequeños. En la segunda, la colinealidad entre `limit` y `rating` ha causado que el error estándar para la estimación del coeficiente de `limit` aumente por un factor de 12 y que el *valor p* aumente a 0.701. En otras palabras, la importancia de la variable `limit` ha sido enmascarada debido a la presencia de colinealidad. Para evitar tal situación, es deseable identificar y abordar problemas potenciales de colinealidad mientras se ajusta el modelo.
 
 Una forma simple de detectar colinealidad es observar la matriz de correlación de los predictores. Un elemento de esta matriz que es grande en valor absoluto indica un par de variables altamente correlacionadas, y por lo tanto un problema de colinealidad en los datos. Desafortunadamente, no todos los problemas de colinealidad pueden detectarse mediante la inspección de la matriz de correlación: es posible que exista colinealidad entre tres o más variables incluso si ningún par de variables tiene una correlación particularmente alta. Llamamos a esta situación *multicolinealidad* (*multicollinearity*). En lugar de inspeccionar la matriz de correlación, una mejor manera de evaluar la *multicolinealidad* es calcular el *factor de inflación de la varianza* (*variance inflation factor*, VIF). El VIF es la razón entre la varianza de $\hat{\beta}_j$ al ajustar el modelo completo dividida por la varianza de $\hat{\beta}_j$ si se ajusta por sí solo. El valor más pequeño posible para el VIF es 1, lo que indica la ausencia completa de colinealidad. Típicamente en la práctica hay una pequeña cantidad de colinealidad entre los predictores. Como regla general, un valor de VIF que excede 5 o 10 indica una cantidad problemática de colinealidad. El VIF para cada variable puede calcularse usando la fórmula
@@ -997,7 +1011,7 @@ En la práctica, la verdadera relación entre $X$ e $Y$ rara vez es exactamente 
 <p class="figure-caption" style="margin-top:0.5em;">Figura&nbsp;3.19: <em>Arriba Izquierda:</em> En un contexto con una relación ligeramente no lineal entre $X$ e $Y$ (línea negra sólida), se muestran los ajustes KNN con $K = 1$ (azul) y $K = 9$ (rojo). <em>Arriba Derecha:</em> Para los datos ligeramente no lineales, se muestran el MSE del conjunto de prueba para la regresión de mínimos cuadrados (línea negra horizontal) y KNN con varios valores de $1/K$ (verde). <em>Abajo Izquierda</em> y <em>Abajo Derecha:</em> Como en el panel superior, pero con una relación fuertemente no lineal entre $X$ e $Y$.</p>
 </div>
 
-Las Figuras 3.18 y 3.19 muestran situaciones en las que KNN se desempeña ligeramente peor que la regresión lineal cuando la relación es lineal, pero mucho mejor que la regresión lineal para situaciones no lineales. En una situación de la vida real en la que la verdadera relación es desconocida, uno podría sospechar que KNN debería favorecerse sobre la regresión lineal porque en el peor de los casos será ligeramente inferior a la regresión lineal si la verdadera relación es lineal, y puede dar resultados sustancialmente mejores si la verdadera relación es no lineal. Pero en realidad, incluso cuando la verdadera relación es altamente no lineal, KNN aún puede proporcionar resultados inferiores a la regresión lineal. En particular, tanto las Figuras 3.18 como 3.19 ilustran contextos con $p = 1$ predictor. Pero en dimensiones más altas, KNN a menudo se desempeña peor que la regresión lineal.
+Las <a href="#fig-3-18" class="quarto-xref">Figuras&nbsp;3.18</a> y <a href="#fig-3-19" class="quarto-xref">3.19</a> muestran situaciones en las que KNN se desempeña ligeramente peor que la regresión lineal cuando la relación es lineal, pero mucho mejor que la regresión lineal para situaciones no lineales. En una situación de la vida real en la que la verdadera relación es desconocida, uno podría sospechar que KNN debería favorecerse sobre la regresión lineal porque en el peor de los casos será ligeramente inferior a la regresión lineal si la verdadera relación es lineal, y puede dar resultados sustancialmente mejores si la verdadera relación es no lineal. Pero en realidad, incluso cuando la verdadera relación es altamente no lineal, KNN aún puede proporcionar resultados inferiores a la regresión lineal. En particular, tanto las <a href="#fig-3-18" class="quarto-xref">Figuras&nbsp;3.18</a> como <a href="#fig-3-19" class="quarto-xref">3.19</a> ilustran contextos con $p = 1$ predictor. Pero en dimensiones más altas, KNN a menudo se desempeña peor que la regresión lineal.
 
 <div id="fig-3-20" style="text-align:center; margin:1.5em 0;">
 <img src="../../Figures/Chapter3/png/3_20.png" class="img-fluid figure-img" style="width:65.0%" alt="">

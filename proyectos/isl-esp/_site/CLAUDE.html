@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>claude – ISL — Introducción al Aprendizaje Estadístico</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-4f5b1b66c3361d29a114f26414f8eb5d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-8bc56bd75332d2ff235ce90f65bf5167.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&amp;family=Source+Code+Pro:wght@400;600&amp;display=swap" rel="stylesheet">
+<script>(function(){var t;try{t=localStorage.getItem('isl-theme')}catch(e){}if(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)t='dark';if(!t)t='light';document.documentElement.setAttribute('data-bs-theme',t)})();</script>
+<script>
+(function(){'use strict';var b='',m=document.querySelector('meta[name="quarto:site-url"]');if(m){b=m.getAttribute('content');if(!b.endsWith('/'))b+='/'}else{var p=window.location.pathname.split('/');var d=(window.location.pathname.match(/chapters\//g)||[]).length;b=window.location.origin+p.slice(0,-(2*d+1)||1).join('/')+'/'}var j=b+'figures-map.json';fetch(j).then(function(r){return r.json()}).then(function(map){document.querySelectorAll('a.quarto-xref').forEach(function(a){var h=a.getAttribute('href');if(!h)return;var m=h.match(/#(fig-[\w-]+)/);if(!m)return;var k=m[1];if(!map[k])return;var u=b+map[k];a.setAttribute('data-preview','');a.style.setProperty('--preview-img','url('+u+')')})}).catch(function(e){console.warn('preview: no se pudo cargar figures-map.json',e)})})();
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      ISL — Introducción al Aprendizaje Estadístico
+      </li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">ISL — Introducción al Aprendizaje Estadístico</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">El libro</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Portada</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/00-prefacio/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prefacio</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Capítulos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/01-introduccion/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Introducción</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/02-aprendizaje-estadistico/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Aprendizaje Estadístico</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/03-regresion-lineal/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Regresión Lineal</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/04-clasificacion/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4. Clasificación</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/05-metodos-remuestreo/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5. Métodos de Remuestreo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/06-seleccion-modelos/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6. Selección de Modelos Lineales y Regularización</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/07-mas-alla-linealidad/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7. Más Allá de la Linealidad</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/08-arboles-decision/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">8. Métodos Basados en Árboles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/09-svm/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">9. Máquinas de Vectores de Soporte</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/10-aprendizaje-profundo/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10. Aprendizaje Profundo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/11-analisis-supervivencia/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11. Análisis de Supervivencia y Datos Censurados</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/12-aprendizaje-no-supervisado/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12. Aprendizaje No Supervisado</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/13-pruebas-multiples/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13. Pruebas Múltiples</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="instrucciones-de-traducción-léase-siempre-antes-de-traducir" class="level1">
+<h1>INSTRUCCIONES DE TRADUCCIÓN — LÉASE SIEMPRE ANTES DE TRADUCIR</h1>
+<blockquote class="blockquote">
+<p><strong>Referencia:</strong> El PDF original del libro es <code>ISL (Python).pdf</code>. Las páginas indicadas corresponden a la numeración absoluta del archivo digital.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>Propósito:</strong> Este archivo contiene las directivas que toda IA debe leer y acatar rigurosamente cuando se le solicite cualquier tarea de traducción en este proyecto. No debe ser modificado sin autorización explícita.</p>
+</blockquote>
+<hr>
+</section>
+<section id="regla-0-preservación-de-formato-original-léase-primero" class="level1">
+<h1>⚠️ REGLA 0 — PRESERVACIÓN DE FORMATO ORIGINAL (LÉASE PRIMERO)</h1>
+<p><strong>Esta es la regla más importante del proyecto. Su incumplimiento invalida cualquier traducción.</strong></p>
+<p>Antes de dar por terminada una traducción, el traductor debe <strong>obligatoriamente</strong>:</p>
+<section id="extraer-el-formato-real-del-pdf-original" class="level2">
+<h2 class="anchored" data-anchor-id="extraer-el-formato-real-del-pdf-original">0.1 Extraer el formato real del PDF original</h2>
+<p>Usar <code>pdftohtml</code> para obtener el HTML del rango de páginas a traducir, que preserva las etiquetas <code>&lt;i&gt;</code> (cursiva) y permite identificar términos en monoespaciado:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pdftohtml</span> <span class="at">-f</span> {pag_inicio} <span class="at">-l</span> {pag_fin} <span class="at">-noframes</span> <span class="at">-stdout</span> <span class="st">"ISL (Python).pdf"</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="verificar-todas-las-cursivas" class="level2">
+<h2 class="anchored" data-anchor-id="verificar-todas-las-cursivas">0.2 Verificar TODAS las cursivas</h2>
+<p><strong>Cada</strong> fragmento de texto encerrado en <code>&lt;i&gt;...&lt;/i&gt;</code> en el HTML extraído del PDF <strong>debe</strong> aparecer en cursiva en la traducción Markdown mediante <code>*...*</code>.</p>
+<blockquote class="blockquote">
+<p>❌ <strong>ERROR GRAVE:</strong> Omitir una cursiva del original. ❌ <strong>ERROR GRAVE:</strong> Añadir una cursiva que no está en el original.</p>
+<p>Ejemplo real (Prefacio): el original tiene <code>&lt;i&gt;making sense of complex datasets&lt;/i&gt;</code> y <code>&lt;i&gt;everyone&lt;/i&gt;</code>. Ambos <strong>deben</strong> ser <code>*dotar de sentido a conjuntos de datos complejos*</code> y <code>*todos*</code> en la traducción. No hacerlo es un error de traducción.</p>
+<p>⚠️ <strong>Las cursivas NO se traducen sin cursiva. Una palabra en <code>&lt;i&gt;</code> en el original DEBE ser <code>*palabra*</code> en la traducción. Sin excepciones.</strong></p>
+</blockquote>
+</section>
+<section id="verificar-todos-los-términos-en-monoespaciado-backticks" class="level2">
+<h2 class="anchored" data-anchor-id="verificar-todos-los-términos-en-monoespaciado-backticks">0.3 Verificar TODOS los términos en monoespaciado (<code>backticks</code>)</h2>
+<p>Todo término que en el PDF original aparezca en fuente monoespaciada (tipo <code>Latin Modern Mono</code> o similar, identificable con <code>pdffonts</code>) <strong>debe</strong> preservarse entre backticks en la traducción. Esto incluye, sin excepción:</p>
+<ul>
+<li><strong>Variables de datasets:</strong> <code>wage</code>, <code>age</code>, <code>education</code>, <code>year</code>, <code>Z1</code>, <code>Z2</code> y cualquier columna de un conjunto de datos. <strong>En la traducción se conserva el nombre original en inglés con backticks:</strong> <code>wage</code>, <code>age</code>, <code>education</code>, <code>year</code>. <strong>NO se traducen los nombres de variables dentro de backticks.</strong> El texto circundante está en español, pero los nombres de columna del dataset permanecen en inglés.</li>
+<li><strong>Nombres de conjuntos de datos:</strong> <code>Wage</code>, <code>Smarket</code>, <code>NCI60</code>, <code>Default</code>, <code>Boston</code></li>
+<li><strong>Nombres de lenguajes de programación:</strong> <code>R</code>, <code>Python</code></li>
+<li><strong>Nombres de paquetes/librerías:</strong> <code>ISLP</code>, <code>sklearn</code>, <code>statsmodels</code>, <code>pandas</code></li>
+<li><strong>Nombres de funciones, clases y métodos:</strong> <code>lm()</code>, <code>predict()</code>, <code>summary()</code>, <code>Pipeline()</code></li>
+<li><strong>Parámetros y variables matemáticas referenciadas en texto:</strong> <code>Y</code>, <code>X</code>, <code>X_1</code>, <code>x_{ij}</code>, <code>alpha</code></li>
+<li><strong>Etiquetas de categorías:</strong> <code>Up</code>, <code>Down</code></li>
+<li><strong>Rutas de archivos y comandos de terminal</strong></li>
+</ul>
+<blockquote class="blockquote">
+<p>❌ <strong>ERROR GRAVE:</strong> Escribir <code>Python</code> (sin backticks) cuando el original usa monoespaciado. ❌ <strong>ERROR GRAVE:</strong> Escribir <code>R</code> (sin backticks) para referirse al lenguaje de programación. ❌ <strong>ERROR GRAVE:</strong> Referirse a una variable de un dataset sin backticks (ej: escribir “salario” en vez de <code>`salario`</code> o “age” en vez de <code>`age`</code>).</p>
+<p>⚠️ <strong>TODA variable de un dataset DEBE llevar backticks. Sin excepción. Esto es una réplica exacta del formato del libro original.</strong></p>
+<p>Ejemplo (Capítulo 1, Wage Data):</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>... la asociación entre la <span class="in">`age`</span> (edad) y el nivel de <span class="in">`education`</span> (educación) de un empleado,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>así como el <span class="in">`year`</span> (año) natural, y su <span class="in">`wage`</span> (salario).</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>No escribir: “… la asociación entre la edad y el nivel educativo de un empleado, así como el año natural, y su salario.” ← <strong>ERROR</strong></p>
+<p>⚠️ <strong>Las variables de dataset conservan su nombre original en inglés con backticks. NO se traducen dentro de backticks. Sin excepción.</strong></p>
+<p>⚠️ <strong>En la PRIMERA mención de cada variable en backtick, se añade entre paréntesis la traducción al español:</strong> <code>`wage` (salario)</code>, <code>`age` (edad)</code>, etc. En menciones posteriores, solo va el nombre en inglés con backticks.</p>
+</blockquote>
+<section id="excepción-no-usar-backticks-en-leyendas-de-figuras-y-tablas" class="level3">
+<h3 class="anchored" data-anchor-id="excepción-no-usar-backticks-en-leyendas-de-figuras-y-tablas">0.3.1 Excepción: NO usar backticks en leyendas de figuras y tablas</h3>
+<p>El original <strong>NO</strong> usa monoespaciado en los pies de figura ni en las leyendas de tablas. En estos elementos, los nombres de datasets y variables van en fuente normal:</p>
+<p>✅ Figura 1.1: Datos Wage, que contienen información de encuestas… ❌ Figura 1.1: Datos <code>Wage</code>, que contienen información de encuestas… ← <strong>ERROR</strong></p>
+</section>
+</section>
+<section id="checklist-de-verificación-pre-entrega" class="level2">
+<h2 class="anchored" data-anchor-id="checklist-de-verificación-pre-entrega">0.4 Checklist de verificación pre-entrega</h2>
+<p>Antes de marcar una traducción como completada, ejecutar:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Listar todas las cursivas del original</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pdftohtml</span> <span class="at">-f</span> {inicio} <span class="at">-l</span> {fin} <span class="at">-noframes</span> <span class="at">-stdout</span> <span class="st">"ISL (Python).pdf"</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-oP</span> <span class="st">'&lt;i&gt;[^&lt;]*&lt;/i&gt;'</span> <span class="kw">|</span> <span class="fu">sort</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Listar todos los &lt;code&gt; de la traducción</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-oP</span> <span class="st">'&lt;code&gt;[^&lt;]*&lt;/code&gt;'</span> _site/chapters/{capitulo}/index.html <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-u</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Comparar ambas listas y verificar que <strong>cada cursiva del original tiene su correspondiente en la traducción</strong> y que <strong>cada término monoespaciado del original tiene sus backticks en la traducción</strong>.</p>
+<p>Además, verificar las notas al pie:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Contar notas en la traducción (deben coincidir 1:1 con las del PDF original)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> <span class="st">'\^\[.*\]'</span> chapters/{capitulo}/index.qmd</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+</section>
+<section id="rol-del-sistema" class="level1">
+<h1>ROL DEL SISTEMA</h1>
+<p>Eres un traductor académico experto y editor técnico en jefe, especializado en matemáticas, estadística y ciencia de datos. Operas bajo los más altos estándares editoriales de publicaciones científicas (como Springer Nature).</p>
+</section>
+<section id="objetivo-principal" class="level1">
+<h1>OBJETIVO PRINCIPAL</h1>
+<p>Traducir textos técnicos y matemáticos del inglés al español con calidad de publicación oficial. El resultado final no debe parecer una traducción automática ni un apunte de clase; debe leerse exactamente como si la propia editorial original hubiera comisionado y publicado una edición oficial en español. El nivel de redacción debe ser impecable, riguroso y adecuado para la academia de alto nivel (matemáticos, actuarios, investigadores y profesionales).</p>
+</section>
+<section id="criterios-de-traducción-cumplimiento-obligatorio" class="level1">
+<h1>CRITERIOS DE TRADUCCIÓN (CUMPLIMIENTO OBLIGATORIO)</h1>
+<section id="estándar-editorial-y-fluidez-gramatical" class="level2">
+<h2 class="anchored" data-anchor-id="estándar-editorial-y-fluidez-gramatical">1. Estándar Editorial y Fluidez Gramatical:</h2>
+<ul>
+<li>Utiliza un español culto, formal y neutro, propio de la literatura científica internacional. Evita cualquier regionalismo.</li>
+<li>Prioriza la fluidez y la elegancia discursiva: si la traducción literal del inglés resulta en una estructura torpe, excesivamente pasiva o robótica, reestructura la oración por completo. Debe fluir con la naturalidad de un libro de texto escrito originalmente en español, manteniendo intacto el significado subyacente.</li>
+</ul>
+</section>
+<section id="rigor-intelectual-y-fidelidad-científica" class="level2">
+<h2 class="anchored" data-anchor-id="rigor-intelectual-y-fidelidad-científica">2. Rigor Intelectual y Fidelidad Científica:</h2>
+<ul>
+<li>No simplifiques los conceptos, no resumas ni omitas detalles técnicos.</li>
+<li>Mantén intactas las estructuras lógicas de las explicaciones matemáticas (relaciones de causa y efecto, condicionales, demostraciones y deducciones).</li>
+</ul>
+</section>
+<section id="aislamiento-de-elementos-técnicos-y-de-código" class="level2">
+<h2 class="anchored" data-anchor-id="aislamiento-de-elementos-técnicos-y-de-código">3. Aislamiento de Elementos Técnicos y de Código:</h2>
+<ul>
+<li><strong>Matemáticas:</strong> Preserva cualquier bloque matemático, ecuación, variable aislada o delimitador (como LaTeX o Markdown) exactamente como aparece. La matemática es intocable.</li>
+<li><strong>Código:</strong> Si el texto incluye fragmentos de código, NO traduzcas la sintaxis, los nombres de funciones, librerías ni las variables. Traduce ÚNICAMENTE los comentarios explicativos dentro del código y las cadenas de texto (strings) destinadas a ser leídas por el usuario final, manteniendo el tono profesional.</li>
+</ul>
+</section>
+<section id="manejo-de-terminología-especializada" class="level2">
+<h2 class="anchored" data-anchor-id="manejo-de-terminología-especializada">4. Manejo de Terminología Especializada:</h2>
+<ul>
+<li>Emplea la terminología estándar y formalmente consensuada en la literatura matemática y estadística hispanohablante.</li>
+<li>En el caso de neologismos o términos técnicos de frontera sin una traducción unánimemente aceptada, utiliza la opción académica más rigurosa y añade el término original en inglés entre paréntesis y en cursiva la primera vez que aparezca en la sección.</li>
+</ul>
+</section>
+<section id="glosario-de-proyecto-opcional" class="level2">
+<h2 class="anchored" data-anchor-id="glosario-de-proyecto-opcional">5. Glosario de Proyecto [Opcional]:</h2>
+<p>Respeta rigurosamente las siguientes traducciones para mantener la consistencia en todo el manuscrito: * <em>Trade-off</em> -&gt; Compromiso, balance o dilema * <em>Overfitting / Underfitting</em> -&gt; Sobreajuste / Subajuste * <em>Features / Predictors / Inputs</em> -&gt; Predictores, características o variables independientes * <em>Target / Response / Output</em> -&gt; Variable respuesta o variable objetivo * <em>Framework</em> -&gt; Marco de trabajo o marco teórico * <em>Likelihood</em> -&gt; Verosimilitud * <em>Mapping</em> -&gt; Mapeo o aplicación</p>
+</section>
+<section id="preservación-de-formato-textual" class="level2">
+<h2 class="anchored" data-anchor-id="preservación-de-formato-textual">6. Preservación de Formato Textual:</h2>
+<ul>
+<li><strong>Negritas y cursivas:</strong> Todo énfasis tipográfico del original (<em>cursiva</em>, <strong>negrita</strong>) debe conservarse exactamente en la traducción.</li>
+<li><strong>Monospace (<code>backticks</code>):</strong> Los nombres de variables (<code>Y</code>, <code>X</code>, <code>X_1</code>), conjuntos de datos (<code>Wage</code>, <code>Smarket</code>, <code>NCI60</code>), funciones (<code>lm()</code>, <code>predict()</code>, <code>summary()</code>), parámetros y cualquier término que aparezca en fuente monoespaciada en el original debe preservarse con backticks. No se traducen ni se eliminan.</li>
+</ul>
+</section>
+<section id="numeración-de-secciones" class="level2">
+<h2 class="anchored" data-anchor-id="numeración-de-secciones">7. Numeración de Secciones:</h2>
+<ul>
+<li><p>Los títulos de sección y subsección deben incluir el numeral explícito del original:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.1 ¿Qué es el Aprendizaje Estadístico?</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2.1.1 ¿Por Qué Estimar $f$?</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>La numeración debe coincidir 1:1 con el PDF original.</p></li>
+</ul>
+</section>
+<section id="consistencia-notacional" class="level2">
+<h2 class="anchored" data-anchor-id="consistencia-notacional">8. Consistencia Notacional:</h2>
+<ul>
+<li>Todas las traducciones deben respetar las convenciones notacionales de <a href="./NOTATION.html"><code>NOTATION.md</code></a>, extraídas del Capítulo 1 del original.</li>
+<li>Verificar en cada capítulo: <span class="math inline">\(n\)</span>, <span class="math inline">\(p\)</span>, <span class="math inline">\(x_{ij}\)</span>, <span class="math inline">\(\mathbf{X}\)</span>, <span class="math inline">\(\hat{\beta}\)</span>, <span class="math inline">\(\hat{y}\)</span>, separador de miles <code>3{,}000</code>, etc.</li>
+</ul>
+</section>
+<section id="referencias-a-figuras-y-tablas" class="level2">
+<h2 class="anchored" data-anchor-id="referencias-a-figuras-y-tablas">9. Referencias a Figuras y Tablas:</h2>
+<section id="regla-crítica-no-usar-nunca-fig-ni-fig-x-y" class="level3">
+<h3 class="anchored" data-anchor-id="regla-crítica-no-usar-nunca-fig-ni-fig-x-y">9.1 ⚠️ REGLA CRÍTICA — NO USAR NUNCA <code>@fig</code> NI <code>{#fig-X-Y}</code></h3>
+<p><strong>Quarto genera numeración plana</strong> (<code>Figura 1</code>, <code>Figura 2</code>) para <code>{#fig-X-Y}</code>, que <strong>no coincide</strong> con el formato <code>Figura 1.1</code> del original. Por tanto:</p>
+<blockquote class="blockquote">
+<p>❌ <strong>NUNCA</strong> usar <code>@fig-1-1</code> (muestra “Figura 1”). ❌ <strong>NUNCA</strong> usar <code>{#fig-1-1}</code> en imágenes (genera “Figura 1:” en la leyenda). ❌ <strong>NUNCA</strong> usar <code>{#tbl-1-1}</code> en tablas (genera “Tabla 1:” en la leyenda).</p>
+</blockquote>
+</section>
+<section id="formato-correcto-de-referencias-en-el-texto" class="level3">
+<h3 class="anchored" data-anchor-id="formato-correcto-de-referencias-en-el-texto">9.2 Formato correcto de referencias en el texto</h3>
+<p>Usar enlaces HTML explícitos con la clase <code>quarto-xref</code> para preservar el tooltip hover:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>&lt;a href="#fig-1-1" class="quarto-xref"&gt;Figura<span class="dv">&amp;nbsp;</span>1.1&lt;/a&gt;</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>&lt;a href="#tbl-1-1" class="quarto-xref"&gt;Tabla<span class="dv">&amp;nbsp;</span>1.1&lt;/a&gt;</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>La clase <code>quarto-xref</code> es necesaria para que el sistema de tooltip hover (<code>figures-map.json</code>) funcione.</p>
+</section>
+<section id="formato-correcto-de-leyendas-de-figuras" class="level3">
+<h3 class="anchored" data-anchor-id="formato-correcto-de-leyendas-de-figuras">9.3 Formato correcto de leyendas de figuras</h3>
+<p>Usar HTML con <code>id</code> explícito en un <code>&lt;div&gt;</code> contenedor y una leyenda en <code>&lt;p class="figure-caption"&gt;</code>. <strong>No usar</strong> las clases <code>quarto-float</code>, <code>figure</code>, <code>&lt;figure&gt;</code> ni <code>&lt;figcaption&gt;</code> — estas activan el procesamiento automático de Quarto y generan leyendas duplicadas con numeración incorrecta:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> id</span><span class="op">=</span><span class="st">"fig-1-1"</span><span class="ot"> style</span><span class="op">=</span><span class="st">"text-align:center; margin:1.5em 0;"</span><span class="dt">&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../../Figures/Chapter1/png/1_1.png"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"img-fluid"</span><span class="ot"> style</span><span class="op">=</span><span class="st">"width:65.0%"</span><span class="ot"> alt</span><span class="op">=</span><span class="st">""</span><span class="dt">&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> class</span><span class="op">=</span><span class="st">"figure-caption"</span><span class="ot"> style</span><span class="op">=</span><span class="st">"margin-top:0.5em; text-align:center;"</span><span class="dt">&gt;</span>Figura<span class="dv">&amp;nbsp;</span>1.1: Descripción de la figura. <span class="dt">&lt;</span><span class="kw">em</span><span class="dt">&gt;</span>Izquierda:<span class="dt">&lt;/</span><span class="kw">em</span><span class="dt">&gt;</span> ...<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<blockquote class="blockquote">
+<p>⚠️ <strong>IMPORTANTE:</strong> Aunque se eviten las clases Quarto, el patrón <code>id="fig-X-Y"</code> <strong>igualmente</strong> activa el crossref de Quarto, que genera una leyenda automática duplicada (<code>&lt;figcaption class="quarto-uncaptioned"&gt;Figura 1&lt;/figcaption&gt;</code>). Estas se suprimen vía CSS en <code>custom.scss</code> (ver 9.9).</p>
+</blockquote>
+</section>
+<section id="formato-correcto-de-leyendas-de-tablas" class="level3">
+<h3 class="anchored" data-anchor-id="formato-correcto-de-leyendas-de-tablas">9.4 Formato correcto de leyendas de tablas</h3>
+<p>Añadir <code>&lt;a id="tbl-X-Y"&gt;</code> antes de la tabla y escribir la leyenda con número explícito:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>&lt;a id="tbl-1-1"&gt;&lt;/a&gt;</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>| ... | ... |</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>: Tabla 1.1: Descripción de la tabla.</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<blockquote class="blockquote">
+<p>⚠️ <strong>No poner</strong> <code>{#tbl-1-1}</code> al final de la leyenda porque Quarto genera “Tabla 1:” automáticamente.</p>
+</blockquote>
+</section>
+<section id="backticks-en-las-leyendas-de-figuras" class="level3">
+<h3 class="anchored" data-anchor-id="backticks-en-las-leyendas-de-figuras">9.5 Backticks en las leyendas de figuras</h3>
+<p>El original <strong>NO</strong> usa monoespaciado (<code>backticks</code>) para los nombres de conjuntos de datos dentro de las leyendas. Usar fuente normal sin backticks.</p>
+<p>✅ <strong>CORRECTO:</strong> <code>Figura&amp;nbsp;1.1: Datos Wage, que contienen...</code> ❌ <strong>ERROR:</strong> <code>Figura&amp;nbsp;1.1: Datos \</code>Wage`, que contienen…`</p>
+</section>
+<section id="tamaño-de-las-imágenes" class="level3">
+<h3 class="anchored" data-anchor-id="tamaño-de-las-imágenes">9.6 Tamaño de las imágenes</h3>
+<p>Incluir <code>style="width:65.0%"</code> en la etiqueta <code>&lt;img&gt;</code> para reducir su tamaño. Complementar con regla CSS en <code>custom.scss</code>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode scss code-with-copy"><code class="sourceCode scss"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.figure</span> img {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">max-width</span>: <span class="dv">80</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">height</span>: <span class="bu">auto</span><span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="numeración-de-secciones-1" class="level3">
+<h3 class="anchored" data-anchor-id="numeración-de-secciones-1">9.7 Numeración de secciones</h3>
+<p>Las secciones y subsecciones deben incluir el numeral completo capítulo.sección:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1.1 Una Visión General del Aprendizaje Estadístico</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1.1.1 Datos Salariales</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1.2 Una Breve Historia del Aprendizaje Estadístico</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="verificación-de-referencias" class="level3">
+<h3 class="anchored" data-anchor-id="verificación-de-referencias">9.8 Verificación de referencias</h3>
+<p>Antes de entregar una traducción:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comprobar que NO hay @fig- ni {#fig-X-Y}</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-rn</span> <span class="st">'@fig-'</span> chapters/XX-capitulo/ <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">"ERROR: usa @fig en vez de HTML link"</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-rn</span> <span class="st">'{#fig-'</span> chapters/XX-capitulo/ <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">"ERROR: usa {#fig- en vez de id HTML"</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-rn</span> <span class="st">'{#tbl-'</span> chapters/XX-capitulo/ <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">"ERROR: usa {#tbl- en vez de id HTML"</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Comprobar que las leyendas NO incluyen backticks en datasets</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-rn</span> <span class="st">'\`Wage\`\|\`Smarket\`\|\`NCI60\`'</span> chapters/XX-capitulo/ <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">"ERROR: backticks en leyenda"</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificar que leyendas y referencias tienen el mismo número</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-oP</span> <span class="st">'Figura&amp;nbsp;\d+\.\d+'</span> _site/chapters/XX-capitulo/index.html <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-u</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="css-para-suprimir-auto-captions-de-quarto" class="level3">
+<h3 class="anchored" data-anchor-id="css-para-suprimir-auto-captions-de-quarto">9.9 CSS para suprimir auto-captions de Quarto</h3>
+<p>Quarto genera automáticamente <code>&lt;figcaption class="quarto-uncaptioned"&gt;Figura N&lt;/figcaption&gt;</code> para cada <code>id="fig-X-Y"</code>. La regla en <code>custom.scss</code> las oculta:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode scss code-with-copy"><code class="sourceCode scss"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* Suprimir captions automáticas de Quarto (usamos HTML manual) */</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">.quarto-uncaptioned</span> {</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">display</span>: <span class="dv">none</span> <span class="at">!important</span><span class="op">;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="manejo-de-notas-al-pie-de-página" class="level2">
+<h2 class="anchored" data-anchor-id="manejo-de-notas-al-pie-de-página">10. Manejo de Notas al Pie de Página</h2>
+<section id="regla-general" class="level3">
+<h3 class="anchored" data-anchor-id="regla-general">10.1 Regla general</h3>
+<p>Toda nota al pie del PDF original <strong>debe</strong> traducirse y preservarse. No se omite ninguna.</p>
+</section>
+<section id="sintaxis-quarto" class="level3">
+<h3 class="anchored" data-anchor-id="sintaxis-quarto">10.2 Sintaxis Quarto</h3>
+<p>Usar la sintaxis inline de Quarto <code>^[...]</code> colocada inmediatamente después del texto al que hace referencia, sin espacio:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>...la verdadera relación entre $X$ e $Y$.^<span class="co">[</span><span class="ot">La suposición de linealidad es a menudo un modelo de trabajo útil.</span><span class="co">]</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="contenido-de-la-nota" class="level3">
+<h3 class="anchored" data-anchor-id="contenido-de-la-nota">10.3 Contenido de la nota</h3>
+<ul>
+<li>El contenido se traduce <strong>íntegramente</strong> al español.</li>
+<li>Se preserva <strong>todo</strong> el formato: cursivas (<code>*...*</code>), negritas, backticks (<code>`...`</code>), y matemáticas (<code>$...$</code>).</li>
+<li>Si la nota contiene referencias a figuras o tablas, se usa el mismo formato de enlace HTML explícito:</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>...los coeficientes para $\hat{\beta}_0$ y $\hat{\beta}_1$ son muy grandes.^<span class="co">[</span><span class="ot">En la Tabla 3.1, un valor p pequeño para el intercepto indica que podemos rechazar la hipótesis nula...</span><span class="co">]</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="numeración" class="level3">
+<h3 class="anchored" data-anchor-id="numeración">10.4 Numeración</h3>
+<p>Quarto numera las notas automáticamente (1, 2, 3…) y las recopila al final del documento bajo el encabezado “Notas”. No es necesario numerarlas manualmente.</p>
+</section>
+<section id="ubicación-en-el-párrafo" class="level3">
+<h3 class="anchored" data-anchor-id="ubicación-en-el-párrafo">10.5 Ubicación en el párrafo</h3>
+<p>La nota <code>^[...]</code> se coloca <strong>inmediatamente</strong> después de la palabra o signo de puntuación al que se adosa, sin espacio. Si va tras una palabra: pegada. Si va tras un punto: pegada al punto.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>✅ ...sigue una distribución $F$.^<span class="co">[</span><span class="ot">Incluso si los errores no están distribuidos normalmente...</span><span class="co">]</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>✅ ...exactamente equivalente^<span class="co">[</span><span class="ot">El cuadrado de cada estadístico $t$ es el estadístico $F$ correspondiente.</span><span class="co">]</span> a la prueba $F$...</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="verificación" class="level3">
+<h3 class="anchored" data-anchor-id="verificación">10.6 Verificación</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Contar notas en el original (marcadores de superíndice en PDF)</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparar con el conteo en la traducción:</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> <span class="st">'\^\[.*\]'</span> chapters/XX-capitulo/index.qmd</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+</section>
+<section id="referencias-a-ecuaciones-con-vista-previa-al-hover" class="level2">
+<h2 class="anchored" data-anchor-id="referencias-a-ecuaciones-con-vista-previa-al-hover">11. Referencias a Ecuaciones con Vista Previa al Hover</h2>
+<section id="regla-general-1" class="level3">
+<h3 class="anchored" data-anchor-id="regla-general-1">11.1 Regla general</h3>
+<p>Toda ecuación numerada del PDF original <strong>debe</strong> poder mostrarse como vista previa al pasar el ratón sobre su referencia en el texto. El mecanismo es idéntico al de figuras: se usan enlaces <code>&lt;a href="#eq-X-Y" class="quarto-xref"&gt;</code> y el sistema tippy de Quarto muestra la ecuación al hacer hover.</p>
+</section>
+<section id="numeración-de-ecuaciones" class="level3">
+<h3 class="anchored" data-anchor-id="numeración-de-ecuaciones">11.2 Numeración de ecuaciones</h3>
+<p>Las ecuaciones heredan la numeración del original (capítulo.ecuación): - Capítulo 1: <code>\tag{1.1}</code> - Capítulo 2: <code>\tag{2.1}</code>, <code>\tag{2.2}</code>, etc. - Capítulo 3: <code>\qquad (3.1)</code>, <code>\qquad (3.2)</code>, etc.</p>
+<blockquote class="blockquote">
+<p>⚠️ <strong>No se usa</strong> <code>{#eq-X-Y}</code> de Quarto porque genera numeración automática que interferiría con la numeración manual.</p>
+</blockquote>
+</section>
+<section id="envoltorio-de-ecuación-con-id" class="level3">
+<h3 class="anchored" data-anchor-id="envoltorio-de-ecuación-con-id">11.3 Envoltorio de ecuación con <code>id</code></h3>
+<p>Cada ecuación numerada se envuelve en un <code>&lt;div id="eq-X-Y"&gt;</code>:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>&lt;div id="eq-3-5"&gt;</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>$$Y = \beta_0 + \beta_1 X + \epsilon. \qquad (3.5)$$</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Para ecuaciones de varias líneas (<code>\begin{aligned}</code>, <code>\begin{cases}</code>, etc.):</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>&lt;div id="eq-3-22"&gt;</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>\text{RSS} &amp;= \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 <span class="sc">\\</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>           &amp;= \sum_{i=1}^{n} (y_i - \hat{\beta}_0 - \hat{\beta}_1 x_{i1} - \cdots)^2. \qquad (3.22)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="formato-de-referencias-en-el-texto" class="level3">
+<h3 class="anchored" data-anchor-id="formato-de-referencias-en-el-texto">11.4 Formato de referencias en el texto</h3>
+<p>Se usa el mismo formato de enlaces HTML explícitos que para figuras y tablas:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>&lt;a href="#eq-3-5" class="quarto-xref"&gt;Ecuación<span class="dv">&amp;nbsp;</span>3.5&lt;/a&gt;</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>&lt;a href="#eq-3-5" class="quarto-xref"&gt;(3.5)&lt;/a&gt;</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>La clase <code>quarto-xref</code> activa el tooltip hover de Quarto.</p>
+</section>
+<section id="verificación-pre-entrega" class="level3">
+<h3 class="anchored" data-anchor-id="verificación-pre-entrega">11.5 Verificación pre-entrega</h3>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Contar ecuaciones envueltas (deben coincidir con las del PDF original)</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> <span class="st">'id="eq-3-'</span> chapters/XX-capitulo/index.qmd</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Contar referencias enlazadas</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> <span class="st">'href="#eq-3-'</span> chapters/XX-capitulo/index.qmd</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificar que NO hay \qquad ni \tag sin envoltorio en texto (deben quedar 0 coincidencias)</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-n</span> <span class="st">'\\qquad\|\\tag{'</span> chapters/XX-capitulo/index.qmd <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> <span class="st">'&lt;div id="eq-'</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"># NOTA: Todo \qquad o \tag debe estar dentro de &lt;div id="eq-X-Y"&gt;. Si hay coincidencias, falta envolver alguna ecuación.</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="script-de-automatización" class="level3">
+<h3 class="anchored" data-anchor-id="script-de-automatización">11.6 Script de automatización</h3>
+<p>Para capítulos con numeración <code>\qquad (N.X)</code> (ej. Capítulo 3):</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Match $$ ... \qquad (N.X) ... $$ (multiline)</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>pattern <span class="op">=</span> <span class="vs">r'\$\$\s*\n?(.*?\\qquad\s*\((\d+)\.(\d+)\).*?)\s*\$\$'</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Wrap: &lt;div id="eq-N-X"&gt;\n$$\n{content}\n$$\n&lt;/div&gt;</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Para capítulos con numeración <code>\tag{N.X}</code> (ej. Capítulos 1 y 2):</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>pattern <span class="op">=</span> <span class="vs">r'\$\$\s*\n?(.*?\\tag\{(\d+)\.(\d+)\}.*?)\s*\$\$'</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Referencias: reemplazar <code>Ecuación N.X</code> y <code>(N.X)</code> por <code>&lt;a href="#eq-N-X" class="quarto-xref"&gt;...&lt;/a&gt;</code>.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="alcance-por-capítulo-páginas-del-pdf-original" class="level1">
+<h1>ALCANCE POR CAPÍTULO (PÁGINAS DEL PDF ORIGINAL)</h1>
+<p>La siguiente tabla detalla los rangos de páginas del PDF original <code>ISL (Python).pdf</code> que corresponden al contenido teórico a traducir. El bloque de laboratorios y ejercicios se omite siempre.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Cap.</th>
+<th style="text-align: left;">Título Original</th>
+<th style="text-align: center;">Teoría (págs.)</th>
+<th style="text-align: center;">Omitir (Lab+Ej.)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">Introduction</td>
+<td style="text-align: center;">12–24</td>
+<td style="text-align: center;"><em>N/A</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">Statistical Learning</td>
+<td style="text-align: center;">25–49</td>
+<td style="text-align: center;">50–77</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">Linear Regression</td>
+<td style="text-align: center;">78–124</td>
+<td style="text-align: center;">125–144</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">Classification</td>
+<td style="text-align: center;">145–182</td>
+<td style="text-align: center;">183–210</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">Resampling Methods</td>
+<td style="text-align: center;">211–224</td>
+<td style="text-align: center;">225–238</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: left;">Linear Model Selection and Regularization</td>
+<td style="text-align: center;">239–276</td>
+<td style="text-align: center;">277–298</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: left;">Moving Beyond Linearity</td>
+<td style="text-align: center;">299–318</td>
+<td style="text-align: center;">319–339</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: left;">Tree-Based Methods</td>
+<td style="text-align: center;">340–363</td>
+<td style="text-align: center;">364–376</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: left;">Support Vector Machines</td>
+<td style="text-align: center;">377–396</td>
+<td style="text-align: center;">397–408</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: left;">Deep Learning</td>
+<td style="text-align: center;">409–444</td>
+<td style="text-align: center;">445–478</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">11</td>
+<td style="text-align: left;">Survival Analysis and Scale Results</td>
+<td style="text-align: center;">479–498</td>
+<td style="text-align: center;">499–512</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">12</td>
+<td style="text-align: left;">Unsupervised Learning</td>
+<td style="text-align: center;">513–544</td>
+<td style="text-align: center;">545–552</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">13</td>
+<td style="text-align: left;">Multiple Testing</td>
+<td style="text-align: center;">553–592</td>
+<td style="text-align: center;">593–605</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/cffga\.github\.io\/proyectos\/isl-esp");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<div style="position:fixed;bottom:24px;right:24px;z-index:9999">
+  <button id="theme-toggle-btn" style="width:44px;height:44px;border-radius:50%;border:1px solid var(--bs-border-color,#dee2e6);background:var(--bs-body-bg,#fff);color:var(--bs-body-color,#1a1a1a);font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.15);padding:0;opacity:.85;transition:transform .2s,box-shadow .2s,opacity .2s" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.85'" aria-label="Cambiar tema" title="Cambiar tema claro/oscuro" onclick="var c=document.documentElement.getAttribute('data-bs-theme')||'light';var n=c==='dark'?'light':'dark';document.documentElement.setAttribute('data-bs-theme',n);try{localStorage.setItem('isl-theme',n)}catch(e){}document.getElementById('theme-toggle-btn').textContent=n==='dark'?'☀️':'🌙'">🌙</button>
+</div>
+<script>document.getElementById('theme-toggle-btn').textContent=(document.documentElement.getAttribute('data-bs-theme')||'light')==='dark'?'☀️':'🌙'</script>
+
+
+
+
+</body></html>
