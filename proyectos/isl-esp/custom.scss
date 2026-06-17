@@ -156,3 +156,18 @@ pre code {
     color: rgba(255, 255, 255, 0.85) !important;
   }
 }
+
+/* Eliminar espacio desperdiciado a la derecha en desktop */
+@media (min-width: 768px) {
+  body.docked.fullcontent .page-columns {
+    grid-template-columns:
+      [screen-start] 1.5em
+      [screen-start-inset page-start] minmax(50px, 100px)
+      [page-start-inset] 50px
+      [body-start-outset] 50px
+      [body-start] 1.5em
+      [body-content-start] minmax(500px, 1fr)
+      [body-content-end body-end body-end-outset page-end-inset page-end screen-end-inset] 1.5em
+      [screen-end];
+  }
+}

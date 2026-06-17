@@ -395,3 +395,28 @@ La siguiente tabla detalla los rangos de páginas del PDF original `ISL (Python)
 | 11 | Survival Analysis and Scale Results | 479–498 | 499–512 |
 | 12 | Unsupervised Learning | 513–544 | 545–552 |
 | 13 | Multiple Testing | 553–592 | 593–605 |
+
+---
+
+# 12. Layout: Espacio a la Derecha en Desktop
+
+El grid de Quarto en `body.docked.fullcontent` deja un `5fr` de espacio vacío a la derecha del contenido (porque la regla de ancho completo está solo dentro de `@media(max-width: 767.98px)`).
+
+## Fix en `custom.scss`
+
+Se añadió una regla en `@media(min-width: 768px)` que:
+
+- **Preserva** el área izquierda del sidebar (`screen-start` → `body-start`): `1.5em + minmax(50px, 100px) + 50px + 50px + 1.5em` ≈ 250–300 px.
+- **Elimina** el `5fr` de la derecha; solo queda `1.5em` de margen antes de `screen-end`.
+- **Contenido**: cambia de `minmax(500px, calc(1000px - 3em))` a `minmax(500px, 1fr)`, usando todo el ancho disponible.
+- **Sin `!important`**: la regla aparece al final del CSS compilado (porque `custom.scss` es el último theme) y vence por orden de cascada.
+
+### Verificación
+
+```bash
+# En el CSS compilado debe aparecer:
+grep 'minmax(500px, 1fr)' _site/site_libs/bootstrap/bootstrap-*.min.css
+
+# Confirmar que la regla está dentro de @media(min-width: 768px):
+grep -A2 '@media(min-width: 768px)' _site/site_libs/bootstrap/bootstrap-*.min.css | grep 'docked.fullcontent'
+```
