@@ -81,9 +81,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-e8964db687007ca8dd88d9d9ce58e3ef.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a8f1a8fe70ee454d12eaddff5c99d1d8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-df65b99a6f7a45e55f10f6f34d1045cf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a8f1a8fe70ee454d12eaddff5c99d1d8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -366,7 +366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="la-idea-de-herencia">La idea de herencia</h2>
 <p>La herencia permite definir una clase a partir de otra. La clase original se llama <em>clase base</em> o <em>padre</em>; la nueva, <em>clase derivada</em> o <em>hija</em>. La clase hija recibe automáticamente todos los atributos y métodos de la padre, y puede añadir los suyos o modificar los que hereda. No se copia nada: la hija simplemente dispone de todo lo que la padre define.</p>
 <p>Partimos de la clase <code>Estudiante</code> tal como quedó en la lección anterior, y definimos <code>EstudiantePosgrado</code> como una clase que hereda de ella. La herencia se indica escribiendo el nombre de la clase padre entre paréntesis después del nombre de la hija:</p>
-<div id="38df9b0f" class="cell" data-execution_count="1">
+<div id="326eba86" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Estudiante:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, nombre, carrera, calificacion):</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nombre <span class="op">=</span> nombre</span>
@@ -391,7 +391,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span>   <span class="co"># de momento, hereda todo sin cambios</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Aunque <code>EstudiantePosgrado</code> no define nada propio, ya puede hacer todo lo que hace <code>Estudiante</code>, porque lo ha heredado:</p>
-<div id="ec3b5a81" class="cell" data-execution_count="2">
+<div id="a0eb942c" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sofia <span class="op">=</span> EstudiantePosgrado(<span class="st">"Sofía"</span>, <span class="st">"Física"</span>, <span class="fl">9.7</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sofia.nombre)         <span class="co"># atributo heredado, definido en Estudiante.__init__</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sofia.clasificar())   <span class="co"># método heredado</span></span>
@@ -408,7 +408,7 @@ Sofía (Física): 9.7</code></pre>
 <h2 class="anchored" data-anchor-id="añadir-y-extender-con-super">Añadir y extender con <code>super()</code></h2>
 <p>Una clase hija que solo hereda no aporta nada. Lo interesante es que añada lo suyo. El estudiante de posgrado tiene un director de tesis, un atributo que el estudiante común no tiene. Para incorporarlo, la hija necesita su propio <code>__init__</code>.</p>
 <p>Aquí aparece una tensión. Si la hija define <code>__init__</code>, reemplaza al de la padre, y perderíamos la inicialización de <code>nombre</code>, <code>carrera</code> y <code>calificacion</code>. No queremos reescribir esa inicialización (eso sería volver a copiar); queremos reutilizar la de la padre y solo añadir lo nuevo. Para eso existe <code>super()</code>, que da acceso a la clase padre desde la hija:</p>
-<div id="48c39158" class="cell" data-execution_count="3">
+<div id="9af28dd2" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> EstudiantePosgrado(Estudiante):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, nombre, carrera, calificacion, director):</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(nombre, carrera, calificacion)   <span class="co"># inicializa lo heredado</span></span>
@@ -428,7 +428,7 @@ Dra. Ramírez</code></pre>
 <section id="sobrescribir-métodos" class="level2">
 <h2 class="anchored" data-anchor-id="sobrescribir-métodos">Sobrescribir métodos</h2>
 <p>Además de añadir, la clase hija puede <em>sobrescribir</em>: redefinir un método que heredó, dándole un comportamiento distinto. El estudiante de posgrado aprueba con un criterio más estricto. Definimos en la hija un método con el mismo nombre que en la padre, y el de la hija tiene prioridad para sus instancias:</p>
-<div id="3779f38f" class="cell" data-execution_count="4">
+<div id="d3bdf6a1" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Estudiante:</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, nombre, carrera, calificacion):</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nombre <span class="op">=</span> nombre</span>
@@ -460,7 +460,7 @@ False</code></pre>
 </div>
 <p>Las dos instancias tienen la misma calificación, <code>7.8</code>, pero responden distinto a <code>aprueba()</code> porque cada una usa el método de su propia clase. Python siempre busca el método primero en la clase de la instancia; solo si no lo encuentra ahí recurre a la padre. Como <code>EstudiantePosgrado</code> define su propio <code>aprueba()</code>, ese tiene prioridad para sus instancias.</p>
 <p>A veces la sobrescritura no quiere reemplazar el comportamiento heredado por completo, sino extenderlo. En ese caso <code>super()</code> también sirve dentro de un método cualquiera, no solo en <code>__init__</code>, para invocar la versión de la padre y añadirle algo:</p>
-<div id="d3fac08f" class="cell" data-execution_count="5">
+<div id="6a556f5e" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Estudiante:</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, nombre, carrera, calificacion):</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nombre <span class="op">=</span> nombre</span>
@@ -492,7 +492,7 @@ False</code></pre>
 <section id="verificar-el-tipo-isinstance" class="level2">
 <h2 class="anchored" data-anchor-id="verificar-el-tipo-isinstance">Verificar el tipo: <code>isinstance</code></h2>
 <p>Cuando trabajamos con clases relacionadas por herencia, a veces necesitamos saber de qué tipo es un objeto. La función <code>type()</code>, que vimos en la lección sobre objetos, devuelve el tipo exacto. Pero la herencia introduce un matiz: un <code>EstudiantePosgrado</code> también es, en cierto sentido, un <code>Estudiante</code>. La función <code>isinstance()</code> captura esa relación:</p>
-<div id="71082127" class="cell" data-execution_count="6">
+<div id="93481efe" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sofia <span class="op">=</span> EstudiantePosgrado(<span class="st">"Sofía"</span>, <span class="st">"Física"</span>, <span class="fl">9.7</span>, <span class="st">"Dra. Ramírez"</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>luis <span class="op">=</span> Estudiante(<span class="st">"Luis"</span>, <span class="st">"Física"</span>, <span class="fl">7.8</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -511,7 +511,7 @@ False</code></pre>
 <h2 class="anchored" data-anchor-id="composición-tener-en-lugar-de-ser">Composición: tener en lugar de ser</h2>
 <p>La herencia expresa una relación de tipo “es un”: un estudiante de posgrado <em>es</em> un estudiante. Pero no toda relación entre clases es de esa forma. Un grupo <em>no es</em> un estudiante; un grupo <em>tiene</em> estudiantes. Esa relación (“tiene un”) se expresa de otra manera, llamada <em>composición</em>: una clase contiene instancias de otra como atributos.</p>
 <p>De hecho, ya usamos composición sin nombrarla. La clase <code>Grupo</code> de la lección anterior contenía una lista de estudiantes:</p>
-<div id="c3c4169f" class="cell" data-execution_count="7">
+<div id="67e08a5a" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Estudiante:</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, nombre, carrera, calificacion):</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nombre <span class="op">=</span> nombre</span>
@@ -549,7 +549,7 @@ False</code></pre>
 <section id="ejemplo-integrador" class="level2">
 <h2 class="anchored" data-anchor-id="ejemplo-integrador">Ejemplo integrador</h2>
 <p>Reunimos herencia y composición en un solo programa. Definimos <code>Estudiante</code> y <code>EstudiantePosgrado</code> mediante herencia, y un <code>Grupo</code> que los contiene mediante composición, capaz de manejar ambos tipos a la vez gracias a que un <code>EstudiantePosgrado</code> también es un <code>Estudiante</code>:</p>
-<div id="dc9f9819" class="cell" data-execution_count="8">
+<div id="75ce70e7" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Estudiante:</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, nombre, carrera, calificacion):</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nombre <span class="op">=</span> nombre</span>

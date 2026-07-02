@@ -81,9 +81,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-e8964db687007ca8dd88d9d9ce58e3ef.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a8f1a8fe70ee454d12eaddff5c99d1d8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-df65b99a6f7a45e55f10f6f34d1045cf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a8f1a8fe70ee454d12eaddff5c99d1d8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -397,7 +397,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="qué-es-un-módulo">Qué es un módulo</h2>
 <p>Un módulo es un archivo que contiene funciones, valores y clases listas para usar. La <em>biblioteca estándar</em> de Python es el conjunto de módulos que vienen incluidos con el lenguaje: no hay que instalar nada, solo pedirlos. Para usar un módulo, se <em>importa</em> con la palabra clave <code>import</code>.</p>
 <p>Empecemos con <code>math</code>, el módulo de funciones matemáticas:</p>
-<div id="29c08557" class="cell" data-execution_count="1">
+<div id="cfde381a" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(math.sqrt(<span class="dv">16</span>))     <span class="co"># raíz cuadrada</span></span>
@@ -413,7 +413,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="las-formas-de-import">Las formas de <code>import</code></h2>
 <p>Hay tres maneras de importar, y conviene conocer las tres porque aparecen en todo el código de Python.</p>
 <p>La primera, <code>import modulo</code>, es la que acabamos de ver: importa el módulo completo y obliga a usar el prefijo. Es la más segura, porque deja claro de dónde viene cada función:</p>
-<div id="8e8674d3" class="cell" data-execution_count="2">
+<div id="8ca786bb" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(math.factorial(<span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -421,7 +421,7 @@ window.Quarto = {
 </div>
 </div>
 <p>La segunda, <code>from modulo import nombre</code>, importa solo lo que se indica, y permite usarlo sin prefijo:</p>
-<div id="f0714ef2" class="cell" data-execution_count="3">
+<div id="96ccddf7" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> sqrt, pi</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sqrt(<span class="dv">25</span>))</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -432,7 +432,7 @@ window.Quarto = {
 </div>
 <p>Esta forma es cómoda cuando se usa mucho una función concreta, pero tiene un riesgo: si dos módulos definen una función con el mismo nombre, importarlas sin prefijo provoca que una oculte a la otra. Por eso conviene reservarla para nombres que no generen confusión.</p>
 <p>La tercera, <code>import modulo as alias</code>, importa el módulo bajo un nombre más corto:</p>
-<div id="c95274f9" class="cell" data-execution_count="4">
+<div id="e2ab4b02" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statistics <span class="im">as</span> stats</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(stats.mean([<span class="fl">7.5</span>, <span class="fl">9.0</span>, <span class="fl">6.0</span>, <span class="fl">8.5</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -444,7 +444,7 @@ window.Quarto = {
 <section id="explorar-un-módulo" class="level2">
 <h2 class="anchored" data-anchor-id="explorar-un-módulo">Explorar un módulo</h2>
 <p>¿Cómo saber qué ofrece un módulo? Con las mismas herramientas que usamos para explorar objetos en la lección correspondiente: <code>dir()</code> lista su contenido, y <code>help()</code> describe cada elemento.</p>
-<div id="0664a24e" class="cell" data-execution_count="5">
+<div id="0cb9a2cc" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Algunos de los nombres que ofrece math (filtramos los internos)</span></span>
@@ -459,7 +459,7 @@ window.Quarto = {
 <section id="el-módulo-math" class="level2">
 <h2 class="anchored" data-anchor-id="el-módulo-math">El módulo <code>math</code></h2>
 <p><code>math</code> reúne las funciones matemáticas de uso frecuente. Para el público de esta serie, muchas serán viejas conocidas:</p>
-<div id="349eeef1" class="cell" data-execution_count="6">
+<div id="ceeebbed" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(math.sqrt(<span class="dv">2</span>))          <span class="co"># raíz cuadrada</span></span>
@@ -482,7 +482,7 @@ window.Quarto = {
 <section id="el-módulo-statistics" class="level2">
 <h2 class="anchored" data-anchor-id="el-módulo-statistics">El módulo <code>statistics</code></h2>
 <p>Desde la lección sobre estructuras de datos venimos calculando promedios a mano, con <code>sum(valores) / len(valores)</code>. El módulo <code>statistics</code> ofrece esa operación y muchas otras con nombre propio:</p>
-<div id="1eb5ac30" class="cell" data-execution_count="7">
+<div id="bab5bdb4" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statistics</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">9.2</span>, <span class="fl">7.8</span>, <span class="fl">6.1</span>, <span class="fl">8.5</span>, <span class="fl">9.7</span>, <span class="fl">5.4</span>]</span>
@@ -503,7 +503,7 @@ window.Quarto = {
 <section id="el-módulo-random" class="level2">
 <h2 class="anchored" data-anchor-id="el-módulo-random">El módulo <code>random</code></h2>
 <p><code>random</code> genera valores aleatorios, lo que abre la puerta a la simulación (una herramienta central en estadística, física y finanzas). Sus funciones más usadas:</p>
-<div id="813a5f66" class="cell" data-execution_count="8">
+<div id="7c3cbf5d" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>random.seed(<span class="dv">42</span>)   <span class="co"># fija la semilla para que los resultados sean reproducibles</span></span>
@@ -519,7 +519,7 @@ cruz</code></pre>
 </div>
 <p>La función <code>random.seed()</code> merece una mención. Los números aleatorios de una computadora son en realidad <em>pseudoaleatorios</em>: se generan con una fórmula que parte de un valor inicial, la <em>semilla</em>. Fijar la semilla con <code>seed()</code> hace que la secuencia sea reproducible, lo que es indispensable en experimentos y simulaciones que deben poder repetirse con los mismos resultados.</p>
 <p>Otra función útil es <code>shuffle</code>, que desordena una lista en su lugar (es un método que modifica, en el sentido de la lección sobre objetos):</p>
-<div id="6bc9d48c" class="cell" data-execution_count="9">
+<div id="0b69a40d" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>random.seed(<span class="dv">7</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -531,7 +531,7 @@ cruz</code></pre>
 </div>
 </div>
 <p>Como ejemplo de simulación, estimemos la probabilidad de que al lanzar dos dados la suma sea 7, repitiendo el experimento muchas veces y contando los aciertos:</p>
-<div id="201af3a0" class="cell" data-execution_count="10">
+<div id="45dfe995" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>random.seed(<span class="dv">0</span>)</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -555,7 +555,7 @@ Probabilidad teórica:  0.1667</code></pre>
 <section id="el-módulo-decimal" class="level2">
 <h2 class="anchored" data-anchor-id="el-módulo-decimal">El módulo <code>decimal</code></h2>
 <p>En la primera lección observamos algo desconcertante: <code>0.1 + 0.2</code> no da exactamente <code>0.3</code>, sino <code>0.30000000000000004</code>. Explicamos entonces que se debe a que los <code>float</code> son representaciones finitas de números reales, y dijimos que existían formas de trabajar con precisión exacta cuando el problema lo exige. El módulo <code>decimal</code> es esa forma:</p>
-<div id="3898af0f" class="cell" data-execution_count="11">
+<div id="87b593a6" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> decimal <span class="im">import</span> Decimal</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="fl">0.1</span> <span class="op">+</span> <span class="fl">0.2</span>)                          <span class="co"># con float: impreciso</span></span>
@@ -575,7 +575,7 @@ Probabilidad teórica:  0.1667</code></pre>
 <section id="ejemplo-integrador" class="level2">
 <h2 class="anchored" data-anchor-id="ejemplo-integrador">Ejemplo integrador</h2>
 <p>Reunimos varios módulos en un pequeño estudio estadístico. Simulamos las calificaciones de un grupo grande de estudiantes, las analizamos con <code>statistics</code>, y usamos <code>math</code> para un cálculo auxiliar:</p>
-<div id="74244c72" class="cell" data-execution_count="12">
+<div id="4b0e4cf2" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statistics</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>

@@ -8,7 +8,7 @@ project:
 website:
   title: "ISL — Introducción al Aprendizaje Estadístico"
   description: "Traducción al español de An Introduction to Statistical Learning with Applications in Python"
-  site-url: "https://cffga.github.io/proyectos/isl-esp"
+  site-url: "https://cffgmx.github.io/proyectos/isl-esp"
   page-navigation: true
   search: true
   favicon: favicon.png

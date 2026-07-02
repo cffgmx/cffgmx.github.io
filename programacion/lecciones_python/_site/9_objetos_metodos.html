@@ -81,9 +81,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-e8964db687007ca8dd88d9d9ce58e3ef.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a8f1a8fe70ee454d12eaddff5c99d1d8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-df65b99a6f7a45e55f10f6f34d1045cf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a8f1a8fe70ee454d12eaddff5c99d1d8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -367,7 +367,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="qué-es-un-objeto">Qué es un objeto</h2>
 <p>Cuando guardamos <code>temperatura = 23.5</code>, no estamos guardando únicamente el número <code>23.5</code>. Estamos guardando un objeto de tipo <code>float</code> que, además del valor, conoce las operaciones que un número decimal puede realizar. Lo mismo ocurre con una lista: <code>[23.5, 24.0, 22.8]</code> es un objeto de tipo <code>list</code> que sabe cómo ordenarse, cómo agregar elementos, cómo invertirse.</p>
 <p>La función <code>type()</code>, que ya hemos usado de forma ocasional, revela el tipo de cualquier objeto:</p>
-<div id="ed731a45" class="cell" data-execution_count="1">
+<div id="d1476b15" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(<span class="fl">23.5</span>))</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(<span class="st">"Python"</span>))</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]))</span>
@@ -387,7 +387,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>La sintaxis para invocar un método es <code>objeto.metodo(argumentos)</code>. El objeto a la izquierda del punto es sobre el que actúa el método; los argumentos entre paréntesis son la información adicional que el método necesita, igual que en cualquier función.</p>
 <p>Esta notación conecta directamente con la lección anterior. Vimos que una función puede recibir su objeto como primer argumento; un método hace exactamente eso, pero de forma implícita. Cuando escribimos <code>lista.append(5)</code>, Python entiende algo equivalente a “ejecuta la operación <code>append</code>, con <code>lista</code> como objeto sobre el que actúa y <code>5</code> como argumento”. El objeto a la izquierda del punto es ese primer argumento que la función recibe sin necesidad de escribirlo dentro de los paréntesis.</p>
 <p>Para descubrir qué métodos tiene un objeto, la función <code>dir()</code> los lista. Combinada con <code>help()</code>, que ya conocemos, permite explorar cualquier tipo sin salir del notebook:</p>
-<div id="62f799d7" class="cell" data-execution_count="2">
+<div id="0957f261" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dir() lista todos los nombres asociados a un tipo</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">dir</span>(<span class="bu">list</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -400,7 +400,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="métodos-de-las-listas">Métodos de las listas</h2>
 <p>La lección sobre estructuras de datos prometió que agregar y eliminar elementos requería métodos. Ahora podemos cumplir esa promesa.</p>
 <p>El método <code>append()</code> agrega un elemento al final de la lista. A diferencia de la concatenación con <code>+</code> que usamos en la lección sobre bucles, <code>append()</code> modifica la lista existente en lugar de crear una nueva:</p>
-<div id="236a8d23" class="cell" data-execution_count="3">
+<div id="e685b70f" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>temperaturas <span class="op">=</span> [<span class="fl">23.5</span>, <span class="fl">24.0</span>, <span class="fl">22.8</span>]</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>temperaturas.append(<span class="fl">21.3</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(temperaturas)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -411,7 +411,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Conviene detenerse en una diferencia importante. En la lección sobre bucles construíamos listas con <code>lista = lista + [elemento]</code>, lo que crea una lista nueva en cada paso. <code>append()</code> no crea nada nuevo: modifica directamente la lista sobre la que actúa. Por eso <code>temperaturas.append(21.3)</code> no se asigna a ninguna variable; el cambio ocurre dentro del objeto <code>temperaturas</code>. Escribir <code>temperaturas = temperaturas.append(21.3)</code> sería un error silencioso, porque <code>append()</code> no devuelve la lista modificada, sino <code>None</code>.</p>
 <p>Esta distinción (entre métodos que modifican el objeto y métodos que devuelven un valor nuevo) recorrerá toda la lección. Conviene tenerla presente desde el principio.</p>
 <p>El método <code>insert()</code> agrega un elemento en una posición específica, desplazando los demás:</p>
-<div id="59c4b0fb" class="cell" data-execution_count="4">
+<div id="7c09e3c3" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>temperaturas.insert(<span class="dv">0</span>, <span class="fl">19.0</span>)   <span class="co"># inserta 19.0 en la posición 0</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(temperaturas)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -419,7 +419,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>El método <code>remove()</code> elimina la primera aparición de un valor, y <code>pop()</code> elimina y devuelve el elemento de una posición dada:</p>
-<div id="98614c18" class="cell" data-execution_count="5">
+<div id="27216eb4" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>temperaturas.remove(<span class="fl">22.8</span>)   <span class="co"># elimina el valor 22.8</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(temperaturas)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -434,7 +434,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><code>pop()</code> es un buen ejemplo de un método que hace dos cosas a la vez: modifica la lista y devuelve un valor. Por eso <code>ultimo = temperaturas.pop()</code> sí tiene sentido: el método devuelve el elemento que quitó, y lo guardamos.</p>
 <p>El método <code>sort()</code> ordena la lista en su lugar, y <code>reverse()</code> la invierte:</p>
-<div id="9e6ddc0f" class="cell" data-execution_count="6">
+<div id="ecc3bf38" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">7.5</span>, <span class="fl">9.0</span>, <span class="fl">6.0</span>, <span class="fl">10.0</span>, <span class="fl">8.0</span>]</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>calificaciones.sort()</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(calificaciones)</span>
@@ -448,7 +448,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Aquí aparece de nuevo la distinción que vimos en la lección sobre listas. La función <code>sorted()</code>, que ya conocíamos, devuelve una lista nueva ordenada sin tocar la original. El método <code>sort()</code> hace lo contrario: modifica la lista original y no devuelve nada. La elección entre uno y otro depende de si queremos conservar el orden original o no.</p>
 <p>Finalmente, <code>index()</code> devuelve la posición de un valor y <code>count()</code> cuenta cuántas veces aparece:</p>
-<div id="d5d6e4fb" class="cell" data-execution_count="7">
+<div id="a525e4b2" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>numeros <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">9</span>]</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(numeros.index(<span class="dv">4</span>))   <span class="co"># posición de la primera aparición de 4</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(numeros.count(<span class="dv">1</span>))   <span class="co"># cuántas veces aparece el 1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -463,7 +463,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Las cadenas también son objetos, y tienen métodos propios. Varios de ellos ya aparecieron en lecciones anteriores sin explicación; ahora reciben su lugar.</p>
 <p>Una particularidad importante: las cadenas son inmutables, como vimos en la lección sobre secuencias. Por eso ningún método de cadena modifica la cadena original. Todos devuelven una cadena nueva. Esto es lo contrario de lo que ocurre con las listas, y es coherente con la naturaleza inmutable de las cadenas.</p>
 <p>Los métodos <code>upper()</code> y <code>lower()</code> devuelven la cadena en mayúsculas o minúsculas:</p>
-<div id="7f13e45a" class="cell" data-execution_count="8">
+<div id="7e8f39eb" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>nombre <span class="op">=</span> <span class="st">"Carlos"</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(nombre.upper())</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(nombre.lower())</span>
@@ -475,7 +475,7 @@ Carlos</code></pre>
 </div>
 </div>
 <p>El método <code>strip()</code>, que usamos en la lección sobre errores, elimina espacios y saltos de línea al inicio y al final:</p>
-<div id="d0acc715" class="cell" data-execution_count="9">
+<div id="155118a8" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>entrada <span class="op">=</span> <span class="st">"   23.5  </span><span class="ch">\n</span><span class="st">"</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(entrada.strip())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -483,7 +483,7 @@ Carlos</code></pre>
 </div>
 </div>
 <p>El método <code>replace()</code> devuelve una cadena con todas las apariciones de un fragmento sustituidas por otro:</p>
-<div id="114eabd4" class="cell" data-execution_count="10">
+<div id="9a4f43d1" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fecha <span class="op">=</span> <span class="st">"2025/01/15"</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fecha.replace(<span class="st">"/"</span>, <span class="st">"-"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -491,7 +491,7 @@ Carlos</code></pre>
 </div>
 </div>
 <p>Los métodos <code>startswith()</code> y <code>endswith()</code> verifican si una cadena comienza o termina con un fragmento dado, y devuelven un booleano:</p>
-<div id="1c4052d8" class="cell" data-execution_count="11">
+<div id="f5f9eb16" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>archivo <span class="op">=</span> <span class="st">"datos.csv"</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(archivo.endswith(<span class="st">".csv"</span>))</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(archivo.startswith(<span class="st">"datos"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -501,7 +501,7 @@ True</code></pre>
 </div>
 </div>
 <p>Los dos métodos más importantes para procesar texto son <code>split()</code> y <code>join()</code>, y son inversos entre sí. <code>split()</code> divide una cadena en una lista de fragmentos, usando un separador:</p>
-<div id="7af72cb8" class="cell" data-execution_count="12">
+<div id="238ff9e2" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>linea <span class="op">=</span> <span class="st">"Ana,20,9.2"</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>campos <span class="op">=</span> linea.split(<span class="st">","</span>)</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(campos)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -510,7 +510,7 @@ True</code></pre>
 </div>
 </div>
 <p><code>join()</code> hace lo contrario: une los elementos de una lista en una sola cadena, usando un separador. La sintaxis es algo inusual, porque el separador es el objeto sobre el que se invoca el método:</p>
-<div id="a97691d7" class="cell" data-execution_count="13">
+<div id="7526107f" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>palabras <span class="op">=</span> [<span class="st">"Python"</span>, <span class="st">"es"</span>, <span class="st">"expresivo"</span>]</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>frase <span class="op">=</span> <span class="st">" "</span>.join(palabras)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(frase)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -524,7 +524,7 @@ True</code></pre>
 <h2 class="anchored" data-anchor-id="métodos-de-los-diccionarios">Métodos de los diccionarios</h2>
 <p>Los diccionarios tienen métodos que resuelven un problema concreto que arrastramos desde la lección sobre bucles. Cuando recorríamos un diccionario con <code>for clave in diccionario</code>, obteníamos solo las claves, y teníamos que escribir <code>diccionario[clave]</code> para llegar al valor. Los métodos de diccionario ofrecen una forma más directa.</p>
 <p>El método <code>keys()</code> devuelve las claves, <code>values()</code> devuelve los valores, e <code>items()</code> devuelve pares clave-valor:</p>
-<div id="3ae4beb0" class="cell" data-execution_count="14">
+<div id="437d0d8d" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>estudiante <span class="op">=</span> {<span class="st">"nombre"</span>: <span class="st">"Ana"</span>, <span class="st">"edad"</span>: <span class="dv">20</span>, <span class="st">"promedio"</span>: <span class="fl">9.2</span>}</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(estudiante.keys()))</span>
@@ -537,7 +537,7 @@ True</code></pre>
 </div>
 </div>
 <p>El método <code>items()</code> es especialmente útil en un <code>for</code>, porque permite recibir la clave y el valor a la vez mediante el desempaquetado de tuplas que aprendimos en la lección sobre estructuras de datos:</p>
-<div id="8b2e9a06" class="cell" data-execution_count="15">
+<div id="a10547a9" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> clave, valor <span class="kw">in</span> estudiante.items():</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>clave<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>valor<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -548,7 +548,7 @@ promedio: 9.2</code></pre>
 </div>
 <p>Esto reemplaza con ventaja el patrón <code>for clave in estudiante: ... estudiante[clave]</code> que usábamos antes. Cada par que produce <code>items()</code> es una tupla <code>(clave, valor)</code>, y el <code>for</code> la desempaqueta en dos variables, exactamente como hacíamos con <code>enumerate()</code> y <code>zip()</code> en la lección sobre bucles.</p>
 <p>El método <code>get()</code> resuelve otro problema que ya encontramos: acceder a una clave que no existe produce un <code>KeyError</code>, como vimos en la lección sobre errores. <code>get()</code> devuelve el valor de una clave si existe, y un valor por defecto si no:</p>
-<div id="c185272b" class="cell" data-execution_count="16">
+<div id="a797802a" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(estudiante.get(<span class="st">"promedio"</span>))        <span class="co"># la clave existe</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(estudiante.get(<span class="st">"beca"</span>))            <span class="co"># no existe: devuelve None</span></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(estudiante.get(<span class="st">"beca"</span>, <span class="st">"sin beca"</span>))  <span class="co"># no existe: devuelve el valor por defecto</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -563,7 +563,7 @@ sin beca</code></pre>
 <section id="métodos-de-los-conjuntos" class="level2">
 <h2 class="anchored" data-anchor-id="métodos-de-los-conjuntos">Métodos de los conjuntos</h2>
 <p>Los conjuntos también son objetos con métodos. El método <code>add()</code> agrega un elemento y <code>discard()</code> lo elimina sin error si no existe:</p>
-<div id="e6785e5c" class="cell" data-execution_count="17">
+<div id="a8b1c9c8" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>materias <span class="op">=</span> {<span class="st">"Cálculo"</span>, <span class="st">"Álgebra"</span>}</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>materias.add(<span class="st">"Física"</span>)</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(materias)</span>
@@ -571,12 +571,12 @@ sin beca</code></pre>
 <span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>materias.discard(<span class="st">"Álgebra"</span>)</span>
 <span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(materias)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>{'Física', 'Álgebra', 'Cálculo'}
-{'Física', 'Cálculo'}</code></pre>
+<pre><code>{'Álgebra', 'Cálculo', 'Física'}
+{'Cálculo', 'Física'}</code></pre>
 </div>
 </div>
 <p>Las operaciones de conjuntos que vimos con operadores en la lección sobre estructuras de datos (unión, intersección, diferencia) también tienen su forma como método. <code>grupo_a | grupo_b</code> puede escribirse <code>grupo_a.union(grupo_b)</code>, y de forma análoga <code>intersection()</code> y <code>difference()</code>:</p>
-<div id="c4579cf4" class="cell" data-execution_count="18">
+<div id="8651b69e" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>manana <span class="op">=</span> {<span class="st">"Ana"</span>, <span class="st">"Luis"</span>, <span class="st">"María"</span>}</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>tarde  <span class="op">=</span> {<span class="st">"María"</span>, <span class="st">"Pedro"</span>}</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -584,9 +584,9 @@ sin beca</code></pre>
 <span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(manana.intersection(tarde))</span>
 <span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(manana.difference(tarde))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>{'Luis', 'María', 'Pedro', 'Ana'}
+<pre><code>{'Ana', 'María', 'Luis', 'Pedro'}
 {'María'}
-{'Luis', 'Ana'}</code></pre>
+{'Ana', 'Luis'}</code></pre>
 </div>
 </div>
 <p>Que cada operación de conjunto exista tanto como operador (<code>|</code>, <code>&amp;</code>, <code>-</code>) como método (<code>union</code>, <code>intersection</code>, <code>difference</code>) ilustra algo más profundo: los operadores que hemos usado desde la primera lección son, en el fondo, métodos disfrazados. Cuando escribimos <code>a + b</code>, Python invoca internamente un método del objeto <code>a</code>. Esa idea se vuelve central cuando definamos nuestros propios tipos.</p>
@@ -596,7 +596,7 @@ sin beca</code></pre>
 <p>A lo largo de la lección ha reaparecido una distinción que conviene consolidar. Algunos métodos modifican el objeto sobre el que actúan y no devuelven nada útil: <code>lista.append()</code>, <code>lista.sort()</code>, <code>conjunto.add()</code>. Otros no modifican el objeto y devuelven un valor nuevo: <code>cadena.upper()</code>, <code>cadena.split()</code>, <code>diccionario.get()</code>.</p>
 <p>La regla general sigue la naturaleza del tipo. Las listas, los diccionarios y los conjuntos son mutables, así que tienen métodos que los modifican en su lugar. Las cadenas son inmutables, así que todos sus métodos devuelven cadenas nuevas y dejan la original intacta.</p>
 <p>El error más común al empezar es asignar el resultado de un método que modifica en su lugar:</p>
-<div id="46c9e253" class="cell" data-execution_count="19">
+<div id="7c139aab" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">7.5</span>, <span class="fl">9.0</span>, <span class="fl">6.0</span>]</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> calificaciones.sort()   <span class="co"># sort() modifica la lista y devuelve None</span></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(resultado)                    <span class="co"># None, no la lista ordenada</span></span>
@@ -611,7 +611,7 @@ sin beca</code></pre>
 <section id="ejemplo-integrador" class="level2">
 <h2 class="anchored" data-anchor-id="ejemplo-integrador">Ejemplo integrador</h2>
 <p>Reunimos los métodos de esta lección en un problema concreto. Tenemos una lista de registros de estudiantes en formato de texto, donde cada registro es una cadena con campos separados por comas. Queremos limpiarlos, convertirlos en diccionarios y producir un resumen por carrera.</p>
-<div id="f5d74341" class="cell" data-execution_count="20">
+<div id="c45fb078" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clasificar(calificacion):</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> calificacion <span class="op">&gt;=</span> <span class="fl">9.0</span>:</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Sobresaliente"</span></span>

@@ -81,9 +81,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-e8964db687007ca8dd88d9d9ce58e3ef.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a8f1a8fe70ee454d12eaddff5c99d1d8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-df65b99a6f7a45e55f10f6f34d1045cf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a8f1a8fe70ee454d12eaddff5c99d1d8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -383,14 +383,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="abrir-una-conexión-y-crear-la-base" class="level2">
 <h2 class="anchored" data-anchor-id="abrir-una-conexión-y-crear-la-base">Abrir una conexión y crear la base</h2>
 <p>Con <code>sqlite3</code>, conectarse es aún más simple, porque no hay servidor ni credenciales: basta el nombre del archivo donde vivirá la base de datos. Si el archivo no existe, se crea.</p>
-<div id="839b0f16" class="cell" data-execution_count="1">
+<div id="1c532e5c" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Conexión a una base de datos en un archivo (se crea si no existe)</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>conexion <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">"biblioteca.db"</span>)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Conexión abierta:"</span>, conexion)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Conexión abierta: &lt;sqlite3.Connection object at 0x7f4ae9ed44f0&gt;</code></pre>
+<pre><code>Conexión abierta: &lt;sqlite3.Connection object at 0x72f3344763e0&gt;</code></pre>
 </div>
 </div>
 <p>El objeto <code>conexion</code> es el mismo concepto que con <code>psycopg</code>: el canal hacia la base de datos. Recuerda la lección sobre archivos del curso de Python, donde abrir un archivo devolvía un objeto que había que cerrar al terminar. Una conexión a base de datos es análoga: es un recurso que se abre, se usa y se cierra. Más adelante veremos la forma cuidadosa de garantizar ese cierre.</p>
@@ -400,7 +400,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="el-cursor-enviar-consultas-y-recibir-resultados">El cursor: enviar consultas y recibir resultados</h2>
 <p>Para ejecutar una consulta no se usa la conexión directamente, sino un objeto intermedio llamado <em>cursor</em>. El cursor es quien envía el SQL y por quien llegan las filas del resultado; puedes pensarlo como el lector que recorre el resultado fila por fila, de forma parecida a como un objeto archivo recorría las líneas de un texto.</p>
 <p>Se obtiene con el método <code>cursor()</code> de la conexión, y se ejecuta SQL con su método <code>execute()</code>:</p>
-<div id="2287c483" class="cell" data-execution_count="2">
+<div id="3b134bc3" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>conexion <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">"biblioteca.db"</span>)</span>
@@ -441,7 +441,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="insertar-datos-y-el-papel-del-commit" class="level2">
 <h2 class="anchored" data-anchor-id="insertar-datos-y-el-papel-del-commit">Insertar datos y el papel del commit</h2>
 <p>Poblamos las tablas con <code>INSERT</code>. Aquí aparece una pieza nueva e importante: tras modificar la base de datos, hay que <em>confirmar</em> los cambios con el método <code>commit()</code> de la conexión. Esto es la transacción de la lección sobre modificación, ahora desde Python: los <code>INSERT</code> quedan pendientes hasta que <code>commit()</code> los hace permanentes.</p>
-<div id="deea0d16" class="cell" data-execution_count="3">
+<div id="eacd2459" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>autores <span class="op">=</span> [</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span>, <span class="st">"Gabriel García Márquez"</span>, <span class="st">"Colombia"</span>, <span class="dv">1927</span>),</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">2</span>, <span class="st">"Julio Cortázar"</span>,         <span class="st">"Argentina"</span>, <span class="dv">1914</span>),</span>
@@ -488,7 +488,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="leer-resultados-fetchall-y-recorrer-filas" class="level2">
 <h2 class="anchored" data-anchor-id="leer-resultados-fetchall-y-recorrer-filas">Leer resultados: fetchall y recorrer filas</h2>
 <p>Para una consulta de lectura, tras el <code>execute()</code> se recuperan las filas del cursor. El método <code>fetchall()</code> devuelve todas las filas como una lista de tuplas; cada tupla es una fila, y sus elementos son las columnas en el orden del <code>SELECT</code>.</p>
-<div id="da0f18f1" class="cell" data-execution_count="4">
+<div id="03c43479" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>cursor.execute(<span class="st">"SELECT titulo, anio FROM libros WHERE genero = 'Novela' ORDER BY anio"</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>filas <span class="op">=</span> cursor.fetchall()</span>
@@ -500,7 +500,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>El resultado es una lista de tuplas de Python: exactamente la estructura con la que empezó el curso de Python. El círculo se cierra: la consulta SQL que filtra y ordena entrega su resultado como datos de Python, listos para recorrerse con un <code>for</code>, procesarse con una comprensión o lo que necesites.</p>
-<div id="57af903b" class="cell" data-execution_count="5">
+<div id="d9d21246" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>cursor.execute(<span class="st">"""</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT a.nombre, COUNT(*) AS cantidad</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM libros AS l</span></span>
@@ -520,7 +520,7 @@ Gabriel García Márquez: 1 libro(s)</code></pre>
 </div>
 <p>Aquí el <code>JOIN</code> con agregación de la lección correspondiente se ejecuta de verdad, y cada fila del resultado se desempaqueta en <code>nombre</code> y <code>cantidad</code> con el desempaquetado de tuplas que conoces de Python. Toda la potencia de SQL para combinar y resumir, entregada en una forma que Python procesa con naturalidad.</p>
 <p>Cuando solo esperas una fila —una agregación global, por ejemplo— <code>fetchone()</code> devuelve una sola en lugar de la lista completa:</p>
-<div id="082f1e99" class="cell" data-execution_count="6">
+<div id="180bbebf" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>cursor.execute(<span class="st">"SELECT COUNT(*), AVG(anio) FROM libros"</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>total, promedio <span class="op">=</span> cursor.fetchone()</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Hay </span><span class="sc">{</span>total<span class="sc">}</span><span class="ss"> libros, con año promedio </span><span class="sc">{</span>promedio<span class="sc">:.1f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -532,7 +532,7 @@ Gabriel García Márquez: 1 libro(s)</code></pre>
 <section id="cerrar-la-conexión-de-forma-segura" class="level2">
 <h2 class="anchored" data-anchor-id="cerrar-la-conexión-de-forma-segura">Cerrar la conexión de forma segura</h2>
 <p>Como toda conexión es un recurso abierto, debe cerrarse al terminar. Podrías llamar a <code>conexion.close()</code> a mano, pero igual que con los archivos en Python, lo correcto es usar un bloque <code>with</code>, que cierra la conexión automáticamente aunque ocurra un error. Reunimos en un solo programa autónomo todo lo de la lección, usando <code>with</code> para gestionar la conexión:</p>
-<div id="9a76dbbb" class="cell" data-execution_count="7">
+<div id="444af6a2" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> consultar_biblioteca(ruta_db):</span>

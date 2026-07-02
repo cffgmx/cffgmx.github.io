@@ -1,6 +1,6 @@
 # cffgmx.github.io
 
-Página personal [cffga.github.io](https://cffgmx.github.io). Sitio estático de una sola página (SPA) servido desde `main` mediante GitHub Pages con Jekyll desactivado (`.nojekyll`).
+Página personal [cffgmx.github.io](https://cffgmx.github.io). Sitio estático de una sola página (SPA) servido desde `main` mediante GitHub Pages con Jekyll desactivado (`.nojekyll`).
 
 ## Estructura
 

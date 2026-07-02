@@ -81,9 +81,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-e8964db687007ca8dd88d9d9ce58e3ef.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a8f1a8fe70ee454d12eaddff5c99d1d8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-df65b99a6f7a45e55f10f6f34d1045cf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a8f1a8fe70ee454d12eaddff5c99d1d8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -366,7 +366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="las-funciones-son-objetos">Las funciones son objetos</h2>
 <p>Cuando definimos una función con <code>def</code>, Python crea un objeto función y le asigna un nombre, exactamente igual que cuando escribimos <code>x = 10</code> crea un objeto entero y le asigna el nombre <code>x</code>. El nombre de la función es solo una etiqueta que apunta al objeto; el objeto existe por sí mismo.</p>
 <p>La prueba es que podemos asignar una función a otra variable sin llamarla, y usarla a través de ese nuevo nombre:</p>
-<div id="5196465b" class="cell" data-execution_count="1">
+<div id="5ce0c670" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clasificar(calificacion):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> calificacion <span class="op">&gt;=</span> <span class="fl">9.0</span>:</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Sobresaliente"</span></span>
@@ -386,7 +386,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>La clave está en la línea <code>evaluar = clasificar</code>, sin paréntesis. Con paréntesis, <code>clasificar(8.5)</code> <em>llama</em> a la función y obtiene su resultado. Sin paréntesis, <code>clasificar</code> es el objeto función mismo, que podemos asignar a otra variable. Ahora <code>evaluar</code> y <code>clasificar</code> son dos nombres para el mismo objeto función, y ambos funcionan igual.</p>
 <p>Como cualquier objeto, una función puede guardarse en una estructura de datos. Una lista de funciones es perfectamente válida:</p>
-<div id="017539bb" class="cell" data-execution_count="2">
+<div id="c57e3751" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> doble(x):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">*</span> <span class="dv">2</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -410,7 +410,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Si una función puede asignarse a una variable y guardarse en una lista, también puede pasarse como argumento a otra función. Una función que recibe otra función como argumento se llama <em>función de orden superior</em>.</p>
 <p>Esto no es tan exótico como suena: ya usamos una sin darnos cuenta. En la lección sobre estructuras de datos ordenamos con <code>sorted()</code>, y esa función acepta un argumento llamado <code>key</code> que es, precisamente, una función. La idea es que <code>sorted()</code> no decide por sí mismo cómo comparar los elementos: le pasamos una función que, dado un elemento, devuelve el valor por el que queremos ordenar.</p>
 <p>Veámoslo con la lista de estudiantes que conocemos, representados como diccionarios. Para ordenarlos por calificación, le damos a <code>sorted()</code> una función que extrae la calificación de cada uno:</p>
-<div id="06e5148f" class="cell" data-execution_count="3">
+<div id="e68f0a83" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> obtener_calificacion(estudiante):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> estudiante[<span class="st">"calificacion"</span>]</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -437,7 +437,7 @@ Ana: 9.2</code></pre>
 <h2 class="anchored" data-anchor-id="expresiones-lambda">Expresiones <code>lambda</code></h2>
 <p>Definir una función completa con <code>def</code> solo para pasarla a <code>sorted()</code> es algo aparatoso, sobre todo cuando la función es tan simple como “devuelve la calificación”. Para estos casos Python ofrece las <em>expresiones lambda</em>: una forma de escribir una función pequeña en una sola línea, sin darle nombre.</p>
 <p>La sintaxis es <code>lambda parámetros: expresión</code>. La expresión a la derecha de los dos puntos es lo que la función devuelve; no se escribe <code>return</code>, porque una lambda siempre devuelve el valor de su única expresión. El ejemplo anterior se reescribe así:</p>
-<div id="49ca7e34" class="cell" data-execution_count="4">
+<div id="aceda204" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>grupo <span class="op">=</span> [</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Ana"</span>, <span class="st">"calificacion"</span>: <span class="fl">9.2</span>},</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Luis"</span>, <span class="st">"calificacion"</span>: <span class="fl">7.8</span>},</span>
@@ -456,7 +456,7 @@ Ana: 9.2</code></pre>
 </div>
 <p><code>lambda e: e["calificacion"]</code> es una función anónima que recibe un parámetro <code>e</code> y devuelve <code>e["calificacion"]</code>. Hace exactamente lo mismo que la función <code>obtener_calificacion</code> de antes, pero sin necesidad de definirla aparte ni ponerle nombre. Se lee casi como lenguaje natural: “para cada <code>e</code>, devuelve su calificación”.</p>
 <p>Una lambda es una función como cualquier otra; lo único especial es su brevedad. Puede asignarse a una variable, aunque en ese caso suele ser más claro usar <code>def</code>:</p>
-<div id="ddfa7a2a" class="cell" data-execution_count="5">
+<div id="42a5ca05" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>distancia <span class="op">=</span> <span class="kw">lambda</span> x, y: ((x <span class="op">**</span> <span class="dv">2</span>) <span class="op">+</span> (y <span class="op">**</span> <span class="dv">2</span>)) <span class="op">**</span> <span class="fl">0.5</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(distancia(<span class="dv">3</span>, <span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -468,7 +468,7 @@ Ana: 9.2</code></pre>
 <section id="ordenar-con-criterios-más-ricos" class="level2">
 <h2 class="anchored" data-anchor-id="ordenar-con-criterios-más-ricos">Ordenar con criterios más ricos</h2>
 <p>El verdadero valor de pasar funciones aparece cuando el criterio de ordenamiento no es trivial. Como la lambda puede contener cualquier expresión, podemos ordenar por criterios compuestos. Por ejemplo, ordenar primero por carrera y, dentro de cada carrera, por calificación, devolviendo una tupla como clave (Python ordena las tuplas comparando primero el primer elemento, luego el segundo, como vimos en la lección sobre estructuras de datos):</p>
-<div id="ccfdcf38" class="cell" data-execution_count="6">
+<div id="782792b0" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>grupo <span class="op">=</span> [</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Ana"</span>, <span class="st">"carrera"</span>: <span class="st">"Matemáticas"</span>, <span class="st">"calificacion"</span>: <span class="fl">9.2</span>},</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"nombre"</span>: <span class="st">"Luis"</span>, <span class="st">"carrera"</span>: <span class="st">"Física"</span>, <span class="st">"calificacion"</span>: <span class="fl">7.8</span>},</span>
@@ -493,7 +493,7 @@ Matemáticas  María    8.5</code></pre>
 <h2 class="anchored" data-anchor-id="map-y-filter"><code>map</code> y <code>filter</code></h2>
 <p>Pasar funciones como argumento es la base de dos funciones de orden superior que aparecen con frecuencia: <code>map</code> y <code>filter</code>. Ambas reciben una función y una colección, y aplican la función a cada elemento.</p>
 <p><code>map</code> aplica una función a cada elemento de una colección y produce los resultados. Para obtener una lista hay que envolverlo en <code>list()</code>:</p>
-<div id="bab765b6" class="cell" data-execution_count="7">
+<div id="fdc82043" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>celsius <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">20</span>, <span class="dv">37</span>, <span class="dv">100</span>]</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>fahrenheit <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> c: c <span class="op">*</span> <span class="dv">9</span> <span class="op">/</span> <span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span>, celsius))</span>
@@ -503,7 +503,7 @@ Matemáticas  María    8.5</code></pre>
 </div>
 </div>
 <p><code>filter</code> conserva solo los elementos para los que una función devuelve <code>True</code>:</p>
-<div id="be1a2d89" class="cell" data-execution_count="8">
+<div id="8cd5d9fa" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">9.2</span>, <span class="fl">5.4</span>, <span class="fl">7.8</span>, <span class="fl">6.1</span>, <span class="fl">4.0</span>, <span class="fl">8.5</span>]</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>aprobadas <span class="op">=</span> <span class="bu">list</span>(<span class="bu">filter</span>(<span class="kw">lambda</span> c: c <span class="op">&gt;=</span> <span class="fl">6.0</span>, calificaciones))</span>
@@ -517,7 +517,7 @@ Matemáticas  María    8.5</code></pre>
 <section id="funciones-que-devuelven-funciones" class="level2">
 <h2 class="anchored" data-anchor-id="funciones-que-devuelven-funciones">Funciones que devuelven funciones</h2>
 <p>Si una función puede recibir otra función como argumento, también puede devolver una función como resultado. Esto permite <em>fabricar</em> funciones a medida. Veamos una función que, dado un umbral de aprobación, construye y devuelve una función clasificadora con ese umbral:</p>
-<div id="0af5139a" class="cell" data-execution_count="9">
+<div id="ea4039b2" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> crear_aprobador(umbral):</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> aprueba(calificacion):</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> calificacion <span class="op">&gt;=</span> umbral</span>
@@ -540,7 +540,7 @@ False</code></pre>
 <section id="ejemplo-integrador" class="level2">
 <h2 class="anchored" data-anchor-id="ejemplo-integrador">Ejemplo integrador</h2>
 <p>Reunimos todo en una función que genera reportes flexibles de un grupo de estudiantes. Recibe funciones como argumentos para decidir qué estudiantes incluir y cómo ordenarlos, lo que la hace adaptable a muchas necesidades sin cambiar su código:</p>
-<div id="da47d6d7" class="cell" data-execution_count="10">
+<div id="5a6f0507" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clasificar(calificacion):</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> calificacion <span class="op">&gt;=</span> <span class="fl">9.0</span>:</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Sobresaliente"</span></span>
