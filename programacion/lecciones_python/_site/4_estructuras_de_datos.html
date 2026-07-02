@@ -398,24 +398,24 @@ window.Quarto = {
 <p>Una <em>lista</em> es una colección <em>ordenada</em> y <em>mutable</em>. Ordenada significa que los elementos tienen una posición fija; mutable significa que ese contenido puede cambiar después de crear la lista.</p>
 <p>La lista modela situaciones donde los datos crecen o cambian con el tiempo. Las lecturas de temperatura de un sensor a lo largo del día son el ejemplo natural: cada hora se registra un nuevo valor que se agrega a la colección. No tiene sentido usar una estructura rígida para datos que por naturaleza son dinámicos.</p>
 <p>Se definen usando corchetes <code>[]</code>, separando los elementos que la conforman por comas.</p>
-<div id="8e4d5195" class="cell" data-execution_count="1">
+<div id="43e192d4" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>temperaturas <span class="op">=</span> [<span class="fl">23.5</span>, <span class="fl">24.0</span>, <span class="fl">22.8</span>, <span class="fl">19.0</span>, <span class="fl">21.3</span>]   <span class="co"># Lecturas horarias de un sensor</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Como ya vimos, los elementos se acceden por su índice. El primero tiene índice <code>0</code>, y los índices negativos cuentan desde el final: <code>temperaturas[-1]</code> es siempre el último elemento, sin importar cuántos haya.</p>
-<div id="c81a67ca" class="cell" data-execution_count="2">
+<div id="00db9b59" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>temperaturas[<span class="dv">0</span>]    <span class="co"># Primera lectura del día</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>23.5</code></pre>
 </div>
 </div>
-<div id="3874a9af" class="cell" data-execution_count="3">
+<div id="8f2378e8" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>temperaturas[<span class="op">-</span><span class="dv">1</span>]   <span class="co"># Lectura más reciente</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>21.3</code></pre>
 </div>
 </div>
 <p>Para modificar el elemento de una lista después de crearla se utiliza la misma notación de índice que ya conocemos:</p>
-<div id="a3b63225" class="cell" data-execution_count="4">
+<div id="1ab77be6" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>temperaturas[<span class="dv">2</span>] <span class="op">=</span> <span class="fl">23.1</span>   <span class="co"># Corregimos una lectura errónea</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>temperaturas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
@@ -424,7 +424,7 @@ window.Quarto = {
 </div>
 <p>También es posible agregar o eliminar elementos, pero por ahora dejaremos esas operaciones para más adelante, ya que se expresan en Python de una forma particular que entenderemos mejor cuando veamos la <em>programación orientada a objetos</em>.</p>
 <p>La función <code>sum()</code> devuelve la suma de todos los elementos de una lista numérica. Combinada con <code>len()</code>, que ya conocemos, permite calcular el promedio de forma directa.</p>
-<div id="f7a065e7" class="cell" data-execution_count="5">
+<div id="20fa644d" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>suma <span class="op">=</span> <span class="bu">sum</span>(temperaturas)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>promedio <span class="op">=</span> suma <span class="op">/</span> <span class="bu">len</span>(temperaturas)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Temperatura promedio del día: </span><span class="sc">{</span>promedio<span class="sc">:.2f}</span><span class="ss"> °C"</span>)  <span class="co"># :.2f indica que se muestran solo 2 decimales</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -433,7 +433,7 @@ window.Quarto = {
 </div>
 </div>
 <p>La función <code>sorted()</code> recibe una secuencia y devuelve una <em>nueva</em> lista con los mismos elementos ordenados de menor a mayor, sin modificar la original. La distinción es importante: la lista original permanece intacta, y el resultado ordenado es un objeto nuevo.</p>
-<div id="77b263d7" class="cell" data-execution_count="6">
+<div id="0dcdcf24" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">7.5</span>, <span class="fl">9.0</span>, <span class="fl">8.5</span>, <span class="fl">6.0</span>, <span class="fl">10.0</span>, <span class="fl">8.0</span>]</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">sorted</span>(calificaciones))   <span class="co"># sorted() devuelve una nueva lista; no modifica la original</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(calificaciones)           <span class="co"># La original no cambió</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -443,7 +443,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Las listas también pueden contener elementos de distintos tipos, incluidas otras listas. Esto permite representar estructuras más complejas, como una pequeña tabla de datos donde cada fila es a su vez una lista.</p>
-<div id="2627b49f" class="cell" data-execution_count="7">
+<div id="82dda046" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cada fila contiene: nombre, edad, calificación</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>alumnos <span class="op">=</span> [</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Ana"</span>,   <span class="dv">20</span>, <span class="fl">9.2</span>],</span>
@@ -451,13 +451,13 @@ window.Quarto = {
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"María"</span>, <span class="dv">21</span>, <span class="fl">9.7</span>]</span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="c8f956ca" class="cell" data-execution_count="8">
+<div id="a4c4b4d6" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>alumnos[<span class="dv">0</span>]       <span class="co"># Primera fila completa</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>['Ana', 20, 9.2]</code></pre>
 </div>
 </div>
-<div id="90079b6a" class="cell" data-execution_count="9">
+<div id="32f65f67" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>alumnos[<span class="dv">0</span>][<span class="dv">2</span>]    <span class="co"># Calificación de Ana: primer alumno, tercer campo</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>9.2</code></pre>
@@ -469,19 +469,19 @@ window.Quarto = {
 <p>Una <em>tupla</em> es una colección ordenada e <em>inmutable</em>. Comparte con las listas la idea de posición y acceso por índice, pero su contenido no puede modificarse una vez creada.</p>
 <p>Esta restricción no es un defecto: es una garantía. Hay datos que por su naturaleza no deberían cambiar. Las coordenadas geográficas de una ciudad son fijas. Los coeficientes de un modelo matemático no se modifican durante el cálculo. Las dimensiones de una imagen no deben alterarse una vez leída. Usar una tupla en esos casos comunica esa intención de forma explícita y protege los datos de modificaciones accidentales.</p>
 <p>Las tuplas se definen con paréntesis <code>()</code>.</p>
-<div id="a0ecd9f3" class="cell" data-execution_count="10">
+<div id="9d6ae09e" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cdmx <span class="op">=</span> (<span class="fl">19.4326</span>, <span class="op">-</span><span class="fl">99.1332</span>)     <span class="co"># Coordenadas de Ciudad de México</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>gdl  <span class="op">=</span> (<span class="fl">20.6597</span>, <span class="op">-</span><span class="fl">103.3496</span>)    <span class="co"># Coordenadas de Guadalajara</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>El acceso a los elementos es idéntico al de las listas: por índice, con el primer elemento en la posición <code>0</code>.</p>
-<div id="b25714da" class="cell" data-execution_count="11">
+<div id="32b84594" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>cdmx[<span class="dv">0</span>]    <span class="co"># Latitud de CDMX</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>19.4326</code></pre>
 </div>
 </div>
 <p>Un uso muy natural de las tuplas es el <em>desempaquetado</em>. El desempaquetado es una forma elegante de extraer los valores de una tupla sin tener que usar índices, y también es una forma de asignar varios valores a la vez de forma clara y concisa. La idea es simple: si en una igualdad <code>=</code> el lado derecho es una tupla con <span class="math inline">\(n\)</span> elementos, podemos escribir <span class="math inline">\(n\)</span> nombres en el lado izquierdo separados por comas, y Python asignará cada elemento de la tupla al nombre que le corresponde por posición (la cantidad de nombres debe coincidir exactamente con la cantidad de elementos que hay en la tupla).</p>
-<div id="c4ee4e07" class="cell" data-execution_count="12">
+<div id="da6c3be7" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>latitud, longitud <span class="op">=</span> cdmx   <span class="co"># desempaquetado: cada variable recibe un elemento de la tupla</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Latitud:  </span><span class="sc">{</span>latitud<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Longitud: </span><span class="sc">{</span>longitud<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -491,7 +491,7 @@ Longitud: -99.1332</code></pre>
 </div>
 </div>
 <p>El desempaquetado también aparece de forma natural cuando se trabaja con listas de tuplas, donde cada elemento de la lista es un registro con varios campos.</p>
-<div id="dd3b13e8" class="cell" data-execution_count="13">
+<div id="86aeead0" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>alumnos <span class="op">=</span> [</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Ana"</span>,   <span class="dv">20</span>, <span class="fl">9.2</span>),</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Luis"</span>,  <span class="dv">22</span>, <span class="fl">8.1</span>),</span>
@@ -510,7 +510,7 @@ Longitud: -99.1332</code></pre>
 <p>Hasta ahora, todas las estructuras que hemos visto tienen algo en común: el orden importa. Las listas y las tuplas guardan sus elementos en una secuencia, y ese orden es parte de su identidad. Pero hay situaciones donde el orden es completamente irrelevante; lo que importa es únicamente <em>qué valores están presentes</em>.</p>
 <p>Un <em>conjunto</em> es una colección no ordenada de elementos únicos. A diferencia de las listas y las tuplas, los conjuntos no mantienen ningún orden entre sus elementos y no permiten duplicados: si se intenta agregar un valor que ya existe, simplemente se ignora. Esta estructura modela directamente la idea matemática de conjunto, y resulta natural en problemas como: ¿qué materias distintas eligieron los alumnos de un grupo?, ¿qué opciones marcaron los encuestados?, ¿qué identificadores únicos aparecen en un registro de accesos? En todos esos casos, la multiplicidad es irrelevante y el orden no tiene ningún significado.</p>
 <p>Los conjuntos se definen con llaves <code>{}</code>.</p>
-<div id="799db78f" class="cell" data-execution_count="14">
+<div id="0b363c43" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Respuestas a la pregunta: ¿cuál es tu materia favorita?</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>respuestas <span class="op">=</span> {<span class="st">"Cálculo"</span>, <span class="st">"Estadística"</span>, <span class="st">"Álgebra"</span>, <span class="st">"Estadística"</span>, <span class="st">"Cálculo"</span>, <span class="st">"Física"</span>}</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>respuestas   <span class="co"># Los duplicados se eliminan automáticamente</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -519,20 +519,20 @@ Longitud: -99.1332</code></pre>
 </div>
 </div>
 <p>En un conjunto no tiene sentido preguntar por el “primer” o el “segundo” elemento, así que el acceso por índice no está disponible. Lo que sí funciona es el operador <code>in</code>, que ya conocemos de las secuencias, y aquí se comporta exactamente igual.</p>
-<div id="7f4e0639" class="cell" data-execution_count="15">
+<div id="306c49bd" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">"Álgebra"</span> <span class="kw">in</span> respuestas   <span class="co"># ¿Álgebra fue mencionada?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
 <pre><code>True</code></pre>
 </div>
 </div>
-<div id="d1ad504e" class="cell" data-execution_count="16">
+<div id="535986a7" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">"Geometría"</span> <span class="kw">in</span> respuestas   <span class="co"># ¿Geometría fue mencionada?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <pre><code>False</code></pre>
 </div>
 </div>
 <p>La función <code>set()</code> puede recibir cualquier secuencia y convertirla en conjunto, eliminando automáticamente los duplicados. Esto hace que el patrón “obtener los valores únicos de una lista” sea inmediato.</p>
-<div id="197fa4af" class="cell" data-execution_count="17">
+<div id="56c8c79b" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">7.5</span>, <span class="fl">9.0</span>, <span class="fl">8.5</span>, <span class="fl">6.0</span>, <span class="fl">10.0</span>, <span class="fl">8.0</span>, <span class="fl">9.0</span>, <span class="fl">7.5</span>]</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>calificaciones_unicas <span class="op">=</span> <span class="bu">set</span>(calificaciones)   <span class="co"># Convierte la lista en un conjunto, eliminando los duplicados</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(calificaciones_unicas)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -544,7 +544,7 @@ Longitud: -99.1332</code></pre>
 <h3 class="anchored" data-anchor-id="operaciones-entre-conjuntos">Operaciones entre conjuntos</h3>
 <p>Las mismas operaciones que se estudian en álgebra de conjuntos (unión, intersección, diferencia) están disponibles directamente en Python.</p>
 <p>La <em>unión</em> <code>|</code> produce un nuevo conjunto con todos los elementos que aparecen en cualquiera de los dos.</p>
-<div id="28438f83" class="cell" data-execution_count="18">
+<div id="b097c8cb" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>grupo_mañana <span class="op">=</span> {<span class="st">"Ana"</span>, <span class="st">"Luis"</span>, <span class="st">"María"</span>, <span class="st">"Carlos"</span>}</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>grupo_tarde  <span class="op">=</span> {<span class="st">"María"</span>, <span class="st">"Pedro"</span>, <span class="st">"Carlos"</span>, <span class="st">"Sofía"</span>}</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -554,21 +554,21 @@ Longitud: -99.1332</code></pre>
 </div>
 </div>
 <p>La <em>intersección</em> <code>&amp;</code> produce únicamente los elementos presentes en ambos conjuntos al mismo tiempo.</p>
-<div id="add1babb" class="cell" data-execution_count="19">
+<div id="6788b94b" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>grupo_mañana <span class="op">&amp;</span> grupo_tarde   <span class="co"># Estudiantes que están en ambos grupos</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>{'Carlos', 'María'}</code></pre>
 </div>
 </div>
 <p>La <em>diferencia</em> <code>A - B</code> produce los elementos que están en <code>A</code> pero no en <code>B</code>.</p>
-<div id="c45c433e" class="cell" data-execution_count="20">
+<div id="582d8582" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>grupo_mañana <span class="op">-</span> grupo_tarde   <span class="co"># Estudiantes que están en el grupo de la mañana pero no en el de la tarde</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
 <pre><code>{'Ana', 'Luis'}</code></pre>
 </div>
 </div>
 <p>La <em>diferencia simétrica</em> <code>A ^ B</code> produce los elementos que están en <code>A</code> o en <code>B</code>, pero no en ambos al mismo tiempo.</p>
-<div id="3b51b83d" class="cell" data-execution_count="21">
+<div id="cbb497e6" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>grupo_mañana <span class="op">^</span> grupo_tarde   <span class="co"># Estudiantes que están en un grupo o en el otro, pero no en ambos</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
 <pre><code>{'Ana', 'Luis', 'Pedro', 'Sofía'}</code></pre>
@@ -581,7 +581,7 @@ Longitud: -99.1332</code></pre>
 <p>Hay una limitación que aparece con frecuencia al usar listas: los elementos se identifican por posición, y las posiciones son anónimas. Si representamos la información de un estudiante como <code>["Carlos", 21, "Matemáticas", 8.7]</code>, tenemos que recordar que el nombre está en la posición <code>0</code>, la edad en la <code>1</code>, y así sucesivamente. Quien lea ese código sin contexto no tiene forma de saber qué significa cada número.</p>
 <p>Un <em>diccionario</em> resuelve ese problema. Es una colección de pares <em>clave-valor</em>: en lugar de posiciones anónimas, cada dato tiene un nombre. Se accede a la información por clave, no por índice.</p>
 <p>Los diccionarios se definen con llaves <code>{}</code>, usando la forma <code>clave: valor</code> para cada entrada, separadas por comas.</p>
-<div id="3b1b9337" class="cell" data-execution_count="22">
+<div id="d7fba23b" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>estudiante <span class="op">=</span> {</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nombre"</span>:   <span class="st">"Carlos"</span>,</span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"edad"</span>:     <span class="dv">21</span>,</span>
@@ -590,14 +590,14 @@ Longitud: -99.1332</code></pre>
 <span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Para acceder al valor asociado a una clave, se usan corchetes con la clave entre comillas en lugar de un índice numérico. La mecánica es la misma que ya conocemos, pero ahora el “índice” es una palabra con significado.</p>
-<div id="c6984195" class="cell" data-execution_count="23">
+<div id="5825d30e" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>estudiante[<span class="st">"carrera"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>'Matemáticas'</code></pre>
 </div>
 </div>
 <p>Los diccionarios son mutables. Para modificar el valor de una clave existente, o para agregar una entrada nueva, se usa la misma sintaxis de asignación que ya conocemos: la clave entre corchetes en el lado izquierdo, el nuevo valor en el derecho.</p>
-<div id="81f4eebc" class="cell" data-execution_count="24">
+<div id="ef9fc593" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>estudiante[<span class="st">"promedio"</span>] <span class="op">=</span> <span class="fl">9.1</span>   <span class="co"># Actualizamos el promedio</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>estudiante[<span class="st">"semestre"</span>] <span class="op">=</span> <span class="dv">6</span>     <span class="co"># Agregamos un campo nuevo</span></span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>estudiante</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -610,13 +610,13 @@ Longitud: -99.1332</code></pre>
 </div>
 </div>
 <p>El operador <code>in</code> también funciona con diccionarios, pero verifica si una <em>clave</em> está presente, no un valor.</p>
-<div id="e55285a0" class="cell" data-execution_count="25">
+<div id="80408ecc" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">"carrera"</span> <span class="kw">in</span> estudiante   <span class="co"># ¿Existe la clave 'carrera'?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
 <pre><code>True</code></pre>
 </div>
 </div>
-<div id="986f5a00" class="cell" data-execution_count="26">
+<div id="55da2724" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">"beca"</span> <span class="kw">in</span> estudiante      <span class="co"># ¿Existe la clave 'beca'?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="26">
 <pre><code>False</code></pre>
@@ -694,7 +694,7 @@ Longitud: -99.1332</code></pre>
 <h2 class="anchored" data-anchor-id="conversión-entre-estructuras">Conversión entre estructuras</h2>
 <p>Python permite convertir entre estas estructuras usando las funciones <code>list()</code>, <code>tuple()</code> y <code>set()</code>. Estas conversiones son útiles cuando una colección se obtiene de cierta forma pero se necesita en otra.</p>
 <p>Un patrón muy común es obtener los valores únicos de una lista convirtiéndola a conjunto, y luego regresar a lista para poder ordenarlos con <code>sorted()</code>.</p>
-<div id="3085ced0" class="cell" data-execution_count="27">
+<div id="3ef3fa60" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>numeros <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">9</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">5</span>]</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>unicos    <span class="op">=</span> <span class="bu">set</span>(numeros)           <span class="co"># Elimina duplicados</span></span>
@@ -708,7 +708,7 @@ Sin duplicados:  [1, 2, 3, 4, 5, 6, 9]</code></pre>
 </div>
 </div>
 <p>También se puede convertir de lista a tupla cuando se tiene una colección que fue construida dinámicamente pero que a partir de cierto punto no debe modificarse: se construye como lista, se le agregan los elementos necesarios (operación que, como se mencionó, requiere métodos que veremos más adelante), y luego se convierte a tupla para protegerla.</p>
-<div id="58defc58" class="cell" data-execution_count="28">
+<div id="f007f262" class="cell" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Se construye dinámicamente la lista de coeficientes</span></span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>coeficientes <span class="op">=</span> [<span class="fl">1.0</span>, <span class="op">-</span><span class="fl">3.5</span>, <span class="fl">2.0</span>]      <span class="co"># Representa 1x² - 3.5x + 2</span></span>
 <span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>

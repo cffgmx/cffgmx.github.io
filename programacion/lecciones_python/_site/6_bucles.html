@@ -381,7 +381,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># instrucciones que se ejecutan una vez por cada elemento</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>variable</code> es un nombre que en cada iteración toma el valor del elemento actual de la colección. <code>colección</code> puede ser cualquier secuencia o estructura de datos: una lista, una tupla, una cadena, un conjunto, un diccionario. El bloque indentado se ejecuta tantas veces como elementos tenga la colección.</p>
 <p>El ejemplo más directo es recorrer una lista e imprimir cada valor:</p>
-<div id="055f8967" class="cell" data-execution_count="1">
+<div id="bfd22586" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>temperaturas <span class="op">=</span> [<span class="fl">23.5</span>, <span class="fl">24.0</span>, <span class="fl">22.8</span>, <span class="fl">19.0</span>, <span class="fl">21.3</span>]</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> temperaturas:</span>
@@ -399,7 +399,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="for-sobre-distintas-colecciones" class="level3">
 <h3 class="anchored" data-anchor-id="for-sobre-distintas-colecciones"><code>for</code> sobre distintas colecciones</h3>
 <p>El bucle <code>for</code> funciona sobre cualquier colección que ya conocemos. Recorrer una tupla es idéntico a recorrer una lista:</p>
-<div id="ff58506c" class="cell" data-execution_count="2">
+<div id="3cb0de59" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>coordenadas <span class="op">=</span> (<span class="fl">19.4326</span>, <span class="op">-</span><span class="fl">99.1332</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> valor <span class="kw">in</span> coordenadas:</span>
@@ -410,7 +410,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Aplicado a una cadena, el bucle recorre sus caracteres uno a uno, lo que tiene sentido porque una cadena es, en el fondo, una secuencia de caracteres:</p>
-<div id="370a831b" class="cell" data-execution_count="3">
+<div id="8df77f2c" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> caracter <span class="kw">in</span> <span class="st">"Python"</span>:</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(caracter)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -423,7 +423,7 @@ n</code></pre>
 </div>
 </div>
 <p>Sobre un conjunto, el bucle recorre sus elementos en un orden no garantizado, consistente con lo que ya sabemos sobre los conjuntos:</p>
-<div id="8171945a" class="cell" data-execution_count="4">
+<div id="d8d8bf75" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>materias <span class="op">=</span> {<span class="st">"Cálculo"</span>, <span class="st">"Estadística"</span>, <span class="st">"Álgebra"</span>, <span class="st">"Física"</span>}</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> materia <span class="kw">in</span> materias:</span>
@@ -436,7 +436,7 @@ Estadística
 </div>
 </div>
 <p>Sobre un diccionario, el comportamiento merece atención: por defecto, el bucle <code>for</code> recorre las <em>claves</em>, no los valores. Para acceder al valor correspondiente a cada clave, basta con usar la notación de corchetes que ya conocemos:</p>
-<div id="05ab0ff4" class="cell" data-execution_count="5">
+<div id="77e8c8ae" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>estudiante <span class="op">=</span> {</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nombre"</span>:   <span class="st">"Ana"</span>,</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"edad"</span>:     <span class="dv">20</span>,</span>
@@ -456,7 +456,7 @@ promedio: 9.2</code></pre>
 <h3 class="anchored" data-anchor-id="combinando-for-con-if">Combinando <code>for</code> con <code>if</code></h3>
 <p>El bloque de un <code>for</code> puede contener cualquier instrucción válida, incluyendo las estructuras de control de la lección anterior. Esto es donde el bucle empieza a mostrar su verdadero alcance: recorrer una colección y tomar decisiones sobre cada elemento.</p>
 <p>Retomando el ejemplo que quedó pendiente al cierre de la lección anterior, podemos ahora clasificar a todos los alumnos de un grupo de una sola vez:</p>
-<div id="e5cc4662" class="cell" data-execution_count="6">
+<div id="a81844b9" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clasificar(calificacion):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> calificacion <span class="op">&gt;=</span> <span class="fl">9.0</span>:</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Sobresaliente"</span></span>
@@ -485,7 +485,7 @@ promedio: 9.2</code></pre>
 </div>
 <p>Siete calificaciones, siete líneas de resultado, una sola llamada a <code>clasificar</code> por cada una, sin repetir código. Si el grupo tuviera trescientos alumnos, el bucle seguiría siendo exactamente el mismo.</p>
 <p>Otro patrón muy frecuente es filtrar: recorrer una colección y procesar solo los elementos que cumplen cierta condición.</p>
-<div id="047944cb" class="cell" data-execution_count="7">
+<div id="1bfc15a7" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">8.2</span>, <span class="fl">5.9</span>, <span class="fl">9.5</span>, <span class="fl">7.1</span>, <span class="fl">6.0</span>, <span class="fl">4.3</span>, <span class="fl">9.8</span>]</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Alumnos reprobados:"</span>)</span>
@@ -503,7 +503,7 @@ promedio: 9.2</code></pre>
 <h3 class="anchored" data-anchor-id="acumulación-dentro-de-un-for">Acumulación dentro de un <code>for</code></h3>
 <p>Un patrón especialmente útil es la <em>acumulación</em>: inicializar una variable antes del bucle y actualizarla en cada iteración. El resultado al terminar el bucle es el valor acumulado a lo largo de toda la colección.</p>
 <p>Por ejemplo, para contar cuántas calificaciones aprobatorias hay en una lista:</p>
-<div id="7dd1fb9a" class="cell" data-execution_count="8">
+<div id="5c0e4300" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">8.2</span>, <span class="fl">5.9</span>, <span class="fl">9.5</span>, <span class="fl">7.1</span>, <span class="fl">6.0</span>, <span class="fl">4.3</span>, <span class="fl">9.8</span>]</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>aprobados <span class="op">=</span> <span class="dv">0</span>   <span class="co"># contador inicial</span></span>
@@ -518,7 +518,7 @@ promedio: 9.2</code></pre>
 </div>
 </div>
 <p>El mismo patrón sirve para construir colecciones nuevas a partir de una existente. Aquí construimos un diccionario de frecuencias: cuántas veces aparece cada nivel de clasificación en la lista de calificaciones.</p>
-<div id="73315e99" class="cell" data-execution_count="9">
+<div id="8d94268b" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">8.2</span>, <span class="fl">5.9</span>, <span class="fl">9.5</span>, <span class="fl">7.1</span>, <span class="fl">6.0</span>, <span class="fl">4.3</span>, <span class="fl">9.8</span>, <span class="fl">9.1</span>, <span class="fl">7.8</span>, <span class="fl">5.0</span>]</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>frecuencias <span class="op">=</span> {</span>
@@ -547,7 +547,7 @@ Reprobado: 3</code></pre>
 <h3 class="anchored" data-anchor-id="la-función-range">La función <code>range()</code></h3>
 <p>Hasta ahora todos los bucles <code>for</code> han recorrido colecciones que ya existían: listas de calificaciones, diccionarios de estudiantes, conjuntos de materias. Pero a veces se necesita repetir algo un número fijo de veces, o generar una secuencia de números enteros para trabajar con ella.</p>
 <p>Para eso existe la función <code>range()</code>. Genera una secuencia de enteros que el <code>for</code> puede recorrer. La forma más simple es <code>range(n)</code>, que produce los enteros desde <code>0</code> hasta <code>n - 1</code>, sin incluir <code>n</code>:</p>
-<div id="7cc4c4df" class="cell" data-execution_count="10">
+<div id="b5dc7e2c" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -560,7 +560,7 @@ Reprobado: 3</code></pre>
 </div>
 <p>Al igual que el slicing que ya conocemos, el extremo superior de <code>range</code> no se incluye. <code>range(5)</code> produce <code>0, 1, 2, 3, 4</code>, cinco valores en total.</p>
 <p><code>range()</code> también acepta un punto de inicio y un paso, con la misma lógica que el slicing: <code>range(inicio, fin)</code> genera desde <code>inicio</code> hasta <code>fin - 1</code>, y <code>range(inicio, fin, paso)</code> avanza de <code>paso</code> en <code>paso</code>:</p>
-<div id="67ce2d1e" class="cell" data-execution_count="11">
+<div id="dc6a6161" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">6</span>):      <span class="co"># del 1 al 5</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -571,7 +571,7 @@ Reprobado: 3</code></pre>
 5</code></pre>
 </div>
 </div>
-<div id="963b0685" class="cell" data-execution_count="12">
+<div id="5f56c343" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">11</span>, <span class="dv">2</span>):  <span class="co"># pares del 0 al 10</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -584,7 +584,7 @@ Reprobado: 3</code></pre>
 </div>
 </div>
 <p><code>range()</code> también puede contar hacia atrás usando un paso negativo:</p>
-<div id="8d3ad407" class="cell" data-execution_count="13">
+<div id="4e0f68f4" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>):  <span class="co"># del 5 al 1, descendiendo</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -596,7 +596,7 @@ Reprobado: 3</code></pre>
 </div>
 </div>
 <p>Un uso natural de <code>range()</code> es recorrer los índices de una lista cuando se necesita tanto el índice como el valor. Recordemos que los índices van de <code>0</code> a <code>len(lista) - 1</code>, exactamente el rango que produce <code>range(len(lista))</code>:</p>
-<div id="f73baeb9" class="cell" data-execution_count="14">
+<div id="569156b0" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>temperaturas <span class="op">=</span> [<span class="fl">23.5</span>, <span class="fl">24.0</span>, <span class="fl">22.8</span>, <span class="fl">19.0</span>, <span class="fl">21.3</span>]</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(temperaturas)):</span>
@@ -613,7 +613,7 @@ Hora 4: 21.3 °C</code></pre>
 <section id="la-función-enumerate" class="level3">
 <h3 class="anchored" data-anchor-id="la-función-enumerate">La función <code>enumerate()</code></h3>
 <p>Recorrer una lista con <code>range(len(...))</code> para obtener el índice y el valor al mismo tiempo funciona, pero resulta algo indirecto. Python ofrece <code>enumerate()</code> para hacer exactamente eso de forma más directa: produce pares <code>(índice, valor)</code> que se pueden desempaquetar en dos variables, usando el desempaquetado de tuplas que ya conocemos de la lección de estructuras de datos.</p>
-<div id="10db3d43" class="cell" data-execution_count="15">
+<div id="7b8684f1" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>temperaturas <span class="op">=</span> [<span class="fl">23.5</span>, <span class="fl">24.0</span>, <span class="fl">22.8</span>, <span class="fl">19.0</span>, <span class="fl">21.3</span>]</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, t <span class="kw">in</span> <span class="bu">enumerate</span>(temperaturas):</span>
@@ -627,7 +627,7 @@ Hora 4: 21.3 °C</code></pre>
 </div>
 </div>
 <p>El resultado es idéntico al ejemplo anterior, pero el código expresa la intención con más claridad: queremos recorrer <code>temperaturas</code> obteniendo en cada paso tanto el índice como el valor. <code>enumerate()</code> acepta un segundo argumento opcional para especificar desde qué número empieza a contar:</p>
-<div id="cf8e5c5e" class="cell" data-execution_count="16">
+<div id="5f2ed0bc" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, t <span class="kw">in</span> <span class="bu">enumerate</span>(temperaturas, start<span class="op">=</span><span class="dv">1</span>):   <span class="co"># empieza a contar desde 1</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Hora </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>t<span class="sc">}</span><span class="ss"> °C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -642,7 +642,7 @@ Hora 5: 21.3 °C</code></pre>
 <section id="la-función-zip" class="level3">
 <h3 class="anchored" data-anchor-id="la-función-zip">La función <code>zip()</code></h3>
 <p>A veces se tienen dos listas relacionadas elemento a elemento y se quiere recorrerlas en paralelo. <code>zip()</code> combina dos o más secuencias en pares, produciendo en cada iteración una tupla con un elemento de cada una:</p>
-<div id="3936692c" class="cell" data-execution_count="17">
+<div id="93d1b9aa" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>ciudades      <span class="op">=</span> [<span class="st">"CDMX"</span>, <span class="st">"Guadalajara"</span>, <span class="st">"Monterrey"</span>]</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>temperaturas  <span class="op">=</span> [<span class="fl">22.5</span>,   <span class="fl">18.3</span>,          <span class="fl">28.1</span>]</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -660,7 +660,7 @@ Monterrey: 28.1 °C</code></pre>
 <h3 class="anchored" data-anchor-id="construir-una-lista-nueva-con-for">Construir una lista nueva con <code>for</code></h3>
 <p>Uno de los patrones de acumulación más frecuentes no produce un número ni un diccionario, sino una lista nueva. La idea es simple: se inicializa una lista vacía antes del bucle y, dentro de él, se va extendiendo con nuevos elementos. Añadir un elemento al final de una lista es una operación que normalmente requeriría un método, mecanismo que todavía no hemos introducido. Sin embargo, hay una forma de construirlas sin necesidad de ningún método: la concatenación con <code>+</code>, que ya conocemos de las secuencias.</p>
 <p>Dentro de un bucle, <code>lista = lista + [elemento]</code> extiende la lista en cada iteración asignándole una nueva lista que incluye el elemento adicional:</p>
-<div id="e9403ba0" class="cell" data-execution_count="18">
+<div id="46458d95" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">8.2</span>, <span class="fl">5.9</span>, <span class="fl">9.5</span>, <span class="fl">7.1</span>, <span class="fl">6.0</span>, <span class="fl">4.3</span>, <span class="fl">9.8</span>]</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>aprobados <span class="op">=</span> []   <span class="co"># lista vacía</span></span>
@@ -680,7 +680,7 @@ Monterrey: 28.1 °C</code></pre>
 <h3 class="anchored" data-anchor-id="break-y-continue"><code>break</code> y <code>continue</code></h3>
 <p>Dentro de un bucle <code>for</code> o <code>while</code> es posible alterar el flujo normal de la iteración con dos instrucciones: <code>break</code> y <code>continue</code>.</p>
 <p><code>break</code> interrumpe el bucle de inmediato, sin esperar a que se agoten los elementos ni a que la condición cambie. Es útil cuando se busca algo dentro de una colección y no tiene sentido seguir recorriendo el resto una vez encontrado:</p>
-<div id="a45ded27" class="cell" data-execution_count="19">
+<div id="5c8c89e0" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">8.2</span>, <span class="fl">5.9</span>, <span class="fl">9.5</span>, <span class="fl">7.1</span>, <span class="fl">6.0</span>, <span class="fl">4.3</span>, <span class="fl">9.8</span>]</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>primera_reprobada <span class="op">=</span> <span class="va">None</span></span>
@@ -700,7 +700,7 @@ Monterrey: 28.1 °C</code></pre>
 </div>
 <p>Sin <code>break</code>, el bucle seguiría recorriendo toda la lista aunque ya hubiera encontrado lo que buscaba. Con <code>break</code>, se detiene exactamente en ese punto.</p>
 <p><code>continue</code> no termina el bucle, sino solo la iteración actual: descarta el resto del bloque y pasa directamente al siguiente elemento. Es útil cuando ciertos elementos deben ignorarse sin necesidad de anidar todo el código dentro de un <code>if</code>:</p>
-<div id="664385e8" class="cell" data-execution_count="20">
+<div id="8e7dddfd" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="fl">8.2</span>, <span class="fl">5.9</span>, <span class="fl">9.5</span>, <span class="fl">7.1</span>, <span class="fl">6.0</span>, <span class="fl">4.3</span>, <span class="fl">9.8</span>]</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Calificaciones aprobatorias:"</span>)</span>
@@ -727,7 +727,7 @@ Monterrey: 28.1 °C</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> condición:</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># instrucciones que se repiten mientras condición sea True</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Un ejemplo elemental: calcular cuántas veces hay que doblar una hoja de papel para que su grosor supere un metro. El grosor inicial es de 0.1 mm y se duplica en cada doblez.</p>
-<div id="ef2e04c5" class="cell" data-execution_count="21">
+<div id="9c3f3163" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>grosor    <span class="op">=</span> <span class="fl">0.1</span>   <span class="co"># milímetros</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>dobleces  <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -746,7 +746,7 @@ Grosor final: 1638.40 mm</code></pre>
 <section id="la-condición-debe-volverse-false-en-algún-momento" class="level3">
 <h3 class="anchored" data-anchor-id="la-condición-debe-volverse-false-en-algún-momento">La condición debe volverse <code>False</code> en algún momento</h3>
 <p>El riesgo del <code>while</code> es escribir una condición que nunca deje de ser verdadera, produciendo un <em>bucle infinito</em> que el programa nunca abandona. En Google Colab, un bucle infinito se interrumpe manualmente con el botón de detener ejecución, o con <code>Ctrl + C</code>. El ejemplo siguiente ilustra la forma correcta: la variable que controla la condición se actualiza dentro del bucle, garantizando que en algún momento la condición resulte <code>False</code>.</p>
-<div id="defc4b68" class="cell" data-execution_count="22">
+<div id="4a7d6a69" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>contador <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> contador <span class="op">&gt;</span> <span class="dv">0</span>:</span>
@@ -774,7 +774,7 @@ Fin.</code></pre>
 <h3 class="anchored" data-anchor-id="while-con-condiciones-compuestas"><code>while</code> con condiciones compuestas</h3>
 <p>La condición del <code>while</code> puede ser tan compleja como se necesite, usando los mismos operadores lógicos que ya conocemos. Un uso frecuente es mantener un proceso hasta que se cumplan varias condiciones simultáneamente, o hasta que alguna de varias condiciones deje de cumplirse.</p>
 <p>Por ejemplo, simular la búsqueda del primer elemento de una lista que supere un umbral, avanzando posición por posición:</p>
-<div id="03599d44" class="cell" data-execution_count="23">
+<div id="8a10986a" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>temperaturas <span class="op">=</span> [<span class="fl">21.3</span>, <span class="fl">22.1</span>, <span class="fl">23.5</span>, <span class="fl">26.8</span>, <span class="fl">25.0</span>, <span class="fl">24.4</span>]</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>umbral       <span class="op">=</span> <span class="fl">25.0</span></span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>indice       <span class="op">=</span> <span class="dv">0</span></span>
@@ -803,7 +803,7 @@ Fin.</code></pre>
 <h2 class="anchored" data-anchor-id="ejemplo-integrador">Ejemplo integrador</h2>
 <p>Para cerrar, un ejemplo que pone en juego todo lo que hemos aprendido en las últimas tres lecciones: estructuras de datos, <code>if</code> / <code>elif</code> / <code>else</code>, y los dos tipos de bucle.</p>
 <p>El problema: dada una lista de diccionarios, cada uno representando a un estudiante con nombre, calificación y carrera, queremos calcular el promedio por carrera y reportar cuántos alumnos están por encima de ese promedio en cada una.</p>
-<div id="dbe553b8" class="cell" data-execution_count="24">
+<div id="51b0ff76" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clasificar(calificacion):</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> calificacion <span class="op">&gt;=</span> <span class="fl">9.0</span>:</span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Sobresaliente"</span></span>

@@ -353,6 +353,7 @@ window.Quarto = {
   <li><a href="#python-como-calculadora" id="toc-python-como-calculadora" class="nav-link" data-scroll-target="#python-como-calculadora">Python como calculadora</a></li>
   <li><a href="#tipos-de-números-en-python" id="toc-tipos-de-números-en-python" class="nav-link" data-scroll-target="#tipos-de-números-en-python">Tipos de números en Python</a></li>
   <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables">Variables</a></li>
+  <li><a href="#lo-que-sigue" id="toc-lo-que-sigue" class="nav-link" data-scroll-target="#lo-que-sigue">Lo que sigue</a></li>
   </ul>
 </nav>
     </div>
@@ -403,7 +404,7 @@ window.Quarto = {
 <p>El punto de partida más natural para aprender a programar es también el más inmediato: hacer cuentas. Antes de hablar de variables, funciones o estructuras de datos, tiene sentido familiarizarse con la forma en que Python interpreta y evalúa expresiones matemáticas. Por eso comenzamos aquí.</p>
 <p>Se pueden evaluar directamente expresiones como <span class="math display">\[3\times 4 \times 5 + 1,\]</span></p>
 <p>pero para ello es necesario escribirlas usando la sintaxis del lenguaje. En Python la multiplicación se escribe con <code>*</code>, la suma con <code>+</code>, la resta con <code>-</code> y la división con <code>/</code>. Así, la expresión anterior se introduce como:</p>
-<div id="92eb8ee4" class="cell" data-execution_count="1">
+<div id="ed2c40b7" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="op">*</span> <span class="dv">4</span> <span class="op">*</span> <span class="dv">5</span> <span class="op">+</span> <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>61</code></pre>
@@ -411,20 +412,20 @@ window.Quarto = {
 </div>
 <p>Al ejecutar esta celda, Python evalúa la expresión y devuelve el resultado, que en este caso es <code>61</code>.</p>
 <p>Además de las operaciones básicas, Python permite calcular potencias. En matemáticas se emplea la notación <span class="math inline">\(a^n\)</span>, pero en Python se usa <code>a ** n</code>. Por ejemplo, <span class="math inline">\(2^3\)</span> se escribe así:</p>
-<div id="ca366efe" class="cell" data-execution_count="2">
+<div id="850ca629" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">**</span> <span class="dv">3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>8</code></pre>
 </div>
 </div>
 <p>Al igual que en el álgebra, los paréntesis permiten agrupar términos y controlar el orden en que se realizan las operaciones. En las siguientes celdas se calculan respectivamente <span class="math inline">\((2^3)^2\)</span> y <span class="math inline">\(2^{3^2}\)</span>, dos expresiones que producen resultados muy distintos precisamente por cómo se agrupan las potencias:</p>
-<div id="a5e2b3c8" class="cell" data-execution_count="3">
+<div id="a2852d8c" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span> <span class="op">**</span> <span class="dv">3</span>) <span class="op">**</span> <span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>64</code></pre>
 </div>
 </div>
-<div id="6e6f45d8" class="cell" data-execution_count="4">
+<div id="8a64938f" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">**</span> (<span class="dv">3</span> <span class="op">**</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>512</code></pre>
@@ -432,14 +433,14 @@ window.Quarto = {
 </div>
 <p>Las últimas dos operaciones que veremos completan el repertorio aritmético básico, la <em>división entera</em> y el <em>módulo</em> o <em>residuo</em>. La división entera responde a la pregunta “¿cuántas veces cabe un número en otro sin pasarse?”, el módulo responde a “¿cuánto sobra?”. Juntas, estas dos operaciones describen completamente una división.</p>
 <p>La división entera entre 7 y 2 se calcula así:</p>
-<div id="c8dc16d0" class="cell" data-execution_count="5">
+<div id="dc1a41cc" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="op">//</span> <span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>3</code></pre>
 </div>
 </div>
 <p>El resultado es 3, porque el 2 cabe 3 veces en 7. Y para saber cuánto sobra:</p>
-<div id="b5b84d64" class="cell" data-execution_count="6">
+<div id="dea2f66f" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="op">%</span> <span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>1</code></pre>
@@ -448,7 +449,7 @@ window.Quarto = {
 <p>El resultado es 1, porque después de esas 3 veces, queda 1 sin dividir.</p>
 <p>Con las operaciones básicas ya cubiertas, conviene introducir una herramienta sencilla pero que se usará constantemente a lo largo de todos los notebooks, los <em>comentarios</em>. Un comentario es texto que se escribe dentro de una celda de código pero que Python ignora por completo al ejecutar. Su propósito es explicar qué hace el código, aclarar la intención detrás de una línea o dejar notas para quien lo lea más adelante.</p>
 <p>En Python, los comentarios se introducen con el símbolo <code>#</code>. Todo lo que aparece a la derecha de ese símbolo en la misma línea es ignorado al ejecutar la celda:</p>
-<div id="975b1541" class="cell" data-execution_count="7">
+<div id="7db284a2" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Este es un comentario, no afecta el resultado</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span>  <span class="co"># Esto también es un comentario, el resultado sigue siendo 4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
@@ -463,7 +464,7 @@ window.Quarto = {
 <p>En matemáticas distinguimos con cuidado los números enteros de los reales. Los <em>enteros</em>, representados por el conjunto <span class="math inline">\(\mathbb{Z} = \{\dots, -2, -1, 0, 1, 2, \dots\}\)</span>, no tienen parte decimal. Los <em>reales</em> <span class="math inline">\(\mathbb{R}\)</span> sí pueden tenerla, y su definición matemática exige precisión infinita.</p>
 <p>Una computadora, sin embargo, trabaja con recursos finitos. No puede almacenar un número real con infinitos decimales, solo puede guardar una aproximación. Por eso Python no trabaja con números reales en sentido estricto, sino con representaciones finitas de ellos, que en programación se llaman <code>float</code>. Los enteros, en cambio, sí se representan de forma exacta y se llaman <code>int</code> (de <em>integer</em>).</p>
 <p>Esta distinción tiene consecuencias prácticas. Por ejemplo:</p>
-<div id="7e3c9765" class="cell" data-execution_count="8">
+<div id="8cdda7bc" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fl">0.1</span> <span class="op">+</span> <span class="fl">0.2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>0.30000000000000004</code></pre>
@@ -472,7 +473,7 @@ window.Quarto = {
 <p>Desde el punto de vista matemático, esperaríamos exactamente <code>0.3</code>. Sin embargo, la computadora muestra un valor ligeramente distinto. Esto no es un error de Python, es la consecuencia inevitable de trabajar con representaciones finitas. Al operar sobre valores aproximados, las pequeñas diferencias en su representación pueden acumularse en el resultado.</p>
 <p>Entender esta distinción entre <code>int</code> (exacto) y <code>float</code> (aproximado) es fundamental para interpretar resultados correctamente y para elegir el tipo adecuado según el problema. Más adelante se verá que existen formas de trabajar con números reales de manera estricta cuando el problema requiere precisión absoluta.</p>
 <p>Python también maneja de forma nativa los <em>números complejos</em>, escritos en el formato <code>a + bj</code>, donde <code>a</code> es la parte real y <code>b</code> la imaginaria. Un detalle importante: Python usa la letra <code>j</code> para la unidad imaginaria, en lugar de la <span class="math inline">\(i\)</span> que es habitual en los libros de matemáticas. Por ejemplo, el número complejo <span class="math inline">\(3 + 4i\)</span> se representa en Python como:</p>
-<div id="20c272dd" class="cell" data-execution_count="9">
+<div id="afddb7be" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="op">+</span> <span class="ot">4j</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>(3+4j)</code></pre>
@@ -481,47 +482,47 @@ window.Quarto = {
 </section>
 <section id="variables" class="level2">
 <h2 class="anchored" data-anchor-id="variables">Variables</h2>
-<p>Las operaciones que hemos hecho hasta ahora tienen una limitación evidente, y es que cada resultado se pierde inmediatamente. Si calculamos <span class="math inline">\(2^{10}\)</span>, el valor aparece en pantalla, pero no podemos usarlo después. Para que un resultado sea reutilizable, necesitamos una forma de guardarlo y darle un nombre. A eso sirven las <em>variables</em>.</p>
-<p>Una variable es un nombre que queda asociado a un valor en la memoria de la computadora. La asignación sigue la forma:</p>
-<p><code>nombre = valor</code></p>
-<p>donde <code>nombre</code> es el identificador elegido y <code>valor</code> es el dato que se quiere almacenar. El símbolo <code>=</code> no expresa igualdad matemática, indica que el nombre de la izquierda quedará ligado al valor de la derecha. Por ejemplo:</p>
-<div id="81272c09" class="cell" data-execution_count="10">
+<p>Cuando haces una operación en Python, como <code>2 + 2</code>, el resultado aparece en la pantalla y desaparece. No puedes hacer nada más con él. La computadora sí lo guarda en algún lugar, pero no te dice dónde. Es como si meteras un papel en un casillero, cerraras la puerta, y tiraras la llave: el papel sigue ahí dentro, pero no hay manera de volver a sacarlo.</p>
+<p>La computadora tiene un lugar especial para guardar datos llamado <em>memoria RAM</em>. Imagina una habitación llena de casilleros metálicos, todos del mismo tamaño, alineados contra las paredes. Cada casillero tiene un número grabado en la chapa (<code>0x7ffe2b3c</code>, <code>0x7ffe2b3d</code>, …), pero esos números son larguísimos y difíciles de recordar. Cada vez que Python necesita guardar un valor, busca un casillero vacío, lo abre, mete el valor adentro y cierra la puerta. Pero la puerta no tiene una etiqueta legible para nosotros. El valor está ahí, pero no podemos señalarlo después.</p>
+<p>Para eso sirven las <strong>variables</strong>: son etiquetas que nosotros mismos podemos pegar en las puertas de los casilleros, para poder encontrar después el valor que guardamos.</p>
+<p>Cuando escribes</p>
+<div id="25c832a0" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>edad <span class="op">=</span> <span class="dv">25</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Al ejecutar esta línea ocurren tres cosas:</p>
-<ol type="1">
-<li>El número <code>25</code> se almacena en algún lugar de la memoria de la computadora.</li>
-<li>Python registra el nombre <code>edad</code>.</li>
-<li>Ese nombre queda asociado al valor <code>25</code>.</li>
-</ol>
-<p>A partir de ese momento, escribir <code>edad</code> en cualquier parte del programa es equivalente a usar el valor <code>25</code>:</p>
-<div id="c2843456" class="cell" data-execution_count="11">
+<p>Python hace tres cosas, en orden. Primero: busca un casillero vacío, lo abre, y mete el número 25 adentro. Segundo: cierra el casillero, pero esta vez no se va sin dejar rastro. Tercero: agarra una etiqueta que dice <code>edad</code> y la pega en la puerta del casillero, justo donde se vea bien.</p>
+<p>A partir de ese momento, cada vez que escribes <code>edad</code> en tu código, Python mira qué casillero tiene la etiqueta <code>edad</code>, lo abre, y te da el valor que hay adentro. Por ejemplo:</p>
+<div id="0b4d797d" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>edad <span class="op">+</span> <span class="dv">25</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>50</code></pre>
 </div>
 </div>
-<p>Ahora bien, las variables no son permanentes, pueden reasignarse. Si posteriormente se ejecuta:</p>
-<div id="34a57ccd" class="cell" data-execution_count="12">
+<p>Es importante entender que la variable no es el casillero, ni es el valor que está dentro. La variable es solamente la <strong>etiqueta</strong> de la puerta. El casillero es un lugar físico en la RAM. El valor es lo que está guardado dentro. La etiqueta es lo que te permite encontrar el casillero correcto entre millones.</p>
+<p>Las etiquetas se pueden despegar y pegar en otro lado. Si después escribes</p>
+<div id="a45dc48d" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>edad <span class="op">=</span> <span class="dv">10</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>la referencia <code>edad</code> se redirige hacia el nuevo valor <code>10</code>:</p>
-<pre><code>Antes:   edad  ──────►  25
-Después: edad  ──────►  10</code></pre>
-<p>El valor <code>25</code> queda sin ninguna variable que lo referencie, y Python lo descartará de la memoria.</p>
-<p>Es posible que dos nombres referencien simultáneamente el mismo objeto:</p>
-<div id="8f1ba374" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> a <span class="co"># Esta línea hace que el nombre "b" apunte también a 10</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">+</span> b</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Python busca el casillero donde está la etiqueta <code>edad</code>, la despega de la puerta, busca otro casillero vacío, mete el 10 adentro, y pega la etiqueta <code>edad</code> en esa nueva puerta.</p>
+<p>El primer casillero (el que tenía el 25) se queda sin etiqueta. La puerta está cerrada, el 25 sigue ahí dentro, pero nadie sabe en qué casillero quedó. Poco después, Python hace una ronda de limpieza: encuentra casilleros sin etiqueta, los vacía y los deja disponibles para cuando se necesiten después.</p>
+<p>También puedes pegar dos etiquetas diferentes en la misma puerta:</p>
+<div id="34d3eb89" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> a</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">+</span> b</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>20</code></pre>
 </div>
 </div>
-<p>Si luego se reasigna <code>a</code>, la referencia <code>b</code> no se ve afectada; simplemente continúa apuntando al valor original:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">+</span> b <span class="co"># Aquí "b" sigue apuntando a 10</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Con esto, tenemos los ingredientes fundamentales: sabemos operar con números, distinguimos sus tipos y podemos guardar resultados para reutilizarlos. La siguiente lección parte de aquí para introducir una capacidad nueva: la de comparar valores y tomar decisiones en función de esas comparaciones.</p>
+<p><code>b = a</code> no copia el 10. Lo que hace es: mira qué casillero tiene la etiqueta <code>a</code>, y pega también la etiqueta <code>b</code> en la misma puerta. Ahora hay dos etiquetas en el mismo casillero. Ambas señalan el mismo valor, el mismo lugar.</p>
+<p>Si después haces</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">+</span> b</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>la etiqueta <code>a</code> se despega y se va a otro casillero. La etiqueta <code>b</code> se queda donde estaba, pegada al casillero del 10. Por eso <code>a</code> vale 3 pero <code>b</code> sigue valiendo 10: son dos etiquetas independientes que pueden moverse por separado.</p>
+<p>Esta imagen mental del estante de casilleros también ayuda a entender por qué Python se preocupa tanto por los tipos de datos (si un valor es entero, decimal, etc.). No todos los valores caben de la misma forma en un casillero. Un número entero como 25 es pequeño y cabe justo en un casillero común. Un número decimal como 3.1416 necesita un formato especial para guardarse (por eso antes vimos que <code>0.1 + 0.2</code> no daba exactamente 0.3). Una lista de temperaturas, como las que veremos después, ni siquiera cabe en un solo casillero: necesita varios casilleros encadenados. El tipo de un valor le dice a Python “esto que está en este casillero es un entero, léelo de esta manera” o “esto es un decimal, léelo de esta otra”. Sin esa información, Python no sabría cómo interpretar los unos y ceros que encuentra dentro del casillero.</p>
+</section>
+<section id="lo-que-sigue" class="level2">
+<h2 class="anchored" data-anchor-id="lo-que-sigue">Lo que sigue</h2>
+<p>Ahora sabemos hacer cuentas y guardar sus resultados para usarlos después. Pero hay algo que todavía no podemos hacer: preguntar. No podemos preguntar “¿este número es mayor que 10?” ni “¿los datos del sensor superaron el límite?” ni “¿los dos valores son iguales?”. Para eso se necesita una herramienta nueva: la capacidad de comparar valores y, según el resultado, hacer una cosa u otra.</p>
 
 
 </section>

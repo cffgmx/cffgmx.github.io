@@ -366,7 +366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Para abordar esta cuestión, Python dispone de los <em>operadores de comparación</em> y los <em>operadores lógicos</em>. Por ahora nos centraremos en los primeros.</p>
 <p>Los operadores de comparación pueden entenderse de forma muy natural como una manera de hacer preguntas. Cada vez que comparas dos expresiones, en realidad estás formulando una pregunta sobre ellas. Por ejemplo, al escribir una comparación, es como si preguntaras “¿estos números son iguales?”, “¿uno es mayor que el otro?” o “¿son distintos?”. La respuesta que Python produce siempre es de tipo <code>True</code> (Verdadero) o <code>False</code> (Falso), que puedes interpretar simplemente como “sí” o “no”. A este tipo de respuestas se les denomina <em>valores booleanos</em>.</p>
 <p>El primer operador de comparación que veremos es <code>==</code>, y se utiliza para preguntar si dos valores son iguales. Es importante no confundirlo con <code>=</code>, que no compara, sino que asigna un valor a una variable. Por su parte, el operador <code>!=</code> permite formular la pregunta contraria y verificar si dos valores son distintos. Por ejemplo:</p>
-<div id="f95793f2" class="cell" data-execution_count="1">
+<div id="f787b665" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>temperatura_actual <span class="op">=</span> <span class="dv">22</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>temperatura_limite <span class="op">=</span> <span class="dv">22</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -376,13 +376,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Los otros operadores de comparación son: <code>&gt;</code> (mayor que), <code>&lt;</code> (menor que), <code>&gt;=</code> (mayor o igual que) y <code>&lt;=</code> (menor o igual que). Funcionan exactamente como en matemáticas, y todos devuelven un booleano. Por ejemplo:</p>
-<div id="15844b7e" class="cell" data-execution_count="2">
+<div id="aecf4501" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">22</span> <span class="op">&gt;</span> <span class="dv">30</span>    <span class="co"># ¿22 es mayor que 30?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>False</code></pre>
 </div>
 </div>
-<div id="ca605388" class="cell" data-execution_count="3">
+<div id="cd491bed" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">22</span> <span class="op">&lt;=</span> <span class="dv">22</span>   <span class="co"># ¿22 es menor o igual que 22?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>True</code></pre>
@@ -390,34 +390,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>En muchas situaciones, una sola comparación no es suficiente. En la vida cotidiana combinamos varias condiciones en una misma idea: “¿hace más de 20 grados <em>y</em> menos de 30?” o “¿es de noche <em>o</em> está nublado?”. Para formular ese tipo de condiciones compuestas, Python ofrece los <em>operadores lógicos</em>: <code>and</code>, <code>or</code> y <code>not</code>.</p>
 <p>El operador <code>and</code> combina dos condiciones y devuelve <code>True</code> únicamente cuando ambas son verdaderas al mismo tiempo. Si alguna falla, el resultado es <code>False</code>. Puede entenderse como el operador que <em>exige que todo se cumpla simultáneamente</em>.</p>
-<div id="fbc4b34b" class="cell" data-execution_count="4">
+<div id="a383e999" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> <span class="dv">25</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>temp <span class="op">&gt;</span> <span class="dv">20</span> <span class="kw">and</span> temp <span class="op">&lt;</span> <span class="dv">30</span>  <span class="co"># ¿Está entre 20 y 30?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>True</code></pre>
 </div>
 </div>
-<div id="7adcc6d1" class="cell" data-execution_count="5">
+<div id="16e3a097" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>temp <span class="op">&gt;</span> <span class="dv">20</span> <span class="kw">and</span> temp <span class="op">&lt;</span> <span class="dv">24</span>  <span class="co"># temp &gt; 20 es True, pero temp &lt; 24 es False</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>False</code></pre>
 </div>
 </div>
 <p><code>or</code> es más permisivo, devuelve <code>True</code> con que una sola de las dos condiciones sea verdadera. Solo produce <code>False</code> cuando ambas fallan al mismo tiempo.</p>
-<div id="0b3a4419" class="cell" data-execution_count="6">
+<div id="baff21e4" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>temp <span class="op">&lt;</span> <span class="dv">10</span> <span class="kw">or</span> temp <span class="op">&gt;</span> <span class="dv">20</span>  <span class="co"># temp &lt; 10 es False, pero temp &gt; 20 es True</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>True</code></pre>
 </div>
 </div>
-<div id="ee380dd6" class="cell" data-execution_count="7">
+<div id="0e03f015" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>temp <span class="op">&lt;</span> <span class="dv">10</span> <span class="kw">or</span> temp <span class="op">&gt;</span> <span class="dv">30</span>  <span class="co"># Ambas condiciones son False</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>False</code></pre>
 </div>
 </div>
 <p>Finalmente, <code>not</code> es un operador de negación que invierte el valor de una condición. Si la condición es <code>True</code>, <code>not</code> la convierte en <code>False</code>, y viceversa.</p>
-<div id="4c49f36d" class="cell" data-execution_count="8">
+<div id="805fb369" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">not</span> temp <span class="op">&gt;</span> <span class="dv">20</span>  <span class="co"># temp &gt; 20 es True, así que not lo convierte en False</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>False</code></pre>
@@ -432,7 +432,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="listas-list" class="level3">
 <h3 class="anchored" data-anchor-id="listas-list">Listas <code>list</code></h3>
 <p>Una <em>lista</em> es la secuencia más flexible. Su contenido puede modificarse libremente después de crearla: se pueden cambiar elementos, añadir nuevos o eliminar los existentes. Se definen usando corchetes <code>[ ]</code>, separando por comas los datos que la conforman. Por ejemplo:</p>
-<div id="f9d0241b" class="cell" data-execution_count="9">
+<div id="042bb454" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>temperaturas <span class="op">=</span> [<span class="fl">23.5</span>, <span class="fl">24.0</span>, <span class="fl">22.8</span>, <span class="dv">17</span>, <span class="fl">19.4</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Conviene usar una lista cuando se sabe que los datos son <em>dinámicos</em>, es decir, cuando se espera que cambien: mediciones que se acumulan, resultados que se procesan, elementos que el usuario puede agregar o quitar. La flexibilidad de la lista responde exactamente a esa necesidad.</p>
@@ -440,7 +440,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="tuplas-tuple" class="level3">
 <h3 class="anchored" data-anchor-id="tuplas-tuple">Tuplas <code>tuple</code></h3>
 <p>Una <em>tupla</em> funciona como una lista en casi todo, con una diferencia fundamental: una vez creada, no puede modificarse. Se definen usando paréntesis <code>()</code>. Por ejemplo:</p>
-<div id="71c122cd" class="cell" data-execution_count="10">
+<div id="536e1f83" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>punto_geodesico <span class="op">=</span> (<span class="fl">19.4326</span>, <span class="op">-</span><span class="fl">99.1332</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Usar una tupla es una forma de comunicar “estos datos no deben cambiar”. Las coordenadas de una ciudad, la fecha de nacimiento de una persona o los extremos de un intervalo matemático son valores estables por naturaleza, y representarlos con una tupla no solo los protege de modificaciones accidentales, sino que comunica esa intención a quien lea el código.</p>
@@ -448,7 +448,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="cadenas-str" class="level3">
 <h3 class="anchored" data-anchor-id="cadenas-str">Cadenas <code>str</code></h3>
 <p>Una <em>cadena</em> es, en el fondo, una secuencia de caracteres de texto. Al igual que las tuplas, las cadenas son inmutables. Se definen encerrando el texto entre comillas dobles o simples.</p>
-<div id="aa205a47" class="cell" data-execution_count="11">
+<div id="b84521a6" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>nombre <span class="op">=</span> <span class="st">'Carlos'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Lo importante es que Python trata todo lo que esté dentro de las comillas como texto puro. Eso significa que <code>"42"</code> no es el número cuarenta y dos, es un <code>"4"</code> seguido de un <code>"2"</code>, dos caracteres con los que no se puede hacer aritmética. Del mismo modo, <code>"hola mundo"</code> tiene diez caracteres, no nueve: el espacio también ocupa una posición en la secuencia.</p>
@@ -458,25 +458,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="lo-que-toda-secuencia-puede-hacer" class="level2">
 <h2 class="anchored" data-anchor-id="lo-que-toda-secuencia-puede-hacer">Lo que toda secuencia puede hacer</h2>
 <p>Más allá de sus diferencias, las tres secuencias comparten un conjunto de operaciones fundamentales. Una de las más importantes es la <em>indexación</em>, es decir, el hecho de que cada elemento ocupa una posición numerada, llamada <em>índice</em>, que comienza en <code>0</code> (y no en <code>1</code>, como podría esperarse). Para acceder a un elemento, basta con escribir el nombre de la secuencia seguido del índice entre corchetes.</p>
-<div id="c477034c" class="cell" data-execution_count="12">
+<div id="766b8bce" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>temperaturas[<span class="dv">2</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>22.8</code></pre>
 </div>
 </div>
-<div id="014a8c65" class="cell" data-execution_count="13">
+<div id="b2cd6627" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>punto_geodesico[<span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>19.4326</code></pre>
 </div>
 </div>
-<div id="aa8c736e" class="cell" data-execution_count="14">
+<div id="70037e4a" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>nombre[<span class="dv">3</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>'l'</code></pre>
 </div>
 </div>
-<div id="0931dc97" class="cell" data-execution_count="15">
+<div id="a3748b77" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">"Hola mundo"</span>[<span class="dv">4</span>] <span class="co"># Aquí el espacio tiene indice 4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
 <pre><code>' '</code></pre>
@@ -484,43 +484,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Python también permite contar desde el final usando índices negativos: <code>secuencia[-1]</code> es siempre el último elemento, <code>secuencia[-2]</code> el penúltimo, y así sucesivamente. Es una convención práctica que evita tener que conocer la longitud exacta de la secuencia.</p>
 <p>Además de acceder a elementos individuales, las secuencias permiten extraer porciones completas mediante el <em>slicing</em> o rebanado. La sintaxis <code>secuencia[inicio:fin]</code> devuelve todos los elementos desde la posición <code>inicio</code> hasta justo antes de <code>fin</code>, sin incluirla.</p>
-<div id="bbd8bbe5" class="cell" data-execution_count="16">
+<div id="226166f6" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>nombre[<span class="dv">0</span>:<span class="dv">5</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <pre><code>'Carlo'</code></pre>
 </div>
 </div>
-<div id="9a4e9f36" class="cell" data-execution_count="17">
+<div id="cb140cba" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>temperaturas[<span class="dv">1</span>:<span class="dv">4</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>[24.0, 22.8, 17]</code></pre>
 </div>
 </div>
 <p>La tercera operación compartida es el operador de pertenencia <code>in</code>, que responde a la pregunta “¿este elemento está dentro de la secuencia?”. Devuelve <code>True</code> o <code>False</code>, los mismos booleanos que ya conocemos de la sección anterior. Aquí se ve por primera vez cómo las ideas se conectan: lo que aprendimos sobre comparaciones sirve directamente para trabajar con secuencias.</p>
-<div id="1b60538a" class="cell" data-execution_count="18">
+<div id="b981560c" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">"P"</span> <span class="kw">in</span> <span class="st">"Python"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <pre><code>True</code></pre>
 </div>
 </div>
-<div id="176045bd" class="cell" data-execution_count="19">
+<div id="6e336336" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">"p"</span> <span class="kw">in</span> <span class="st">"Python"</span> <span class="co"># Devuelve false pues es minúscula</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>False</code></pre>
 </div>
 </div>
-<div id="a8587def" class="cell" data-execution_count="20">
+<div id="a0075df5" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="dv">17</span> <span class="kw">in</span> temperaturas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
 <pre><code>True</code></pre>
 </div>
 </div>
 <p>Hasta aquí, todos los ejemplos han usado colecciones de un solo tipo de dato. En la práctica, sin embargo, las listas y las tuplas pueden mezclar cualquier tipo de elemento, incluso otras secuencias. Esto se llama <em>anidamiento</em>: una secuencia que contiene a otra, lo que permite representar estructuras más complejas con las mismas herramientas que ya conocemos.</p>
-<div id="1c625f4c" class="cell" data-execution_count="21">
+<div id="eaabc1f3" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Una lista que mezcla números, cadenas, tuplas y listas</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>registro <span class="op">=</span> [<span class="dv">42</span>, <span class="st">"temperatura"</span>, [<span class="fl">23.5</span>, <span class="fl">24.0</span>, <span class="fl">22.8</span>], (<span class="dv">3</span>, <span class="st">"hola"</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="28fb33bb" class="cell" data-execution_count="22">
+<div id="05236ce0" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>registro[<span class="dv">3</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <pre><code>(3, 'hola')</code></pre>
@@ -528,7 +528,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>En los ejemplos anteriores nos hemos limitado a <em>leer</em> los valores que contiene una secuencia. Esto nos lleva a una pregunta natural: ¿qué sucede cuando necesitamos <em>modificar</em> uno de esos valores? La respuesta depende del tipo de secuencia.</p>
 <p>Como ya vimos, las listas son mutables: su contenido puede cambiar después de crearlas. Las tuplas y las cadenas, en cambio, son inmutables. La edición directa de elementos, por tanto, solo es posible en listas, y se hace usando la misma notación de índice que ya conocemos, ahora en el lado izquierdo de una asignación:</p>
-<div id="5f89c616" class="cell" data-execution_count="23">
+<div id="0d8c1518" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>temperaturas <span class="op">=</span> [<span class="fl">23.5</span>, <span class="fl">24.0</span>, <span class="fl">22.8</span>]</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>temperaturas[<span class="dv">1</span>] <span class="op">=</span> <span class="fl">19.0</span>  <span class="co"># Reemplazamos el segundo valor</span></span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>temperaturas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>

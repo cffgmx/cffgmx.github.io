@@ -112,57 +112,59 @@ Python también maneja de forma nativa los *números complejos*, escritos en el 
 
 ## Variables
 
-Las operaciones que hemos hecho hasta ahora tienen una limitación evidente, y es que cada resultado se pierde inmediatamente. Si calculamos $2^{10}$, el valor aparece en pantalla, pero no podemos usarlo después. Para que un resultado sea reutilizable, necesitamos una forma de guardarlo y darle un nombre. A eso sirven las *variables*.
+Cuando haces una operación en Python, como `2 + 2`, el resultado aparece en la pantalla y desaparece. No puedes hacer nada más con él. La computadora sí lo guarda en algún lugar, pero no te dice dónde. Es como si meteras un papel en un casillero, cerraras la puerta, y tiraras la llave: el papel sigue ahí dentro, pero no hay manera de volver a sacarlo.
 
-Una variable es un nombre que queda asociado a un valor en la memoria de la computadora. La asignación sigue la forma:
+La computadora tiene un lugar especial para guardar datos llamado *memoria RAM*. Imagina una habitación llena de casilleros metálicos, todos del mismo tamaño, alineados contra las paredes. Cada casillero tiene un número grabado en la chapa (`0x7ffe2b3c`, `0x7ffe2b3d`, ...), pero esos números son larguísimos y difíciles de recordar. Cada vez que Python necesita guardar un valor, busca un casillero vacío, lo abre, mete el valor adentro y cierra la puerta. Pero la puerta no tiene una etiqueta legible para nosotros. El valor está ahí, pero no podemos señalarlo después.
 
-`nombre = valor`
+Para eso sirven las **variables**: son etiquetas que nosotros mismos podemos pegar en las puertas de los casilleros, para poder encontrar después el valor que guardamos.
 
-donde `nombre` es el identificador elegido y `valor` es el dato que se quiere almacenar. El símbolo `=` no expresa igualdad matemática, indica que el nombre de la izquierda quedará ligado al valor de la derecha. Por ejemplo:
+Cuando escribes
 
 ```{python}
 edad = 25
 ```
 
-Al ejecutar esta línea ocurren tres cosas:
+Python hace tres cosas, en orden. Primero: busca un casillero vacío, lo abre, y mete el número 25 adentro. Segundo: cierra el casillero, pero esta vez no se va sin dejar rastro. Tercero: agarra una etiqueta que dice `edad` y la pega en la puerta del casillero, justo donde se vea bien.
 
-1. El número `25` se almacena en algún lugar de la memoria de la computadora.
-2. Python registra el nombre `edad`.
-3. Ese nombre queda asociado al valor `25`.
+A partir de ese momento, cada vez que escribes `edad` en tu código, Python mira qué casillero tiene la etiqueta `edad`, lo abre, y te da el valor que hay adentro. Por ejemplo:
 
-A partir de ese momento, escribir `edad` en cualquier parte del programa es equivalente a usar el valor `25`:
-
-````{python}
+```{python}
 edad + 25
-````
+```
 
-Ahora bien, las variables no son permanentes, pueden reasignarse. Si posteriormente se ejecuta:
+Es importante entender que la variable no es el casillero, ni es el valor que está dentro. La variable es solamente la **etiqueta** de la puerta. El casillero es un lugar físico en la RAM. El valor es lo que está guardado dentro. La etiqueta es lo que te permite encontrar el casillero correcto entre millones.
+
+Las etiquetas se pueden despegar y pegar en otro lado. Si después escribes
 
 ```{python}
 edad = 10
 ```
 
-la referencia `edad` se redirige hacia el nuevo valor `10`:
+Python busca el casillero donde está la etiqueta `edad`, la despega de la puerta, busca otro casillero vacío, mete el 10 adentro, y pega la etiqueta `edad` en esa nueva puerta.
 
-```
-Antes:   edad  ──────►  25
-Después: edad  ──────►  10
-```
+El primer casillero (el que tenía el 25) se queda sin etiqueta. La puerta está cerrada, el 25 sigue ahí dentro, pero nadie sabe en qué casillero quedó. Poco después, Python hace una ronda de limpieza: encuentra casilleros sin etiqueta, los vacía y los deja disponibles para cuando se necesiten después.
 
-El valor `25` queda sin ninguna variable que lo referencie, y Python lo descartará de la memoria.
-
-Es posible que dos nombres referencien simultáneamente el mismo objeto:
+También puedes pegar dos etiquetas diferentes en la misma puerta:
 
 ```{python}
 a = 10
-b = a # Esta línea hace que el nombre "b" apunte también a 10
+b = a
 a + b
 ```
 
-Si luego se reasigna `a`, la referencia `b` no se ve afectada; simplemente continúa apuntando al valor original:
+`b = a` no copia el 10. Lo que hace es: mira qué casillero tiene la etiqueta `a`, y pega también la etiqueta `b` en la misma puerta. Ahora hay dos etiquetas en el mismo casillero. Ambas señalan el mismo valor, el mismo lugar.
+
+Si después haces
 
 ```python
 a = 3
-a + b # Aquí "b" sigue apuntando a 10
+a + b
 ```
-Con esto, tenemos los ingredientes fundamentales: sabemos operar con números, distinguimos sus tipos y podemos guardar resultados para reutilizarlos. La siguiente lección parte de aquí para introducir una capacidad nueva: la de comparar valores y tomar decisiones en función de esas comparaciones.
+
+la etiqueta `a` se despega y se va a otro casillero. La etiqueta `b` se queda donde estaba, pegada al casillero del 10. Por eso `a` vale 3 pero `b` sigue valiendo 10: son dos etiquetas independientes que pueden moverse por separado.
+
+Esta imagen mental del estante de casilleros también ayuda a entender por qué Python se preocupa tanto por los tipos de datos (si un valor es entero, decimal, etc.). No todos los valores caben de la misma forma en un casillero. Un número entero como 25 es pequeño y cabe justo en un casillero común. Un número decimal como 3.1416 necesita un formato especial para guardarse (por eso antes vimos que `0.1 + 0.2` no daba exactamente 0.3). Una lista de temperaturas, como las que veremos después, ni siquiera cabe en un solo casillero: necesita varios casilleros encadenados. El tipo de un valor le dice a Python "esto que está en este casillero es un entero, léelo de esta manera" o "esto es un decimal, léelo de esta otra". Sin esa información, Python no sabría cómo interpretar los unos y ceros que encuentra dentro del casillero.
+
+## Lo que sigue
+
+Ahora sabemos hacer cuentas y guardar sus resultados para usarlos después. Pero hay algo que todavía no podemos hacer: preguntar. No podemos preguntar "¿este número es mayor que 10?" ni "¿los datos del sensor superaron el límite?" ni "¿los dos valores son iguales?". Para eso se necesita una herramienta nueva: la capacidad de comparar valores y, según el resultado, hacer una cosa u otra.

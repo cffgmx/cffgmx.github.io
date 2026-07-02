@@ -366,7 +366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="definir-un-método">Definir un método</h2>
 <p>Un método es, simplemente, una función definida dentro de una clase. La única diferencia con las funciones que conocemos desde la lección sobre funciones es que recibe <code>self</code> como primer parámetro, igual que <code>__init__</code>. A través de <code>self</code>, el método tiene acceso a los atributos del objeto sobre el que actúa.</p>
 <p>Convertimos la vieja función <code>clasificar()</code> en un método de la clase <code>Estudiante</code>:</p>
-<div id="7286a795" class="cell" data-execution_count="1">
+<div id="77f6defc" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Estudiante:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, nombre, carrera, calificacion):</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nombre <span class="op">=</span> nombre</span>
@@ -396,7 +396,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="métodos-que-usan-parámetros" class="level2">
 <h2 class="anchored" data-anchor-id="métodos-que-usan-parámetros">Métodos que usan parámetros</h2>
 <p>Un método puede recibir parámetros adicionales además de <code>self</code>, igual que cualquier función. Imaginemos un método que comprueba si el estudiante aprueba según un umbral que puede variar:</p>
-<div id="9c8b2e05" class="cell" data-execution_count="2">
+<div id="fbbb10ee" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Estudiante:</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, nombre, carrera, calificacion):</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nombre <span class="op">=</span> nombre</span>
@@ -420,7 +420,7 @@ False</code></pre>
 <section id="métodos-que-modifican-el-objeto" class="level2">
 <h2 class="anchored" data-anchor-id="métodos-que-modifican-el-objeto">Métodos que modifican el objeto</h2>
 <p>En la lección sobre objetos distinguimos entre métodos que devuelven un valor y métodos que modifican el objeto sobre el que actúan. Nuestras clases pueden tener ambos tipos. Un método que modifica el objeto asigna nuevos valores a sus atributos a través de <code>self</code>:</p>
-<div id="3e944824" class="cell" data-execution_count="3">
+<div id="5de75351" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Estudiante:</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, nombre, carrera, calificacion):</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nombre <span class="op">=</span> nombre</span>
@@ -457,16 +457,16 @@ Sobresaliente</code></pre>
 <section id="la-representación-de-un-objeto" class="level2">
 <h2 class="anchored" data-anchor-id="la-representación-de-un-objeto">La representación de un objeto</h2>
 <p>Hay un problema práctico que aparece en cuanto trabajamos con objetos propios. Veamos qué ocurre al imprimir un estudiante directamente:</p>
-<div id="8bda6567" class="cell" data-execution_count="4">
+<div id="238906f5" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ana <span class="op">=</span> Estudiante(<span class="st">"Ana"</span>, <span class="st">"Matemáticas"</span>, <span class="fl">9.2</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ana)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;__main__.Estudiante object at 0x77865c239450&gt;</code></pre>
+<pre><code>&lt;__main__.Estudiante object at 0x7d6b701ad450&gt;</code></pre>
 </div>
 </div>
 <p>El resultado es algo como <code>&lt;__main__.Estudiante object at 0x...&gt;</code>: el tipo del objeto y su dirección en memoria. Es información correcta pero inútil para un humano. Cuando imprimimos una lista vemos sus elementos, cuando imprimimos una cadena vemos su texto; quisiéramos que al imprimir un estudiante viéramos algo igualmente legible.</p>
 <p>Python resuelve esto con un método especial: <code>__str__</code>. Si una clase lo define, <code>print()</code> lo usa para obtener la representación textual del objeto. Los métodos especiales se reconocen por los dos guiones bajos a cada lado del nombre, igual que <code>__init__</code>:</p>
-<div id="e16c0f40" class="cell" data-execution_count="5">
+<div id="a39b34de" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Estudiante:</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, nombre, carrera, calificacion):</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nombre <span class="op">=</span> nombre</span>
@@ -488,7 +488,7 @@ Sobresaliente</code></pre>
 <section id="str__-y-__repr__" class="level2">
 <h2 class="anchored" data-anchor-id="str__-y-__repr__"><code>__str__</code> y <code>__repr__</code></h2>
 <p>Python distingue entre dos representaciones textuales de un objeto, y conviene entender la diferencia. <code>__str__</code> produce una representación pensada para el usuario final: legible, amigable. Existe además <code>__repr__</code>, pensada para el programador: una representación precisa y, en lo posible, sin ambigüedad sobre qué es el objeto.</p>
-<div id="b7608fa0" class="cell" data-execution_count="6">
+<div id="ed4f70e5" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Estudiante:</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, nombre, carrera, calificacion):</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nombre <span class="op">=</span> nombre</span>
@@ -515,7 +515,7 @@ Estudiante('Ana', 'Matemáticas', 9.2)</code></pre>
 </div>
 <p>La distinción tiene una lógica clara. <code>__str__</code> responde a “¿cómo le muestro este objeto a una persona?”; <code>__repr__</code> responde a “¿cómo describo este objeto sin ambigüedad para alguien que programa?”. Por eso <code>__repr__</code> suele tener la forma de la llamada que crearía el objeto. Cuando una clase define solo uno de los dos, conviene que sea <code>__repr__</code>, porque Python recurre a él como respaldo cuando <code>__str__</code> no existe.</p>
 <p>Un detalle revelador: al imprimir una lista de estudiantes, Python usa <code>__repr__</code> para cada elemento, no <code>__str__</code>:</p>
-<div id="90e9f57d" class="cell" data-execution_count="7">
+<div id="6bcea26a" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>grupo <span class="op">=</span> [</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    Estudiante(<span class="st">"Ana"</span>, <span class="st">"Matemáticas"</span>, <span class="fl">9.2</span>),</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    Estudiante(<span class="st">"Luis"</span>, <span class="st">"Física"</span>, <span class="fl">7.8</span>),</span>
@@ -531,7 +531,7 @@ Estudiante('Ana', 'Matemáticas', 9.2)</code></pre>
 <h2 class="anchored" data-anchor-id="operadores-como-métodos-especiales">Operadores como métodos especiales</h2>
 <p>En la lección sobre objetos adelantamos una idea: los operadores que usamos desde la primera lección son, en el fondo, métodos. Ahora podemos comprobarlo. Cuando escribimos <code>a + b</code>, Python invoca un método especial llamado <code>__add__</code> sobre <code>a</code>. Cuando escribimos <code>len(x)</code>, invoca <code>__len__</code>. Definir estos métodos en nuestras clases les permite responder a los operadores y funciones del lenguaje.</p>
 <p>Construyamos una clase <code>Grupo</code> que contenga estudiantes y que sepa cuántos tiene mediante <code>len()</code>:</p>
-<div id="8095e450" class="cell" data-execution_count="8">
+<div id="fc17ef62" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Grupo:</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, estudiantes):</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.estudiantes <span class="op">=</span> estudiantes</span>
@@ -556,7 +556,7 @@ Estudiante('Ana', 'Matemáticas', 9.2)</code></pre>
 <section id="ejemplo-integrador" class="level2">
 <h2 class="anchored" data-anchor-id="ejemplo-integrador">Ejemplo integrador</h2>
 <p>Reunimos todo en dos clases que trabajan juntas: <code>Estudiante</code>, con sus métodos propios y su representación, y <code>Grupo</code>, que contiene estudiantes y ofrece operaciones sobre el conjunto. Es la versión orientada a objetos del problema que ha recorrido toda la serie.</p>
-<div id="fa403389" class="cell" data-execution_count="9">
+<div id="c7b3e42f" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Estudiante:</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, nombre, carrera, calificacion):</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nombre <span class="op">=</span> nombre</span>

@@ -371,7 +371,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> condición:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># instrucciones que se ejecutan solo si condición es True</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>La condición puede ser cualquier expresión que Python pueda evaluar como <code>True</code> o <code>False</code>: una comparación, una combinación de comparaciones con <code>and</code> u <code>or</code>, o directamente una variable booleana. Si la evaluación resulta <code>True</code>, se ejecuta el bloque indentado; si resulta <code>False</code>, Python salta directamente a la primera línea que esté fuera de ese bloque.</p>
-<div id="f3d37bcf" class="cell" data-execution_count="1">
+<div id="71146211" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>temperatura <span class="op">=</span> <span class="fl">38.5</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> temperatura <span class="op">&gt;</span> <span class="fl">37.5</span>:</span>
@@ -381,7 +381,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Si cambiamos el valor de <code>temperatura</code> a uno que no supere el umbral, el bloque indentado no se ejecuta en absoluto:</p>
-<div id="2afa1173" class="cell" data-execution_count="2">
+<div id="d6552513" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>temperatura <span class="op">=</span> <span class="fl">36.8</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> temperatura <span class="op">&gt;</span> <span class="fl">37.5</span>:</span>
@@ -398,7 +398,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="la-cláusula-else">La cláusula <code>else</code></h2>
 <p>Un <code>if</code> por sí solo permite reaccionar cuando algo es verdadero, pero no dice nada sobre qué hacer cuando es falso. En muchas situaciones eso no es suficiente: se quiere hacer una cosa si se cumple la condición, y otra cosa distinta si no se cumple. Para eso existe la cláusula <code>else</code>.</p>
 <p><code>else</code> se escribe al mismo nivel de indentación que el <code>if</code> al que pertenece, seguido de dos puntos. Su bloque se ejecuta únicamente cuando la condición del <code>if</code> resultó <code>False</code>. Los dos bloques son mutuamente excluyentes, o se ejecuta uno u otro, pero nunca ambos.</p>
-<div id="8e3b0b0b" class="cell" data-execution_count="3">
+<div id="ffc5f5b4" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>calificacion <span class="op">=</span> <span class="fl">7.5</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> calificacion <span class="op">&gt;=</span> <span class="fl">6.0</span>:</span>
@@ -410,7 +410,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Un uso típico de esta estructura es asignar un valor a una variable dependiendo de si se cumple una condición. Por ejemplo, el sistema de cobro de una red de transporte público aplica una tarifa diferente según si el pasajero es estudiante o no:</p>
-<div id="2f26c440" class="cell" data-execution_count="4">
+<div id="7d5747a4" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>precio_base <span class="op">=</span> <span class="fl">22.0</span>   <span class="co"># precio sin descuento, en pesos</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>es_estudiante <span class="op">=</span> <span class="va">True</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -430,7 +430,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="la-cláusula-elif">La cláusula <code>elif</code></h2>
 <p>Hay problemas que no se reducen a dos casos. Una escala de calificaciones tiene varios niveles: sobresaliente, bien, suficiente, reprobado. Una clasificación de riesgo puede ser baja, media o alta. Una tarifa puede depender de tres o más tramos de consumo. Para manejar estas situaciones de forma limpia, Python ofrece la cláusula <code>elif</code>, abreviatura de <em>else if</em>.</p>
 <p><code>elif</code> permite añadir condiciones adicionales entre el <code>if</code> inicial y el <code>else</code> final. Python las evalúa en orden, de arriba hacia abajo, y ejecuta el bloque de la primera que resulte <code>True</code>. En cuanto encuentra esa condición, salta todo lo que sigue y continúa después del bloque completo. Si ninguna resulta <code>True</code>, se ejecuta el bloque del <code>else</code>, cuando existe.</p>
-<div id="f19e5ccf" class="cell" data-execution_count="5">
+<div id="0c15d9a2" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>calificacion <span class="op">=</span> <span class="fl">8.2</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> calificacion <span class="op">&gt;=</span> <span class="fl">9.0</span>:</span>
@@ -455,7 +455,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="condiciones-compuestas">Condiciones compuestas</h2>
 <p>La condición de un <code>if</code> puede ser cualquier expresión booleana, incluyendo las que combinan varias comparaciones con <code>and</code>, <code>or</code> y <code>not</code>. Esto permite expresar restricciones que involucran varias variables a la vez.</p>
 <p>Para clasificar un punto del plano según el cuadrante al que pertenece, por ejemplo, hay que verificar simultáneamente el signo de <code>x</code> y el signo de <code>y</code>:</p>
-<div id="11190834" class="cell" data-execution_count="6">
+<div id="30078fff" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span>  <span class="fl">3.0</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="op">-</span><span class="fl">1.5</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -476,7 +476,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>El operador <code>in</code>, que ya conocemos de las secuencias y los conjuntos, también funciona directamente como condición de un <code>if</code>. Esto es natural cuando se quiere verificar si un valor pertenece a un grupo de opciones, sin necesidad de encadenar varios <code>or</code>:</p>
-<div id="eb29ea83" class="cell" data-execution_count="7">
+<div id="5432841a" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dia <span class="op">=</span> <span class="st">"jueves"</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> dia <span class="kw">in</span> {<span class="st">"jueves"</span>, <span class="st">"viernes"</span>}:</span>
@@ -493,7 +493,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="if-anidados"><code>if</code> anidados</h2>
 <p>El bloque de instrucciones dentro de un <code>if</code> puede contener cualquier código válido de Python, incluyendo otros <code>if</code>. Esto se llama <em>anidamiento</em> y sirve para expresar decisiones que solo tienen sentido dentro del contexto de una decisión anterior.</p>
 <p>El caso más claro es cuando una segunda condición solo es relevante si la primera ya se cumplió. Para determinar si un número es positivo y par, la paridad solo vale la pena verificarla si ya sabemos que el número es positivo:</p>
-<div id="206f353c" class="cell" data-execution_count="8">
+<div id="dc573826" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>numero <span class="op">=</span> <span class="dv">14</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> numero <span class="op">&gt;</span> <span class="dv">0</span>:</span>
@@ -516,7 +516,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="if-dentro-de-funciones-y-el-return-anticipado"><code>if</code> dentro de funciones y el <code>return</code> anticipado</h2>
 <p>En la lección sobre funciones vimos que <code>return</code> entrega el resultado de una función al código que la llamó, y que es el único valor que cruza la frontera entre el interior (el cuerpo) y el exterior de la función. Lo que no mencionamos entonces es que una función puede tener más de un <code>return</code>. En cuanto Python ejecuta cualquiera de ellos, la función termina de inmediato, las líneas que siguen simplemente no se ejecutan.</p>
 <p>Esto se vuelve natural al combinar funciones con estructuras <code>if</code>. Una función que clasifica una calificación puede devolver su resultado directamente desde cada rama:</p>
-<div id="cf01fe5e" class="cell" data-execution_count="9">
+<div id="b4fca6eb" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clasificar(calificacion):</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> calificacion <span class="op">&gt;=</span> <span class="fl">9.0</span>:</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Sobresaliente"</span></span>
@@ -541,7 +541,7 @@ Reprobado</code></pre>
 <p>Hasta ahora hemos visto <code>return</code> como la instrucción que entrega el resultado de una función. Pero una función solo puede hacer su trabajo si los argumentos que recibe son válidos. Cuando no lo son (porque un valor carece de sentido, o porque el cálculo produciría un error como una división entre cero) la función debería detenerse antes de intentar nada. La forma de lograrlo es colocar al principio un <code>if</code> que verifique el problema y ejecute un <code>return</code> de “emergencia” si lo encuentra. Este patrón se llama <em>retorno temprano</em> o <em>cláusula de guarda</em>. En estos casos, hay que decidir qué devuelve ese <code>return</code> de emergencia. En Python existe una convención para estos casos: devolver <code>None</code>, un valor especial que representa la ausencia de resultado. No es cero, no es una cadena vacía, es simplemente nada, y es precisamente lo que se usa cuando una función no puede producir un valor significativo.</p>
 <p>Antes de ver un ejemplo, hay una regla de Python que conviene conocer: resulta que en Python los números <code>0</code> y <code>0.0</code> se evalúan como <code>False</code> en un contexto booleano, y las colecciones vacías hacen lo mismo. Una lista vacía <code>[]</code>, una tupla vacía <code>()</code>, una cadena vacía <code>""</code>, un conjunto vacío <code>set()</code> y un diccionario vacío <code>{}</code> son todos <code>False</code>. Cualquier colección con al menos un elemento es <code>True</code>. Esta regla hace que <code>not valores</code> sea una forma concisa de preguntar “¿la lista está vacía?”.</p>
 <p>Consideremos una función que calcula el promedio de una lista de números. El promedio requiere dividir entre la cantidad de elementos, operación que no tiene sentido si la lista está vacía:</p>
-<div id="57ae3ca7" class="cell" data-execution_count="10">
+<div id="6b138296" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> promedio(valores):</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> valores:       <span class="co"># True cuando la lista está vacía</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span>       <span class="co"># No hay resultado posible</span></span>
@@ -555,7 +555,7 @@ None</code></pre>
 </div>
 </div>
 <p>El patrón escala naturalmente cuando hay varias condiciones que verificar. Cada cláusula de guarda ocupa su propia línea al principio de la función, y el cuerpo principal permanece al primer nivel de indentación:</p>
-<div id="394c4f36" class="cell" data-execution_count="11">
+<div id="d60bdd6a" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> velocidad(distancia, tiempo):</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> distancia <span class="op">&lt;</span> <span class="dv">0</span>:</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span>   <span class="co"># La distancia no puede ser negativa</span></span>
@@ -574,7 +574,7 @@ None</code></pre>
 </div>
 <p>Aquí aparecen dos <code>if</code> separados en lugar de un <code>elif</code>. Esto es intencional: cada cláusula de guarda verifica un problema distinto e independiente. Usar <code>elif</code> también funcionaría en este caso concreto, pero dos <code>if</code> independientes comunican con más claridad que se trata de dos validaciones distintas y no de ramas alternativas de una misma decisión.</p>
 <p>Como las funciones <code>promedio</code> y <code>velocidad</code> anteriores pueden devolver un número o <code>None</code>, si pretendemos usar sus valores es fundamental verificar qué <code>return</code> se recibió antes de operar sobre él. Si el código que las llama no hace esa verificación, intentará operar sobre <code>None</code> y Python lanzará un error. La forma correcta de verificar si una función devolvió <code>None</code> o un valor válido es con el operador <code>is</code>, que pregunta si dos nombres apuntan exactamente al mismo objeto en memoria. <code>None</code> es un objeto único en Python, por lo que <code>is None</code> e <code>is not None</code> son las formas convencionales y precisas de verificarlo.</p>
-<div id="d6e789a9" class="cell" data-execution_count="12">
+<div id="cad9cf8e" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> velocidad(<span class="dv">100</span>, <span class="dv">2</span>)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> resultado <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>: <span class="co"># prueba que el resultado no es None antes de usarlo</span></span>
@@ -591,7 +591,7 @@ None</code></pre>
 <h2 class="anchored" data-anchor-id="ejemplo-integrador">Ejemplo integrador</h2>
 <p>Para ver cómo encajan los conceptos de esta lección, vamos a construir una función que calcula el precio final de un producto en una tienda. Los datos del producto llegan como un diccionario con claves como <code>"precio"</code>, <code>"categoria"</code> y <code>"en_oferta"</code>. La función debe rechazar datos incoherentes (un diccionario sin precio, o un precio negativo) y, si los datos son válidos, aplicar un descuento que depende de la categoría del artículo y de si está en oferta.</p>
 <p>Este problema combina tres cosas que ya conocemos: cláusulas de guarda para validar la entrada, <code>if</code> / <code>elif</code> / <code>else</code> para decidir qué descuento corresponde, y acceso a un diccionario para leer los datos.</p>
-<div id="9d118624" class="cell" data-execution_count="13">
+<div id="6cae3377" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calcular_precio_final(producto):</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"precio"</span> <span class="kw">not</span> <span class="kw">in</span> producto:</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span>   <span class="co"># Sin precio base no hay cálculo posible</span></span>
